@@ -1,0 +1,36 @@
+.client-logos-row {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.client-logos {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.scrolling-wrapper {
+    animation: scroll 20s linear infinite;
+}
+
+.scrolling-wrapper.reverse {
+    animation: scroll-reverse 20s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-100% - 120px));
+    }
+}
+
+@keyframes scroll-reverse {
+    0% {
+        transform: translateX(calc(-100% - 120px));
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
