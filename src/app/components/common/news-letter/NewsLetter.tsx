@@ -1,7 +1,5 @@
 'use client'
 import React, { useState } from 'react'
-// import bgIcon from '../../../../public/assets/bigstep-icon.svg'
-import Image from 'next/image'
 import InputField from '../input-fields/InputField'
 import { subscriberFormData } from '@/api-data/api';
 

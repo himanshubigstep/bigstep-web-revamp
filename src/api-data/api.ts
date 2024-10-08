@@ -1,3 +1,13 @@
+interface SubscriberInput {
+  email: string; // Example property, adjust according to your actual structure
+}
+
+interface ContactFormInput {
+  name: string; // Example property
+  business_mail: string; // Example property
+  message: string; // Example property
+}
+
 export const fetchHeaderData = async () => {
   try {
     const response = await fetch(
@@ -108,7 +118,7 @@ export const fetchClientReviews = async () => {
   }
 };
 
-export const subscriberFormData = async (inputValue: any) => {
+export const subscriberFormData = async (inputValue: SubscriberInput) => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/subscribers`, {
       method: 'POST',
@@ -146,7 +156,7 @@ export const fetchBlogsData = async () => {
   }
 };
 
-export const contactFormData = async (formData: any) => {
+export const contactFormData = async (formData: ContactFormInput) => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/inquiries`, {
       method: 'POST',
