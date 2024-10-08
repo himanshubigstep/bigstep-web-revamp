@@ -87,13 +87,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
             } else {
                 setSubmitError('Failed to submit the form. Please try again.');
             }
-        } catch (error: any) {
+        } catch (error) {
             console.error('Error submitting the form:', error);
 
-            if (error.message === 'This attribute must be unique') {
-                setSubmitError('Email should be unique');
+            if (error instanceof Error) {
+                if (error.message === 'This attribute must be unique') {
+                    setSubmitError('Email should be unique');
+                } else {
+                    setSubmitError('An error occurred. Please try again.');
+                }
             } else {
-                setSubmitError('An error occurred. Please try again.');
+                setSubmitError('An unknown error occurred. Please try again.');
             }
         } finally {
             setIsSubmitting(false);
