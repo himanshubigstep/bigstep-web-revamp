@@ -1,7 +1,5 @@
 'use client'
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import BigstepImage from '../../../assets/bigstep_image.jpeg'
 import { fetchSuccessStoriesData } from '@/api-data/api'
 import './SuccessStoriesBlock.css'
 

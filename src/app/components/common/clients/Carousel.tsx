@@ -1,8 +1,6 @@
 'use client'
 import React, { useState, useEffect, Fragment } from 'react';
 import { fetchClientReviews } from '@/api-data/api';
-// import bgIcon from '../../../../public/assets/bigstep-icon.svg'
-import Image from 'next/image';
 
 interface ClientReviewsData {
     data: {
