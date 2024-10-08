@@ -1,6 +1,4 @@
-import Image from 'next/image'
 import React from 'react'
-// import bgImage from '../../../../public/assets/bigstep-icon.svg'
 import ContactForm from './ContactForm'
 
 interface ContactUsProps {

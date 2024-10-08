@@ -1,14 +1,22 @@
-import Link from 'next/link'
-import React from 'react'
-import { AiOutlineMail } from 'react-icons/ai'
+import Link from 'next/link';
+import React from 'react';
+import { AiOutlineMail } from 'react-icons/ai';
 
-interface AddressProps {
-  attributes: any
+interface OrganisationDetails {
+  address?: string;
+  organisation_mail?: string;
+  hr_email?: string;
 }
 
+interface AddressProps {
+  attributes: {
+    organisation_details?: OrganisationDetails;
+  };
+}
 
 const Address: React.FC<AddressProps> = ({ attributes }) => {
-  const address = attributes?.organisation_details
+  const address = attributes?.organisation_details;
+
   return (
     <div className='w-full'>
       <address>
@@ -18,21 +26,20 @@ const Address: React.FC<AddressProps> = ({ attributes }) => {
         <div className='flex flex-col gap-4'>
           <Link
             className='text-gray-300 hover:text-white not-italic flex gap-2 items-center'
-            href='mailto:info@bigsteptech.co
-              m
-              '>
+            href={`mailto:${address?.organisation_mail}`}
+          >
             <AiOutlineMail /> {`${address?.organisation_mail} [Business related]`}
           </Link>
           <Link
             className='text-gray-300 hover:text-white not-italic flex gap-2 items-center'
-            href='mailto:hr@bigsteptech.com'
+            href={`mailto:${address?.hr_email}`}
           >
             <AiOutlineMail /> {`${address?.hr_email} [HR related]`}
           </Link>
         </div>
       </address>
     </div>
-  )
-}
+  );
+};
 
-export default Address
+export default Address;

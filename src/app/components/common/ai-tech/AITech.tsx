@@ -1,8 +1,28 @@
-import Image, { StaticImageData } from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { fetchBlogsData } from '@/api-data/api';
 import { useRouter } from 'next/navigation';
 import Button from '../button/Button';
+
+interface BlogAttributes {
+    heading: string;
+    description: string;
+    image: {
+        data: {
+            attributes: {
+                formats: {
+                    medium: { url: string };
+                    thumbnail: { url: string };
+                };
+            };
+        };
+    };
+    publishedAt: string;
+}
+
+interface BlogData {
+    id: number;
+    attributes: BlogAttributes;
+}
 
 interface RightSectionItem {
     id: number;
@@ -30,25 +50,23 @@ const AITech: React.FC<AITechProps> = ({
 
     useEffect(() => {
         const fetchData = async () => {
-            const blogsResponse = await fetchBlogsData();
-            const blogs = blogsResponse.map((blog: any, index: number) => {
+            const blogsResponse: BlogData[] = await fetchBlogsData();
+            const blogs = blogsResponse.map((blog) => {
                 return {
                     id: blog.id,
                     title: blog.attributes.heading,
                     description: blog.attributes.description,
-                    src: index === 0
-                        ? process.env.NEXT_PUBLIC_IMAGE_URL + blog.attributes.image.data.attributes.formats.medium.url
-                        : process.env.NEXT_PUBLIC_IMAGE_URL + blog.attributes.image.data.attributes.formats.thumbnail.url,
-                    date: formatDate(blog.attributes.publishedAt)
+                    src: process.env.NEXT_PUBLIC_IMAGE_URL + (blog.attributes.image.data.attributes.formats.medium.url || blog.attributes.image.data.attributes.formats.thumbnail.url),
+                    date: formatDate(blog.attributes.publishedAt),
                 };
             });
 
             setRightSectionItems(blogs);
         };
         fetchData();
-    }, [])
+    }, []);
 
-    function formatDate(date: Date) {
+    function formatDate(date: string) {
         const options: Intl.DateTimeFormatOptions = {
             day: 'numeric',
             month: 'long',
