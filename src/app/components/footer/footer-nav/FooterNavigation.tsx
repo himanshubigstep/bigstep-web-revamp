@@ -1,8 +1,4 @@
 import React from 'react'
-import Services from './Services'
-import Specialization from './Specialization'
-import Resources from './Resources'
-import AboutUs from './AboutUs'
 import Link from 'next/link'
 
 interface TechnologyTextItem {

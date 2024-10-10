@@ -1,32 +1,50 @@
 'use client'
-import React, { useState } from 'react'
-import InputField from '../input-fields/InputField'
+import React, { useState } from 'react';
+import InputField from '../input-fields/InputField';
 import { subscriberFormData } from '@/api-data/api';
+
+// Define the structure of latest_info
+interface LatestInfo {
+    heading?: string;
+    background_image?: {
+        data?: {
+            attributes?: {
+                formats?: {
+                    large?: {
+                        url: string;
+                    }
+                }
+            }
+        }
+    };
+}
 
 interface SubscribeFormProps {
     buttonText?: string;
-    latest_info?: any;
+    latest_info?: LatestInfo; // Use the defined type here
 }
 
 const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', latest_info }) => {
     const [inputValue, setInputValue] = useState({
         name: '',
         email: ''
-    })
+    });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [formErrors, setFormErrors] = useState({
         name: '',
         email: '',
     });
+
     const handleInputChange = (field: 'name' | 'email') => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputValue(prevState => ({
             ...prevState,
             [field]: event.target.value
         }));
     };
+
     const validateForm = () => {
-        const errors = { name: '', email: '', phone_number: '' };
+        const errors = { name: '', email: '' };
         let isValid = true;
 
         if (!inputValue.name.trim()) {
@@ -35,10 +53,10 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
         }
 
         if (!inputValue.email.trim()) {
-            errors.email = 'email is required';
+            errors.email = 'Email is required';
             isValid = false;
         } else if (!/\S+@\S+\.\S+/.test(inputValue.email)) {
-            errors.email = 'email is invalid';
+            errors.email = 'Email is invalid';
             isValid = false;
         }
 
@@ -60,10 +78,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
             const response = await subscriberFormData(inputValue);
             if (response) {
                 console.log('Form submitted successfully:', response);
-                setInputValue({
-                    name: '',
-                    email: '',
-                });
+                setInputValue({ name: '', email: '' });
             } else {
                 setSubmitError('Failed to submit the form. Please try again.');
             }
@@ -88,7 +103,6 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
                     alt='Background Icon'
                     className='absolute 0 left-0 right-0 bottom-0 md:object-contain object-cover w-full h-full'
                 />
-
                 <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
                     <h2 className='text-3xl font-medium text-white text-center mb-4'>{latest_info?.heading}</h2>
                 </div>
@@ -124,7 +138,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
-export default NewsLetter
+export default NewsLetter;

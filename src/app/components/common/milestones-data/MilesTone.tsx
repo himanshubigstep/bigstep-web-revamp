@@ -20,7 +20,7 @@ const MilesTone = ({ homePageData }: { homePageData: any }) => {
                 <img
                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData?.milestones?.background_image?.data?.attributes?.formats?.large?.url}`}
                     alt={homePageData?.milestones?.background_image?.data?.attributes?.name}
-                    className='md:flex hidden absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover opacity-80 md:rounded-[3rem]'
+                    className='flex absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover opacity-80 md:rounded-[3rem]'
                 />
                 <div className='relative w-full md:items-center md:h-full flex'>
                     <div className='md:w-3/4 w-full md:p-16 p-8 flex flex-wrap items-center'>

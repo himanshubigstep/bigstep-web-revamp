@@ -23,7 +23,7 @@ const Footer = () => {
   }, []);
   
   if (!footerData) {
-    return <div>Loading...</div>;
+    return;
   }
 
   const { attributes } = footerData;
@@ -32,7 +32,7 @@ const Footer = () => {
   const logoHeight = 100;
   return (
     <Fragment>
-      <div className='relative w-full bg-[#242424] dark:border-t-gray-800 dark:border-t-2 md:p-16 p-8'>
+      <div className='poppins relative w-full bg-[#242424] dark:border-t-gray-800 dark:border-t-2 md:p-16 p-8'>
         <img
           src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${footerData?.attributes?.background_image?.data?.attributes?.formats?.large?.url}`}
           alt='Footer Background'

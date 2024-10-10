@@ -95,10 +95,6 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
         return () => clearInterval(timer);
     }, [slides, isHovered, currentSlideId]);
 
-    if (!slides || slides.length === 0) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div
             id="default-carousel"

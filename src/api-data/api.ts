@@ -193,3 +193,19 @@ export const fetchServiceDataHome = async () => {
     return null;
   }
 };
+
+export const fetchtrustedClients = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/trusted-bies?populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

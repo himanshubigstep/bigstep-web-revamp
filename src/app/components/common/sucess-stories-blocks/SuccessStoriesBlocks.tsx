@@ -53,17 +53,17 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                 </div>
                 <div className='w-full flex flex-wrap md:justify-center rounded-3xl'>
                     {carouselImagesArray.slice(0, 2).map((imageData, index) => (
-                        <div className='w-1/2 relative p-2 on-hover' key={imageData.id}>
-                            <div className='w-full rounded-3xl flex justify-center items-center'>
+                        <div className='w-1/2 md:h-96 relative p-2 on-hover' key={imageData.id}>
+                            <div className='w-full h-full rounded-3xl flex justify-center items-center'>
                                 <img
                                     src={imageData.src}
                                     alt={imageData.title}
-                                    className='w-full h-auto object-contain rounded-3xl'
+                                    className='w-full h-full rounded-3xl'
                                 />
                             </div>
-                            <div className='display-hover absolute md:p-6 p-4 bottom-2 left-2 right-2 flex-col bg-black opacity-60 hidden rounded-3xl'>
-                                <h3 className='text-2xl font-medium text-white'>{imageData?.title}</h3>
-                                <p className='text-lg font-normal text-white'>{imageData?.description}</p>
+                            <div className='display-hover absolute md:p-6 p-4 bottom-2 left-2 right-2 flex-col bg-black opacity-80 hidden rounded-3xl'>
+                                <h3 className='md:text-2xl text-lg font-medium text-white'>{imageData?.title}</h3>
+                                <p className='md:text-lg text-md md:line-clamp-none line-clamp-2 font-normal text-white'>{imageData?.description}</p>
                                 {/* <p className='text-md font-normal text-white'>hoji aap</p> */}
                             </div>
                         </div>
@@ -71,17 +71,17 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                 </div>
                 <div className='w-full flex flex-wrap md:justify-center rounded-3xl'>
                     {carouselImagesArray.slice(2).map((imageData, index) => (
-                        <div className='w-1/3 relative p-2 on-hover' key={imageData.id}>
-                            <div className='w-full rounded-3xl flex justify-center items-center'>
+                        <div className='md:w-1/3 w-1/2 md:h-96 relative p-2 on-hover' key={imageData.id}>
+                            <div className='w-full h-full rounded-3xl flex justify-center items-center'>
                                 <img
                                     src={imageData.src}
                                     alt={imageData.title}
-                                    className='w-full h-auto object-contain rounded-3xl'
+                                    className='w-full h-full rounded-3xl'
                                 />
                             </div>
-                            <div className='display-hover absolute md:p-6 p-4 bottom-2 left-2 right-2 flex-col bg-black opacity-60 hidden rounded-3xl'>
-                                <h3 className='text-2xl font-medium text-white'>{imageData?.title}</h3>
-                                <p className='text-lg font-normal text-white'>{imageData?.description}</p>
+                            <div className='display-hover absolute md:p-6 p-4 bottom-2 left-2 right-2 flex-col bg-black opacity-80 hidden rounded-3xl'>
+                                <h3 className='md:text-2xl text-lg font-medium text-white'>{imageData?.title}</h3>
+                                <p className='md:text-lg text-md md:line-clamp-none line-clamp-2 font-normal text-white'>{imageData?.description}</p>
                                 {/* <p className='text-md font-normal text-white'>hoji aap</p> */}
                             </div>
                         </div>

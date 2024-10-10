@@ -115,7 +115,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                         placeholder='Enter your name'
                         value={formData.name}
                         onChange={handleChange}
-                        className='w-1/3 md:w-full h-12 bg-white dark:bg-black px-4 rounded-lg outline-0'
+                        className='w-1/3 md:w-full h-12 bg-black px-4 rounded-lg outline-0 text-white'
                         error={formErrors.name}
                     />
                     <InputField
@@ -125,7 +125,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                         placeholder='Enter your business email'
                         value={formData.business_mail}
                         onChange={handleChange}
-                        className='w-1/3 md:w-full h-12 bg-white dark:bg-black px-4 rounded-lg outline-0'
+                        className='w-1/3 md:w-full h-12 bg-black px-4 rounded-lg outline-0 text-white'
                         error={formErrors.business_mail}
                     />
                     <InputField
@@ -135,7 +135,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                         placeholder='Enter your company name'
                         value={formData.company}
                         onChange={handleChange}
-                        className='w-1/3 md:w-full h-12 bg-white dark:bg-black px-4 rounded-lg outline-0'
+                        className='w-1/3 md:w-full h-12 bg-black px-4 rounded-lg outline-0 text-white'
                     />
                 </div>
                 <div className='flex md:flex-row flex-col gap-4'>
@@ -146,7 +146,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                         placeholder='Enter your location'
                         value={formData.location}
                         onChange={handleChange}
-                        className='w-1/2 md:w-full bg-white dark:bg-black h-12 px-4 rounded-lg outline-0'
+                        className='w-1/2 md:w-full bg-black h-12 px-4 rounded-lg outline-0 text-white'
                     />
                     <InputField
                         type='number'
@@ -155,7 +155,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                         placeholder='Enter your phone number'
                         value={formData.phone_number}
                         onChange={handleChange}
-                        className='w-1/2 md:w-full bg-white dark:bg-black h-12 px-4 rounded-lg outline-0'
+                        className='w-1/2 md:w-full bg-black h-12 px-4 rounded-lg outline-0 text-white'
                         error={formErrors.phone_number}
                     />
                 </div>
@@ -166,7 +166,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                     placeholder='Enter your message'
                     value={formData.message}
                     onChange={handleChange}
-                    className='w-full h-32 bg-white dark:bg-black px-4 rounded-lg outline-0'
+                    className='w-full h-32 bg-black px-4 rounded-lg outline-0 text-white'
                 />
                 {submitError && <p className='text-red-500 text-center'>{submitError}</p>}
                 <div className='w-full flex justify-center'>

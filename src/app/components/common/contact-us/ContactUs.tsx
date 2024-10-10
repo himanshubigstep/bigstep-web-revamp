@@ -1,15 +1,32 @@
 import React from 'react'
 import ContactForm from './ContactForm'
 
+interface ContactUsData {
+    heading: string;
+    description: string;
+    background_image?: {
+        data?: {
+            attributes?: {
+                formats?: {
+                    large?: {
+                        url: string;
+                    }
+                }
+            }
+        }
+    };
+}
+
 interface ContactUsProps {
     buttonText?: string;
-    contactUsData: any[];
+    contactUsData: ContactUsData[];
 }
 
 const ContactUs: React.FC<ContactUsProps> = ({ buttonText = 'Send', contactUsData }) => {
     const hasData = contactUsData && contactUsData.length > 0;
-    const { heading, description, background_image } = hasData ? contactUsData[0] : { heading: '', description: '', background_image: null };
+    const { heading, description, background_image } = hasData ? contactUsData[0] : { heading: '', description: '', background_image: undefined };
     const bgImageUrl = background_image?.data?.attributes?.formats?.large?.url;
+    
     return (
         <div className='relative w-full h-full rounded-3xl max-w-[1440px] md:mb-16 mb-8 md:py-16 py-8 mx-auto'>
             {bgImageUrl && (

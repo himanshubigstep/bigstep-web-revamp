@@ -64,10 +64,13 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
   const toggleSubmenu = (
     key: string,
     link: string | null,
-    hasTechnology: boolean
+    hasTechnology: boolean,
+    menuHeading: string,
   ) => {
+    const formattedHeading = menuHeading.toLowerCase().replace(/\s+/g, '-');
     if (link) {
-      router.push(link);
+      const formattedLink = link.startsWith('/') ? link.slice(1) : link;
+      router.push(`/${formattedHeading}/${formattedLink}`);
       handleLinkClick();
     } else if (hasTechnology) {
       setOpenSubmenus((prev) => ({
@@ -176,7 +179,8 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                               toggleSubmenu(
                                 submenu.item,
                                 submenu.item_link,
-                                !!submenu.technology
+                                !!submenu.technology,
+                                menu.heading
                               )
                             }
                             className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "text-lg text-left flex items-center gap-2 pb-4 font-semibold text-blue-500" : "flex items-center gap-2 text-lg text-black dark:text-white hover:text-blue-500"}`}>
@@ -195,7 +199,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                   className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500"
                                 >
                                   <Link
-                                    href={item.link}
+                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-')}/${submenu.item.toLowerCase().replace(/\s+/g, '-')}/${item.link}`}
                                     className="text-md"
                                     onClick={handleLinkClick}
                                   >
@@ -223,7 +227,8 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                               toggleSubmenu(
                                 submenu.item,
                                 submenu.item_link,
-                                !!submenu.technology
+                                !!submenu.technology,
+                                menu.heading
                               )
                             }
                             className={`${menu.items_on_right && menu.items_on_right.some((submenu: any) => submenu.technology) ? "text-lg text-left flex items-center gap-2 pb-4 font-semibold text-blue-500" : "flex items-center text-black dark:text-white gap-2 text-lg hover:text-blue-500"}`}>
@@ -242,7 +247,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                   className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500"
                                 >
                                   <Link
-                                    href={item.link}
+                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-')}/${submenu.item.toLowerCase().replace(/\s+/g, '-')}/${item.link}`}
                                     className="text-md"
                                     onClick={handleLinkClick}
                                   >
