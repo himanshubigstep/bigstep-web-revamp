@@ -23,7 +23,7 @@ interface Service {
 interface CommonBlockProps {
   title: string;
   description: string;
-  services: Service[];
+  services: Service[] | null; // Allow services to be null
   containerClassName?: string;
   logoClassName?: string;
   titleClassName?: string;
@@ -37,7 +37,7 @@ interface CommonBlockProps {
 const CommonBlock: React.FC<CommonBlockProps> = ({ 
   title,
   description,
-  services,
+  services = [], // Default to empty array if services is null
   containerClassName = '',
   logoClassName = '',
   titleClassName = '',
@@ -50,7 +50,7 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const itemsPerPage = 2;
-  const totalItems = services.length;
+  const totalItems = services ? services.length : 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   
   useEffect(() => {
@@ -65,7 +65,7 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
   }, []);
   
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentServices = isMobile ? services.slice(startIndex, startIndex + itemsPerPage) : services;
+  const currentServices = isMobile ? services && services.slice(startIndex, startIndex + itemsPerPage) : services;
 
   const handleNext = () => {
     if (currentPage < totalPages) {
@@ -93,7 +93,7 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
         <p className={`${descriptionClassName}`}>{description}</p>
       </div>
       <div className={`${serviceContainerClassName}`}>
-        {currentPage && currentServices.map((service, index) => (
+        {currentServices && currentServices.map((service, index) => (
           <div key={index} className={`${serviceItemClassName}`}>
             <div className={`${serviceIconClassName}`} style={{ backgroundColor: service?.attributes?.hex_code }}>
               <img className='w-12 p-2' src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${service?.attributes?.logo?.data?.attributes?.url}`} alt={service?.attributes?.heading} />
