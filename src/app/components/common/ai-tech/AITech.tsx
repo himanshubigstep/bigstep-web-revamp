@@ -50,18 +50,23 @@ const AITech: React.FC<AITechProps> = ({
 
     useEffect(() => {
         const fetchData = async () => {
-            const blogsResponse: BlogData[] = await fetchBlogsData();
-            const blogs = blogsResponse.map((blog) => {
-                return {
-                    id: blog.id,
-                    title: blog.attributes.heading,
-                    description: blog.attributes.description,
-                    src: process.env.NEXT_PUBLIC_IMAGE_URL + (blog.attributes.image.data.attributes.formats.medium.url || blog.attributes.image.data.attributes.formats.thumbnail.url),
-                    date: formatDate(blog.attributes.publishedAt),
-                };
-            });
+            try {
+                const blogsResponse: BlogData[] | null = await fetchBlogsData();
+                const blogs = Array.isArray(blogsResponse) ? blogsResponse.map((blog) => {
+                    return {
+                        id: blog.id,
+                        title: blog.attributes.heading,
+                        description: blog.attributes.description,
+                        src: process.env.NEXT_PUBLIC_IMAGE_URL + (blog.attributes.image.data.attributes.formats.medium.url || blog.attributes.image.data.attributes.formats.thumbnail.url),
+                        date: formatDate(blog.attributes.publishedAt),
+                    };
+                }) : [];
 
-            setRightSectionItems(blogs);
+                setRightSectionItems(blogs);
+            } catch (error) {
+                console.error("Error fetching blogs data:", error);
+                setRightSectionItems([]); // Optionally set to empty on error
+            }
         };
         fetchData();
     }, []);
