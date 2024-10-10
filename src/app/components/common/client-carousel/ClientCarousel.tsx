@@ -13,9 +13,10 @@ interface Client {
     };
 }
 
-const ClientCarousel = ({ clients = [], heading, description }: { clients?: Client[], heading: string, description: string }) => {
-    // Safeguard against empty clients array
-    const clientCount = clients.length || 0; // Default to 0 if clients is null
+const ClientCarousel = ({ clients = [], heading, description }: { clients?: Client[] | null, heading: string, description: string }) => {
+    if (!clients) return null; // Safeguard against null
+
+    const clientCount = clients.length;
     const midpoint = Math.ceil(clientCount / 2);
     const row1 = clients.slice(0, midpoint);
     const row2 = clients.slice(midpoint);
