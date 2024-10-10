@@ -1,5 +1,5 @@
-import React from 'react'
-import './ClientCarousel.css'
+import React from 'react';
+import './ClientCarousel.css';
 
 interface Client {
     attributes: {
@@ -13,8 +13,10 @@ interface Client {
     };
 }
 
-const ClientCarousel = ({ clients, heading, description }: { clients: Client[], heading: string, description: string }) => {
-    const midpoint = Math.ceil(clients.length / 2);
+const ClientCarousel = ({ clients = [], heading, description }: { clients?: Client[], heading: string, description: string }) => {
+    // Safeguard against empty clients array
+    const clientCount = clients.length || 0; // Default to 0 if clients is null
+    const midpoint = Math.ceil(clientCount / 2);
     const row1 = clients.slice(0, midpoint);
     const row2 = clients.slice(midpoint);
 
@@ -54,7 +56,7 @@ const ClientCarousel = ({ clients, heading, description }: { clients: Client[], 
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ClientCarousel
+export default ClientCarousel;
