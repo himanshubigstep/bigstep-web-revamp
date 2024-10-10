@@ -105,13 +105,13 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
         >
             <div className="relative h-[32rem] overflow-hidden md:h-[48rem]">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-r from-black via-gray-800 to-transparent opacity-50 z-20' data-carousel-item></div>
-                {slides.map(slide => (
+                {slides && slides.map(slide => (
                     <Slide key={slide.id} slide={slide} isActive={slide.id === currentSlideId} />
                 ))}
             </div>
 
             <div className="absolute z-20 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                {slides.map(slide => (
+                {slides && slides.map(slide => (
                     <button
                         key={slide.id}
                         type="button"
