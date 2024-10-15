@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import BigsteLogo from '../../../assets/bigstep logo.png';
+import Button from '../button/Button';
 
 interface ServiceAttributes {
   hex_code: string;
@@ -16,7 +17,7 @@ interface ServiceAttributes {
 }
 
 interface Service {
-  icon: string | StaticImageData;
+  id: number; // Added id here
   attributes: ServiceAttributes;
 }
 
@@ -32,6 +33,8 @@ interface CommonBlockProps {
   serviceItemClassName?: string;
   serviceIconClassName?: string;
   buttonClassName?: string;
+  serviceHeaderClassName?: string;
+  mainbutton?: string
 }
 
 const CommonBlock: React.FC<CommonBlockProps> = ({ 
@@ -46,11 +49,16 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
   serviceItemClassName = '',
   serviceIconClassName = '',
   buttonClassName = '',
+  serviceHeaderClassName = '',
+  mainbutton = ''
  }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const itemsPerPage = 2;
-  const totalItems = services ? services.length : 0;
+
+  // Sort services by id
+  const sortedServices = services?.sort((a, b) => a.id - b.id) || [];
+  const totalItems = sortedServices.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   
   useEffect(() => {
@@ -65,7 +73,7 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
   }, []);
   
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentServices = isMobile ? services && services.slice(startIndex, startIndex + itemsPerPage) : services;
+  const currentServices = isMobile ? sortedServices.slice(startIndex, startIndex + itemsPerPage) : sortedServices;
 
   const handleNext = () => {
     if (currentPage < totalPages) {
@@ -93,18 +101,31 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
         <p className={`${descriptionClassName}`}>{description}</p>
       </div>
       <div className={`${serviceContainerClassName}`}>
-        {currentServices && currentServices.map((service, index) => (
-          <div key={index} className={`${serviceItemClassName}`}>
-            <div className={`${serviceIconClassName}`} style={{ backgroundColor: service?.attributes?.hex_code }}>
-              <img className='w-12 p-2' src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${service?.attributes?.logo?.data?.attributes?.url}`} alt={service?.attributes?.heading} />
+        {currentServices.map((service, index) => (
+          <div key={service.id} className={`${serviceItemClassName}`}>
+            <div className={`${serviceIconClassName}`} style={{ backgroundColor: service.attributes.hex_code }}>
+              <img
+                className='w-12 p-2'
+                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${service.attributes.logo.data.attributes.url}`}
+                alt={service.attributes.heading}
+              />
             </div>
-            <div className='w-full text-left flex flex-col gap-2'>
-              <h4 className='text-lg font-medium'>{service?.attributes?.heading}</h4>
-              <p className='text-md font-normal'>{service?.attributes?.discription}</p>
+            <div className={serviceHeaderClassName}>
+              <h4 className='md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.attributes.heading}</h4>
+              <p className='text-md font-normal'>{service.attributes.discription}</p>
             </div>
           </div>
         ))}
       </div>
+      {mainbutton &&
+        <div className='relative w-full h-auto px-4 pt-8 flex justify-center items-center'>
+          <Button
+            text='Learn more about our Best Practices'
+            onClick={() => console.log('Get Started')}
+            className={`${mainbutton}`}
+          />
+        </div>
+      }
       {isMobile && (
         <div className='relative flex justify-between items-center mt-8'>
           <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt; Previous</button>

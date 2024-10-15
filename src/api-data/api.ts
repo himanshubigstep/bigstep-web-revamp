@@ -209,3 +209,22 @@ export const fetchtrustedClients = async () => {
     return null;
   }
 };
+
+
+// Product Engineering Api
+
+export const fetchProductEngineeringData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/product-engineering?populate[product_introduction][populate]=*&populate[product_information][populate]=*&populate[custom_software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

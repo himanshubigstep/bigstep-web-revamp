@@ -106,7 +106,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
                 <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
                     <h2 className='text-3xl font-medium text-white text-center mb-4'>{latest_info?.heading}</h2>
                 </div>
-                <form onSubmit={handelSubscription} className='md:w-[70%] w-[90%] mx-auto h-full relative flex md:flex-row flex-col items-center justify-between md:gap-8 py-8'>
+                <form onSubmit={handelSubscription} className='md:w-[70%] w-[90%] mx-auto h-full relative flex md:flex-row flex-col items-center justify-between md:gap-8 pt-8'>
                     <InputField
                         type='text'
                         label='Name'

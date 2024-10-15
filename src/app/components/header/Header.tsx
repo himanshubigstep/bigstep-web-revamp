@@ -42,7 +42,7 @@ const Header = () => {
 
   return (
     <div className={`poppins z-10w-full h-[100px] fixed left-0 right-0 top-0 z-30 ${scrolled ? 'bg-white dark:bg-black shadow-2xl' : 'bg-transparent'}`}>
-        <div className='relative w-full md:px-0 px-4 max-w-[1440px] mx-auto h-full flex items-center justify-between md-gap-0 gap-4'>
+        <div className='md:px-4 relative w-full px-4 max-w-[1440px] mx-auto h-full flex items-center justify-between md-gap-0 gap-4'>
             <Logo scrolled={scrolled} />
             <Navigation menuItems={menuItems} scrolled={scrolled} />
         </div>

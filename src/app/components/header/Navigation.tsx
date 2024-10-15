@@ -60,6 +60,16 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
       }
     }
   };
+  
+  const handleMouseEnter = (menu: any) => {
+    if (!menu.link) {
+      toggleDropdown(menu);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownOpen(null);
+  };
 
   const toggleSubmenu = (
     key: string,
@@ -136,18 +146,17 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
             <li
               key={menu.id}
               className="md:h-full md:w-auto w-full md:flex items-center"
-              onClick={() => !menu.link && toggleDropdown(menu)}
+              onMouseEnter={() => handleMouseEnter(menu)}
+              onMouseLeave={handleMouseLeave}
             >
               <button
                 onClick={() => {
                   if (menu.link) {
                     router.push(menu.link);
                     handleLinkClick();
-                  } else {
-                    toggleDropdown(menu);
                   }
                 }}
-                className={`text-lg md:w-auto w-full text-md z-30 flex items-center md:justify-normal justify-between gap-2 md:hover:text-blue-500 md:dark:text-inherit dark:text-white font-bold
+                className={`text-lg md:w-auto w-full text-md z-30 flex items-center md:justify-normal justify-between gap-2 md:hover:text-blue-500 md:dark:text-inherit dark:text-white
                     ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
                     ${scrolled ? 'md:text-black md:dark:text-white' : 'md:text-white md:hover:text-white'} menu-item-button`}
               >
@@ -199,7 +208,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                   className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500"
                                 >
                                   <Link
-                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-')}/${submenu.item.toLowerCase().replace(/\s+/g, '-')}/${item.link}`}
+                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-')}/${submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}/${item.link}`}
                                     className="text-md"
                                     onClick={handleLinkClick}
                                   >

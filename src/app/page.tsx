@@ -336,7 +336,7 @@ export default function Home() {
         title={homePageData?.technologies[0]?.heading || ''}
         description={homePageData?.technologies[0]?.description || ''}
         services={homePageServiceData}
-        containerClassName= 'relative w-full max-w-[1440px] mx-auto md:py-16 py-8'
+        containerClassName= 'relative w-full max-w-[1440px] mx-auto md:py-16 py-8 md:px-4'
         logoClassName= 'md:w-auto w-full md:h-full'
         titleClassName= 'text-3xl font-medium text-center mb-4'
         descriptionClassName= 'text-lg font-normal '
@@ -344,6 +344,7 @@ export default function Home() {
         serviceItemClassName= 'mt-8 flex flex-col md:w-1/3 w-1/2 md:px-12 md:py-6 px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
         serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center'
         buttonClassName= 'px-4 py-2 mx-2 bg-gray-300 rounded'
+        serviceHeaderClassName="w-full text-left flex flex-col gap-2"
       />
       <SuccessStoriesBlocks sucessStoriesData={homePageData?.success_stories} />
       <ClientCarousel

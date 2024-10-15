@@ -6,13 +6,13 @@ import Image from 'next/image'
 
 const TopBanner = () => {
     return (
-        <div className='w-full relative h-[52rem] md:h-[48rem] md:px-0 px-4'>
-            <div className='w-full h-full absolute right-0 top-0 bottom-0'>
+        <div className='w-full relative h-[52rem] md:h-[48rem] md:px-4 px-4'>
+            <div className='w-full h-full absolute right-0 left-0 top-0 bottom-0'>
                 <div className='w-full h-full absolute top-0 bottom-0 bg-gradient-to-r from-black to-transparent' />
                 <Image
                     src={topBanner}
                     alt='image'
-                    className='w-full h-full object-cover'
+                    className='w-full h-full'
                 />
             </div>
             <div className='w-full max-w-[1440px] mx-auto h-full flex md:justify-between md:items-center gap-4 relative'>

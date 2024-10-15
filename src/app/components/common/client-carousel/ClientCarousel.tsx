@@ -27,7 +27,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                 <h2 className='text-3xl font-bold text-center mb-4'>{heading}</h2>
                 <p className='text-lg'>{description}</p>
             </div>
-            <div className='w-full md:pt-8 flex flex-col md:gap-8 gap-0'>
+            <div className='w-full md:pt-8 flex flex-col md:gap-8 gap-0 overflow-hidden'>
                 <div className='client-logos-row md:max-w-[1440px] max-w-full mx-auto'>
                     <div className='scrolling-wrapper'>
                         {row1.map((client, index) => (
