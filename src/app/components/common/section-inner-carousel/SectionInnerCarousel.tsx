@@ -2,29 +2,22 @@
 import React, { useState } from 'react'
 import Button from '../button/Button'
 
-interface CarouselItem {
-    id: number;
-    heading: string;
-    description: string;
-    buttonTitle: string;
-    buttonClick: string;
-}
-
-const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProductEngineerData: CarouselItem[] }) => {
-    const [activeIndex, setActiveIndex] = useState(0);
+const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProductEngineerData: any }) => {
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const hasData = Array.isArray(carouselProductEngineerData) && carouselProductEngineerData.length > 0;
 
     return (
         <div className='w-full h-full bg-white dark:bg-black md:py-16 py-8'>
             <div className='w-full md:h-[30rem] h-full max-w-[1440px] mx-auto flex md:flex-row flex-col justify-center items-center text-center md:rounded-3xl'>
-                <div className='md:w-[40%] w-full md:h-full md:py-0 py-8 md:px-8 px-4 flex justify-center items-center bg-blue-500 md:rounded-tl-3xl md:rounded-bl-3xl'>
+                <div className='md:w-[40%] w-full md:h-full md:py-0 py-8 md:px-16 px-8 flex flex-col justify-center items-center bg-blue-500 md:rounded-tl-3xl md:rounded-bl-3xl'>
                     <div className='w-full h-full flex flex-col gap-8 justify-center'>
-                        {carouselProductEngineerData.map((item, index) => (
+                        {hasData && carouselProductEngineerData.map((item: { id: React.Key | null | undefined; heading: string }, index: number) => (
                             <React.Fragment key={item.id}>
                                 <h2
-                                    className='text-lg font-medium text-white text-left flex gap-4 cursor-pointer'
-                                    onClick={() => setActiveIndex(index)}
+                                    className={`text-lg text-white text-left flex gap-4 cursor-pointer ${selectedIndex === index ? 'font-medium' : 'font-normal'}`}
+                                    onClick={() => setSelectedIndex(index)}
                                 >
-                                    <span>{index + 1}.</span>
+                                    <span className={`${selectedIndex === index ? 'font-medium' : 'font-normal'}`}>{index + 1}.</span>
                                     {item.heading}
                                 </h2>
                                 {index < carouselProductEngineerData.length - 1 && (
@@ -34,15 +27,28 @@ const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProduct
                         ))}
                     </div>
                 </div>
-                <div className='md:w-[60%] w-full md:h-full md:py-0 py-8 md:px-8 px-4 flex justify-center items-center bg-black md:rounded-tr-3xl md:rounded-br-3xl'>
+                <div className='md:w-[60%] w-full md:h-full md:py-0 py-8 md:px-24 px-8 flex justify-center items-center bg-black md:rounded-tr-3xl md:rounded-br-3xl'>
                     <div className='w-full h-full flex flex-col gap-4 justify-center'>
-                        <h2 className='md:w-[70%] text-3xl font-medium text-white text-left flex gap-4'>{carouselProductEngineerData[activeIndex].heading}</h2>
-                        <p className='md:w-[70%] text-lg font-normal text-white text-left'>{carouselProductEngineerData[activeIndex].description}</p>
-                        <Button
-                            onClick={() => window.open(carouselProductEngineerData[activeIndex].buttonClick, '_blank')}
-                            text={carouselProductEngineerData[activeIndex].buttonTitle}
-                            className='w-44 py-4 md:mt-0 mt-4 md:rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
-                        />
+                        {hasData && (
+                            <div className='w-full h-full flex flex-col justify-center gap-4'>
+                                <h2 className='text-3xl font-semibold text-white text-left flex gap-4'>
+                                    {carouselProductEngineerData[selectedIndex]?.heading}
+                                </h2>
+                                <p className='text-lg font-normal text-white text-left'>
+                                    {carouselProductEngineerData[selectedIndex]?.description}
+                                </p>
+                                <Button
+                                    onClick={() => {
+                                        const selectedItem = carouselProductEngineerData[selectedIndex];
+                                        if (selectedItem && selectedItem.technologyText[0]) {
+                                            window.location.href = selectedItem.technologyText[0].technologyLinks;
+                                        }
+                                    }}
+                                    text={carouselProductEngineerData[selectedIndex]?.buttonText}
+                                    className='w-44 py-4 md:mt-0 mt-4 md:rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -50,4 +56,4 @@ const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProduct
     )
 }
 
-export default SectionInnerCarousel
+export default SectionInnerCarousel;

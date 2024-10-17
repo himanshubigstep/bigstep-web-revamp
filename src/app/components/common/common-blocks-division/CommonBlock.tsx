@@ -17,14 +17,14 @@ interface ServiceAttributes {
 }
 
 interface Service {
-  id: number; // Added id here
+  id: number;
   attributes: ServiceAttributes;
 }
 
 interface CommonBlockProps {
   title: string;
-  description: string;
-  services: Service[] | null; // Allow services to be null
+  description?: string;
+  services: Service[] | null;
   containerClassName?: string;
   logoClassName?: string;
   titleClassName?: string;
@@ -40,7 +40,7 @@ interface CommonBlockProps {
 const CommonBlock: React.FC<CommonBlockProps> = ({ 
   title,
   description,
-  services = [], // Default to empty array if services is null
+  services = [],
   containerClassName = '',
   logoClassName = '',
   titleClassName = '',
@@ -54,9 +54,8 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
  }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
-  const itemsPerPage = 2;
-
-  // Sort services by id
+  const itemsPerPage = 4;
+  
   const sortedServices = services?.sort((a, b) => a.id - b.id) || [];
   const totalItems = sortedServices.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -98,21 +97,25 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
       </div>
       <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
         <h2 className={`${titleClassName}`}>{title}</h2>
-        <p className={`${descriptionClassName}`}>{description}</p>
+        {description &&
+          <p className={`${descriptionClassName}`}>{description}</p>
+        }
       </div>
       <div className={`${serviceContainerClassName}`}>
         {currentServices.map((service, index) => (
           <div key={service.id} className={`${serviceItemClassName}`}>
-            <div className={`${serviceIconClassName}`} style={{ backgroundColor: service.attributes.hex_code }}>
-              <img
-                className='w-12 p-2'
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${service.attributes.logo.data.attributes.url}`}
-                alt={service.attributes.heading}
-              />
+            <div className='w-full flex md:flex-row flex-col md:justify-start justify-center md:items-start items-center'>
+              <div className={`${serviceIconClassName}`} style={{ backgroundColor: service.attributes.hex_code }}>
+                <img
+                  className='w-12 p-2'
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${service.attributes.logo.data.attributes.url}`}
+                  alt={service.attributes.heading}
+                />
+              </div>
+              <h4 className='md:w-[60%] w-full md:text-left text-center md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.attributes.heading}</h4>
             </div>
             <div className={serviceHeaderClassName}>
-              <h4 className='md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.attributes.heading}</h4>
-              <p className='text-md font-normal'>{service.attributes.discription}</p>
+              <p className='text-md font-normal md:flex hidden'>{service.attributes.discription}</p>
             </div>
           </div>
         ))}

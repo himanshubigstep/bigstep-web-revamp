@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import InputField from '../input-fields/InputField';
 import { subscriberFormData } from '@/api-data/api';
 
-// Define the structure of latest_info
 interface LatestInfo {
     heading?: string;
     background_image?: {
@@ -16,15 +15,15 @@ interface LatestInfo {
                 }
             }
         }
-    };
+    }
+    button_text?: string
 }
 
 interface SubscribeFormProps {
-    buttonText?: string;
-    latest_info?: LatestInfo; // Use the defined type here
+    latest_info?: LatestInfo;
 }
 
-const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', latest_info }) => {
+const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info }) => {
     const [inputValue, setInputValue] = useState({
         name: '',
         email: ''
@@ -96,15 +95,15 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
     };
 
     return (
-        <div className='w-full h-full rounded-3xl md:py-16 py-8'>
-            <div className='relative w-full h-full max-w-[1440px] mx-auto rounded-3xl md:py-24 py-8'>
+        <div className='w-full h-full md:rounded-3xl md:py-16 py-8'>
+            <div className='relative w-full h-full max-w-[1440px] mx-auto md:rounded-3xl md:py-24 py-8'>
                 <img
                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${latest_info?.background_image?.data?.attributes?.formats?.large?.url}`}
                     alt='Background Icon'
-                    className='absolute 0 left-0 right-0 bottom-0 md:object-contain object-cover w-full h-full'
+                    className='absolute 0 left-0 right-0 bottom-0 md:object-fill object-cover w-full h-full'
                 />
                 <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
-                    <h2 className='text-3xl font-medium text-white text-center mb-4'>{latest_info?.heading}</h2>
+                    <h2 className='text-3xl font-semibold text-white text-center mb-4'>{latest_info?.heading}</h2>
                 </div>
                 <form onSubmit={handelSubscription} className='md:w-[70%] w-[90%] mx-auto h-full relative flex md:flex-row flex-col items-center justify-between md:gap-8 pt-8'>
                     <InputField
@@ -132,7 +131,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
                         className='md:w-48 w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white'
                         disabled={isSubmitting}
                     >
-                        {isSubmitting ? 'Sending...' : buttonText}
+                        {isSubmitting ? 'Sending...' : latest_info?.button_text}
                     </button>
                     {submitError && <p className='text-red-500 text-left absolute left-0 bottom-0'>{submitError}</p>}
                 </form>

@@ -22,9 +22,9 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
     const row2 = clients.slice(midpoint);
 
     return (
-        <div className='relative w-full h-full md:pt-16 pt-8 bg-white dark:bg-black'>
+        <div className='relative w-full h-full md:pt-16 pt-8 bg-white dark:bg-black md:px-0 px-4'>
             <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
-                <h2 className='text-3xl font-bold text-center mb-4'>{heading}</h2>
+                <h2 className='text-3xl font-semibold text-center mb-4'>{heading}</h2>
                 <p className='text-lg'>{description}</p>
             </div>
             <div className='w-full md:pt-8 flex flex-col md:gap-8 gap-0 overflow-hidden'>

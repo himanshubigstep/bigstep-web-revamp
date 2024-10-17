@@ -12,6 +12,7 @@ import NewsLetter from "./components/common/news-letter/NewsLetter";
 import AITech from "./components/common/ai-tech/AITech";
 import ContactUs from "./components/common/contact-us/ContactUs";
 import LoaderSpinner from "./components/common/loader-spinner/LoadingSpinner";
+import OurValues from "./components/our-values/OurValues";
 
 interface HomePageData {
   id: number;
@@ -336,13 +337,13 @@ export default function Home() {
         title={homePageData?.technologies[0]?.heading || ''}
         description={homePageData?.technologies[0]?.description || ''}
         services={homePageServiceData}
-        containerClassName= 'relative w-full max-w-[1440px] mx-auto md:py-16 py-8 md:px-4'
-        logoClassName= 'md:w-auto w-full md:h-full'
-        titleClassName= 'text-3xl font-medium text-center mb-4'
+        containerClassName= 'relative w-full max-w-[1440px] mx-auto md:py-16 py-8 px-4'
+        logoClassName= 'md:w-auto w-full md:h-full md:object-fill object-cover'
+        titleClassName= 'text-3xl font-semibold text-center mb-4'
         descriptionClassName= 'text-lg font-normal '
         serviceContainerClassName= 'relative w-full flex flex-wrap md:justify-center text-center'
-        serviceItemClassName= 'mt-8 flex flex-col md:w-1/3 w-1/2 md:px-12 md:py-6 px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-        serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center'
+        serviceItemClassName= 'md:mt-8 flex flex-col justify-center md:w-1/3 w-1/2 md:px-12 md:py-6 md:px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center md:mr-4 md:mb-0 mb-4'
         buttonClassName= 'px-4 py-2 mx-2 bg-gray-300 rounded'
         serviceHeaderClassName="w-full text-left flex flex-col gap-2"
       />
@@ -372,19 +373,20 @@ export default function Home() {
         partnerShipData={partnerShipData}
       />
       <MilesTone homePageData={homePageData} />
+      <OurValues />
       <Clients
         title={homePageData?.client_reviews[0].heading || ''}
         description={homePageData?.client_reviews[0].description || ''}
         bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.formats.large.url}`  : ''} 
       />
-      <NewsLetter latest_info={homePageData?.latest_info} buttonText="Subscribe" />
+      <NewsLetter latest_info={homePageData?.latest_info} />
       <AITech
         bannerTitle={homePageData?.home_page_blogs[0].heading || ''}
         bannerDescription={homePageData?.home_page_blogs[0].description || ''}
         buttonTitle={homePageData?.home_page_blogs[0].button_text || ''}
         onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
       />
-      <ContactUs buttonText="Send" contactUsData = {homePageData?.get_in_touch || []} />
+      <ContactUs contactUsData = {homePageData?.get_in_touch[0]} />
     </div>
   );
 }

@@ -12,22 +12,22 @@ const MilesTone = ({ homePageData }: { homePageData: any }) => {
     });
     return (
         <div className='w-full max-w-[1440px] mx-auto py-16'>
-            <div className='w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center mb-8'>
-                <h2 className='text-3xl font-medium text-center mb-4 text-black dark:text-white'>{homePageData?.milestones?.heading}</h2>
+            <div className='w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center mb-8 md:px-0 px-4'>
+                <h2 className='text-3xl font-semibold text-center mb-4 text-black dark:text-white'>{homePageData?.milestones?.heading}</h2>
                 <p className='text-lg font-normal text-black dark:text-white'>{homePageData?.milestones?.description}</p>
             </div>
-            <div className='w-full relative md:rounded-[3rem] md:h-[30rem] mt-8'>
+            <div className='w-full relative md:rounded-[3rem] md:h-[32rem] mt-8'>
                 <img
                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData?.milestones?.background_image?.data?.attributes?.formats?.large?.url}`}
                     alt={homePageData?.milestones?.background_image?.data?.attributes?.name}
-                    className='flex absolute left-0 right-0 top-0 bottom-0 w-full h-full md:rounded-[3rem]'
+                    className='flex absolute left-0 right-0 top-0 bottom-0 w-full md:h-auto h-full md:rounded-[3rem] md:object-fill object-cover'
                 />
                 <div className='relative w-full md:items-center md:h-full flex'>
-                    <div className='md:w-3/4 w-full md:p-16 p-8 flex flex-wrap items-center'>
+                    <div className='md:w-3/4 w-full grid md:grid-cols-3 grid-cols-2 justify-center md:px-16 px-8 md:py-0 py-8 md:gap-16 gap-2'>
                         {mappedData.map((item: any) => (
-                            <div key={item.id} className='md:w-1/3 w-1/2 md:p-0 p-2 mb-12'>
-                                <h2 className='text-4xl font-semibold mb-4 text-white'>{item?.heading}</h2>
-                                <p className='text-xl font-medium text-white'>{item?.description}</p>
+                            <div key={item.id} className='md:p-0 p-2'>
+                                <h2 className='md:text-5xl text-3xl font-bold mb-4 text-white'>{item?.heading}</h2>
+                                <p className='md:w-3/4 md:text-2xl text-lg font-semibold text-white'>{item?.description}</p>
                             </div>
                         ))}
                     </div>

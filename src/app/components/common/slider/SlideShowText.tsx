@@ -45,7 +45,6 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
                 autoPlay
                 loop
                 muted
-                controls
             >
                 <source src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.url}`} type="video/mp4" />
                 Your browser does not support the video tag.
@@ -53,17 +52,17 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
         ) : (
             <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.formats.large.url}`}
-                className="absolute block w-full h-full"
+                className="absolute block w-full h-full object-cover"
                 alt={`Slide ${slide.id}`}
             />
         )}
         <div className="relative w-full max-w-[1440px] mx-auto h-full text-white z-20 px-4 md:px-4">
             <div className={`md:w-[45%] w-full h-full flex flex-col justify-center items-start transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                <h2 className="md:text-4xl text-2xl mb-4 font-medium">{slide.attributes.title}</h2>
-                <p className="md:mb-16 mb-4 md:text-xl text-md font-normal">{slide.attributes.text_body}</p>
+                <h2 className="md:text-4xl text-xl mb-4 font-medium">{slide.attributes.title}</h2>
+                <p className="md:mb-16 mb-4 md:text-lg text-md font-normal">{slide.attributes.text_body}</p>
                 <Button
                     text={slide.attributes.button_text}
-                    className="bg-blue-500 hover:bg-blue-800 text-white py-4 px-4 rounded-xl w-auto font-medium"
+                    className="md:text-lg text-sm bg-blue-500 hover:bg-blue-800 text-white py-4 px-4 rounded-xl w-auto font-medium"
                     onClick={() => window.open(slide.attributes.button_link, '_blank')}
                 />
             </div>
@@ -109,7 +108,7 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="relative overflow-hidden h-[80vh]">
+            <div className="relative overflow-hidden min-h-[80vh]">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-r from-black via-gray-900 to-transparent opacity-90 z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />
