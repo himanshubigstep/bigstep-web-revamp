@@ -269,7 +269,7 @@ const CloudDevOps = () => {
 
     cloudDevOpsTrustedData();
   }, [])
-  
+
   useEffect(() => {
     const fetchHeaderDataResponse = async () => {
       try {
@@ -287,49 +287,51 @@ const CloudDevOps = () => {
   if (loading) {
     return <LoaderSpinner />;
   }
-  
+
   return (
     <div className='poppins'>
-        <TopBanner bannerData={cloudDevOpsData?.introduction} />
-        <SectionInnerCarousel carouselProductEngineerData={cloudDevOpsData?.software} />
-        <ServiceDataBlock
-          title={cloudDevOpsData?.how_can_we_help?.heading || ''}
-          services={cloudDevOpsDataPageHelpServiceData[0]?.attributes?.service_data || []}
-          showButton={false}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto md:pb-16 pb-8 md:px-4'
-          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
-          serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/2 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex flex-col md:flex-row gap-4 md:items-center items-start'
-          serviceItemDescription='w-full text-left flex flex-col gap-2'
-        />
-        <Parterners
-          title={cloudDevOpsData?.technologies_we_use?.heading || ''}
-          description={cloudDevOpsData?.technologies_we_use?.description || ''}
-          techData={cloudDevOpsTechData || []}
-        />
-        <ServiceDataBlock
-          title={cloudDevOpsData?.trusted_partner?.heading || ''}
-          description={cloudDevOpsData?.trusted_partner?.description || ''}
-          services={cloudDevOpsPageTrustedData[0]?.attributes?.service_data || []}
-          showButton={true}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 md:px-4'
-          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
-          serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/2 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex flex-col md:flex-row gap-4 md:items-center items-start'
-          serviceItemDescription='w-full text-left flex flex-col gap-2'
-          buttonText={cloudDevOpsData?.trusted_partner?.button_text || ''}
-          bgImage={cloudDevOpsData?.trusted_partner?.background_image?.data?.attributes?.formats?.large?.url || ''}
-          logoClassName='md:w-auto w-full md:h-full'
-        />
-        <AITech
-          bannerTitle={cloudDevOpsData?.latest_info?.heading || ''}
-          bannerDescription={cloudDevOpsData?.latest_info?.description || ''}
-          buttonTitle={cloudDevOpsData?.latest_info?.button_text || ''}
-          onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
-        />
-        <ContactUs contactUsData = {cloudDevOpsData?.get_in_touch} />
+      {cloudDevOpsData?.introduction && (
+        <TopBanner bannerData={cloudDevOpsData.introduction} />
+      )}
+      <SectionInnerCarousel carouselProductEngineerData={cloudDevOpsData?.software} />
+      <ServiceDataBlock
+        title={cloudDevOpsData?.how_can_we_help?.heading || ''}
+        services={cloudDevOpsDataPageHelpServiceData[0]?.attributes?.service_data || []}
+        showButton={false}
+        mainContainerClass='relative w-full max-w-[1440px] mx-auto md:pb-16 pb-8 md:px-4'
+        headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+        serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
+        serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/2 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconHeader='w-full flex flex-col md:flex-row gap-4 md:items-center items-start'
+        serviceItemDescription='w-full text-left flex flex-col gap-2'
+      />
+      <Parterners
+        title={cloudDevOpsData?.technologies_we_use?.heading || ''}
+        description={cloudDevOpsData?.technologies_we_use?.description || ''}
+        techData={cloudDevOpsTechData || []}
+      />
+      <ServiceDataBlock
+        title={cloudDevOpsData?.trusted_partner?.heading || ''}
+        description={cloudDevOpsData?.trusted_partner?.description || ''}
+        services={cloudDevOpsPageTrustedData[0]?.attributes?.service_data || []}
+        showButton={true}
+        mainContainerClass='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 md:px-4'
+        headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+        serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
+        serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/2 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconHeader='w-full flex flex-col md:flex-row gap-4 md:items-center items-start'
+        serviceItemDescription='w-full text-left flex flex-col gap-2'
+        buttonText={cloudDevOpsData?.trusted_partner?.button_text || ''}
+        bgImage={cloudDevOpsData?.trusted_partner?.background_image?.data?.attributes?.formats?.large?.url || ''}
+        logoClassName='md:w-auto w-full md:h-full'
+      />
+      <AITech
+        bannerTitle={cloudDevOpsData?.latest_info?.heading || ''}
+        bannerDescription={cloudDevOpsData?.latest_info?.description || ''}
+        buttonTitle={cloudDevOpsData?.latest_info?.button_text || ''}
+        onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+      />
+      <ContactUs contactUsData={cloudDevOpsData?.get_in_touch} />
     </div>
   )
 }

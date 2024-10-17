@@ -2,7 +2,6 @@ import React from 'react'
 import ContactForm from './ContactForm'
 
 const ContactUs = ({ contactUsData }: { contactUsData: any }) => {
-    console.log(contactUsData)
     
     const bgImageUrl = contactUsData?.background_image?.data?.attributes?.formats?.large?.url;
     
