@@ -17,21 +17,24 @@ const ServiceDataBlock = ({
     buttonText,
     bgImage,
     logoClassName,
-    } : {
-        title: string;
-        description?: string;
-        services: any,
-        showButton: boolean
-        mainContainerClass?: string,
-        headingClassName?: string,
-        serviceBlockClassName?: string,
-        serviceItemClassName?: string,
-        serviceIconHeader?: string,
-        serviceItemDescription?: string,
-        buttonText?: string,
-        bgImage?: string,
-        logoClassName?: string
-    }) => {
+} : {
+    title: string;
+    description?: string;
+    services: any,
+    showButton: boolean,
+    mainContainerClass?: string,
+    headingClassName?: string,
+    serviceBlockClassName?: string,
+    serviceItemClassName?: string,
+    serviceIconHeader?: string,
+    serviceItemDescription?: string,
+    buttonText?: string,
+    bgImage?: string,
+    logoClassName?: string
+}) => {
+    // Sort the services by ID
+    const sortedServices = services.sort((a: any, b: any) => a.id - b.id);
+
     return (
         <div className={mainContainerClass}>
             <div className={headingClassName}>
@@ -48,7 +51,7 @@ const ServiceDataBlock = ({
                 </div>
             }
             <div className={serviceBlockClassName}>
-                {services.map((service: any) => (
+                {sortedServices.map((service: any) => (
                     <div key={service.id} className={serviceItemClassName}>
                         <div className={serviceIconHeader}>
                             <div className='rounded-full w-16 h-16 flex justify-center items-center bg-green-300'>
@@ -58,7 +61,7 @@ const ServiceDataBlock = ({
                                     alt={service.heading}
                                 />
                             </div>
-                            <h4 className='md:line-clamp-none line-clamp-1 md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500 text-left'>{service.heading}</h4>
+                            <h4 className='md:line-clamp-none line-clamp-1 md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.heading}</h4>
                         </div>
                         <div className={serviceItemDescription}>
                             <p className='line-clamp-3 md:line-clamp-none text-md font-normal'>{service.description}</p>

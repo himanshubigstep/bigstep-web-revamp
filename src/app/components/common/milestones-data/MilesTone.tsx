@@ -23,7 +23,7 @@ const MilesTone = ({ homePageData }: { homePageData: any }) => {
                     className='flex absolute left-0 right-0 top-0 bottom-0 w-full md:h-auto h-full md:rounded-[3rem] md:object-fill object-cover'
                 />
                 <div className='relative w-full md:items-center md:h-full flex'>
-                    <div className='md:w-3/4 w-full grid md:grid-cols-3 grid-cols-2 justify-center md:px-16 px-8 md:py-0 py-8 md:gap-16 gap-2'>
+                    <div className='md:w-[65%] w-full grid md:grid-cols-3 grid-cols-2 justify-center md:px-16 px-8 md:py-0 py-8 md:gap-16 gap-2'>
                         {mappedData.map((item: any) => (
                             <div key={item.id} className='md:p-0 p-2'>
                                 <h2 className='md:text-5xl text-3xl font-bold mb-4 text-white'>{item?.heading}</h2>

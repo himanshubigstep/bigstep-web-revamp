@@ -60,7 +60,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
       }
     }
   };
-  
+
   const handleMouseEnter = (menu: any) => {
     if (!menu.link) {
       toggleDropdown(menu);
@@ -78,9 +78,22 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
     menuHeading: string,
   ) => {
     const formattedHeading = menuHeading.toLowerCase().replace(/\s+/g, '-');
+    const finalHeading = formattedHeading === 'what-we-do' ? 'services' : formattedHeading;
+    const urlHeading = formattedHeading === 'how-we-do' ? 'engagement-models' : finalHeading;
+    
+    if (key === 'Technologies' || key === 'Partnerships') {
+      if (link) {
+        
+        const formattedLink = link.startsWith('/') ? link.slice(1) : link;
+        router.push(`/${formattedLink}`);
+        handleLinkClick();
+      }
+      return;
+    }
+  
     if (link) {
       const formattedLink = link.startsWith('/') ? link.slice(1) : link;
-      router.push(`/${formattedHeading}/${formattedLink}`);
+      router.push(`/${urlHeading}/${formattedLink}`);
       handleLinkClick();
     } else if (hasTechnology) {
       setOpenSubmenus((prev) => ({
@@ -89,6 +102,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
       }));
     }
   };
+
   const handleLinkClick = () => {
     setDropdownOpen(null);
     setOpenSubmenus({});
@@ -208,7 +222,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                   className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500"
                                 >
                                   <Link
-                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-')}/${submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}/${item.link}`}
+                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-').replace('what-we-do', 'services')}/${submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}/${item.link}`}
                                     className="text-md"
                                     onClick={handleLinkClick}
                                   >
@@ -226,48 +240,58 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                       }`}
                   >
                     {menu.items_on_right &&
-                      menu.items_on_right.map((submenu: any) => (
-                        <li
-                          key={submenu.id}
-                          className="relative flex flex-col"
-                        >
-                          <button
-                            onClick={() =>
-                              toggleSubmenu(
-                                submenu.item,
-                                submenu.item_link,
-                                !!submenu.technology,
-                                menu.heading
-                              )
-                            }
-                            className={`${menu.items_on_right && menu.items_on_right.some((submenu: any) => submenu.technology) ? "text-lg text-left flex items-center gap-2 pb-4 font-semibold text-blue-500" : "flex items-center text-black dark:text-white gap-2 text-lg hover:text-blue-500"}`}>
-                            <img
-                              className="w-4 h-4 mt-1 mr-2"
-                              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${submenu.icon.data.attributes.url}`}
-                              alt=""
-                            />
-                            <span className="underline-gap">{submenu.item}</span>
-                          </button>
-                          {submenu.technology && (
-                            <ul className="flex flex-col pt-2">
-                              {submenu.technology.items.map((item: any, index: number) => (
-                                <li
-                                  key={index}
-                                  className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500"
-                                >
-                                  <Link
-                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-')}/${submenu.item.toLowerCase().replace(/\s+/g, '-')}/${item.link}`}
-                                    className="text-md"
-                                    onClick={handleLinkClick}
-                                  >
-                                    {item.title}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </li>
-                      ))}
+                      menu.items_on_right.map((submenu: any) => {
+                        let baseUrl = `/${menu.heading.toLowerCase().replace(/\s+/g, '-')}`;
+                        return (
+                          <li key={submenu.id} className="relative flex flex-col">
+                            <button
+                              onClick={() =>
+                                toggleSubmenu(
+                                  submenu.item,
+                                  submenu.item_link,
+                                  !!submenu.technology,
+                                  menu.heading
+                                )
+                              }
+                              className={`${menu.items_on_right && menu.items_on_right.some((submenu: any) => submenu.technology)
+                                  ? "text-lg text-left flex items-center gap-2 pb-4 font-semibold text-blue-500"
+                                  : "flex items-center text-black dark:text-white gap-2 text-lg hover:text-blue-500"
+                                }`}
+                            >
+                              <img
+                                className="w-4 h-4 mt-1 mr-2"
+                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${submenu.icon.data.attributes.url}`}
+                                alt=""
+                              />
+                              <span className="underline-gap">{submenu.item}</span>
+                            </button>
+                            {submenu.technology && (
+                              <ul className="flex flex-col pt-2">
+                                {submenu.technology.items.map((item: any, index: number) => {
+                                  const formattedSubmenuItem = submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '');
+                                  const formattedHeading = menu.heading.toLowerCase().replace(/\s+/g, '-');
+                                  const finalHeading = formattedHeading === 'what-we-do' ? 'services' : formattedHeading;
+                                  const urlHeading = formattedHeading === 'how-we-do' ? 'engagement-models' : finalHeading;
+
+                                  if (urlHeading === 'services' && submenu.item === 'Specializations' && !submenu.item_link) {
+                                    baseUrl = `/${formattedSubmenuItem}/${item.link}`;
+                                  } else {
+                                    baseUrl += `/${formattedSubmenuItem}/${item.link}`;
+                                  }
+
+                                  return (
+                                    <li key={index} className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500">
+                                      <Link href={baseUrl} className="text-md" onClick={handleLinkClick}>
+                                        {item.title}
+                                      </Link>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            )}
+                          </li>
+                        );
+                      })}
                   </ul>
                 </ul>
               )}

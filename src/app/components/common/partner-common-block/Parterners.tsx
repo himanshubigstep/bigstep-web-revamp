@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 interface Logo {
     attributes: {
+        name: string;
         url: string;
     };
 }
@@ -44,12 +45,12 @@ const Partners = ({
                 className="w-full h-full object-cover absolute left-0 right-0 top-0 bottom-0"
             />
             <div className="relative w-full h-full max-w-[1440px] mx-auto">
-                <div className="w-full text-left flex flex-col gap-2">
+                <div className="w-full text-left flex flex-col gap-2 md:max-w-[75%] mx-auto">
                     <h4 className="font-semibold text-center text-3xl mb-4 text-white">{title}</h4>
                     <p className="font-normal text-center text-lg mb-16 text-white">{description}</p>
                 </div>
 
-                <div className="w-full h-full flex md:flex-none flex-wrap gap-6 md:items-center mb-16">
+                <div className="w-full h-full flex md:flex-none flex-wrap gap-6 md:items-center justify-center mb-16 md:max-w-[75%] mx-auto">
                     {sortedTechData.map((partner) => (
                         <Button
                             key={partner.id}
@@ -60,15 +61,18 @@ const Partners = ({
                     ))}
                 </div>
 
-                <div className="bg-white rounded-2xl w-full h-full md:py-8 py-4">
-                    <div className="flex w-full justify-evenly items-center md:px-8 px-4">
+                <div className="border-[1px] border-gray-500 md:max-w-[75%] mx-auto rounded-2xl w-full h-full md:py-8 py-4">
+                    <div className="md:flex w-full grid grid-cols-2 justify-center gap-8 items-start md:px-8 px-4">
                         {selectedPartner && sortedTechData.find(partner => partner.id === selectedPartner)?.attributes.logos.data.map((logo, index) => (
-                            <div key={index} className="aspect-square flex justify-center items-center md:p-4 p-2">
-                                <img
-                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.attributes.url}`}
-                                    alt="partner logo"
-                                    className="object-contain w-36 aspect-auto"
-                                />
+                            <div key={index} className='flex flex-col gap-4 justify-center items-center'>
+                                <div className="bg-white rounded-xl flex justify-center items-center md:p-4 p-2">
+                                    <img
+                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.attributes.url}`}
+                                        alt="partner logo"
+                                        className="object-contain w-[8rem] aspect-square"
+                                    />
+                                </div>
+                                <span className='text-lg md:w-[75%] mx-auto text-center text-white font-medium'>{logo.attributes.name.replace(/\.[^.]+$/, '')}</span>
                             </div>
                         ))}
                     </div>

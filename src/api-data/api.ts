@@ -85,7 +85,7 @@ export const fetchSuccessStoriesData = async () => {
     return null;
   }
 };
-  
+
 export const fetchPaternershipData = async () => {
   try {
     const response = await fetch(
@@ -104,17 +104,17 @@ export const fetchPaternershipData = async () => {
 
 export const fetchClientReviews = async () => {
   try {
-      const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/reviews/?populate=*`
-      );
-      if (!response.ok) {
-          throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.data;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/reviews/?populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
   } catch (error) {
-      console.log(error);
-      return null;
+    console.log(error);
+    return null;
   }
 };
 
@@ -282,17 +282,17 @@ export const fetchProductEngineeringTrustedPartner = async () => {
 
 export const fetchDataAndAiData = async () => {
   try {
-      const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/data-ai?populate[introduction][populate]=*&populate[information][populate]=*&populate[software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
-      );
-      if (!response.ok) {
-          throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.data;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/data-ai?populate[introduction][populate]=*&populate[information][populate]=*&populate[software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
   } catch (error) {
-      console.log(error);
-      return null;
+    console.log(error);
+    return null;
   }
 };
 
@@ -349,17 +349,17 @@ export const fetchDataAndAITrustedPartner = async () => {
 
 export const fetchRpaData = async () => {
   try {
-      const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/rpa?populate[introduction][populate]=*&populate[information][populate]=*&populate[software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
-      );
-      if (!response.ok) {
-          throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.data;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/rpa?populate[introduction][populate]=*&populate[information][populate]=*&populate[software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
   } catch (error) {
-      console.log(error);
-      return null;
+    console.log(error);
+    return null;
   }
 };
 
@@ -416,17 +416,17 @@ export const fetchRpaTrustedPartner = async () => {
 
 export const fetchCloudDevOpsData = async () => {
   try {
-      const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/cloud-devop?populate[introduction][populate]=*&populate[information][populate]=*&populate[software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
-      );
-      if (!response.ok) {
-          throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.data;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/cloud-devop?populate[introduction][populate]=*&populate[information][populate]=*&populate[software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
   } catch (error) {
-      console.log(error);
-      return null;
+    console.log(error);
+    return null;
   }
 };
 
@@ -483,17 +483,17 @@ export const fetchCloudDevOpsTrustedPartner = async () => {
 
 export const fetchInternetOfThingsData = async () => {
   try {
-      const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/iot?populate[introduction][populate]=*&populate[information][populate]=*&populate[software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
-      );
-      if (!response.ok) {
-          throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.data;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/iot?populate[introduction][populate]=*&populate[information][populate]=*&populate[software][populate]=*&populate[how_can_we_help][populate]=*&populate[technologies_we_use][populate]=*&populate[trusted_partner][populate]=*&populate[latest_info][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
   } catch (error) {
-      console.log(error);
-      return null;
+    console.log(error);
+    return null;
   }
 };
 
@@ -599,6 +599,602 @@ export const fetchLiveStreamingBenifits = async () => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Live%20Video%20Media%20Streaming%20Page%20-%20Benefits%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// content management systems api
+
+export const fetchContentManagementSystemsData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/content-management-system?populate[introduction][populate]=*&populate[solution_expertise][populate]=*&populate[engaging_streaming_experience][populate]=*&populate[cutting_edge_technologies][populate]=*&populate[transformative_benefits][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchContentManagementSystemsFeatures = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Content%20Management%20Systems%20Page%20-%20Features%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchContentManagementSystemsTechData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=Content%20Management%20Systems%20(CMS)&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchContentManagementSystemsBenifits = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Content%20Management%20Systems%20Page%20-%20Benefits%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// Saas product development api
+
+export const fetchSaasProductDevelopmentData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/saas-product-architecture?populate[introduction][populate]=*&populate[solution_expertise][populate]=*&populate[engaging_streaming_experience][populate]=*&populate[cutting_edge_technologies][populate]=*&populate[transformative_benefits][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchSaasProductDevelopmentFeatures = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=SaaS%20Products%20Architecture%20And%20Development%20Page%20-%20Features%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchSaasProductDevelopmentTechData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=SaaS%20Products%20Architecture%20And%20Development&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchSaasProductDevelopmentBenifits = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=SaaS Products Architecture And Development Page - Benefits Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// React and React Native api
+
+export const fetchReactAndReactNativeData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/react-native-development?populate[introduction][populate]=*&populate[solution_expertise][populate]=*&populate[engaging_streaming_experience][populate]=*&populate[cutting_edge_technologies][populate]=*&populate[transformative_benefits][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchReactAndReactNativeFeatures = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=React%20And%20React%20Native%20Development%20Page%20-%20Features%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchReactAndReactNativeTechData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=React%20And%20React%20Native%20Development&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchReactAndReactNativeBenifits = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=React%20And%20React%20Native%20Development%20Page%20-%20Benefits%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// agentic workflows api
+
+export const fetchAgenticWorkflowsData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/agentic-workflow?populate[introduction][populate]=*&populate[solution_expertise][populate]=*&populate[engaging_streaming_experience][populate]=*&populate[cutting_edge_technologies][populate]=*&populate[transformative_benefits][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchAgenticWorkflowsFeatures = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Agentic%20Workflows%20Page%20-%20Features%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchAgenticWorkflowsTechData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=Agentic%20Workflows&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchAgenticWorkflowsBenifits = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Agentic%20Workflows%20Page%20-%20Benefits%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// document-summarization api
+
+export const fetchDocumentSummarizationsData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/document-summarization?populate[introduction][populate]=*&populate[solution_expertise][populate]=*&populate[engaging_streaming_experience][populate]=*&populate[cutting_edge_technologies][populate]=*&populate[transformative_benefits][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchDocumentSummarizationsFeatures = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Document%20Summarization%20And%20Intelligence%20Page%20-%20Features%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchDocumentSummarizationsTechData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=Document%20Summarization%20And%20Intelligence&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchDocumentSummarizationsBenifits = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Document%20Summarization%20And%20Intelligence%20Page%20-%20Benefits%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// aws-consulting-development api
+
+export const fetchAwsConsultingDevelopmentData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/aws-consulting?populate[introduction][populate]=*&populate[solution_expertise][populate]=*&populate[engaging_streaming_experience][populate]=*&populate[cutting_edge_technologies][populate]=*&populate[transformative_benefits][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchAwsConsultingDevelopmentFeatures = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=AWS%20Consulting%20And%20Development%20Page%20-%20Features%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchAwsConsultingDevelopmentTechData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=AWS%20Consulting%20And%20Development&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchAwsConsultingDevelopmentBenifits = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=AWS%20Consulting%20And%20Development%20Page%20-%20Benefits%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// Customer Software Development Api
+
+export const fetchCustomerSoftwareDevelopmentData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/pe-cloud?populate[cloud_intro][populate]=*&populate[why_choose][populate]=*&populate[technologies][populate]=*&populate[success][populate]=*&populate[blogs][populate]=*&populate[client_reviews][populate]=*&populate[intro2][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchCustomerSoftwareDevelopmentChooseUs = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=PE%20-%20Custom%20Software%20Page%20-%20Why%20BigStep%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchcustomerSoftwareDevelopmentTech = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=Custom%20Software%20And%20Cloud-Native%20Application%20Development&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// Backend Development Api
+
+export const fetchBackendDevelopmentData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/pe-backend?populate[backend_intro][populate]=*&populate[why_choose][populate]=*&populate[technologies][populate]=*&populate[success][populate]=*&populate[blogs][populate]=*&populate[client_reviews][populate]=*&populate[intro2][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchBackendDevelopmentChooseUs = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=PE%20-%20Backend%20Development%20Page%20-%20Why%20BigStep%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchBackendDevelopmentTech = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=Backend%20Development&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// Web Application Development Api
+
+export const fetchWebApplicationDevelopmentData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/pe-web?populate[web_intro][populate]=*&populate[why_choose][populate]=*&populate[technologies][populate]=*&populate[success][populate]=*&populate[blogs][populate]=*&populate[client_reviews][populate]=*&populate[intro2][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchWebApplicationDevelopmentChooseUs = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=PE%20-%20Web%20Development%20Page%20-%20Why%20BigStep%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchWebApplicationDevelopmentTech = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=Web%20Application%20Development&populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// Mobile App Development Api
+
+export const fetchMobileAppDevelopmentData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/pe-mobile?populate[mobile_intro][populate]=*&populate[why_choose][populate]=*&populate[technologies][populate]=*&populate[success][populate]=*&populate[blogs][populate]=*&populate[client_reviews][populate]=*&populate[intro2][populate]=*&populate[get_in_touch][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchMobileAppDevelopmentChooseUs = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=PE%20-%20Mobile%20App%20Development%20Page%20-%20Why%20BigStep%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchMobileAppDevelopmentTech = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-we-work-ons?filters[$and][0][category][$eq]=Mobile%20App%20Development&populate=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
