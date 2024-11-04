@@ -1,200 +1,191 @@
-// 'use client'
-// import { fetchHomepageData } from '@/api-data/api'
-// import Clients from '@/app/components/common/clients/Clients'
-// import ContactUs from '@/app/components/common/contact-us/ContactUs'
-// import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
-// import MilesTone from '@/app/components/common/milestones-data/MilesTone'
-// import TopBanner from '@/app/components/common/top-banner/TopBanner'
-// import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
-// import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
+'use client'
+import React, { useEffect, useState } from 'react'
+import { fetchRemoteEngineeringTeamData, fetchRemoteEngineeringTeamHolisticApproach } from '@/api-data/api'
+import Clients from '@/app/components/common/clients/Clients'
+import ContactUs from '@/app/components/common/contact-us/ContactUs'
+import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
+import MilesTone from '@/app/components/common/milestones-data/MilesTone'
+import TopBanner from '@/app/components/common/top-banner/TopBanner'
+import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
+import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
 
-// interface HomePageData {
-//   id: number;
-//   home_introduction: {
-//     id: number;
-//     heading: string;
-//     button_text: string;
-//     description: string;
-//     background_image: {
-//       data: {
-//         attributes: {
-//           formats: {
-//             large: {
-//               url: string
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }[];
-//   Message: {
-//     id: number;
-//     heading: string;
-//     button_text: string | null;
-//     description: string;
-//     background_image: any
-//   };
-//   success_stories: {
-//     id: number;
-//     heading: string;
-//     button_text: string;
-//     description: string;
-//   };
-//   technologies: {
-//     id: number;
-//     heading: string;
-//     button_text: string;
-//     description: string;
-//   }[];
-//   milestones: {
-//     id: number;
-//     heading: string;
-//     button_text: string | null;
-//     description: string;
-//     background_image: {
-//       data: {
-//         attributes: {
-//           formats: {
-//             large: {
-//               url: string
-//             }
-//           }
-//         }
-//       }
-//     }
-//   };
-//   milestones1: {
-//     id: number;
-//     Years: {
-//       id: number;
-//       description: string;
-//       heading: string;
-//     };
-//     cloud_projects: {
-//       id: number;
-//       description: string;
-//       heading: string;
-//     };
-//     deliveries: {
-//       id: number;
-//       description: string;
-//       heading: string;
-//     };
-//     experts: {
-//       id: number;
-//       description: string;
-//       heading: string;
-//     };
-//   }
-//   partners: {
-//     id: number;
-//     heading: string;
-//     button_text: string;
-//     description: string;
-//     background_image: {
-//       data: {
-//         attributes: {
-//           formats: {
-//             large: {
-//               url: string
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }[];
-//   client_reviews: {
-//     id: number;
-//     heading: string;
-//     button_text: string | null;
-//     description: string;
-//     background_image: {
-//       data: {
-//         attributes: {
-//           formats: {
-//             large: {
-//               url: string
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }[];
-//   home_page_blogs: {
-//     id: number;
-//     heading: string;
-//     button_text: string | null;
-//     description: string | null;
-//   }[];
-//   culture: {
-//     id: number;
-//     heading: string;
-//     description: string;
-//   };
-//   faq: {
-//     id: number;
-//     heading: string;
-//     button_text: string | null;
-//     description: string;
-//   }[];
-//   trusted_by: {
-//     heading: string;
-//     description: string;
-//   };
-//   latest_info: {
-//     background_image: {
-//       data: {
-//         attributes: {
-//           formats: {
-//             large: {
-//               url: string
-//             }
-//           }
-//         }
-//       }
-//     }
-//     heading: string;
-//   }
-//   get_in_touch: any[];
-// }
-// import React, { useEffect, useState } from 'react'
+interface RemoteEngineeringTeamProps {
+  id: number;
+  client_query: {
+    id: number;
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
+  client_review: {
+    id: number;
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+    button_text: string
+    description: string
+    heading: string
+  }
+  complete_product_development: {
+    id: number;
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+    button_text: string
+    heading: string
+    description: string
+  }
+  holistic_approach: {
+    id: number;
+    button_text: string
+    description: string
+    heading: string
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
+  introduction: {
+    id: number;
+    buttonText: string;
+    description: string;
+    heading: string;
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }[]
+    }
+  }
+  outstanding_results: {
+    id: number;
+    heading: string;
+    description: string;
+    button_text: string;
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
+  product_development: {
+    id: number;
+    heading: string;
+    description: string;
+    button_text: string;
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 const RemoteEngineeringTeam = () => {
-    // const [homePageData, setHomePageData] = useState<HomePageData | null>(null)
-    // const [loading, setLoading] = useState<boolean>(true);
+    const [remoteEngineeringTeamData, setRemoteEngineeringTeamData] = useState<RemoteEngineeringTeamProps | null>(null)
+    const [remoteEngineeringTeamHolisticData, setRemoteEngineeringTeamHolisticData] = useState<any>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
-    // useEffect(() => {
-    //   const fetchHomePageDataResponse = async () => {
-    //     try {
-    //       const response = await fetchHomepageData();
-    //       setHomePageData(response.attributes);
+    useEffect(() => {
+      const fetchRemoteEngineeringTeamDataResponse = async () => {
+        try {
+          const response = await fetchRemoteEngineeringTeamData();
+          setRemoteEngineeringTeamData(response.attributes);
   
-    //     } catch (error) {
-    //       console.log(error);
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   };
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      };
   
-    //   fetchHomePageDataResponse();
-    // }, []);
+      fetchRemoteEngineeringTeamDataResponse();
+    }, []);
 
-    // if (loading) {
-    //   return <LoaderSpinner />;
-    // }
+    useEffect(() => {
+      const fetchRemoteEngineeringTeamHolisticData = async () => {
+        try {
+          const response = await fetchRemoteEngineeringTeamHolisticApproach();
+          setRemoteEngineeringTeamHolisticData(response);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      
+      fetchRemoteEngineeringTeamHolisticData();
+    }, [])
+
+    if (loading) {
+      return <LoaderSpinner />;
+    }
     
   return (    
     <div className='poppins'>
-        {/* <TopBanner />
-        <HolisticApproach />
-        <ProductDevelopment />
-        <MilesTone homePageData={homePageData} />
-        <Clients
-            title={homePageData?.client_reviews[0].heading || ''}
-            description={homePageData?.client_reviews[0].description || ''}
-            bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.formats.large.url}`  : ''} 
+        <TopBanner bannerData={remoteEngineeringTeamData?.introduction} />
+        <HolisticApproach
+          title={remoteEngineeringTeamData?.holistic_approach?.heading || ''}
+          description={remoteEngineeringTeamData?.holistic_approach?.description || ''}
+          buttonText={remoteEngineeringTeamData?.holistic_approach?.button_text || ''}
+          holisticData={remoteEngineeringTeamHolisticData[0] || []}
         />
-        <ContactUs buttonText="Send" contactUsData = {homePageData?.get_in_touch || []} /> */}
+        <ProductDevelopment />
+        {/* <MilesTone homePageData={homePageData} /> */}
+        <Clients
+            title={remoteEngineeringTeamData?.client_review?.heading || ''}
+            description={remoteEngineeringTeamData?.client_review?.description || ''}
+            bgImage={remoteEngineeringTeamData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${remoteEngineeringTeamData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+        />
+        <ContactUs contactUsData = {remoteEngineeringTeamData?.client_query || []} />
     </div>
   )
 }

@@ -25,13 +25,13 @@ const ProductDevelopment = () => {
     ]
     return (
         <div className='w-full h-full relative md:py-16 py-8 bg-black'>
-            <div className='relative w-full max-w-[1080px] mx-auto flex flex-col items-center'>
+            <div className='relative w-full max-w-[1440px] mx-auto flex flex-col items-center'>
                 <img src='' alt='' />
                 <div className='w-full flex flex-col justify-center items-center text-center'>
-                    <h2 className='text-3xl font-bold text-center mb-4 text-white'>Our Holistic Approach to Product Development</h2>
-                    <p className='text-lg text-white'>Our process integrates multiple disciplines into a cohesive workflow to deliver a complete, high-quality product.</p>
+                    <h2 className='text-3xl font-bold text-center mb-4 text-white'>Why Choose Our Complete Product Development?</h2>
+                    {/* <p className='text-lg text-white'>Our process integrates multiple disciplines into a cohesive workflow to deliver a complete, high-quality product.</p> */}
                 </div>
-                <div className='w-full grid grid-cols-2 md:grid-cols-4 gap-8 md:mt-8 mt-4'>
+                <div className='w-full max-w-[1080px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:mt-8 mt-4'>
                     {productDevelopmentData.map((item: any) => (
                         <div className='w-full flex justify-between items-start gap-4'>
                             <div className='flex flex-col justify-center text-white text-4xl'>

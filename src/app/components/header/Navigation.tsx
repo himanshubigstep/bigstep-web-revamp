@@ -185,7 +185,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                   className={`${menu.items_on_right.length !== 0
                     ? "w-full flex md:flex-row flex-col justify-between left-0"
                     : "small-menu left-auto right-auto"
-                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white dark:bg-black md:absolute left-0 right-0 top-full md:border-gray-200 md:border-t-[1px] md:dark:border-gray-800 md:gap-8 gap-4 rounded-2xl md:p-8 p-2`}
+                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white dark:bg-black md:absolute left-0 right-0 top-full md:border-gray-200 md:border-t-[1px] md:dark:border-gray-800 md:gap-8 gap-4 rounded-2xl md:p-8 p-2 shadow-xl`}
                 >
                   <ul
                     className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "grid md:grid-cols-2 grid-cols-1 md:gap-8 gap-4 md:w-[65%]" : "grid grid-cols-1 md:gap-8 gap-4 w-[100%]"
@@ -222,7 +222,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                   className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500"
                                 >
                                   <Link
-                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-').replace('what-we-do', 'services')}/${submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}/${item.link}`}
+                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-').replace('what-we-do', 'services')}/${submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}${item.link}`}
                                     className="text-md"
                                     onClick={handleLinkClick}
                                   >
