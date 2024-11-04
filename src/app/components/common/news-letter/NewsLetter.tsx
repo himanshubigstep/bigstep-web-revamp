@@ -1,32 +1,49 @@
 'use client'
-import React, { useState } from 'react'
-import InputField from '../input-fields/InputField'
+import React, { useState } from 'react';
+import InputField from '../input-fields/InputField';
 import { subscriberFormData } from '@/api-data/api';
 
-interface SubscribeFormProps {
-    buttonText?: string;
-    latest_info?: any;
+interface LatestInfo {
+    heading?: string;
+    background_image?: {
+        data?: {
+            attributes?: {
+                formats?: {
+                    large?: {
+                        url: string;
+                    }
+                }
+            }
+        }
+    }
+    button_text?: string
 }
 
-const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', latest_info }) => {
+interface SubscribeFormProps {
+    latest_info?: LatestInfo;
+}
+
+const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info }) => {
     const [inputValue, setInputValue] = useState({
         name: '',
         email: ''
-    })
+    });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [formErrors, setFormErrors] = useState({
         name: '',
         email: '',
     });
+
     const handleInputChange = (field: 'name' | 'email') => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputValue(prevState => ({
             ...prevState,
             [field]: event.target.value
         }));
     };
+
     const validateForm = () => {
-        const errors = { name: '', email: '', phone_number: '' };
+        const errors = { name: '', email: '' };
         let isValid = true;
 
         if (!inputValue.name.trim()) {
@@ -35,10 +52,10 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
         }
 
         if (!inputValue.email.trim()) {
-            errors.email = 'email is required';
+            errors.email = 'Email is required';
             isValid = false;
         } else if (!/\S+@\S+\.\S+/.test(inputValue.email)) {
-            errors.email = 'email is invalid';
+            errors.email = 'Email is invalid';
             isValid = false;
         }
 
@@ -60,10 +77,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
             const response = await subscriberFormData(inputValue);
             if (response) {
                 console.log('Form submitted successfully:', response);
-                setInputValue({
-                    name: '',
-                    email: '',
-                });
+                setInputValue({ name: '', email: '' });
             } else {
                 setSubmitError('Failed to submit the form. Please try again.');
             }
@@ -81,18 +95,17 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
     };
 
     return (
-        <div className='w-full h-full rounded-3xl md:py-16 py-8'>
-            <div className='relative w-full h-full max-w-[1440px] mx-auto rounded-3xl md:py-24 py-8'>
+        <div className='w-full h-full md:rounded-3xl md:py-16 py-8'>
+            <div className='relative w-full h-full max-w-[1440px] mx-auto md:rounded-3xl md:py-24 py-8'>
                 <img
                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${latest_info?.background_image?.data?.attributes?.formats?.large?.url}`}
                     alt='Background Icon'
-                    className='absolute 0 left-0 right-0 bottom-0 md:object-contain object-cover w-full h-full'
+                    className='absolute 0 left-0 right-0 bottom-0 md:object-fill object-cover w-full h-full'
                 />
-
                 <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
-                    <h2 className='text-3xl font-medium text-white text-center mb-4'>{latest_info?.heading}</h2>
+                    <h2 className='text-3xl font-semibold text-white text-center mb-4'>{latest_info?.heading}</h2>
                 </div>
-                <form onSubmit={handelSubscription} className='md:w-[70%] w-[90%] mx-auto h-full relative flex md:flex-row flex-col items-center justify-between md:gap-8 py-8'>
+                <form onSubmit={handelSubscription} className='md:w-[70%] w-[90%] mx-auto h-full relative flex md:flex-row flex-col items-center justify-between md:gap-8 pt-8'>
                     <InputField
                         type='text'
                         label='Name'
@@ -118,13 +131,13 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ buttonText = 'Subscribe', la
                         className='md:w-48 w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white'
                         disabled={isSubmitting}
                     >
-                        {isSubmitting ? 'Sending...' : buttonText}
+                        {isSubmitting ? 'Sending...' : latest_info?.button_text}
                     </button>
                     {submitError && <p className='text-red-500 text-left absolute left-0 bottom-0'>{submitError}</p>}
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
-export default NewsLetter
+export default NewsLetter;

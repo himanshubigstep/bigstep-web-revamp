@@ -5,39 +5,14 @@ import CommonBlock from "./components/common/common-blocks-division/CommonBlock"
 import SuccessStoriesBlocks from "./components/common/sucess-stories-blocks/SuccessStoriesBlocks";
 import ClientCarousel from "./components/common/client-carousel/ClientCarousel";
 import PartnersBlock from "./components/common/partners-section/PartnersBlock";
-import { fetchHomepageData, fetchHomePageCarousel, fetchPaternershipData, fetchHeaderData, fetchServiceDataHome } from "@/api-data/api";
+import { fetchHomepageData, fetchHomePageCarousel, fetchPaternershipData, fetchHeaderData, fetchServiceDataHome, fetchtrustedClients } from "@/api-data/api";
 import MilesTone from "./components/common/milestones-data/MilesTone";
 import Clients from "./components/common/clients/Clients";
 import NewsLetter from "./components/common/news-letter/NewsLetter";
 import AITech from "./components/common/ai-tech/AITech";
 import ContactUs from "./components/common/contact-us/ContactUs";
-
-const clients = [
-  'https://bigsteptech.com/wp-content/uploads/2024/01/jio.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/vts.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/leap.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/play-day.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/invest-india.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/melophy.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/fliksta.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/hod.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/ey.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/vmly.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/accenture.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/policy-boss.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/gathering-us.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/airmeet.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/bizzabo.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/infinity-learn.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/firebolt.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/balbo.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/travel-me.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/agora.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/make-in-india.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/tcc.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/Torum.png',
-  'https://bigsteptech.com/wp-content/uploads/2024/01/soundcore.png'
-]
+import LoaderSpinner from "./components/common/loader-spinner/LoadingSpinner";
+import OurValues from "./components/our-values/OurValues";
 
 interface HomePageData {
   id: number;
@@ -122,6 +97,17 @@ interface HomePageData {
     heading: string;
     button_text: string;
     description: string;
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
   }[];
   client_reviews: {
     id: number;
@@ -241,6 +227,8 @@ export default function Home() {
   const [partnerShipData, setPartnerShipData] = useState<any>();
   const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
   const [homePageServiceData, setHomePageServiceData] = useState<any>([]);
+  const [truestedClientsData, setTrustedClientsData] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   
   useEffect(() => {
     const fetchHeaderDataResponse = async () => {
@@ -250,6 +238,8 @@ export default function Home() {
       } catch (error) {
         console.log(error);
         return null;
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -264,10 +254,28 @@ export default function Home() {
       } catch (error) {
         console.log(error);
         return null;
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchHomePageServiceData();
+  }, [])
+
+  useEffect(() => {
+    const fetchtrustedClientsData = async () => {
+      try {
+        const response = await fetchtrustedClients();
+        setTrustedClientsData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchtrustedClientsData()
   }, [])
 
   useEffect(() => {
@@ -294,6 +302,8 @@ export default function Home() {
 
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -308,44 +318,75 @@ export default function Home() {
       } catch (error) {
         console.log(error);
         return null;
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchHomePageCarouselData();
   }, [])
 
+  if (loading) {
+    return <LoaderSpinner />;
+  }
+
   return (
-    <div className="w-full h-full bg-white dark:bg-black">
+    <div className="poppins w-full h-full bg-white dark:bg-black">
       <SlideShowText slides={homePageCarousel} />
       <CommonBlock
         title={homePageData?.technologies[0]?.heading || ''}
         description={homePageData?.technologies[0]?.description || ''}
         services={homePageServiceData}
+        containerClassName= 'relative w-full max-w-[1440px] mx-auto md:py-16 py-8 px-4'
+        logoClassName= 'md:w-auto w-full md:h-full md:object-fill object-cover'
+        titleClassName= 'text-3xl font-semibold text-center mb-4'
+        descriptionClassName= 'text-lg font-normal '
+        serviceContainerClassName= 'relative w-full flex flex-wrap md:justify-center text-center'
+        serviceItemClassName= 'md:mt-8 flex flex-col justify-center md:w-1/3 w-1/2 md:px-12 md:py-6 md:px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center md:mr-4 md:mb-0 mb-4'
+        buttonClassName= 'px-4 py-2 mx-2 bg-gray-300 rounded'
+        serviceHeaderClassName="w-full text-left flex flex-col gap-2"
       />
       <SuccessStoriesBlocks sucessStoriesData={homePageData?.success_stories} />
       <ClientCarousel
-        clients={clients}
+        clients={truestedClientsData}
         heading={homePageData?.trusted_by?.heading || ''}
         description={homePageData?.trusted_by?.description || ''}
       />
       <PartnersBlock
-        homePageData={homePageData?.partners[0]}
+         homePageData={{
+          heading: homePageData?.partners[0]?.heading || '',
+          button_text: homePageData?.partners[0]?.button_text || '',
+          description: homePageData?.partners[0]?.description || '',
+          background_image: {
+            data: {
+              attributes: {
+                formats: {
+                  large: {
+                    url: homePageData?.partners[0]?.background_image?.data?.attributes?.formats?.large?.url || '',
+                  },
+                },
+              },
+            },
+          },
+        }}
         partnerShipData={partnerShipData}
       />
       <MilesTone homePageData={homePageData} />
+      <OurValues />
       <Clients
         title={homePageData?.client_reviews[0].heading || ''}
         description={homePageData?.client_reviews[0].description || ''}
         bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.formats.large.url}`  : ''} 
       />
-      <NewsLetter latest_info={homePageData?.latest_info} buttonText="Subscribe" />
+      <NewsLetter latest_info={homePageData?.latest_info} />
       <AITech
         bannerTitle={homePageData?.home_page_blogs[0].heading || ''}
         bannerDescription={homePageData?.home_page_blogs[0].description || ''}
         buttonTitle={homePageData?.home_page_blogs[0].button_text || ''}
         onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
       />
-      <ContactUs buttonText="Send" contactUsData = {homePageData?.get_in_touch || []} />
+      <ContactUs contactUsData = {homePageData?.get_in_touch[0]} />
     </div>
   );
 }

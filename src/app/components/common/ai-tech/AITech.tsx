@@ -50,18 +50,27 @@ const AITech: React.FC<AITechProps> = ({
 
     useEffect(() => {
         const fetchData = async () => {
-            const blogsResponse: BlogData[] = await fetchBlogsData();
-            const blogs = blogsResponse.map((blog) => {
-                return {
-                    id: blog.id,
-                    title: blog.attributes.heading,
-                    description: blog.attributes.description,
-                    src: process.env.NEXT_PUBLIC_IMAGE_URL + (blog.attributes.image.data.attributes.formats.medium.url || blog.attributes.image.data.attributes.formats.thumbnail.url),
-                    date: formatDate(blog.attributes.publishedAt),
-                };
-            });
+            try {
+                const blogsResponse: BlogData[] | null = await fetchBlogsData();
+                const blogs = Array.isArray(blogsResponse) ? blogsResponse.map((blog) => {
+                    return {
+                        id: blog.id,
+                        title: blog.attributes.heading,
+                        description: blog.attributes.description,
+                        src: process.env.NEXT_PUBLIC_IMAGE_URL + (blog.attributes.image.data.attributes.formats.medium.url || blog.attributes.image.data.attributes.formats.thumbnail.url),
+                        date: formatDate(blog.attributes.publishedAt),
+                        rawDate: new Date(blog.attributes.publishedAt), // Store raw date for sorting
+                    };
+                }) : [];
 
-            setRightSectionItems(blogs);
+                // Sort blogs by date in descending order
+                blogs.sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime());
+
+                setRightSectionItems(blogs);
+            } catch (error) {
+                console.error("Error fetching blogs data:", error);
+                setRightSectionItems([]); // Optionally set to empty on error
+            }
         };
         fetchData();
     }, []);
@@ -82,14 +91,14 @@ const AITech: React.FC<AITechProps> = ({
     return (
         <div className='relative w-full h-full md:py-16 py-8 bg-white dark:bg-black'>
             <div className='w-full h-full max-w-[1240px] mx-auto flex flex-col items-center justify-center'>
-                <div className='w-full h-full flex justify-center flex-col items-center mb-8'>
+                <div className='w-full h-full flex justify-center flex-col items-center mb-8 md:px-0 px-4'>
                     <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
-                        <h2 className='text-3xl font-medium text-center mb-4'>{bannerTitle}</h2>
+                        <h2 className='text-3xl font-semibold text-center mb-4'>{bannerTitle}</h2>
                         <p className='text-lg font-normal'>{bannerDescription}</p>
                     </div>
                 </div>
 
-                <div className='w-full h-full flex md:flex-row flex-col-reverse justify-between items-start rounded-lg md:border-2 md:border-gray-300 dark:border-gray-800 p-8 gap-16'>
+                <div className='w-full h-full flex md:flex-row flex-col justify-between items-start rounded-lg md:border-2 md:border-gray-300 dark:border-gray-800 p-8 gap-16'>
                     <div className='md:w-1/2 w-full flex flex-col items-start rounded-lg gap-8'>
                         <div className='w-full flex flex-col justify-center items-start rounded-lg'>
                             <img

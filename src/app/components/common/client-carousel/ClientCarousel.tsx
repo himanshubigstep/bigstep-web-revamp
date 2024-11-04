@@ -1,23 +1,39 @@
-import React from 'react'
-import './ClientCarousel.css'
+import React from 'react';
+import './ClientCarousel.css';
 
-const ClientCarousel = ({ clients, heading, description }: { clients: string[], heading: string, description: string }) => {
-    const row1 = clients.slice(0, 12);
-    const row2 = clients.slice(12);
+interface Client {
+    attributes: {
+        image: {
+            data: {
+                attributes: {
+                    url: string;
+                };
+            };
+        };
+    };
+}
+
+const ClientCarousel = ({ clients = [], heading, description }: { clients?: Client[] | null, heading: string, description: string }) => {
+    if (!clients) return null; // Safeguard against null
+
+    const clientCount = clients.length;
+    const midpoint = Math.ceil(clientCount / 2);
+    const row1 = clients.slice(0, midpoint);
+    const row2 = clients.slice(midpoint);
 
     return (
-        <div className='relative w-full h-full md:py-16 py-8 bg-white dark:bg-black'>
+        <div className='relative w-full h-full md:pt-16 pt-8 bg-white dark:bg-black md:px-0 px-4'>
             <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
-                <h2 className='text-3xl font-bold text-center mb-4'>{heading}</h2>
+                <h2 className='text-3xl font-semibold text-center mb-4'>{heading}</h2>
                 <p className='text-lg'>{description}</p>
             </div>
-            <div className='w-full md:pt-8 flex flex-col gap-8'>
+            <div className='w-full md:pt-8 flex flex-col md:gap-8 gap-0 overflow-hidden'>
                 <div className='client-logos-row md:max-w-[1440px] max-w-full mx-auto'>
                     <div className='scrolling-wrapper'>
                         {row1.map((client, index) => (
-                            <div className='md:w-60 w-32 md:py-2 md:px-4 p-2 client-logos' key={index}>
+                            <div className='md:w-60 md:h-60 w-24 h-24 md:py-2 md:px-4 p-2 client-logos' key={index}>
                                 <img
-                                    src={client}
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${client.attributes.image.data.attributes.url}`}
                                     alt={`client ${index + 1}`}
                                     className='w-full h-full object-contain'
                                 />
@@ -25,14 +41,14 @@ const ClientCarousel = ({ clients, heading, description }: { clients: string[], 
                         ))}
                     </div>
                 </div>
-                <div className='w-full h-[1px] bg-gray-200' />
+                <div className='md:block hidden w-full h-[1px] bg-gray-200' />
                 <div className='client-logos-row md:max-w-[1440px] max-w-full w-100% mx-auto'>
                     <div className='scrolling-wrapper reverse'>
                         {row2.map((client, index) => (
-                            <div className='md:w-60 w-32 md:py-2 md:px-4 p-2 client-logos' key={index}>
+                            <div className='md:w-60 md:h-60 w-24 h-24 md:py-2 md:px-4 p-2 client-logos' key={index}>
                                 <img
-                                    src={client}
-                                    alt={`client ${index + 13}`}
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${client.attributes.image.data.attributes.url}`}
+                                    alt={`client ${index + midpoint + 1}`}
                                     className='w-full h-full object-contain'
                                 />
                             </div>
@@ -41,7 +57,7 @@ const ClientCarousel = ({ clients, heading, description }: { clients: string[], 
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ClientCarousel
+export default ClientCarousel;

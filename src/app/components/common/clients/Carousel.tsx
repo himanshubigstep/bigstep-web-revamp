@@ -68,9 +68,9 @@ const Carousel = () => {
 
     return (
         <Fragment>
-            {reviews && reviews.length === 0 ? (
+            {/* {reviews && reviews.length === 0 ? (
                 <div>Loading...</div>
-            ) : (
+            ) : ( */}
                 <div id="controls-carousel" className='relative w-full h-full max-w-[1440px] mx-auto rounded-2xl md:p-8 md:px-16 mb-16'>
                     {reviews && reviews.map((item, index) => {
                         const { title, description } = splitMessage(item?.attributes?.message || '');
@@ -129,7 +129,7 @@ const Carousel = () => {
                         </span>
                     </button>
                 </div>
-            )}
+            {/* )} */}
             <div className="absolute md:bottom-4 bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 mb-16">
                 {reviews && reviews.map((item, index) => (
                     <button
