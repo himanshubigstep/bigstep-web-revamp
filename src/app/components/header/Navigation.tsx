@@ -170,7 +170,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                     handleLinkClick();
                   }
                 }}
-                className={`text-lg md:w-auto w-full text-md z-30 flex items-center md:justify-normal justify-between gap-2 md:hover:text-blue-500 md:dark:text-inherit dark:text-white
+                className={`text-md md:w-auto w-full text-md z-30 flex items-center md:justify-normal justify-between gap-2 md:hover:text-blue-500 md:dark:text-inherit dark:text-white
                     ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
                     ${scrolled ? 'md:text-black md:dark:text-white' : 'md:text-white md:hover:text-white'} menu-item-button`}
               >
@@ -206,7 +206,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                 menu.heading
                               )
                             }
-                            className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "text-lg text-left flex items-center gap-2 pb-4 font-semibold text-blue-500" : "flex items-center gap-2 text-lg text-black dark:text-white hover:text-blue-500"}`}>
+                            className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "text-md text-left flex items-center gap-2 pb-4 font-semibold text-blue-500" : "flex items-center gap-2 text-md text-black dark:text-white hover:text-blue-500"}`}>
                             <img
                               className="w-6 h-6"
                               src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${submenu.icon.data.attributes.url}`}
@@ -254,8 +254,8 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                 )
                               }
                               className={`${menu.items_on_right && menu.items_on_right.some((submenu: any) => submenu.technology)
-                                  ? "text-lg text-left flex items-center gap-2 pb-4 font-semibold text-blue-500"
-                                  : "flex items-center text-black dark:text-white gap-2 text-lg hover:text-blue-500"
+                                  ? "text-md text-left flex items-center gap-2 pb-4 font-semibold text-blue-500"
+                                  : "flex items-center text-black dark:text-white gap-2 text-md hover:text-blue-500"
                                 }`}
                             >
                               <img
@@ -303,7 +303,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
         <Button
           onClick={handelContactUs}
           text={lastItemData?.item}
-          className="text-lg font-medium"
+          className="text-md font-medium"
         />
       </div>
     </div>

@@ -13,6 +13,7 @@ import AITech from "./components/common/ai-tech/AITech";
 import ContactUs from "./components/common/contact-us/ContactUs";
 import LoaderSpinner from "./components/common/loader-spinner/LoadingSpinner";
 import OurValues from "./components/our-values/OurValues";
+import ModelBox from "./components/model-box/ModelBox";
 
 interface HomePageData {
   id: number;
@@ -387,6 +388,7 @@ export default function Home() {
         onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
       />
       <ContactUs contactUsData = {homePageData?.get_in_touch[0]} />
+      <ModelBox />
     </div>
   );
 }

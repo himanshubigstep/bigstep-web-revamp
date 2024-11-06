@@ -1698,7 +1698,7 @@ export const fetchCtoAsServiceHolisticApproach = async () => {
 export const fetchTechnologyData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/tech?populate[technological_experties][populate]=*&populate[get_in_touch][populate]=*&populate[our_tech_stack]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/tech?populate[0]=technological_experties&populate[1]=get_in_touch&populate[3]=our_tech_stack&populate[4]=technologies_introduction&populate[5]=technologies_introduction.backgroundImage`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
