@@ -104,7 +104,7 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                             >
                                 {index + 1}
                                 <div
-                                    className='w-[1px] h-16 absolute'
+                                    className='w-[1px] h-24 absolute'
                                     style={{
                                         borderColor: 'green',
                                         borderWidth: 1,
@@ -116,8 +116,8 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                                 <div
                                     className='absolute top-0 flex flex-col justify-center items-center w-72'
                                     style={{
-                                        bottom: item.id % 2 !== 0 ? '250%' : 'auto',
-                                        top: item.id % 2 === 0 ? '250%' : 'auto',
+                                        bottom: item.id % 2 !== 0 ? '340%' : 'auto',
+                                        top: item.id % 2 === 0 ? '340%' : 'auto',
                                     }}
                                 >
                                     <h3 className='text-center text-xl font-semibold text-black'>{item.heading}</h3>
@@ -126,8 +126,8 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                                 <div
                                     className='absolute'
                                     style={{
-                                        bottom: item.id % 2 === 0 ? '120%' : 'auto',
-                                        top: item.id % 2 !== 0 ? '120%' : 'auto',
+                                        bottom: item.id % 2 === 0 ? '140%' : 'auto',
+                                        top: item.id % 2 !== 0 ? '140%' : 'auto',
                                     }}
                                 >
                                     {item.serviceLogo?.data?.attributes?.url && (

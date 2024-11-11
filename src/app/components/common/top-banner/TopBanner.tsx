@@ -15,7 +15,7 @@ const TopBanner = ({bannerData}: {bannerData: any}) => {
             </div>
             <div className='w-full max-w-[1440px] mx-auto h-full flex md:justify-between md:items-center gap-4 relative'>
                 <div className='md:w-2/5 w-full h-full flex flex-col justify-center items-start gap-4'>
-                    <h3 className='text-3xl font-light uppercase text-white'>Product Engineering</h3>
+                    <h3 className='text-3xl font-light uppercase text-white'>{bannerData?.label}</h3>
                     <h2 className='text-4xl font-semibold text-white'>{bannerData?.heading}</h2>
                     <p className='text-xl font-normal text-white'>{bannerData?.description}</p>
                     <Button

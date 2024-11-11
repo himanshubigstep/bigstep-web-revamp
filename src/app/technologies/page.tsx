@@ -3,12 +3,51 @@ import { fetchTechnologyData } from '@/api-data/api';
 import React, { useEffect, useState } from 'react'
 import TopBanner from '../components/common/top-banner/TopBanner';
 
-interface HomePageData {
+interface TechnologiesPageData {
+  get_in_touch: {
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              large: {
+                url: string
+              }
+            }
+          }
+        }
+      }
+    }
+    button_text: string
+    description: string
+    heading: string
+    id: number
+  }
+  technological_experties: {
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+    button_text: string
+    description: string
+    heading: string
+    id: number
+  }
+  technologies_introduction: {
 
+  }
+  our_tech_stack: string
 }
 
 const Technologies = () => {
-    const [technologyData, setTechnologyData] = useState<HomePageData | null>(null)
+    const [technologyData, setTechnologyData] = useState<TechnologiesPageData | null>(null)
     // const [homePageServiceData, setHomePageServiceData] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(true);
   

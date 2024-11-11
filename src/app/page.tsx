@@ -13,6 +13,7 @@ import AITech from "./components/common/ai-tech/AITech";
 import ContactUs from "./components/common/contact-us/ContactUs";
 import LoaderSpinner from "./components/common/loader-spinner/LoadingSpinner";
 import OurValues from "./components/our-values/OurValues";
+import ModelBox from "./components/model-box/ModelBox";
 
 interface HomePageData {
   id: number;
@@ -262,11 +263,34 @@ export default function Home() {
     fetchHomePageServiceData();
   }, [])
 
+  // useEffect(() => {
+  //   const fetchtrustedClientsData = async () => {
+  //     try {
+  //       const response = await fetchtrustedClients();
+  //       setTrustedClientsData(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //       return null;
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+
+  //   fetchtrustedClientsData()
+  // }, [])
+
   useEffect(() => {
     const fetchtrustedClientsData = async () => {
       try {
-        const response = await fetchtrustedClients();
-        setTrustedClientsData(response);
+        let serviceResponse = await fetchtrustedClients();
+        let allServiceData = serviceResponse?.data || [];
+
+        while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
+          const nextPage = serviceResponse.meta.pagination.page + 1;
+          serviceResponse = await fetchtrustedClients(nextPage);
+          allServiceData = allServiceData.concat(serviceResponse?.data || []);
+        }
+        setTrustedClientsData(allServiceData);
       } catch (error) {
         console.log(error);
         return null;
@@ -387,6 +411,7 @@ export default function Home() {
         onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
       />
       <ContactUs contactUsData = {homePageData?.get_in_touch[0]} />
+      <ModelBox />
     </div>
   );
 }

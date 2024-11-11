@@ -194,16 +194,16 @@ export const fetchServiceDataHome = async () => {
   }
 };
 
-export const fetchtrustedClients = async () => {
+export const fetchtrustedClients = async (page = 1) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/trusted-bies?populate=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/trusted-bies?populate=*&pagination[page]=${page}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    return data.data;
+    return data;
   } catch (error) {
     console.log(error);
     return null;
@@ -1562,7 +1562,7 @@ export const fetchKubernatesAdoptionsTech = async () => {
 export const fetchCompleteProductDevelopmentData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/engagement-model?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/engagement-model?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*&populate[satisfaction][populate]=*&populate[ttm][populate]=*&populate[cost][populate]=*&populate[delivery][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1698,7 +1698,7 @@ export const fetchCtoAsServiceHolisticApproach = async () => {
 export const fetchTechnologyData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/tech?populate[technological_experties][populate]=*&populate[get_in_touch][populate]=*&populate[our_tech_stack]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/tech?populate[0]=technological_experties&populate[1]=get_in_touch&populate[3]=our_tech_stack&populate[4]=technologies_introduction&populate[5]=technologies_introduction.backgroundImage`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

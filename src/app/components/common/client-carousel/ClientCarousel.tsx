@@ -14,12 +14,14 @@ interface Client {
 }
 
 const ClientCarousel = ({ clients = [], heading, description }: { clients?: Client[] | null, heading: string, description: string }) => {
-    if (!clients) return null; // Safeguard against null
+    if (!clients) return null;
 
     const clientCount = clients.length;
     const midpoint = Math.ceil(clientCount / 2);
     const row1 = clients.slice(0, midpoint);
     const row2 = clients.slice(midpoint);
+
+    console.log(row1)
 
     return (
         <div className='relative w-full h-full md:pt-16 pt-8 bg-white dark:bg-black md:px-0 px-4'>
@@ -29,9 +31,9 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
             </div>
             <div className='w-full md:pt-8 flex flex-col md:gap-8 gap-0 overflow-hidden'>
                 <div className='client-logos-row md:max-w-[1440px] max-w-full mx-auto'>
-                    <div className='scrolling-wrapper'>
+                    <div className='scrolling-wrapper h-auto'>
                         {row1.map((client, index) => (
-                            <div className='md:w-60 md:h-60 w-24 h-24 md:py-2 md:px-4 p-2 client-logos' key={index}>
+                            <div className='md:min-w-36 md:max-h-36 min-w-24 max-h-24 md:py-2 md:px-4 p-2 client-logos' key={index}>
                                 <img
                                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${client.attributes.image.data.attributes.url}`}
                                     alt={`client ${index + 1}`}
@@ -45,7 +47,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                 <div className='client-logos-row md:max-w-[1440px] max-w-full w-100% mx-auto'>
                     <div className='scrolling-wrapper reverse'>
                         {row2.map((client, index) => (
-                            <div className='md:w-60 md:h-60 w-24 h-24 md:py-2 md:px-4 p-2 client-logos' key={index}>
+                            <div className='md:min-w-36 md:max-h-36 min-w-24 max-h-24 md:py-2 md:px-4 p-2 client-logos' key={index}>
                                 <img
                                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${client.attributes.image.data.attributes.url}`}
                                     alt={`client ${index + midpoint + 1}`}

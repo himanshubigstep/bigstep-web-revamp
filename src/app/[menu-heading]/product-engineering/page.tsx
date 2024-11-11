@@ -100,6 +100,7 @@ interface productEngineeringPageData {
   product_introduction: {
     id: number;
     heading: string;
+    label: string;
     description: string;
     button_text: string;
     backgroundImage: {
