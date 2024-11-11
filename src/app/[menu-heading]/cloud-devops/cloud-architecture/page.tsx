@@ -59,6 +59,7 @@ interface CloudArchitechPageProps {
     buttonText: string
     description: string
     heading: string
+    label: string
   }
   get_in_touch: {
     button_text: string

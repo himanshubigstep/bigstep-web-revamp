@@ -81,6 +81,7 @@ interface CtoAsServiceProps {
     buttonText: string;
     description: string;
     heading: string;
+    label: string
     background_image: {
       data: {
         attributes: {

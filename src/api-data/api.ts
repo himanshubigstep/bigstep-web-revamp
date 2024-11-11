@@ -194,16 +194,16 @@ export const fetchServiceDataHome = async () => {
   }
 };
 
-export const fetchtrustedClients = async () => {
+export const fetchtrustedClients = async (page = 1) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/trusted-bies?populate=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/trusted-bies?populate=*&pagination[page]=${page}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    return data.data;
+    return data;
   } catch (error) {
     console.log(error);
     return null;
@@ -1562,7 +1562,7 @@ export const fetchKubernatesAdoptionsTech = async () => {
 export const fetchCompleteProductDevelopmentData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/engagement-model?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/engagement-model?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*&populate[satisfaction][populate]=*&populate[ttm][populate]=*&populate[cost][populate]=*&populate[delivery][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

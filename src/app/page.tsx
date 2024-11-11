@@ -263,11 +263,34 @@ export default function Home() {
     fetchHomePageServiceData();
   }, [])
 
+  // useEffect(() => {
+  //   const fetchtrustedClientsData = async () => {
+  //     try {
+  //       const response = await fetchtrustedClients();
+  //       setTrustedClientsData(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //       return null;
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+
+  //   fetchtrustedClientsData()
+  // }, [])
+
   useEffect(() => {
     const fetchtrustedClientsData = async () => {
       try {
-        const response = await fetchtrustedClients();
-        setTrustedClientsData(response);
+        let serviceResponse = await fetchtrustedClients();
+        let allServiceData = serviceResponse?.data || [];
+
+        while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
+          const nextPage = serviceResponse.meta.pagination.page + 1;
+          serviceResponse = await fetchtrustedClients(nextPage);
+          allServiceData = allServiceData.concat(serviceResponse?.data || []);
+        }
+        setTrustedClientsData(allServiceData);
       } catch (error) {
         console.log(error);
         return null;

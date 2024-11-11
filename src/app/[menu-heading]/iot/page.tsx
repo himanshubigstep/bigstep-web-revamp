@@ -101,6 +101,7 @@ interface internetOfThingsPageData {
     heading: string;
     description: string;
     button_text: string;
+    label: string;
     backgroundImage: {
       data: {
         id: number;

@@ -1,36 +1,56 @@
 .client-logos-row {
-    overflow: hidden;
+    /* overflow: hidden; */
     white-space: nowrap;
-}
-
-.client-logos {
+    width: 100%;
+  }
+  
+  .client-logos {
     display: inline-block;
-    margin-right: 20px;
-}
-
-.scrolling-wrapper {
+    margin-right: 10px;
+  }
+  
+  .scrolling-wrapper {
+    display: flex;
     animation: scroll 20s linear infinite;
-}
-
-.scrolling-wrapper.reverse {
+  }
+  
+  .scrolling-wrapper.reverse {
     animation: scroll-reverse 20s linear infinite;
-}
-
-@keyframes scroll {
+  }
+  
+  @keyframes scroll {
     0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-100% - 120px));
-    }
-}
-
-@keyframes scroll-reverse {
-    0% {
-        transform: translateX(calc(-100% - 120px));
+      transform: translateX(0);
     }
     100% {
-        transform: translateX(0);
+      transform: translateX(-100%);
     }
-}
+  }
+  
+  @keyframes scroll-reverse {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Add this to make the items repeat for a continuous scroll */
+  .scrolling-wrapper > .client-logos {
+    animation-duration: 20s;
+    animation-timing-function: linear;
+  }
+  
+  .scrolling-wrapper > .client-logos:first-child {
+    animation-delay: 5s;
+  }
+  
+  .scrolling-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  
+  

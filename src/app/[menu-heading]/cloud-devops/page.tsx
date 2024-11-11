@@ -101,6 +101,7 @@ interface cloudDevOpsPageData {
     id: number;
     heading: string;
     description: string;
+    label: string;
     button_text: string;
     backgroundImage: {
       data: {
