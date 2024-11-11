@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useEffect, useRef, useState } from 'react';
 import './ClientCarousel.css';
 
 interface Client {
@@ -16,12 +17,28 @@ interface Client {
 const ClientCarousel = ({ clients = [], heading, description }: { clients?: Client[] | null, heading: string, description: string }) => {
     if (!clients) return null;
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const scrollSpeed = 1;
+
+    const [offset, setOffset] = useState(0);
     const clientCount = clients.length;
     const midpoint = Math.ceil(clientCount / 2);
     const row1 = clients.slice(0, midpoint);
     const row2 = clients.slice(midpoint);
 
-    console.log(row1)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setOffset((prevOffset) => {
+                if (containerRef.current) {
+                    const totalWidth = containerRef.current.scrollWidth / 2;
+                    return (prevOffset - scrollSpeed) % totalWidth;
+                }
+                return prevOffset - scrollSpeed;
+            });
+        }, 10);
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className='relative w-full h-full md:pt-16 pt-8 bg-white dark:bg-black md:px-0 px-4'>
@@ -29,33 +46,49 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                 <h2 className='text-3xl font-semibold text-center mb-4'>{heading}</h2>
                 <p className='text-lg'>{description}</p>
             </div>
-            <div className='w-full md:pt-8 flex flex-col md:gap-8 gap-0 overflow-hidden'>
-                <div className='client-logos-row md:max-w-[1440px] max-w-full mx-auto'>
-                    <div className='scrolling-wrapper h-auto'>
-                        {row1.map((client, index) => (
-                            <div className='md:min-w-36 md:max-h-36 min-w-24 max-h-24 md:py-2 md:px-4 p-2 client-logos' key={index}>
-                                <img
-                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${client.attributes.image.data.attributes.url}`}
-                                    alt={`client ${index + 1}`}
-                                    className='w-full h-full object-contain'
-                                />
-                            </div>
-                        ))}
-                    </div>
+            <div className='client-logos-row md:max-w-[1440px] max-w-full mx-auto'>
+                <div className="flex whitespace-nowrap gap-4" ref={containerRef} style={{ transform: `translateX(${offset}px)` }}>
+                    {row1 && row1.map((item, index) => (
+                        <div key={index} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white dark:bg-black rounded-lg flex justify-center items-center">
+                            <img
+                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
+                                alt={`client ${index + 1}`}
+                                className="md:w-40 md:h-24 w-20 h-20 object-contain mx-2 dark:invert"
+                            />
+                        </div>
+                    ))}
+                    {row1 && row1.map((item, index) => (
+                        <div key={`clone-${index}`} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white dark:bg-black rounded-lg flex justify-center items-center">
+                            <img
+                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
+                                alt={`client ${index + 1}`}
+                                className="md:w-40 md:h-24 w-20 h-20 object-contain mx-2 dark:invert"
+                            />
+                        </div>
+                    ))}
                 </div>
-                <div className='md:block hidden w-full h-[1px] bg-gray-200' />
-                <div className='client-logos-row md:max-w-[1440px] max-w-full w-100% mx-auto'>
-                    <div className='scrolling-wrapper reverse'>
-                        {row2.map((client, index) => (
-                            <div className='md:min-w-36 md:max-h-36 min-w-24 max-h-24 md:py-2 md:px-4 p-2 client-logos' key={index}>
-                                <img
-                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${client.attributes.image.data.attributes.url}`}
-                                    alt={`client ${index + midpoint + 1}`}
-                                    className='w-full h-full object-contain'
-                                />
-                            </div>
-                        ))}
-                    </div>
+            </div>
+            <div className='md:block hidden w-full h-[1px] bg-gray-200' />
+            <div className="client-logos-row md:max-w-[1440px] max-w-full mx-auto">
+                <div className="flex whitespace-nowrap gap-4 animate-marquee-reverse" ref={containerRef} style={{ transform: `translateX(${offset}px)` }}>
+                    {row2.map((item, index) => (
+                        <div key={index} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white dark:bg-black rounded-lg flex justify-center items-center">
+                            <img
+                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
+                                alt={`client ${index + 1}`}
+                                className="md:w-40 md:h-24 w-20 h-20 object-contain mx-2 dark:invert"
+                            />
+                        </div>
+                    ))}
+                    {row2.map((item, index) => (
+                        <div key={`clone-${index}`} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white dark:bg-black rounded-lg flex justify-center items-center">
+                            <img
+                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
+                                alt={`client ${index + 1}`}
+                                className="md:w-40 md:h-24 w-20 h-20 object-contain mx-2 dark:invert"
+                            />
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
