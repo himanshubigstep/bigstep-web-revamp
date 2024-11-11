@@ -11,7 +11,7 @@ interface ContactFormInput {
 export const fetchHeaderData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/header?populate[0]=heading_what_we_do&populate[1]=heading_what_we_do.items_on_left.icon&populate[2]=heading_what_we_do.items_on_right.icon&populate[3]=heading_how_we_do&populate[4]=heading_how_we_do.items_on_left.icon&populate[5]=heading_how_we_do.items_on_right.icon&populate[6]=heading_success_stories&populate[7]=heading_company&populate[8]=heading_company.items_on_left.icon&populate[9]=heading_company.items_on_right.icon&populate[10]=heading_blogs&populate[11]=heading_lets_talk`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/header?populate[0]=heading_what_we_do&populate[1]=heading_what_we_do.items_on_left.icon&populate[2]=heading_what_we_do.items_on_right.icon&populate[3]=heading_how_we_do&populate[4]=heading_how_we_do.items_on_left.icon&populate[5]=heading_how_we_do.items_on_right.icon&populate[6]=heading_success_stories&populate[7]=heading_company&populate[8]=heading_company.items_on_left.icon&populate[9]=heading_company.items_on_right.icon&populate[10]=heading_blogs&populate[11]=heading_lets_talk&populate[12]=Main_logo`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
