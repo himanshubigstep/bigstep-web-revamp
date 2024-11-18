@@ -42,7 +42,7 @@ const ServiceDataBlock = ({
                 {description && <p className='text-lg font-normal'>{description}</p>}
             </div>
             {bgImage && logoClassName &&
-                <div className='absolute top-0 bottom-0 w-full flex justify-center items-center text-center py-8'>
+                <div className='absolute top-0 bottom-0 left-0 right-0 w-full flex justify-center items-center text-center py-8'>
                     <img
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${bgImage}`}
                         alt='image'

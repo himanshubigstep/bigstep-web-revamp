@@ -73,32 +73,33 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
 const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [sortedSlides, setSortedSlides] = useState<HomePageCarousel[]>([]);
 
     useEffect(() => {
         if (slides && slides.length > 0) {
-            const sortedSlides = [...slides].sort((a, b) => a.id - b.id);
-            setCurrentSlideIndex(0);
+            // Sorting slides only once when slides are received or updated
+            const sorted = [...slides].sort((a, b) => a.id - b.id);
+            setSortedSlides(sorted); // Store sorted slides in state
+            setCurrentSlideIndex(0); // Reset to the first slide
         }
-    }, [slides]);
+    }, [slides]); // Re-run if `slides` prop changes
 
     useEffect(() => {
         const timer = setInterval(() => {
-            if (!isHovered && slides.length > 0) {
+            if (!isHovered && sortedSlides.length > 0) {
                 setCurrentSlideIndex(prevIndex => {
-                    const nextIndex = (prevIndex + 1) % slides.length;
+                    const nextIndex = (prevIndex + 1) % sortedSlides.length;
                     return nextIndex;
                 });
             }
         }, 3000);
 
         return () => clearInterval(timer);
-    }, [slides, isHovered]);
+    }, [sortedSlides, isHovered]);
 
     const handleSlideChange = (index: number) => {
         setCurrentSlideIndex(index);
     };
-    
-    const sortedSlides = [...slides].sort((a, b) => a.id - b.id);
 
     return (
         <div

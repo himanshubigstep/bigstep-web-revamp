@@ -44,13 +44,13 @@ const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShip
       </div>
       <div className='relative w-full max-w-[1140px] mx-auto bg-white rounded-2xl flex flex-wrap md:justify-center text-center mt-8'>
         <div className='dark:bg-gray-200 w-full h-full flex justify-center items-center bg-white md:rounded-xl py-8 relative'>
-          <div className='flex flex-wrap w-full relative z-10 px-8 justify-center items-center'>
+          <div className='flex flex-wrap w-full relative z-10 px-8 justify-center items-start'>
             {partnerShipData && partnerShipData.map((partner, index) => (
-              <div key={index} className='md:w-1/4 w-1/2 px-4 flex justify-center items-center grayscale hover:grayscale-0 hover:scale-105'>
+              <div key={index} className='md:w-1/4 w-1/2 px-4 flex justify-center items-start grayscale hover:grayscale-0 hover:scale-105 py-8'>
                 <img
                   src={partner.src}
                   alt={partner.alt}
-                  className="object-contain w-auto h-[10rem]"
+                  className="object-contain w-auto h-auto"
                 />
               </div>
             ))}

@@ -132,6 +132,17 @@ interface HomePageData {
     heading: string;
     button_text: string | null;
     description: string | null;
+    background_image: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
   }[];
   culture: {
     id: number;
@@ -163,6 +174,34 @@ interface HomePageData {
     heading: string;
   }
   get_in_touch: any[];
+  value: {
+    id: number;
+    description: string;
+    title: string;
+    value_1: {
+      id: number;
+      link: string;
+      image: {
+        data: {
+          attributes: {
+            url: string;
+          }
+        }
+      }
+    }[]
+    value_photos: {
+      data: {
+        id: number;
+        attributes: {
+          formats: {
+            large: {
+              url: string;
+            }
+          }
+        }
+      }[]
+    }
+  }
 }
 
 interface HomePageCarousel {
@@ -230,7 +269,7 @@ export default function Home() {
   const [homePageServiceData, setHomePageServiceData] = useState<any>([]);
   const [truestedClientsData, setTrustedClientsData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  
+
   useEffect(() => {
     const fetchHeaderDataResponse = async () => {
       try {
@@ -246,7 +285,7 @@ export default function Home() {
 
     fetchHeaderDataResponse();
   }, [])
-  
+
   useEffect(() => {
     const fetchHomePageServiceData = async () => {
       try {
@@ -262,22 +301,6 @@ export default function Home() {
 
     fetchHomePageServiceData();
   }, [])
-
-  // useEffect(() => {
-  //   const fetchtrustedClientsData = async () => {
-  //     try {
-  //       const response = await fetchtrustedClients();
-  //       setTrustedClientsData(response);
-  //     } catch (error) {
-  //       console.log(error);
-  //       return null;
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-
-  //   fetchtrustedClientsData()
-  // }, [])
 
   useEffect(() => {
     const fetchtrustedClientsData = async () => {
@@ -310,18 +333,18 @@ export default function Home() {
 
         const partnerShipResponse = await fetchPaternershipData();
         const partners = partnerShipResponse.map((item: any) => {
-            const attributes = item.attributes;
-            const logo = attributes.logo.data ? attributes.logo.data.attributes : {};
-            
-            return {
-                src: logo.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.url}` : '',
-                alt: attributes.heading,
-                category: 'Unknown',
-                width: 200,
-                height: 80
-            };
+          const attributes = item.attributes;
+          const logo = attributes.logo.data ? attributes.logo.data.attributes : {};
+
+          return {
+            src: logo.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.url}` : '',
+            alt: attributes.heading,
+            category: 'Unknown',
+            width: 200,
+            height: 80
+          };
         });
-        
+
         setPartnerShipData(partners);
 
       } catch (error) {
@@ -361,14 +384,14 @@ export default function Home() {
         title={homePageData?.technologies[0]?.heading || ''}
         description={homePageData?.technologies[0]?.description || ''}
         services={homePageServiceData}
-        containerClassName= 'relative w-full max-w-[1440px] mx-auto md:py-16 py-8 px-4'
-        logoClassName= 'md:w-auto w-full md:h-full md:object-fill object-cover'
-        titleClassName= 'text-3xl font-semibold text-center mb-4'
-        descriptionClassName= 'text-lg font-normal '
-        serviceContainerClassName= 'relative w-full flex flex-wrap md:justify-center text-center'
-        serviceItemClassName= 'md:mt-8 flex flex-col justify-center md:w-1/3 w-1/2 md:px-12 md:py-6 md:px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        containerClassName='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 px-4'
+        logoClassName='md:w-auto w-auto md:h-full md:object-fill object-cover'
+        titleClassName='text-3xl font-semibold text-center mb-4'
+        descriptionClassName='text-lg font-normal '
+        serviceContainerClassName='relative w-full flex flex-wrap md:justify-center text-center'
+        serviceItemClassName='md:mt-8 flex flex-col justify-center md:w-1/3 w-1/2 md:px-12 md:py-6 md:px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
         serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center md:mr-4 md:mb-0 mb-4'
-        buttonClassName= 'px-4 py-2 mx-2 bg-gray-300 rounded'
+        buttonClassName='px-4 py-2 mx-2 bg-gray-300 rounded'
         serviceHeaderClassName="w-full text-left flex flex-col gap-2"
       />
       <SuccessStoriesBlocks sucessStoriesData={homePageData?.success_stories} />
@@ -378,7 +401,7 @@ export default function Home() {
         description={homePageData?.trusted_by?.description || ''}
       />
       <PartnersBlock
-         homePageData={{
+        homePageData={{
           heading: homePageData?.partners[0]?.heading || '',
           button_text: homePageData?.partners[0]?.button_text || '',
           description: homePageData?.partners[0]?.description || '',
@@ -397,20 +420,23 @@ export default function Home() {
         partnerShipData={partnerShipData}
       />
       <MilesTone homePageData={homePageData} />
-      <OurValues />
+      <OurValues valuesData={homePageData?.value} />
       <Clients
         title={homePageData?.client_reviews[0].heading || ''}
         description={homePageData?.client_reviews[0].description || ''}
-        bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.formats.large.url}`  : ''} 
+        bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.formats.large.url}` : ''}
       />
-      <NewsLetter latest_info={homePageData?.latest_info} />
+      <NewsLetter
+        latest_info={homePageData?.latest_info}
+      />
       <AITech
         bannerTitle={homePageData?.home_page_blogs[0].heading || ''}
         bannerDescription={homePageData?.home_page_blogs[0].description || ''}
         buttonTitle={homePageData?.home_page_blogs[0].button_text || ''}
         onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+        bannerImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.home_page_blogs[0].background_image.data.attributes.formats.large.url}` : ''}
       />
-      <ContactUs contactUsData = {homePageData?.get_in_touch[0]} />
+      <ContactUs contactUsData={homePageData?.get_in_touch[0]} />
       <ModelBox />
     </div>
   );

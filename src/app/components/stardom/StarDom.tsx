@@ -1,0 +1,146 @@
+'use client'
+import React, { useState } from 'react'
+
+const StarDom = ({
+    heading,
+    description,
+    backgroundImage,
+    firstRowClass,
+    secondRowClass,
+    firstRowData,
+    secondRowData,
+}: {
+    heading: string
+    description: string
+    backgroundImage: string
+    firstRowClass: string
+    secondRowClass: string
+    firstRowData: any
+    secondRowData: any
+}) => {
+    // Combine firstRowData and secondRowData for mobile display
+    const combinedData = [...firstRowData, ...secondRowData]
+
+    const [currentIndex, setCurrentIndex] = useState(0)
+
+    const handleNext = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % combinedData.length)
+    }
+
+    const handlePrev = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + combinedData.length) % combinedData.length)
+    }
+
+    return (
+        <div className="relative w-full h-full md:py-16 py-8">
+            <div className="relative w-full h-full max-w-[1440px] mx-auto md:py-16 py-8">
+                {/* Background Image */}
+                <div className="absolute top-0 bottom-0 rounded-3xl w-full flex justify-center items-center text-center">
+                    <img
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${backgroundImage}`}
+                        alt="background"
+                        className="w-full h-full rounded-3xl"
+                    />
+                </div>
+
+                {/* Heading and Description */}
+                <div className="relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4 mb-8">
+                    <h2 className="text-3xl font-semibold text-center text-white mb-4">{heading}</h2>
+                    <p className="text-lg font-normal text-white">{description}</p>
+                </div>
+
+                {/* First Row - Desktop View */}
+                <div className="w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl">
+                    <div className={firstRowClass}>
+                        {firstRowData.map((item: any, index: number) => (
+                            <div
+                                key={item.id}
+                                className="relative flex justify-center items-center rounded-xl"
+                            >
+                                <img
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.images?.data?.attributes?.formats?.large?.url}`}
+                                    alt={item?.heading}
+                                    className="object-contain w-full h-full rounded-xl"
+                                />
+                                <div className="rounded-bl-xl rounded-br-xl absolute bottom-0 w-full flex bg-black opacity-80 justify-start items-center px-4 h-24">
+                                    <div className="w-[2px] h-12 bg-purple-500 mr-4" />
+                                    <div className="w-auto h-full flex flex-col justify-center items-start">
+                                        <h3 className="text-md font-semibold text-white text-left">{item?.heading}</h3>
+                                        <p className="text-sm font-normal text-white text-left">{item?.description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Second Row - Desktop View */}
+                <div className="w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl mt-12">
+                    <div className={secondRowClass}>
+                        {secondRowData.map((item: any, index: number) => (
+                            <div
+                                key={item.id}
+                                className="relative flex justify-center items-center rounded-xl"
+                            >
+                                <img
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.images?.data?.attributes?.formats?.large?.url}`}
+                                    alt={item?.heading}
+                                    className="object-contain w-full h-full rounded-xl"
+                                />
+                                <div className="rounded-bl-xl rounded-br-xl absolute bottom-0 w-full flex bg-black opacity-80 justify-start items-center px-4 h-24">
+                                    <div className="w-[2px] h-12 bg-purple-500 mr-4" />
+                                    <div className="w-auto h-full flex flex-col justify-center items-start">
+                                        <h3 className="text-md font-semibold text-white text-left">{item?.heading}</h3>
+                                        <p className="text-sm font-normal text-white text-left">{item?.description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Mobile View - Combined Data as Slider */}
+                <div className="w-full max-w-[90%] mx-auto md:hidden flex flex-wrap md:justify-center rounded-3xl mt-12 relative">
+                    <div className="relative w-full h-full">
+                        {combinedData.length > 0 && (
+                            <>
+                                <div className="w-full h-full rounded-3xl flex justify-center items-center">
+                                    <img
+                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${combinedData[currentIndex]?.images?.data?.attributes?.formats?.large?.url}`}
+                                        alt={combinedData[currentIndex]?.heading}
+                                        className="object-contain w-full h-full rounded-xl"
+                                    />
+                                </div>
+                                <div className="display-hover md:flex justify-center absolute p-4 flex-col bg-black bottom-0 left-0 right-0">
+                                    <h3 className="text-xl font-medium text-white">{combinedData[currentIndex]?.heading}</h3>
+                                    <p className="text-md font-normal text-white">{combinedData[currentIndex]?.description}</p>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                    <div className='flex justify-between w-full mt-4'>
+                        <button onClick={handlePrev} className='flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none'>
+                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 dark:bg-gray-800/30 group-hover:bg-blue-500 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-blue-500 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg className="w-2 h-2 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
+                                </svg>
+                                <span className="sr-only">Previous</span>
+                            </span>
+                        </button>
+                        <button onClick={handleNext} className='flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none'>
+                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 dark:bg-gray-800/30 group-hover:bg-blue-500 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-blue-500 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg className="w-2 h-2 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+                                </svg>
+                                <span className="sr-only">Next</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    )
+}
+
+export default StarDom

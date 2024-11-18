@@ -1,15 +1,17 @@
 import React from 'react'
 
 const MilesTone = ({ homePageData }: { homePageData: any }) => {
-    const milestonesData = homePageData?.milestones1 || []
-    const mappedData = Object.keys(milestonesData).filter(key => key !== 'id').map(key => {
-        const item = milestonesData[key];
-        return {
+    const milestonesData = Array.isArray(homePageData?.milestones1)
+        ? homePageData?.milestones1
+        : Object.values(homePageData?.milestones1 || {});
+    const filteredData = milestonesData.filter((item: any) => item && item.id);
+    const mappedData = filteredData
+        .map((item: any) => ({
             id: item.id,
             heading: item.heading,
-            description: item.description
-        };
-    });
+            description: item.description,
+        }))
+        .sort((a: { id: number; }, b: { id: number; }) => a.id - b.id);
     return (
         <div className='w-full max-w-[1440px] mx-auto py-16'>
             <div className='w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center mb-8 md:px-0 px-4'>
@@ -26,10 +28,15 @@ const MilesTone = ({ homePageData }: { homePageData: any }) => {
                     <div className='md:w-[65%] w-full grid md:grid-cols-3 grid-cols-2 justify-center md:px-16 px-8 md:py-0 py-8 md:gap-16 gap-2'>
                         {mappedData.map((item: any) => (
                             <div key={item.id} className='md:p-0 p-2'>
-                                <h2 className='md:text-5xl text-3xl font-bold mb-4 text-white'>{item?.heading}</h2>
-                                <p className='md:w-3/4 md:text-2xl text-lg font-semibold text-white'>{item?.description}</p>
+                                <h2 className='md:text-4xl text-3xl font-bold mb-4 text-white'>{item?.heading}</h2>
+                                <p className='md:w-[90%] md:text-xl text-lg font-semibold text-white'>{item?.description}</p>
                             </div>
                         ))}
+                        <img
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData?.milestones1?.bigstep_logo?.data?.attributes?.formats?.large?.url}`}
+                            alt={homePageData?.milestones?.background_image?.data?.attributes?.name}
+                            className='flex w-16'
+                        />
                     </div>
                 </div>
             </div>

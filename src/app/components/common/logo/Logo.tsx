@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const Logo = ({ scrolled, logo }: { scrolled: boolean, logo: any }) => {
-  console.log(logo[1]?.attributes?.url)
   return (
     <Link href={'/'}>
         <img

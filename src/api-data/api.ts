@@ -41,7 +41,7 @@ export const fetchFooterData = async () => {
 export const fetchHomepageData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/home-page?populate[home_introduction][populate]=*&populate[Message][populate]=*&populate[success_stories][populate]=*&populate[technologies][populate]=*&populate[milestones][populate]=*&populate[milestones1][populate]=*&populate[partners][populate]=*&populate[culture][populate]=*&populate[client_reviews][populate]=*&populate[home_page_blogs][populate]=*&populate[faq][populate]=*&&populate[latest_info][populate]=*&populate[trusted_by][populate]=*&populate[get_in_touch][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/home-page?populate[0]=home_introduction&populate[1]=Message&populate[2]=success_stories.background_image&populate[3]=technologies&populate[4]=partners.background_image&populate[5]=culture&populate[6]=client_reviews.background_image&populate[7]=faq&populate[8]=home_page_blogs.background_image&populate[9]=get_in_touch.background_image&populate[10]=trusted_by.background_image&populate[11]=milestones1&populate[12]=value&populate[13]=value.value_photos&populate[14]=value.value_1.image&populate[15]=milestones1.Years.images&populate[16]=milestones1.deliveries.images&populate[17]=milestones1.cloud_projects.images&populate[18]=milestones1.experts.images&populate[19]=milestones1.retention_rate.images&populate[20]=milestones1.bigstep_logo&populate[21]=milestones.background_image&populate[22]=latest_info.background_image`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -149,7 +149,7 @@ export const fetchBlogsData = async () => {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    return data.data;
+    return data;
   } catch (error) {
     console.log(error);
     return null;
@@ -1699,6 +1699,100 @@ export const fetchTechnologyData = async () => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/tech?populate[0]=technological_experties&populate[1]=get_in_touch&populate[3]=our_tech_stack&populate[4]=technologies_introduction&populate[5]=technologies_introduction.backgroundImage`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+
+// About us Page
+
+export const fetchAboutUsData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/about-page?populate[0]=about_intro.backgroundImage&populate[1]=empowering.images&populate[2]=empowering_values.images&populate[3]=startdom_heading.images&populate[4]=stardom_data.images&populate[5]=visnories_heading&populate[6]=visnories_data.images&populate[7]=heartbeat_heading.background_image&populate[8]=heartbeat_data.images`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+
+// About us Page
+
+export const fetchCulturePageData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/culture-new-page?populate[0]=intro.images&populate[1]=employee_data&populate[2]=core_values_heading.images&populate[3]=core_values_data.serviceLogo&populate[4]=cultural_bigstepians.images&populate[5]=cultural_bigstepians_data.images&populate[6]=bigstep_annual_heading.images`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// Blogs Page Data
+
+export const fetchBlogsPageData = async () => {
+  try {
+      const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/blog-page?populate[intro][populate]=*&populate[latest_info][populate]=*&populate[blog_page_section]=*`
+      );
+      if (!response.ok) {
+          throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      return data.data;
+  } catch (error) {
+      console.log(error);
+      return null;
+  }
+};
+
+
+// Blog details Page
+
+export const fetchBlogDetail = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/blog-detail?populate[0]=related_blogs.background_image&populate[1]=get_in_touch.background_image&populate[2]=latest_info.background_image`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+
+// Contact Us Page
+
+export const fetchContactUsPage = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/contact-us?populate[0]=intro.backgroundImage&populate[1]=get_in_touch.background_image`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

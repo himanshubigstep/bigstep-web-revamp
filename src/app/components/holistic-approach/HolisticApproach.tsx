@@ -14,6 +14,7 @@ interface HolisticData {
     id: number;
     heading: string;
     description: string;
+    hex_code: string;
     serviceLogo?: {
         data?: {
             attributes: {
@@ -37,56 +38,13 @@ interface HolisticApproachProps {
 const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description, buttonText, holisticData }) => {
     const holisticApproach = holisticData?.attributes?.service_data || [];
     const sortedApproach = holisticApproach.sort((a, b) => a.id - b.id);
-    const holisticApproachData = [
-        {
-            id: 1,
-            heading: 'Initial Concept and Ideation',
-            description: 'Understanding your vision and goals to create a detailed project roadmap.',
-            icon: bulb,
-            bgCode: '#E4F3E8',
-            color: '#1EB047'
-        },
-        {
-            id: 2,
-            heading: 'Design',
-            description: 'Crafting user-centric designs through wireframes, prototypes, and user feedback.',
-            icon: pencil,
-            bgCode: '#F5DFC3',
-            color: '#D5AC78'
-        },
-        {
-            id: 3,
-            heading: 'Development',
-            description: 'Implementing agile methodologies for iterative and flexible development.',
-            icon: code,
-            bgCode: '#FCDADA',
-            color: '#ECA5A5'
-        },
-        {
-            id: 4,
-            heading: 'Quality Assurance',
-            description: 'Conducting rigorous testing to ensure reliability and performance.',
-            icon: medal,
-            bgCode: '#FFDAFB',
-            color: '#D090C9'
-        },
-        {
-            id: 5,
-            heading: 'Deployment',
-            description: 'Seamlessly launching your product in the live environment.',
-            icon: rocket,
-            bgCode: '#DEEFD7',
-            color: '#8DB87C'
-        },
-        {
-            id: 6,
-            heading: 'Maintenance',
-            description: 'Providing ongoing support and updates to keep your product running smoothly.',
-            icon: settings,
-            bgCode: '#F0F7FF',
-            color: '#007AFF'
-        },
-    ]
+    
+    const addOpacityToHex = (hex: string, opacity: number) => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    };
     return (
         <div className='w-full h-full md:py-16 py-8 px-4 flex flex-col justify-center items-center'>
             <div className='w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center text-center'>
@@ -94,19 +52,20 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                 <p className='text-lg'>{description}</p>
             </div>
             <div className='relative w-full max-w-[1440px] mx-auto mt-8 md:h-[36rem] h-auto'>
-                <div className='w-full h-full flex justify-center items-center'>
-                    <div className='flex w-full h-1 bg-[#E1E1E1] relative z-10 px-8 justify-evenly items-center'>
+                <div className='flex w-full h-1 bg-[#E1E1E1] absolute top-1/2 z-10 px-8 justify-evenly items-center' />
+                <div className='w-full h-full flex justify-evenly items-center'>
                         {sortedApproach.map((item, index) => (
                             <div
                                 key={item.id}
-                                className='w-12 h-12 rounded-full relative z-10 flex justify-center items-center text-2xl font-semibold'
-                                style={{ backgroundColor: 'green', color: 'white' }}
+                                className='w-12 h-12 rounded-full relative z-20 flex justify-center items-center text-2xl font-semibold'
+                                style={{ backgroundColor: addOpacityToHex(item.hex_code, 0.5),
+                                    color: item.hex_code, }}
                             >
                                 {index + 1}
                                 <div
                                     className='w-[1px] h-24 absolute'
                                     style={{
-                                        borderColor: 'green',
+                                        borderColor: item.hex_code,
                                         borderWidth: 1,
                                         borderStyle: 'dashed',
                                         bottom: item.id % 2 !== 0 ? '110%' : 'auto',
@@ -120,8 +79,8 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                                         top: item.id % 2 === 0 ? '340%' : 'auto',
                                     }}
                                 >
-                                    <h3 className='text-center text-xl font-semibold text-black'>{item.heading}</h3>
-                                    <p className='text-center text-sm font-normal text-black'>{item.description}</p>
+                                    <h3 className='text-center text-xl font-semibold dark:text-white text-black'>{item.heading}</h3>
+                                    <p className='text-center text-sm font-normal dark:text-white text-black'>{item.description}</p>
                                 </div>
                                 <div
                                     className='absolute'
@@ -140,7 +99,7 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    {/* </div> */}
                 </div>
             </div>
             <Button
