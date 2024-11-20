@@ -37,7 +37,7 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
               >
                 <div className="w-full h-36 flex justify-center items-center rounded-tl-2xl rounded-tr-2xl">
                   <img
-                    src={getImageUrl(item?.attributes?.image?.data?.attributes?.formats?.large?.url)}
+                    src={getImageUrl(item?.attributes?.image?.data?.attributes?.url)}
                     alt={item?.attributes?.heading || 'Blog image'}
                     className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl"
                   />

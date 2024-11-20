@@ -62,23 +62,6 @@ const Partners = ({
                     ))}
                 </div>
 
-                {/* <div className="border-[1px] border-gray-500 md:max-w-[75%] mx-auto rounded-2xl w-full h-full md:py-8 py-4">
-                    <div className="md:flex w-full grid grid-cols-2 justify-center gap-8 items-start md:px-8 px-4">
-                        {selectedPartner && sortedTechData.find(partner => partner.id === selectedPartner)?.attributes.logos.data.map((logo, index) => (
-                            <div key={index} className='flex flex-col gap-4 justify-center items-center'>
-                                <div className="bg-white rounded-xl flex justify-center items-center md:p-4 p-2">
-                                    <img
-                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.attributes.url}`}
-                                        alt="partner logo"
-                                        className="object-contain w-[8rem] aspect-square"
-                                    />
-                                </div>
-                                <span className='text-lg md:w-[75%] mx-auto text-center text-white font-medium'>{logo.attributes.name.replace(/\.[^.]+$/, '')}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
-
                 <div className="border-[1px] border-gray-500 md:max-w-[75%] mx-auto rounded-2xl w-full h-full md:py-8 py-4">
                     <div className="md:flex w-full grid grid-cols-2 justify-center gap-8 items-start md:px-8 px-4">
                         {selectedPartnerData && selectedPartnerData.attributes.logos.data?.length > 0 ? (

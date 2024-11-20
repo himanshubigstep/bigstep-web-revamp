@@ -4,10 +4,10 @@ import { fetchCompleteProductDevelopmentData, fetchCompleteProductDevelopmentHol
 import Clients from '@/app/components/common/clients/Clients'
 import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
-import MilesTone from '@/app/components/common/milestones-data/MilesTone'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
 import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
+import MileStoneSubmenu from '@/app/components/common/milestones-data/MileStoneSubmenu'
 
 interface CompleteProductDevelopmentProps {
   id: number;
@@ -111,6 +111,12 @@ interface CompleteProductDevelopmentProps {
       }
     }
   }
+  MilesTones: {
+    id: number;
+    heading: string;
+    sub_heading: string;
+    description: string
+  }
   product_development: {
     id: number;
     heading: string;
@@ -127,6 +133,28 @@ interface CompleteProductDevelopmentProps {
         }
       }
     }
+  }
+  why_choose: {
+    id: number;
+    heading: string;
+    description: string;
+    button_text: string;
+    images: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
+  why_choose_data: {
+    id: number;
+    heading: string;
+    description: string
   }
 }
 
@@ -179,13 +207,17 @@ const CompleteProductDevelopment = () => {
           buttonText={completeProductDevelopmentData?.holistic_approach?.button_text || ''}
           holisticData={completeProductDevelopmentHolisticData[0] || []}
         />
-        <ProductDevelopment />
-        {/* <MilesTone homePageData={homePageData} /> */}
-        <Clients
-            title={completeProductDevelopmentData?.client_review?.heading || ''}
-            description={completeProductDevelopmentData?.client_review?.description || ''}
-            bgImage={completeProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${completeProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+        <ProductDevelopment
+          developmentData={completeProductDevelopmentData}
         />
+        <MileStoneSubmenu homePageData={completeProductDevelopmentData} />
+        <div className='w-full h-full md:py-16 py-8'>
+          <Clients
+              title={completeProductDevelopmentData?.client_review?.heading || ''}
+              description={completeProductDevelopmentData?.client_review?.description || ''}
+              bgImage={completeProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${completeProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+          />
+        </div>
         <ContactUs contactUsData = {completeProductDevelopmentData?.client_query || []} />
     </div>
   )

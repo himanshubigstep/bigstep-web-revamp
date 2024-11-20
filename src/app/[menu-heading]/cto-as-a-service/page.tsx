@@ -181,11 +181,13 @@ const CtoAsService = () => {
         />
         <ProductDevelopment />
         {/* <MilesTone homePageData={homePageData} /> */}
-        <Clients
-            title={ctoAsServiceData?.client_review?.heading || ''}
-            description={ctoAsServiceData?.client_review?.description || ''}
-            bgImage={ctoAsServiceData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${ctoAsServiceData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
-        />
+        <div className='w-full h-full md:py-16 py-8'>
+          <Clients
+              title={ctoAsServiceData?.client_review?.heading || ''}
+              description={ctoAsServiceData?.client_review?.description || ''}
+              bgImage={ctoAsServiceData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${ctoAsServiceData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+          />
+        </div>
         <ContactUs contactUsData = {ctoAsServiceData?.client_query || []} />
     </div>
   )

@@ -28,7 +28,7 @@ const ImageBlocks = ({ topHeading, section }: { topHeading: string, section: Emp
         <div className='w-full h-full flex flex-col justify-center items-center relative md:px-0 px-4'>
             <div className='w-full grid md:grid-cols-3 grid-cols-1 md:gap-16 gap-8'>
                 {section && section.map((item) => (
-                    <div className='w-full h-full flex flex-col rounded-2xl border-[1px] border-gray-300 dark:border-gray-800'>
+                    <div key={item.id} className='w-full h-full flex flex-col rounded-2xl border-[1px] border-gray-300 dark:border-gray-800'>
                         <div className='w-full h-72 flex justify-center items-center rounded-tl-2xl rounded-tr-2xl'>
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.images?.data?.attributes?.formats?.large?.url}`}

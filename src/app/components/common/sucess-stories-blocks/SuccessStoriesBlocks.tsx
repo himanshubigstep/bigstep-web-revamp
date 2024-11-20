@@ -9,6 +9,7 @@ interface SuccessStoriesData {
     title: string
     description: string
     subtitle: string
+    logoSrc: string
 }
 
 const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any }) => {
@@ -25,7 +26,8 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                         title: story.attributes.title,
                         description: story.attributes.body,
                         subtitle: story.attributes.subtitle,
-                        src: process.env.NEXT_PUBLIC_IMAGE_URL + story.attributes.image.data.attributes.formats.large.url
+                        src: process.env.NEXT_PUBLIC_IMAGE_URL + story.attributes.image.data.attributes.formats.large.url,
+                        logoSrc: process.env.NEXT_PUBLIC_IMAGE_URL + story.attributes.logo.data.attributes.url
                     };
                 });
                 setCarouselImagesArray(successStories);
@@ -70,9 +72,15 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                                     className='w-full h-full rounded-3xl'
                                 />
                             </div>
-                            <div className='display-hover flex justify-center absolute md:p-6 p-4 flex-col bg-black rounded-3xl'>
-                                <h3 className='md:text-2xl text-lg font-medium text-white'>{imageData?.title}</h3>
-                                <p className='md:text-lg text-md md:line-clamp-none line-clamp-2 font-normal text-white'>{imageData?.description}</p>
+                            <div className='display-hover flex justify-center items-center absolute md:p-6 p-4 flex-col bg-black rounded-3xl'>
+                                <img
+                                    src={imageData.logoSrc}
+                                    alt={imageData?.title}
+                                    className='w-48 object-contain mb-4'
+                                />
+                                <h3 className='md:text-3xl text-lg font-bold mb-4 text-white'>{imageData?.title}</h3>
+                                <h4 className='md:text-2xl text-lg font-medium mb-4 text-white'>{imageData?.subtitle}</h4>
+                                <p className='md:text-xl text-md md:line-clamp-none line-clamp-2 font-normal text-center text-white'>{imageData?.description}</p>
                                 {/* <p className='text-md font-normal text-white'>hoji aap</p> */}
                             </div>
                         </div>
@@ -80,7 +88,7 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                 </div>
                 <div className='w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl'>
                     {carouselImagesArray.slice(2).map((imageData, index) => (
-                        <div className='md:w-1/3 w-1/2 md:h-96 relative p-2 on-hover' key={imageData.id}>
+                        <div className='w-1/2 md:h-96 relative p-2 on-hover' key={imageData.id}>
                             <div className='w-full h-full rounded-3xl flex justify-center items-center'>
                                 <img
                                     src={imageData.src}
@@ -88,9 +96,15 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                                     className='w-full h-full rounded-3xl'
                                 />
                             </div>
-                            <div className='display-hover flex justify-center absolute md:p-6 p-4 flex-col bg-black rounded-3xl'>
-                                <h3 className='md:text-2xl text-lg font-medium text-white'>{imageData?.title}</h3>
-                                <p className='md:text-lg text-md md:line-clamp-none line-clamp-2 font-normal text-white'>{imageData?.description}</p>
+                            <div className='display-hover flex justify-center items-center absolute md:p-6 p-4 flex-col bg-black rounded-3xl'>
+                                <img
+                                    src={imageData.logoSrc}
+                                    alt={imageData?.title}
+                                    className='w-48 object-contain mb-4'
+                                />
+                                <h3 className='md:text-3xl text-lg font-bold mb-4 text-white'>{imageData?.title}</h3>
+                                <h4 className='md:text-2xl text-lg font-medium mb-4 text-white'>{imageData?.subtitle}</h4>
+                                <p className='md:text-xl text-md md:line-clamp-none line-clamp-2 font-normal text-center text-white'>{imageData?.description}</p>
                                 {/* <p className='text-md font-normal text-white'>hoji aap</p> */}
                             </div>
                         </div>

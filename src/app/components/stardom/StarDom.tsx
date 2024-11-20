@@ -18,7 +18,7 @@ const StarDom = ({
     firstRowData: any
     secondRowData: any
 }) => {
-    // Combine firstRowData and secondRowData for mobile display
+    
     const combinedData = [...firstRowData, ...secondRowData]
 
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -34,7 +34,7 @@ const StarDom = ({
     return (
         <div className="relative w-full h-full md:py-16 py-8">
             <div className="relative w-full h-full max-w-[1440px] mx-auto md:py-16 py-8">
-                {/* Background Image */}
+                
                 <div className="absolute top-0 bottom-0 rounded-3xl w-full flex justify-center items-center text-center">
                     <img
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${backgroundImage}`}
@@ -42,14 +42,12 @@ const StarDom = ({
                         className="w-full h-full rounded-3xl"
                     />
                 </div>
-
-                {/* Heading and Description */}
+                
                 <div className="relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4 mb-8">
                     <h2 className="text-3xl font-semibold text-center text-white mb-4">{heading}</h2>
                     <p className="text-lg font-normal text-white">{description}</p>
                 </div>
-
-                {/* First Row - Desktop View */}
+                
                 <div className="w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl">
                     <div className={firstRowClass}>
                         {firstRowData.map((item: any, index: number) => (
@@ -73,8 +71,7 @@ const StarDom = ({
                         ))}
                     </div>
                 </div>
-
-                {/* Second Row - Desktop View */}
+                
                 <div className="w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl mt-12">
                     <div className={secondRowClass}>
                         {secondRowData.map((item: any, index: number) => (
@@ -98,8 +95,7 @@ const StarDom = ({
                         ))}
                     </div>
                 </div>
-
-                {/* Mobile View - Combined Data as Slider */}
+                
                 <div className="w-full max-w-[90%] mx-auto md:hidden flex flex-wrap md:justify-center rounded-3xl mt-12 relative">
                     <div className="relative w-full h-full">
                         {combinedData.length > 0 && (

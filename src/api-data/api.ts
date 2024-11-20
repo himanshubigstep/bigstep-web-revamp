@@ -1,11 +1,11 @@
 interface SubscriberInput {
-  email: string; // Example property, adjust according to your actual structure
+  email: string;
 }
 
 interface ContactFormInput {
-  name: string; // Example property
-  business_mail: string; // Example property
-  message: string; // Example property
+  name: string;
+  business_mail: string;
+  message: string;
 }
 
 export const fetchHeaderData = async () => {
@@ -1562,7 +1562,7 @@ export const fetchKubernatesAdoptionsTech = async () => {
 export const fetchCompleteProductDevelopmentData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/engagement-model?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*&populate[satisfaction][populate]=*&populate[ttm][populate]=*&populate[cost][populate]=*&populate[delivery][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/engagement-model?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*&populate[MilesTones][populate]=*&populate[why_choose][populate]=*&populate[why_choose_data][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1698,7 +1698,7 @@ export const fetchCtoAsServiceHolisticApproach = async () => {
 export const fetchTechnologyData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/tech?populate[0]=technological_experties&populate[1]=get_in_touch&populate[3]=our_tech_stack&populate[4]=technologies_introduction&populate[5]=technologies_introduction.backgroundImage`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/tech?populate[0]=technological_experties&populate[1]=get_in_touch.background_image&populate[3]=our_tech_stack.images&populate[4]=technologies_introduction&populate[5]=technologies_introduction.backgroundImage`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1793,6 +1793,76 @@ export const fetchContactUsPage = async () => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/contact-us?populate[0]=intro.backgroundImage&populate[1]=get_in_touch.background_image`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+
+// technologies data
+
+export const fetchtechnologies = async (page = 1) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technologies?populate=*&pagination[page]=${page}`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchTechnologyDataService = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Technologies%20Page%20-%20What%20it%20Means%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+
+// partnershipdata data
+
+export const fetchPartnershipData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/paterner?populate[0]=technology_partnerships.background_image&populate[1]=get_in_touch.background_image&populate[3]=our_tech_stack.images&populate[4]=partner_Intro.backgroundImage&populate[5]=technologies_introduction.backgroundImage`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchPartnershipDataService = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Partnerships%20Page%20-%20What%20it%20Means%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

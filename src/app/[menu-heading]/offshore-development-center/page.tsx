@@ -181,11 +181,13 @@ const OffShoreDevelopment = () => {
         />
         <ProductDevelopment />
         {/* <MilesTone homePageData={homePageData} /> */}
-        <Clients
-            title={offShoreProductDevelopmentData?.client_review?.heading || ''}
-            description={offShoreProductDevelopmentData?.client_review?.description || ''}
-            bgImage={offShoreProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${offShoreProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
-        />
+        <div className='w-full h-full md:py-16 py-8'>
+          <Clients
+              title={offShoreProductDevelopmentData?.client_review?.heading || ''}
+              description={offShoreProductDevelopmentData?.client_review?.description || ''}
+              bgImage={offShoreProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${offShoreProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+          />
+        </div>
         <ContactUs contactUsData = {offShoreProductDevelopmentData?.client_query || []} />
     </div>
   )

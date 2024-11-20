@@ -1,7 +1,11 @@
 'use client'
-import { fetchTechnologyData } from '@/api-data/api';
+import { fetchtechnologies, fetchTechnologyData, fetchTechnologyDataService } from '@/api-data/api';
 import React, { useEffect, useState } from 'react'
 import TopBanner from '../components/common/top-banner/TopBanner';
+import LoaderSpinner from '../components/common/loader-spinner/LoadingSpinner';
+import PartnersTech from '../components/common/partner-common-block/PartnersTech';
+import ServiceDataBlock from '../components/common/service-data-block/ServiceDataBlock';
+import ContactUs from '../components/common/contact-us/ContactUs';
 
 interface TechnologiesPageData {
   get_in_touch: {
@@ -41,14 +45,43 @@ interface TechnologiesPageData {
     id: number
   }
   technologies_introduction: {
-
+    id: number
+    description: string
+    heading: string
+    backgroundImage: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }[]
+    }
   }
-  our_tech_stack: string
+  our_tech_stack: {
+    id: number
+    heading: string
+    description: string
+    images: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 const Technologies = () => {
     const [technologyData, setTechnologyData] = useState<TechnologiesPageData | null>(null)
-    // const [homePageServiceData, setHomePageServiceData] = useState<any>([]);
+    const [technologiesData, setTechnologiesData] = useState<any>([]);
+    const [techPageServiceData, setTechPageServiceData] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(true);
   
     useEffect(() => {
@@ -66,46 +99,72 @@ const Technologies = () => {
       fetchTechnologyPageDataResponse();
     }, []);
   
-    // useEffect(() => {
-    //   const fetchHomePageServiceData = async () => {
-    //     try {
-    //       const response = await fetchServiceDataHome();
-    //       setHomePageServiceData(response);
-    //     } catch (error) {
-    //       console.log(error);
-    //       return null;
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   }
+    useEffect(() => {
+      const fetchTechnologiesData = async () => {
+        try {
+          let serviceResponse = await fetchtechnologies();
+          let allServiceData = serviceResponse?.data || [];
   
-    //   fetchHomePageServiceData();
-    // }, [])
+          while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
+            const nextPage = serviceResponse.meta.pagination.page + 1;
+            serviceResponse = await fetchtechnologies(nextPage);
+            allServiceData = allServiceData.concat(serviceResponse?.data || []);
+          }
+          setTechnologiesData(allServiceData);
+        } catch (error) {
+          console.log(error);
+          return null;
+        } finally {
+          setLoading(false);
+        }
+      }
+  
+      fetchTechnologiesData()
+    }, [])
 
-    // if (loading) {
-    //   return <LoaderSpinner />;
-    // }
+    useEffect(() => {
+      const fetchtechPageServiceData = async () => {
+        try {
+          const response = await fetchTechnologyDataService();
+          setTechPageServiceData(response);
+        } catch (error) {
+          console.log(error);
+          return null;
+        } finally {
+          setLoading(false);
+        }
+      }
+  
+      fetchtechPageServiceData();
+    }, [])
+
+    if (loading) {
+      return <LoaderSpinner />;
+    }
 
   return (
     <div className='poppins'>
-        {/* <TopBanner bannerData={technologyData?.introduction} /> */}
-        {/* <Parterners />
-        <CommonBlock
-            title={homePageData?.technologies[0]?.heading || ''}
-            description={homePageData?.technologies[0]?.description || ''}
-            services={homePageServiceData}
-            containerClassName='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 md:px-4'
-            logoClassName='md:w-auto w-full md:h-full'
-            titleClassName='text-3xl font-medium text-center mb-4'
-            descriptionClassName='text-lg font-normal '
-            serviceContainerClassName='relative w-full flex flex-wrap md:justify-center text-center'
-            serviceItemClassName='mt-8 flex flex-col md:w-1/3 w-1/2 md:px-12 md:py-6 px-4 py-4 gap-4 justify-center items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-            serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center'
-            buttonClassName='px-4 py-2 mx-2 bg-gray-300 rounded'
-            serviceHeaderClassName='w-full text-center flex flex-col gap-2'
-            mainbutton='px-8 py-4 mx-2 bg-blue-500 hover:bg-blue-800 rounded-xl text-white'
+        <TopBanner bannerData={technologyData?.technologies_introduction} />
+        <PartnersTech
+          title={technologyData?.our_tech_stack?.heading || ''}
+          description={technologyData?.our_tech_stack?.description || ''}
+          techData = {technologiesData}
+          bannerImage={technologyData?.our_tech_stack?.images?.data?.attributes?.formats?.large?.url || ''}
         />
-        <ContactUs buttonText="Send" contactUsData = {homePageData?.get_in_touch || []} /> */}
+        <ServiceDataBlock
+          title={technologyData?.technological_experties?.heading || ''}
+          description={technologyData?.technological_experties?.description || ''}
+          services={techPageServiceData[0]?.attributes?.service_data || []}
+          showButton={true}
+          mainContainerClass='relative w-full max-w-[1440px] mx-auto md:py-24 py-12 md:px-4'
+          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+          serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
+          serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/3 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+          serviceIconHeader='w-full flex flex-row md:flex-col gap-4 md:items-center items-start'
+          serviceItemDescription='w-full flex flex-col gap-2'
+          buttonText={technologyData?.technological_experties?.button_text || ''}
+        />
+        <ContactUs contactUsData={technologyData?.get_in_touch} />
     </div>
   )
 }

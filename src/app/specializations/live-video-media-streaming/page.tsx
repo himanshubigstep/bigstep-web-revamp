@@ -247,7 +247,7 @@ const LiveStreaming = () => {
           mainContainerClass='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 md:px-4'
           headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
           serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
-          serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/4 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-center items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+          serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/3 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-center items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
           serviceIconHeader='w-full flex flex-col gap-4 md:items-center items-start'
           serviceItemDescription='w-full text-center flex flex-col gap-2'
         />

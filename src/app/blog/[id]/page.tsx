@@ -29,6 +29,7 @@ interface Author {
 interface Image {
     data: {
         attributes: {
+            url: string;
             formats: {
                 large: {
                     url: string;
@@ -181,7 +182,7 @@ const BlogPostPage = () => {
             <div id='read-more-section' className='w-full h-full max-w-[1440px] mx-auto md:py-16 py-6 flex md:flex-row flex-col justify-between items-start md:gap-8 gap-4 md:px-0 px-4'>
                 <div className='w-full md:max-w-[70%] max-w-full h-full flex flex-col md:justify-between md:items-center gap-4 relative'>
                     <img
-                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog?.attributes?.image?.data?.attributes?.formats?.large?.url}`}
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog?.attributes?.image?.data?.attributes?.url}`}
                         alt='image'
                         className='w-full h-full rounded-2xl'
                     />

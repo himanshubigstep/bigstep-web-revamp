@@ -10,7 +10,7 @@ interface Partner {
 
 interface PartnerSectionData {
   heading: string;
-  button_text: string;
+  button_text?: string;
   description: string;
   background_image: {
     data: {
@@ -28,19 +28,22 @@ interface PartnerSectionData {
 interface PartnersBlockProps {
   homePageData: PartnerSectionData;
   partnerShipData: Partner[];
+  headingClass: string
+  descriptionClass: string
+  mainClass: string
 }
 
-const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShipData }) => {
+const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShipData, headingClass, descriptionClass, mainClass }) => {
   return (
-    <div className='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 rounded-3xl'>
+    <div className={mainClass}>
       <img
         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData?.background_image?.data?.attributes?.formats?.large?.url}`}
         alt='image'
         className='absolute top-0 bottom-0 w-full h-full flex justify-center md:object-fill object-cover items-center text-center rounded-3xl'
       />
       <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4'>
-        <h2 className='text-3xl font-semibold text-center mb-4'>{homePageData.heading}</h2>
-        <p className='text-lg font-normal'>{homePageData.description}</p>
+        <h2 className={headingClass}>{homePageData.heading}</h2>
+        <p className={descriptionClass}>{homePageData.description}</p>
       </div>
       <div className='relative w-full max-w-[1140px] mx-auto bg-white rounded-2xl flex flex-wrap md:justify-center text-center mt-8'>
         <div className='dark:bg-gray-200 w-full h-full flex justify-center items-center bg-white md:rounded-xl py-8 relative'>
@@ -57,9 +60,11 @@ const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShip
           </div>
         </div>
       </div>
-      <div className='relative w-full h-auto px-4 pt-8 flex justify-center items-center'>
-        <Button text={homePageData.button_text} className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal' onClick={() => { }} />
-      </div>
+      {homePageData.button_text &&
+        <div className='relative w-full h-auto px-4 pt-8 flex justify-center items-center'>
+          <Button text={homePageData.button_text} className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal' onClick={() => { }} />
+        </div>
+      }
     </div>
   );
 };

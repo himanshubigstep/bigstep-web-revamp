@@ -58,7 +58,6 @@ const ImagesAboutUs = ({
             <div className='w-full h-full relative max-w-[1080px] mx-auto flex flex-col items-center justify-center md:pt-16 pt-8'>
                 <div className='w-full h-full flex items-center justify-center gap-4'>
                     {images && images.map((item: any) => (
-                        console.log(item),
                         <div
                             key={item.id}
                             className={`relative cursor-pointer transition-all duration-500 h-[24rem] ${item.id === selectedImageId ? 'w-[55%]' : 'w-[20%]'} overflow-hidden`}

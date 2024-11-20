@@ -181,11 +181,13 @@ const RemoteEngineeringTeam = () => {
         />
         <ProductDevelopment />
         {/* <MilesTone homePageData={homePageData} /> */}
-        <Clients
-            title={remoteEngineeringTeamData?.client_review?.heading || ''}
-            description={remoteEngineeringTeamData?.client_review?.description || ''}
-            bgImage={remoteEngineeringTeamData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${remoteEngineeringTeamData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
-        />
+        <div className='w-full h-full md:py-16 py-8'>
+          <Clients
+              title={remoteEngineeringTeamData?.client_review?.heading || ''}
+              description={remoteEngineeringTeamData?.client_review?.description || ''}
+              bgImage={remoteEngineeringTeamData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${remoteEngineeringTeamData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+          />
+        </div>
         <ContactUs contactUsData = {remoteEngineeringTeamData?.client_query || []} />
     </div>
   )
