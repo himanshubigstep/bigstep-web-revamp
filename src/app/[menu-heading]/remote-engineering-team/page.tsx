@@ -179,7 +179,7 @@ const RemoteEngineeringTeam = () => {
           buttonText={remoteEngineeringTeamData?.holistic_approach?.button_text || ''}
           holisticData={remoteEngineeringTeamHolisticData[0] || []}
         />
-        <ProductDevelopment />
+        <ProductDevelopment developmentData={remoteEngineeringTeamData} />
         {/* <MilesTone homePageData={homePageData} /> */}
         <div className='w-full h-full md:py-16 py-8'>
           <Clients

@@ -179,7 +179,7 @@ const OffShoreDevelopment = () => {
           buttonText={offShoreProductDevelopmentData?.holistic_approach?.button_text || ''}
           holisticData={offShoreDevelopmentHolisticData[0] || []}
         />
-        <ProductDevelopment />
+        <ProductDevelopment developmentData={offShoreProductDevelopmentData} />
         {/* <MilesTone homePageData={homePageData} /> */}
         <div className='w-full h-full md:py-16 py-8'>
           <Clients

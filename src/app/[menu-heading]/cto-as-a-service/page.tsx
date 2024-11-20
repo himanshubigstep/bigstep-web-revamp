@@ -179,7 +179,7 @@ const CtoAsService = () => {
           buttonText={ctoAsServiceData?.holistic_approach?.button_text || ''}
           holisticData={ctoAsServiceHolisticData[0] || []}
         />
-        <ProductDevelopment />
+        <ProductDevelopment developmentData={ctoAsServiceData} />
         {/* <MilesTone homePageData={homePageData} /> */}
         <div className='w-full h-full md:py-16 py-8'>
           <Clients
