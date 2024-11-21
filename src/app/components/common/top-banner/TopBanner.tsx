@@ -8,9 +8,9 @@ const TopBanner = ({bannerData}: {bannerData: any}) => {
             <div className='w-full h-full absolute right-0 left-0 top-0 bottom-0'>
                 <div className='w-full h-full absolute top-0 bottom-0 bg-gradient-to-r from-black to-transparent' />
                 <img
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${bannerData?.backgroundImage?.data[0]?.attributes?.formats?.large?.url}`}
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${bannerData?.backgroundImage?.data[0]?.attributes?.url}`}
                     alt='image'
-                    className='w-full h-full'
+                    className='w-full h-full object-cover'
                 />
             </div>
             <div className='w-full max-w-[1440px] mx-auto h-full flex md:justify-between md:items-center gap-4 relative'>

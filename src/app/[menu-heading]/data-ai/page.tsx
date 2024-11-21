@@ -107,6 +107,7 @@ interface dataandAiPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -137,6 +138,7 @@ interface dataandAiPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -308,6 +310,7 @@ const DataAndAI = () => {
           title={dataandAiPageData?.technologies_we_use?.heading || ''}
           description={dataandAiPageData?.technologies_we_use?.description || ''}
           techData={dataAndAITechData || []}
+          bgImage={dataandAiPageData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={dataandAiPageData?.trusted_partner?.heading || ''}

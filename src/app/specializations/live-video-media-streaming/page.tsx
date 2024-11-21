@@ -55,6 +55,7 @@ interface LiveStreamingData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -85,6 +86,7 @@ interface LiveStreamingData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -255,6 +257,7 @@ const LiveStreaming = () => {
           title={liveStreamingData?.cutting_edge_technologies?.heading || ''}
           description={liveStreamingData?.cutting_edge_technologies?.description || ''}
           techData={liveStreamingTechData || []}
+          bgImage={liveStreamingData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={liveStreamingData?.transformative_benefits?.heading || ''}

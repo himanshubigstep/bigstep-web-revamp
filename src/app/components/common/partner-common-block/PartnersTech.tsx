@@ -115,11 +115,11 @@ const PartnersTech = ({
     }, [visibleCategories, selectedCategory]);
 
     return (
-        <div className="w-full h-full bg-black relative md:py-16 py-8 px-4">
+        <div className="w-full max-w-[1440px] mx-auto rounded-3xl h-full bg-black relative md:py-16 py-8 px-4 md:mt-16 mt-8">
             <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${bannerImage}`}
                 alt="Background Image"
-                className="w-full h-full absolute left-0 right-0 top-0 bottom-0"
+                className="w-full h-full absolute left-0 right-0 top-0 bottom-0 rounded-3xl"
             />
             <div className="relative w-full h-full max-w-[1440px] mx-auto">
                 <div className="w-full text-left flex flex-col gap-2 md:max-w-[75%] mx-auto">

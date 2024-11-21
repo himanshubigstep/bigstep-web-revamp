@@ -34,7 +34,7 @@ const Footer = () => {
     <Fragment>
       <div className='poppins relative w-full bg-[#242424] dark:border-t-gray-800 dark:border-t-2 md:p-16 p-8'>
         <img
-          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${footerData?.attributes?.background_image?.data?.attributes?.formats?.large?.url}`}
+          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${footerData?.attributes?.background_image?.data?.attributes?.url}`}
           alt='Footer Background'
           className='absolute left-0 right-0 top-0 bottom-0 w-full h-full object-contain bg-repeat-x opacity-80'
         />

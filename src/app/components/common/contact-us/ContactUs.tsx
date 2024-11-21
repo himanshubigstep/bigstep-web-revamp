@@ -3,7 +3,7 @@ import ContactForm from './ContactForm'
 
 const ContactUs = ({ contactUsData }: { contactUsData: any }) => {
     
-    const bgImageUrl = contactUsData?.background_image?.data?.attributes?.formats?.large?.url;
+    const bgImageUrl = contactUsData?.background_image?.data?.attributes?.url;
     
     return (
         <div className='relative w-full h-full rounded-3xl max-w-[1440px] md:mb-16 mb-8 md:py-16 py-8 mx-auto'>

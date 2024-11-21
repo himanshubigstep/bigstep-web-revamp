@@ -55,6 +55,7 @@ interface AwsConsultingDevelopmentData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -85,6 +86,7 @@ interface AwsConsultingDevelopmentData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -255,6 +257,7 @@ const AwsConsultingDevelopment = () => {
           title={awsConsultingDevelopmentData?.cutting_edge_technologies?.heading || ''}
           description={awsConsultingDevelopmentData?.cutting_edge_technologies?.description || ''}
           techData={awsConsultingDevelopmentTechData || []}
+          bgImage={awsConsultingDevelopmentData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={awsConsultingDevelopmentData?.transformative_benefits?.heading || ''}

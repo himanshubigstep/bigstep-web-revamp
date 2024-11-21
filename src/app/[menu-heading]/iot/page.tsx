@@ -106,6 +106,7 @@ interface internetOfThingsPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -136,6 +137,7 @@ interface internetOfThingsPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -306,6 +308,7 @@ const InternetOfThings = () => {
           title={internetOfThingsPageData?.technologies_we_use?.heading || ''}
           description={internetOfThingsPageData?.technologies_we_use?.description || ''}
           techData={internetOfThingsTechData || []}
+          bgImage={internetOfThingsPageData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={internetOfThingsPageData?.trusted_partner?.heading || ''}

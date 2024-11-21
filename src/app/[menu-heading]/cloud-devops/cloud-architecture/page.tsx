@@ -48,6 +48,7 @@ interface CloudArchitechPageProps {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface CloudArchitechPageProps {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const CloudArchitech = () => {
         title={cloudArchitechData?.technologies?.heading || ''}
         description={cloudArchitechData?.technologies?.description || ''}
         techData={cloudArchitechTechData || []}
+        bgImage={cloudArchitechData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={cloudArchitechData?.blogs?.heading || ''}

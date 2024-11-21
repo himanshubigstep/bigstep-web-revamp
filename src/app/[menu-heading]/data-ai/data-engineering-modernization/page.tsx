@@ -48,6 +48,7 @@ interface DataEngineeringModernizationPageData {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface DataEngineeringModernizationPageData {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const DataEngineeringModernization = () => {
         title={dataEngineeringModernizationData?.technologies?.heading || ''}
         description={dataEngineeringModernizationData?.technologies?.description || ''}
         techData={dataEngineeringModernizationTechData || []}
+        bgImage={dataEngineeringModernizationData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={dataEngineeringModernizationData?.blogs?.heading || ''}

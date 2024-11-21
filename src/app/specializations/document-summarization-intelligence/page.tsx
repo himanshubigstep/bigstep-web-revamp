@@ -55,6 +55,7 @@ interface DocumentSummarizationsData {
       data: {
         id: number;
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -85,6 +86,7 @@ interface DocumentSummarizationsData {
       data: {
         id: number;
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -255,6 +257,7 @@ const DocumentSummarizationInteligence = () => {
           title={documentSummarizationsData?.cutting_edge_technologies?.heading || ''}
           description={documentSummarizationsData?.cutting_edge_technologies?.description || ''}
           techData={documentSummarizationsTechData || []}
+          bgImage={documentSummarizationsData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={documentSummarizationsData?.transformative_benefits?.heading || ''}

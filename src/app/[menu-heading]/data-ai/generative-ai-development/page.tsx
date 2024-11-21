@@ -48,6 +48,7 @@ interface GenerativeAiPageData {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface GenerativeAiPageData {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const GenerativeAiDevelopment = () => {
         title={generativeAiData?.technologies?.heading || ''}
         description={generativeAiData?.technologies?.description || ''}
         techData={generativeAiTechData || []}
+        bgImage={generativeAiData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={generativeAiData?.blogs?.heading || ''}

@@ -26,7 +26,7 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                         title: story.attributes.title,
                         description: story.attributes.body,
                         subtitle: story.attributes.subtitle,
-                        src: process.env.NEXT_PUBLIC_IMAGE_URL + story.attributes.image.data.attributes.formats.large.url,
+                        src: process.env.NEXT_PUBLIC_IMAGE_URL + story.attributes.image.data.attributes.url,
                         logoSrc: process.env.NEXT_PUBLIC_IMAGE_URL + story.attributes.logo.data.attributes.url
                     };
                 });
@@ -52,7 +52,7 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
         <div className='relative w-full max-w-[1440px] rounded-3xl mx-auto md:py-16 py-8'>
             <div className='absolute top-0 bottom-0 rounded-3xl w-full flex justify-center items-center text-center'>
                 <img
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${sucessStoriesData?.background_image?.data?.attributes?.formats?.large?.url}`}
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${sucessStoriesData?.background_image?.data?.attributes?.url}`}
                     alt='image'
                     className='w-full h-full rounded-3xl md:object-fill object-cover'
                 />

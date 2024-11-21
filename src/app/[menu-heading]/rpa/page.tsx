@@ -106,6 +106,7 @@ interface rpaPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -136,6 +137,7 @@ interface rpaPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -306,6 +308,7 @@ const RPA = () => {
           title={rpaPageData?.technologies_we_use?.heading || ''}
           description={rpaPageData?.technologies_we_use?.description || ''}
           techData={rpaTechData || []}
+          bgImage={rpaPageData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={rpaPageData?.trusted_partner?.heading || ''}

@@ -48,6 +48,7 @@ interface BackendDevelopmentPageData {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface BackendDevelopmentPageData {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const BackendEngineering = () => {
         title={backendDevelopmentData?.technologies?.heading || ''}
         description={backendDevelopmentData?.technologies?.description || ''}
         techData={backendDevelopmentTechData || []}
+        bgImage={backendDevelopmentData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={backendDevelopmentData?.blogs?.heading || ''}

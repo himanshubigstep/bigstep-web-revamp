@@ -107,6 +107,7 @@ interface cloudDevOpsPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -137,6 +138,7 @@ interface cloudDevOpsPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -308,6 +310,7 @@ const CloudDevOps = () => {
           title={cloudDevOpsData?.technologies_we_use?.heading || ''}
           description={cloudDevOpsData?.technologies_we_use?.description || ''}
           techData={cloudDevOpsTechData || []}
+          bgImage={cloudDevOpsData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={cloudDevOpsData?.trusted_partner?.heading || ''}

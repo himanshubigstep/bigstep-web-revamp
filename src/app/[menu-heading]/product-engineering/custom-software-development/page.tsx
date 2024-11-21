@@ -48,6 +48,7 @@ interface CustomerSoftwareDevelopmentPageData {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface CustomerSoftwareDevelopmentPageData {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const CustomerSoftwareDevelopment = () => {
         title={customerSoftwareDevelopmentData?.technologies?.heading || ''}
         description={customerSoftwareDevelopmentData?.technologies?.description || ''}
         techData={customerSoftwareDevelopmentTechData || []}
+        bgImage={customerSoftwareDevelopmentData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={customerSoftwareDevelopmentData?.blogs?.heading || ''}

@@ -222,7 +222,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                   className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500"
                                 >
                                   <Link
-                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-').replace('what-we-do', 'services')}/${submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}${item.link}`}
+                                    href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-').replace('what-we-do', 'services')}/${submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}/${item.link}`}
                                     className="text-md"
                                     onClick={handleLinkClick}
                                   >

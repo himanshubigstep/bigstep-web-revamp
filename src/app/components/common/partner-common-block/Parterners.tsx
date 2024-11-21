@@ -1,7 +1,6 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../button/Button';
-import Image from 'next/image';
 
 interface Logo {
     attributes: {
@@ -24,26 +23,32 @@ const Partners = ({
     title,
     description,
     techData,
+    bgImage,
 }: {
     title: string;
     description: string;
     techData: Partner[];
+    bgImage: string;
 }) => {
     const sortedTechData = techData.sort((a, b) => a.id - b.id);
 
     const [selectedPartner, setSelectedPartner] = useState<number | null>(sortedTechData.length > 0 ? sortedTechData[0].id : null);
-
+    useEffect(() => {
+        if (sortedTechData.length > 0) {
+            setSelectedPartner(sortedTechData[0].id);
+        }
+    }, [sortedTechData]);
     const handleButtonClick = (id: number) => {
         setSelectedPartner(id);
     };
     const selectedPartnerData = sortedTechData.find(partner => partner.id === selectedPartner);
 
     return (
-        <div className="w-full h-full bg-black relative md:py-16 py-8 px-4">
-            <Image
-                src=""
+        <div className="w-full max-w-[1440px] mx-auto rounded-3xl h-full bg-black relative md:py-16 py-8 px-4">
+            <img
+                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${bgImage}`}
                 alt="Background Image"
-                className="w-full h-full object-cover absolute left-0 right-0 top-0 bottom-0"
+                className="w-full h-full absolute left-0 right-0 top-0 bottom-0 rounded-3xl"
             />
             <div className="relative w-full h-full max-w-[1440px] mx-auto">
                 <div className="w-full text-left flex flex-col gap-2 md:max-w-[75%] mx-auto">

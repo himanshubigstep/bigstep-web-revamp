@@ -64,7 +64,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                         >
                             <div className="w-full flex flex-col justify-center items-start rounded-lg">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${firstItem?.attributes?.image?.data?.attributes?.formats?.large?.url}`}
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${firstItem?.attributes?.image?.data?.attributes?.url}`}
                                     alt="AI Tech"
                                     className="w-full object-contain rounded-lg"
                                 />
@@ -92,7 +92,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                                     >
                                         <div className="md:w-1/6 md:aspect-square h-20 md:h-auto flex justify-center items-center rounded-lg">
                                             <img
-                                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.formats?.large?.url}`}
+                                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.url}`}
                                                 alt="AI Tech"
                                                 className="w-full object-contain rounded-lg"
                                             />

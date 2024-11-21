@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import BigsteLogo from '../../../assets/bigstep logo.png';
 import Button from '../button/Button';
+import Link from 'next/link';
 
 interface ServiceAttributes {
   hex_code: string;
@@ -14,6 +15,7 @@ interface ServiceAttributes {
   };
   heading: string;
   discription: string;
+  link: string;
 }
 
 interface Service {
@@ -112,7 +114,9 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
                   alt={service.attributes.heading}
                 />
               </div>
-              <h4 className='md:w-[60%] w-full md:text-left text-center md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.attributes.heading}</h4>
+              <Link href={service.attributes.link}>
+                <h4 className='md:w-[60%] w-full md:text-left text-center md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.attributes.heading}</h4>
+              </Link>
             </div>
             <div className={serviceHeaderClassName}>
               <p className='text-md font-normal md:flex hidden'>{service.attributes.discription}</p>

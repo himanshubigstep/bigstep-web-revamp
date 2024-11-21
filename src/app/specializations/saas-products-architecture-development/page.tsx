@@ -55,6 +55,7 @@ interface SaasProductDevelopmentData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -85,6 +86,7 @@ interface SaasProductDevelopmentData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -255,6 +257,7 @@ const SaasProductDevelopment = () => {
           title={saasProductDevelopmentData?.cutting_edge_technologies?.heading || ''}
           description={saasProductDevelopmentData?.cutting_edge_technologies?.description || ''}
           techData={saasProductDevelopmentTechData || []}
+          bgImage={saasProductDevelopmentData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={saasProductDevelopmentData?.transformative_benefits?.heading || ''}

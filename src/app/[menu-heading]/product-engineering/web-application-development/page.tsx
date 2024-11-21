@@ -48,6 +48,7 @@ interface WebApplicationDevelopmentPageData {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface WebApplicationDevelopmentPageData {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const WebApplicationDevelopment = () => {
         title={webApplicationDevelopmentData?.technologies?.heading || ''}
         description={webApplicationDevelopmentData?.technologies?.description || ''}
         techData={webApplicationDevelopmentTechData || []}
+        bgImage={webApplicationDevelopmentData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={webApplicationDevelopmentData?.blogs?.heading || ''}

@@ -8,6 +8,7 @@ interface LatestInfo {
     background_image?: {
         data?: {
             attributes?: {
+                url?: string;
                 formats?: {
                     large?: {
                         url: string;
@@ -100,7 +101,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
         <div className={classNameOptional ? 'w-full h-full md:rounded-3xl md:py-0 py-0' : 'w-full h-full md:rounded-3xl md:py-16 py-8'}>
             <div className='relative w-full h-full max-w-[1440px] mx-auto md:rounded-3xl md:py-24 py-8 rounded-3xl'>
                 <img
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${latest_info?.background_image?.data?.attributes?.formats?.large?.url}`}
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${latest_info?.background_image?.data?.attributes?.url}`}
                     alt='Background Icon'
                     className='absolute 0 left-0 right-0 bottom-0 md:object-fill object-cover w-full h-full rounded-3xl'
                 />

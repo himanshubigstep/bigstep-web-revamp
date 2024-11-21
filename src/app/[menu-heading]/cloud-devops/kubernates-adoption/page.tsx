@@ -48,6 +48,7 @@ interface KubernatesAdoptionsPageProps {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface KubernatesAdoptionsPageProps {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const KubernatesAdoptions = () => {
         title={kubernatesAdoptionsData?.technologies?.heading || ''}
         description={kubernatesAdoptionsData?.technologies?.description || ''}
         techData={kubernatesAdoptionsTechData || []}
+        bgImage={kubernatesAdoptionsData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={kubernatesAdoptionsData?.blogs?.heading || ''}

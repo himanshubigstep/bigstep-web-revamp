@@ -48,6 +48,7 @@ interface AiMlPageData {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface AiMlPageData {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const AiMl = () => {
         title={aiMlData?.technologies?.heading || ''}
         description={aiMlData?.technologies?.description || ''}
         techData={aiMlTechData || []}
+        bgImage={aiMlData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={aiMlData?.blogs?.heading || ''}

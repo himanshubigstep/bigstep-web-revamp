@@ -48,6 +48,7 @@ interface MobileAppDevelopmentPageData {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface MobileAppDevelopmentPageData {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const MobileAppDevelopment = () => {
         title={mobileAppDevelopmentData?.technologies[0].heading || ''}
         description={mobileAppDevelopmentData?.technologies[0].description || ''}
         techData={customerSoftwareDevelopmentTechData || []}
+        bgImage={mobileAppDevelopmentData?.technologies[0]?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={mobileAppDevelopmentData?.blogs?.heading || ''}

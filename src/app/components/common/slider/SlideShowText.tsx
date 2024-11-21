@@ -51,7 +51,7 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
             </video>
         ) : (
             <img
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.formats.large.url}`}
+                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.url}`}
                 className="absolute block w-full h-full object-cover"
                 alt={`Slide ${slide.id}`}
             />

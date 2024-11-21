@@ -55,6 +55,7 @@ interface AgenticWorkflowsData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -85,6 +86,7 @@ interface AgenticWorkflowsData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -255,6 +257,7 @@ const AgenticWorkFlows = () => {
           title={agenticWorkflowsData?.cutting_edge_technologies?.heading || ''}
           description={agenticWorkflowsData?.cutting_edge_technologies?.description || ''}
           techData={agenticWorkflowsTechData || []}
+          bgImage={agenticWorkflowsData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={agenticWorkflowsData?.transformative_benefits?.heading || ''}

@@ -55,6 +55,7 @@ interface ContentManagementSystemsData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -85,6 +86,7 @@ interface ContentManagementSystemsData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -255,6 +257,7 @@ const ContentManagementSystems = () => {
           title={contentManagementSystemsData?.cutting_edge_technologies?.heading || ''}
           description={contentManagementSystemsData?.cutting_edge_technologies?.description || ''}
           techData={contentManagementSystemsTechData || []}
+          bgImage={contentManagementSystemsData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={contentManagementSystemsData?.transformative_benefits?.heading || ''}

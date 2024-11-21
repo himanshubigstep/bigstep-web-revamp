@@ -25,6 +25,7 @@ interface HomePageData {
     background_image: {
       data: {
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -61,6 +62,7 @@ interface HomePageData {
     background_image: {
       data: {
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -101,6 +103,7 @@ interface HomePageData {
     background_image: {
       data: {
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -118,6 +121,7 @@ interface HomePageData {
     background_image: {
       data: {
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -135,6 +139,7 @@ interface HomePageData {
     background_image: {
       data: {
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -163,6 +168,7 @@ interface HomePageData {
     background_image: {
       data: {
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -410,7 +416,7 @@ export default function Home() {
               attributes: {
                 formats: {
                   large: {
-                    url: homePageData?.partners[0]?.background_image?.data?.attributes?.formats?.large?.url || '',
+                    url: homePageData?.partners[0]?.background_image?.data?.attributes?.url || '',
                   },
                 },
               },
@@ -427,7 +433,7 @@ export default function Home() {
       <Clients
         title={homePageData?.client_reviews[0].heading || ''}
         description={homePageData?.client_reviews[0].description || ''}
-        bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.formats.large.url}` : ''}
+        bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.url}` : ''}
       />
       <NewsLetter
         latest_info={homePageData?.latest_info}
@@ -437,7 +443,7 @@ export default function Home() {
         bannerDescription={homePageData?.home_page_blogs[0].description || ''}
         buttonTitle={homePageData?.home_page_blogs[0].button_text || ''}
         onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
-        bannerImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.home_page_blogs[0].background_image.data.attributes.formats.large.url}` : ''}
+        bannerImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.home_page_blogs[0].background_image.data.attributes.url}` : ''}
       />
       <ContactUs contactUsData={homePageData?.get_in_touch[0]} />
       <ModelBox />

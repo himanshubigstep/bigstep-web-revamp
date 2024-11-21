@@ -48,6 +48,7 @@ interface CloudServicesPageProps {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface CloudServicesPageProps {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const CloudServices = () => {
         title={cloudServicesData?.technologies?.heading || ''}
         description={cloudServicesData?.technologies?.description || ''}
         techData={cloudServicesTechData || []}
+        bgImage={cloudServicesData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={cloudServicesData?.blogs?.heading || ''}

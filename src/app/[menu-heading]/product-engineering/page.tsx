@@ -17,7 +17,16 @@ interface productEngineeringPageData {
     description: string;
     buttonText: string;
     backgroundimage: {
-      data: any;
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }};
     }
     technologyText: {
       id: number;
@@ -107,6 +116,7 @@ interface productEngineeringPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -137,6 +147,7 @@ interface productEngineeringPageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -308,6 +319,7 @@ const ProductEngineering = () => {
           title={productEngineeringData?.technologies_we_use?.heading || ''}
           description={productEngineeringData?.technologies_we_use?.description || ''}
           techData={productEngineeringTechData || []}
+          bgImage={productEngineeringData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={productEngineeringData?.trusted_partner?.heading || ''}

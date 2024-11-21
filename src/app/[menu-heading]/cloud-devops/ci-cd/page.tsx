@@ -48,6 +48,7 @@ interface CiCdPageProps {
     backgroundImage: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -84,6 +85,7 @@ interface CiCdPageProps {
     background_image: {
       data: {
         attributes: {
+          url: string
           formats: {
             large: {
               url: string
@@ -235,6 +237,7 @@ const CiCd = () => {
         title={ciCdData?.technologies?.heading || ''}
         description={ciCdData?.technologies?.description || ''}
         techData={ciCdTechData || []}
+        bgImage={ciCdData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
       <AITech
         bannerTitle={ciCdData?.blogs?.heading || ''}

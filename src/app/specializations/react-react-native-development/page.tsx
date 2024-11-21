@@ -55,6 +55,7 @@ interface ReactAndReactNativeData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -85,6 +86,7 @@ interface ReactAndReactNativeData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -255,6 +257,7 @@ const ReactNativeDevelopment = () => {
           title={reactAndReactNativeData?.cutting_edge_technologies?.heading || ''}
           description={reactAndReactNativeData?.cutting_edge_technologies?.description || ''}
           techData={reactAndReactNativeTechData || []}
+          bgImage={reactAndReactNativeData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={reactAndReactNativeData?.transformative_benefits?.heading || ''}
