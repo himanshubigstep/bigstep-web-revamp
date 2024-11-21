@@ -1596,7 +1596,7 @@ export const fetchCompleteProductDevelopmentHolisticApproach = async () => {
 export const fetchOffShoreDevelopmentData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/offshore-development-center?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/offshore-development-center?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*&populate[MilesTones][populate]=*&populate[why_choose][populate]=*&populate[why_choose_data][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1612,7 +1612,7 @@ export const fetchOffShoreDevelopmentData = async () => {
 export const fetchOffShoreDevelopmentHolisticApproach = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Complete%20Product%20Development%20Page%20-%20Holistic%20Approach%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Offshore%20Development%20Center%20Page%20-%20Holistic%20Approach%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1630,7 +1630,7 @@ export const fetchOffShoreDevelopmentHolisticApproach = async () => {
 export const fetchRemoteEngineeringTeamData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/remote-engineering-team?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/remote-engineering-team?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*&populate[MilesTones][populate]=*&populate[why_choose][populate]=*&populate[why_choose_data][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1646,7 +1646,7 @@ export const fetchRemoteEngineeringTeamData = async () => {
 export const fetchRemoteEngineeringTeamHolisticApproach = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Complete%20Product%20Development%20Page%20-%20Holistic%20Approach%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Remote%20Engineering%20Team%20Page%20-%20Holistic%20Approach%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1664,7 +1664,7 @@ export const fetchRemoteEngineeringTeamHolisticApproach = async () => {
 export const fetchCtoAsServiceData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/cto-as-service?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/cto-as-service?populate[introduction][populate]=*&populate[complete_product_development][populate]=*&populate[holistic_approach][populate]=*&populate[product_development][populate]=*&populate[outstanding_results][populate]=*&populate[client_review][populate]=*&populate[client_query][populate]=*&populate[MilesTones][populate]=*&populate[why_choose][populate]=*&populate[why_choose_data][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1680,7 +1680,7 @@ export const fetchCtoAsServiceData = async () => {
 export const fetchCtoAsServiceHolisticApproach = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=Complete%20Product%20Development%20Page%20-%20Holistic%20Approach%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=CTO%20as%20a%20Service%20Page%20-%20Holistic%20Approach%20Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

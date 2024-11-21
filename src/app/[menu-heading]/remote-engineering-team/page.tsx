@@ -4,10 +4,10 @@ import { fetchRemoteEngineeringTeamData, fetchRemoteEngineeringTeamHolisticAppro
 import Clients from '@/app/components/common/clients/Clients'
 import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
-import MilesTone from '@/app/components/common/milestones-data/MilesTone'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
 import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
+import MileStoneSubmenu from '@/app/components/common/milestones-data/MileStoneSubmenu'
 
 interface RemoteEngineeringTeamProps {
   id: number;
@@ -111,6 +111,12 @@ interface RemoteEngineeringTeamProps {
       }
     }
   }
+  MilesTones: {
+    id: number;
+    heading: string;
+    sub_heading: string;
+    description: string
+  }
   product_development: {
     id: number;
     heading: string;
@@ -127,6 +133,28 @@ interface RemoteEngineeringTeamProps {
         }
       }
     }
+  }
+  why_choose: {
+    id: number;
+    heading: string;
+    description: string;
+    button_text: string;
+    images: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
+  why_choose_data: {
+    id: number;
+    heading: string;
+    description: string
   }
 }
 
@@ -180,7 +208,7 @@ const RemoteEngineeringTeam = () => {
           holisticData={remoteEngineeringTeamHolisticData[0] || []}
         />
         <ProductDevelopment developmentData={remoteEngineeringTeamData} />
-        {/* <MilesTone homePageData={homePageData} /> */}
+        <MileStoneSubmenu homePageData={remoteEngineeringTeamData} />
         <div className='w-full h-full md:py-16 py-8'>
           <Clients
               title={remoteEngineeringTeamData?.client_review?.heading || ''}

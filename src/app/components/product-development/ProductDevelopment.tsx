@@ -16,7 +16,7 @@ const ProductDevelopment = ({ developmentData }: { developmentData: any }) => {
                 </div>
                 <div className='relative w-full max-w-[1080px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:mt-8 mt-4'>
                     {productDevelopmentData && productDevelopmentData.map((item: any, index: number) => (
-                        <div key={item.id} className='w-full flex justify-between items-start gap-4'>
+                        <div key={item.id} className='w-full flex justify-between items-start gap-4 mb-4'>
                             <div className='flex flex-col justify-center text-white text-4xl'>
                             <span
                                     style={{
