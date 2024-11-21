@@ -79,7 +79,7 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                             >
                                 {index + 1}
                                 <div
-                                    className='w-[1px] h-32 absolute'
+                                    className='w-[1px] h-24 absolute'
                                     style={{
                                         borderColor: hexColor,
                                         borderWidth: 1,
