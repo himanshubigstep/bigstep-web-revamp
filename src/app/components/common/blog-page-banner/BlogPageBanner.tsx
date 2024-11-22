@@ -12,7 +12,7 @@ const BlogPageBanner = ({ bannerData }: { bannerData: any }) => {
         return date.toLocaleDateString('en-US', options);
     };
     return (
-        <div className='w-full relative h-[36rem] md:h-[42rem] md:px-4 px-4'>
+        <div className='w-full relative h-[36rem] md:h-[48rem] md:px-4 px-4'>
             <div className='w-full h-full absolute right-0 left-0 top-0 bottom-0'>
                 <div className='w-full h-full absolute top-0 bottom-0 bg-black opacity-75' />
                 <img
@@ -21,19 +21,19 @@ const BlogPageBanner = ({ bannerData }: { bannerData: any }) => {
                     className='w-full h-full object-cover'
                 />
             </div>
-            <div className='w-full max-w-[1440px] mx-auto h-full flex md:justify-between md:items-center gap-4 relative'>
-                <div className='md:w-2/5 mx-auto w-full h-full flex flex-col justify-center items-center gap-4'>
-                    <h2 className='text-3xl font-bold uppercase text-white'>Blog</h2>
-                    <h3 className='text-2xl font-bold uppercase text-white mb-4 text-center'>{formatDate(bannerData?.updatedAt)}</h3>
-                    <h2 className='text-4xl font-semibold text-white text-center'>{bannerData?.heading}</h2>
-                    <p className='text-xl font-normal text-white line-clamp-3 w-full text-center'>{bannerData?.description}</p>
+            <div className='w-full max-w-[1440px] mx-auto h-full flex md:justify-between md:items-center relative'>
+                <div className='md:w-1/2 mx-auto w-full h-full flex flex-col justify-center items-center'>
+                    <h2 className='md:text-3xl text-2xl font-bold uppercase text-white md:mb-4'>Blog</h2>
+                    <h3 className='md:text-2xl text-xl font-bold uppercase text-white md:mb-4 text-center'>{formatDate(bannerData?.updatedAt)}</h3>
+                    <h2 className='md:text-4xl text-3xl font-semibold text-white text-center md:mb-4'>{bannerData?.heading}</h2>
+                    <p className='md:text-xl text-lg font-normal text-white line-clamp-3 w-full text-center'>{bannerData?.description}</p>
                     <a 
                         href="#read-more-section" 
-                        className="text-lg font-semibold text-white mt-4 hover:underline"
+                        className="text-lg font-semibold text-white md:mt-4 hover:underline"
                     >
                         Read More
                     </a>
-                    <div className='mt-8 rounded-full flex justify-center items-center md:w-3/6 w-full py-4 bg-white dark:bg-black gap-4'>
+                    <div className='md:mt-8 mt-4 rounded-full flex justify-center items-center md:w-3/6 w-full py-4 bg-white dark:bg-black gap-4'>
                         <div className='w-12 h-12 flex justify-center items-center rounded-full gap-4'>
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${bannerData?.author?.data?.attributes?.image?.data?.attributes?.url}`}

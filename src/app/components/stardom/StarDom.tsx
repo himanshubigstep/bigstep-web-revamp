@@ -33,13 +33,13 @@ const StarDom = ({
 
     return (
         <div className="relative w-full h-full md:py-16 py-8">
-            <div className="relative w-full h-full max-w-[1440px] mx-auto md:py-16 py-8">
+            <div className="relative w-full h-full md:py-16 py-8">
                 
-                <div className="absolute top-0 bottom-0 rounded-3xl w-full flex justify-center items-center text-center">
+                <div className="absolute top-0 bottom-0 w-full flex justify-center items-center text-center">
                     <img
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${backgroundImage}`}
                         alt="background"
-                        className="w-full h-full rounded-3xl"
+                        className="w-full h-full object-cover object-top"
                     />
                 </div>
                 

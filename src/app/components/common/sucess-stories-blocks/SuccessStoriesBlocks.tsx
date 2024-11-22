@@ -49,12 +49,12 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
     };
 
     return (
-        <div className='relative w-full max-w-[1440px] rounded-3xl mx-auto md:py-16 py-8'>
-            <div className='absolute top-0 bottom-0 rounded-3xl w-full flex justify-center items-center text-center'>
+        <div className='relative w-full md:py-16 py-8'>
+            <div className='absolute top-0 bottom-0 w-full flex justify-center items-center text-center'>
                 <img
                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${sucessStoriesData?.background_image?.data?.attributes?.url}`}
                     alt='image'
-                    className='w-full h-full rounded-3xl md:object-fill object-cover'
+                    className='w-full h-full object-cover object-top'
                 />
             </div>
             <div className='relative w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center md:px-0 px-4'>

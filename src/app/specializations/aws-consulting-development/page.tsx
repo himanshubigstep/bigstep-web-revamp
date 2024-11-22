@@ -271,8 +271,6 @@ const AwsConsultingDevelopment = () => {
           serviceIconHeader='w-full flex flex-col md:flex-row gap-4 md:items-center items-start'
           serviceItemDescription='w-full text-left flex flex-col gap-2'
           buttonText={awsConsultingDevelopmentData?.transformative_benefits?.button_text || ''}
-          bgImage={awsConsultingDevelopmentData?.transformative_benefits?.background_image?.data?.attributes?.formats?.large?.url || ''}
-          logoClassName='md:w-auto w-full md:h-full'
         />
         <ContactUs contactUsData = {awsConsultingDevelopmentData?.get_in_touch || []} />
     </div>

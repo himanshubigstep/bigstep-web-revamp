@@ -423,7 +423,7 @@ export default function Home() {
             },
           },
         }}
-        mainClass="relative w-full max-w-[1440px] mx-auto md:py-16 py-8 rounded-3xl"
+        mainClass="relative w-full md:py-16 py-8"
         headingClass="text-3xl font-semibold text-center mb-4"
         descriptionClass="text-lg font-normal"
         partnerShipData={partnerShipData}

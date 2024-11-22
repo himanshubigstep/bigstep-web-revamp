@@ -115,11 +115,11 @@ const PartnersTech = ({
     }, [visibleCategories, selectedCategory]);
 
     return (
-        <div className="w-full max-w-[1440px] mx-auto rounded-3xl h-full bg-black relative md:py-16 py-8 px-4 md:mt-16 mt-8">
+        <div className="w-full h-full bg-black relative md:py-16 py-8 px-4">
             <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${bannerImage}`}
                 alt="Background Image"
-                className="w-full h-full absolute left-0 right-0 top-0 bottom-0 rounded-3xl"
+                className="w-full h-full absolute left-0 right-0 top-0 bottom-0 object-cover object-top"
             />
             <div className="relative w-full h-full max-w-[1440px] mx-auto">
                 <div className="w-full text-left flex flex-col gap-2 md:max-w-[75%] mx-auto">
@@ -159,57 +159,57 @@ const PartnersTech = ({
                 </div>
 
                 {selectedCategory && sortedFilteredPartners.length > 0 ? (
-    <div className="border-[1px] border-gray-500 rounded-2xl w-full h-full md:py-8 py-4">
-        <div className="w-full grid md:grid-cols-5 grid-cols-3 justify-center gap-8 items-start md:px-8 px-4">
-            {paginatedPartners.map((partner, index) => (
-                <div key={index} className='flex flex-col gap-4 justify-center items-center'>
-                    <div className="bg-white rounded-xl flex justify-center items-center md:p-4 p-2">
-                        {partner.attributes.logo.data && Array.isArray(partner.attributes.logo.data) ? (
-                            partner.attributes.logo.data.map((logo, logoIndex) => (
-                                <img
-                                    key={logoIndex}
-                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.attributes.url}`}
-                                    alt={`partner logo for ${partner.attributes.heading}`}
-                                    className="object-contain w-[8rem] aspect-square"
-                                />
-                            ))
-                        ) : partner.attributes.logo.data ? (
-                            <img
-                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${partner.attributes.logo.data.attributes.url}`}
-                                alt={`partner logo for ${partner.attributes.heading}`}
-                                className="object-contain w-[8rem] aspect-square"
-                            />
-                        ) : (
-                            <div>No logo available</div>
+                    <div className="border-[1px] border-gray-500 rounded-2xl w-full h-full md:py-8 py-4">
+                        <div className="w-full grid md:grid-cols-5 grid-cols-3 justify-center gap-8 items-start md:px-8 px-4">
+                            {paginatedPartners.map((partner, index) => (
+                                <div key={index} className='flex flex-col gap-4 justify-center items-center'>
+                                    <div className="bg-white rounded-xl flex justify-center items-center md:p-4 p-2">
+                                        {partner.attributes.logo.data && Array.isArray(partner.attributes.logo.data) ? (
+                                            partner.attributes.logo.data.map((logo, logoIndex) => (
+                                                <img
+                                                    key={logoIndex}
+                                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.attributes.url}`}
+                                                    alt={`partner logo for ${partner.attributes.heading}`}
+                                                    className="object-contain w-[8rem] aspect-square"
+                                                />
+                                            ))
+                                        ) : partner.attributes.logo.data ? (
+                                            <img
+                                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${partner.attributes.logo.data.attributes.url}`}
+                                                alt={`partner logo for ${partner.attributes.heading}`}
+                                                className="object-contain w-[8rem] aspect-square"
+                                            />
+                                        ) : (
+                                            <div>No logo available</div>
+                                        )}
+                                    </div>
+                                    <span className='text-lg md:w-[75%] mx-auto text-center text-white font-medium line-clamp-2'>
+                                        {partner.attributes.heading}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                        {/* Render pagination controls only if there are more than 10 partners */}
+                        {sortedFilteredPartners.length > partnersPerPage && (
+                            <div className="flex justify-between items-center max-w-[80%] mx-auto mt-8">
+                                <button
+                                    onClick={handlePrevPage}
+                                    disabled={currentPage === 0}
+                                    className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Prev
+                                </button>
+                                <button
+                                    onClick={handleNextPage}
+                                    disabled={currentPage === totalPages - 1}
+                                    className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Next
+                                </button>
+                            </div>
                         )}
                     </div>
-                    <span className='text-lg md:w-[75%] mx-auto text-center text-white font-medium line-clamp-2'>
-                        {partner.attributes.heading}
-                    </span>
-                </div>
-            ))}
-        </div>
-        {/* Render pagination controls only if there are more than 10 partners */}
-        {sortedFilteredPartners.length > partnersPerPage && (
-            <div className="flex justify-between items-center max-w-[80%] mx-auto mt-8">
-                <button
-                    onClick={handlePrevPage}
-                    disabled={currentPage === 0}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed">
-                    Prev
-                </button>
-                <button
-                    onClick={handleNextPage}
-                    disabled={currentPage === totalPages - 1}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed">
-                    Next
-                </button>
-            </div>
-        )}
-    </div>
-) : (
-    <div className="text-white text-center">No partners available in this category.</div>
-)}
+                ) : (
+                    <div className="text-white text-center">No partners available in this category.</div>
+                )}
 
             </div>
         </div>

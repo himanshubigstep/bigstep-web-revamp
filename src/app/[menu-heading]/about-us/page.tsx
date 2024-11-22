@@ -13,7 +13,7 @@ interface AboutUsPageData {
     id: number;
     about_intro: {
       id: number;
-      background_image: {
+      backgroundImage: {
         data: {
           attributes: {
             formats: {

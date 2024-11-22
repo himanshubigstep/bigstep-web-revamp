@@ -34,13 +34,9 @@ const ServiceDataBlock = ({
 }) => {
     // Sort the services by ID
     const sortedServices = services.sort((a: any, b: any) => a.id - b.id);
-
+    console.log(bgImage)
     return (
         <div className={mainContainerClass}>
-            <div className={headingClassName}>
-                <h2 className='text-3xl font-semibold text-center mb-4'>{title}</h2>
-                {description && <p className='text-lg font-normal'>{description}</p>}
-            </div>
             {bgImage && logoClassName &&
                 <div className='absolute top-0 bottom-0 left-0 right-0 w-full flex justify-center items-center text-center py-8'>
                     <img
@@ -50,6 +46,10 @@ const ServiceDataBlock = ({
                     />
                 </div>
             }
+            <div className={headingClassName}>
+                <h2 className='text-3xl font-semibold text-center mb-4'>{title}</h2>
+                {description && <p className='text-lg font-normal'>{description}</p>}
+            </div>
             <div className={serviceBlockClassName}>
                 {sortedServices.map((service: any) => (
                     <div key={service.id} className={serviceItemClassName}>

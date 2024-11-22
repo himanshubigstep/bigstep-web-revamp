@@ -81,6 +81,7 @@ interface CulturePageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -130,13 +131,8 @@ const CulturePage = () => {
       image: {
         data: {
           attributes: {
-            url: item.images.data.attributes.formats.large.url,
+            url: item.images.data.attributes.url,
             ext: item.images.data.attributes.formats.large.url.split('.').pop() || '',
-            formats: {
-              large: {
-                url: item.images.data.attributes.formats.large.url,
-              },
-            },
           },
         },
       },

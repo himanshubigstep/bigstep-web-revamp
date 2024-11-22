@@ -39,7 +39,7 @@ const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShip
       <img
         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData?.background_image?.data?.attributes?.formats?.large?.url}`}
         alt='image'
-        className='absolute top-0 bottom-0 w-full h-full flex justify-center md:object-fill object-cover items-center text-center rounded-3xl'
+        className='absolute top-0 bottom-0 w-full h-full flex justify-center object-top object-cover items-center text-center'
       />
       <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4'>
         <h2 className={headingClass}>{homePageData.heading}</h2>

@@ -1,18 +1,11 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 
-interface ImageFormats {
-    large: {
-        url: string;
-    };
-}
-
 interface ImageData {
     data: {
         attributes: {
             url: string;
             ext: string;
-            formats: ImageFormats;
         };
     };
 }
@@ -39,7 +32,8 @@ const Slide: React.FC<{ slide: CulturePageCarousel; isActive: boolean }> = ({ sl
     const videoUrl = process.env.NEXT_PUBLIC_IMAGE_URL + imageUrl;
     
     const isVideo = imageExt && imageExt.endsWith('.mp4');
-    const imageSrc = `${process.env.NEXT_PUBLIC_IMAGE_URL}${slide?.attributes?.image?.data?.attributes?.formats?.large?.url}`;
+    const imageSrc = `${process.env.NEXT_PUBLIC_IMAGE_URL}${slide?.attributes?.image?.data?.attributes?.url}`;
+    console.log(imageSrc)
 
     return (
         <div

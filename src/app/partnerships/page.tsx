@@ -173,7 +173,7 @@ const Partnership = () => {
             },
           },
         }}
-        mainClass='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 rounded-3xl md:mt-16 mt-8'
+        mainClass='relative w-full md:py-16 py-8 md:mt-16 mt-8'
         headingClass='text-3xl font-semibold text-center mb-4 text-white'
         descriptionClass='text-lg font-normal text-white'
         partnerShipData={partnersData}

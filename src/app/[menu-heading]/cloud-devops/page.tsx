@@ -299,7 +299,7 @@ const CloudDevOps = () => {
           title={cloudDevOpsData?.how_can_we_help?.heading || ''}
           services={cloudDevOpsDataPageHelpServiceData[0]?.attributes?.service_data || []}
           showButton={false}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto md:pb-16 pb-8 md:px-4'
+          mainContainerClass='relative w-full max-w-[1440px] mx-auto md:pb-16 pb-8 md:px-4 dark:md:pt-16 dark:pt-8'
           headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
           serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
           serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/2 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'

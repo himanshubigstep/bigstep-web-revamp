@@ -38,11 +38,11 @@ const ImagesAboutUs = ({
         setSelectedImageId(id);
     };
     return (
-        <div className='relative w-full max-w-[1440px] mx-auto h-full md:py-16 py-8 md:mb-17 mb-8 rounded-3xl'>
+        <div className='relative w-full h-full md:py-16 py-8 md:mb-17 mb-8'>
             <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${heartBackgroundImage}`}
                 alt='Background Image'
-                className='absolute left-0 right-0 top-0 bottom-0 w-full h-full rounded-3xl'
+                className='absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover object-top'
             />
             <div className='relative w-full h-full max-w-[1080px] mx-auto mb-16 md:p-0 p-4'>
                 <h2 className='text-3xl font-semibold text-center mb-4 text-white'>{heartHeading}</h2>
@@ -55,12 +55,12 @@ const ImagesAboutUs = ({
                     className="w-[240px] bg-blue-500 hover:bg-blue-800 text-white py-4 rounded-xl"
                 />
             </div>
-            <div className='w-full h-full relative max-w-[1080px] mx-auto flex flex-col items-center justify-center md:pt-16 pt-8'>
+            <div className='w-full h-full relative max-w-[1440px] mx-auto flex flex-col items-center justify-center md:pt-16 pt-8'>
                 <div className='w-full h-full flex items-center justify-center gap-4'>
                     {images && images.map((item: any) => (
                         <div
                             key={item.id}
-                            className={`relative cursor-pointer transition-all duration-500 h-[24rem] ${item.id === selectedImageId ? 'w-[55%]' : 'w-[20%]'} overflow-hidden`}
+                            className={`relative cursor-pointer transition-all duration-500 h-[32rem] ${item.id === selectedImageId ? 'w-[55%]' : 'w-[20%]'} overflow-hidden`}
                             onClick={() => handleClick(item.id)}
                         >
                             <img
