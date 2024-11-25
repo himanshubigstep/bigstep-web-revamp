@@ -53,6 +53,18 @@ interface HomePageData {
     heading: string;
     button_text: string;
     description: string;
+    background_image: {
+      data: {
+        attributes: {
+          url: string;
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
   }[];
   milestones: {
     id: number;
@@ -100,6 +112,7 @@ interface HomePageData {
     heading: string;
     button_text: string;
     description: string;
+    button_link: string;
     background_image: {
       data: {
         attributes: {
@@ -199,6 +212,7 @@ interface HomePageData {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string;
@@ -399,6 +413,7 @@ export default function Home() {
         serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center md:mr-4 md:mb-0 mb-4'
         buttonClassName='px-4 py-2 mx-2 bg-gray-300 rounded'
         serviceHeaderClassName="w-full text-left flex flex-col gap-2"
+        backgroundImage={homePageData?.technologies[0]?.background_image?.data?.attributes?.url}
       />
       <SuccessStoriesBlocks sucessStoriesData={homePageData?.success_stories} />
       <ClientCarousel
@@ -411,6 +426,7 @@ export default function Home() {
           heading: homePageData?.partners[0]?.heading || '',
           button_text: homePageData?.partners[0]?.button_text || '',
           description: homePageData?.partners[0]?.description || '',
+          button_link: homePageData?.partners[0]?.button_link || '',
           background_image: {
             data: {
               attributes: {

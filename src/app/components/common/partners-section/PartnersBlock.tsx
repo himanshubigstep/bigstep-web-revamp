@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../button/Button';
+import { useRouter } from 'next/navigation';
 
 interface Partner {
   src: string;
@@ -12,6 +13,7 @@ interface PartnerSectionData {
   heading: string;
   button_text?: string;
   description: string;
+  button_link?: string;
   background_image: {
     data: {
       attributes: {
@@ -34,6 +36,14 @@ interface PartnersBlockProps {
 }
 
 const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShipData, headingClass, descriptionClass, mainClass }) => {
+  const router = useRouter();
+  const handelClick = () => {
+    if (homePageData.button_link) {
+      router.push(homePageData?.button_link)
+  } else {
+      console.log('No link provided')
+  }
+  }
   return (
     <div className={mainClass}>
       <img
@@ -62,7 +72,7 @@ const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShip
       </div>
       {homePageData.button_text &&
         <div className='relative w-full h-auto px-4 pt-8 flex justify-center items-center'>
-          <Button text={homePageData.button_text} className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal' onClick={() => { }} />
+          <Button text={homePageData.button_text} className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal' onClick={handelClick} />
         </div>
       }
     </div>

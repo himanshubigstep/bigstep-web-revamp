@@ -112,6 +112,7 @@ interface productEngineeringPageData {
     label: string;
     description: string;
     button_text: string;
+    link: string;
     backgroundImage: {
       data: {
         id: number;

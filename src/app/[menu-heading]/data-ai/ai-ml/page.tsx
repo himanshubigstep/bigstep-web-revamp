@@ -61,6 +61,7 @@ interface AiMlPageData {
     description: string
     heading: string
     label: string
+    link: string;
   }
   get_in_touch: {
     button_text: string

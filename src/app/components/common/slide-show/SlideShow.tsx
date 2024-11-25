@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 
 const Slide: React.FC<{ slide: any; isActive: boolean }> = ({ slide, isActive }) => {
-    const imageUrl = slide?.attributes?.formats?.large?.url || slide?.attributes?.url;
+    const imageUrl = slide?.attributes?.url || slide?.attributes?.url;
 
     return (
         <div

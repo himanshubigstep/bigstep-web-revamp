@@ -20,7 +20,8 @@ const TermsAndConditions = () => {
             buttonText: 'Lets Get Started',
             heading: 'Terms & Conditions',
             description: 'Terms & Conditions',
-            label: 'Terms & Conditions'
+            label: 'Terms & Conditions',
+            link: 'https://www.google.com',
         }
     }
     return (

@@ -48,6 +48,7 @@ interface TechnologiesPageData {
     id: number
     description: string
     heading: string
+    link: string;
     backgroundImage: {
       data: {
         attributes: {

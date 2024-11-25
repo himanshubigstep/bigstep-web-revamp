@@ -54,6 +54,7 @@ interface PartnerShipData {
     id: number
     description: string
     heading: string
+    link: string;
     backgroundImage: {
       data: {
         attributes: {
@@ -173,7 +174,7 @@ const Partnership = () => {
             },
           },
         }}
-        mainClass='relative w-full md:py-16 py-8 md:mt-16 mt-8'
+        mainClass='relative w-full md:py-16 py-8'
         headingClass='text-3xl font-semibold text-center mb-4 text-white'
         descriptionClass='text-lg font-normal text-white'
         partnerShipData={partnersData}

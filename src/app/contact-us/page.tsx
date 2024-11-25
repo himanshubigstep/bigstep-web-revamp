@@ -12,6 +12,7 @@ interface ContactUsData {
       buttonText: string;
       description: string;
       heading: string;
+      link: string;
       backgroundImage: {
         data: {
           attributes: {

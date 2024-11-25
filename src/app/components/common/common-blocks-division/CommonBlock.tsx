@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Image, { StaticImageData } from 'next/image';
-import BigsteLogo from '../../../assets/bigstep logo.png';
 import Button from '../button/Button';
 import Link from 'next/link';
 
@@ -37,6 +35,7 @@ interface CommonBlockProps {
   buttonClassName?: string;
   serviceHeaderClassName?: string;
   mainbutton?: string
+  backgroundImage?: string | null;
 }
 
 const CommonBlock: React.FC<CommonBlockProps> = ({ 
@@ -52,7 +51,8 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
   serviceIconClassName = '',
   buttonClassName = '',
   serviceHeaderClassName = '',
-  mainbutton = ''
+  mainbutton = '',
+  backgroundImage,
  }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
@@ -91,8 +91,8 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
   return (
     <div className={`${containerClassName}`}>
       <div className='absolute top-0 bottom-0 left-0 right-0 w-full flex justify-center items-center text-center py-8'>
-        <Image
-          src={BigsteLogo}
+        <img
+          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${backgroundImage}`}
           alt='image'
           className={`${logoClassName}`}
         />

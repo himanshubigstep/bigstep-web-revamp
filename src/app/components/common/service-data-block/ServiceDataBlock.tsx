@@ -34,7 +34,6 @@ const ServiceDataBlock = ({
 }) => {
     // Sort the services by ID
     const sortedServices = services.sort((a: any, b: any) => a.id - b.id);
-    console.log(bgImage)
     return (
         <div className={mainContainerClass}>
             {bgImage && logoClassName &&

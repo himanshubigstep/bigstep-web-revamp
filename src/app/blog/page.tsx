@@ -69,6 +69,7 @@ interface blogPageProps {
       };
       heading: string;
       description: string;
+      link: string;
     }[];
     latest_info: {
       background_image: {

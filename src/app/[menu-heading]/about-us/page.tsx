@@ -27,6 +27,7 @@ interface AboutUsPageData {
       button_text: string;
       heading: string;
       description: string;
+      link: string;
     }
     empowering: {
       id: number;

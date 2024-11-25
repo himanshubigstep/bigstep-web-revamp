@@ -61,6 +61,7 @@ interface BackendDevelopmentPageData {
     description: string
     heading: string
     label: string
+    link: string;
   }[]
   get_in_touch: {
     button_text: string
@@ -250,7 +251,9 @@ const BackendEngineering = () => {
         description={backendDevelopmentData?.client_reviews?.description || ''}
         bgImage={backendDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${backendDevelopmentData.client_reviews?.background_image.data.attributes.formats.large.url}` : ''}
       />
-      <ContactUs contactUsData={backendDevelopmentData?.get_in_touch || []} />
+      <div className='w-full h-full md:py-16 py-8'>
+        <ContactUs contactUsData={backendDevelopmentData?.get_in_touch || []} />
+      </div>
     </div>
   )
 }

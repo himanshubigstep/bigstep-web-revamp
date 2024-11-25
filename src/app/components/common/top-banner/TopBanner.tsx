@@ -1,9 +1,17 @@
 'use client'
 import React from 'react'
 import Button from '../button/Button'
+import { useRouter } from 'next/navigation'
 
 const TopBanner = ({bannerData}: {bannerData: any}) => {
-    console.log(bannerData)
+    const router = useRouter()
+    const handleClick = () => {
+        if (bannerData?.link) {
+            router.push(bannerData?.link)
+        } else {
+            console.log('No link provided')
+        }
+    }
     return (
         <div className='w-full relative h-[52rem] md:h-[48rem] md:px-4 px-4'>
             <div className='w-full h-full absolute right-0 left-0 top-0 bottom-0'>
@@ -21,7 +29,7 @@ const TopBanner = ({bannerData}: {bannerData: any}) => {
                     <p className='text-xl font-normal text-white'>{bannerData?.description}</p>
                     {bannerData?.buttonText &&
                         <Button
-                            onClick={() => console.log('clicked')}
+                            onClick={handleClick}
                             text={bannerData?.buttonText}
                             className='py-4 px-8 md:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
                         />

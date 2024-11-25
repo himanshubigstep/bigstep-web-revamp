@@ -61,6 +61,7 @@ interface MobileAppDevelopmentPageData {
     description: string
     heading: string
     label: string
+    link: string;
   }
   get_in_touch: {
     button_text: string
@@ -250,7 +251,9 @@ const MobileAppDevelopment = () => {
         description={mobileAppDevelopmentData?.client_reviews?.description || ''}
         bgImage={mobileAppDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${mobileAppDevelopmentData.client_reviews?.background_image.data.attributes.formats.large.url}` : ''}
       />
-      <ContactUs contactUsData={mobileAppDevelopmentData?.get_in_touch || []} />
+      <div className='w-full h-full md:py-16 py-8'>
+        <ContactUs contactUsData={mobileAppDevelopmentData?.get_in_touch || []} />
+      </div>
     </div>
   )
 }

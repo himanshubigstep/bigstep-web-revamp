@@ -51,6 +51,7 @@ interface LiveStreamingData {
     description: string;
     button_text: string;
     label: string
+    link: string;
     backgroundImage: {
       data: {
         id: number;

@@ -82,6 +82,7 @@ interface RemoteEngineeringTeamProps {
     description: string;
     heading: string;
     label: string
+    link: string;
     background_image: {
       data: {
         attributes: {
