@@ -379,6 +379,39 @@ export const fetchRpaServiceHelp = async () => {
   }
 }
 
+
+export const fetchRpaImplimentationSubSection = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=RPA%20Page%20-%20How%20We%20Can%20Help%20Implementation%20Sub-Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchRpaManagedSubSection = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/provider-services?filters[$and][0][category][$eq]=RPA%20Page%20-%20How%20We%20Can%20Help%20Managed%20Services%20Sub-Section&populate[serviceImage][populate]=*&populate[service_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 export const fetchRpaTechnologiesused = async () => {
   try {
     const response = await fetch(

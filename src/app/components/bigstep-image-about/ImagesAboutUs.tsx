@@ -60,7 +60,7 @@ const ImagesAboutUs = ({
                     {images && images.map((item: any) => (
                         <div
                             key={item.id}
-                            className={`relative cursor-pointer transition-all duration-500 h-[32rem] ${item.id === selectedImageId ? 'w-[55%]' : 'w-[20%]'} overflow-hidden`}
+                            className={`relative cursor-pointer transition-all duration-1000 h-[32rem] ${item.id === selectedImageId ? 'w-[55%]' : 'w-[20%]'} overflow-hidden`}
                             onClick={() => handleClick(item.id)}
                         >
                             <img

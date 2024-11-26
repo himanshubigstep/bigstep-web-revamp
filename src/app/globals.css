@@ -100,3 +100,11 @@ body {
     margin-right: auto;
   }
 }
+
+.list-alpha {
+  list-style-type: lower-alpha;
+}
+
+.list-roman {
+  list-style-type: lower-roman;
+}

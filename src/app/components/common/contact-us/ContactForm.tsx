@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import InputField from '../input-fields/InputField';
 import { contactFormData } from '@/api-data/api';
+import LoaderSpinner from '../loader-spinner/LoadingSpinner';
 
 interface ContactFormProps {
     buttonText?: string;
@@ -175,7 +176,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                         className='md:w-48 w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white'
                         disabled={isSubmitting}
                     >
-                        {isSubmitting ? 'Sending...' : buttonText}
+                        {isSubmitting ? <LoaderSpinner /> : buttonText}
                     </button>
                 </div>
             </form>

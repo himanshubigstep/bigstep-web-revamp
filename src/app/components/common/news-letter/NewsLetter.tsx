@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import InputField from '../input-fields/InputField';
 import { subscriberFormData } from '@/api-data/api';
+import LoaderSpinner from '../loader-spinner/LoadingSpinner';
 
 interface LatestInfo {
     heading?: string;
@@ -108,7 +109,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
                 <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
                     <h2 className='text-3xl font-semibold text-white text-center mb-4'>{latest_info?.heading}</h2>
                 </div>
-                <form onSubmit={handelSubscription} className={formClass ? 'md:w-[70%] w-[90%] mx-auto h-full relative flex flex-col items-center justify-between md:gap-8 pt-8' : 'md:w-[70%] w-[90%] mx-auto h-full relative flex md:flex-row flex-col items-center justify-between md:gap-8 pt-8'}>
+                <form onSubmit={handelSubscription} className={formClass ? 'md:w-[90%] w-[90%] mx-auto h-full relative flex flex-col items-center justify-between md:gap-8 pt-8' : 'md:w-[70%] w-[90%] mx-auto h-full relative flex md:flex-row flex-col items-center justify-between md:gap-8 pt-8'}>
                     <InputField
                         type='text'
                         label='Name'
@@ -131,10 +132,10 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
                     />
                     <button
                         type='submit'
-                        className='md:w-48 w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white'
+                        className={`${formClass ? 'md:w-full w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white' : 'md:w-48 w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white'}`}
                         disabled={isSubmitting}
                     >
-                        {isSubmitting ? 'Sending...' : latest_info?.button_text}
+                        {isSubmitting ? <LoaderSpinner /> : latest_info?.button_text}
                     </button>
                     {submitError && <p className='text-red-500 text-left absolute left-0 bottom-0'>{submitError}</p>}
                 </form>

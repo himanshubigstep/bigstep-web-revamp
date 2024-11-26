@@ -1,5 +1,5 @@
 'use client'
-import { fetchHeaderData, fetchRpaData, fetchRpaServiceHelp, fetchRpaTechnologiesused, fetchRpaTrustedPartner } from '@/api-data/api'
+import { fetchHeaderData, fetchRpaData, fetchRpaImplimentationSubSection, fetchRpaManagedSubSection, fetchRpaServiceHelp, fetchRpaTechnologiesused, fetchRpaTrustedPartner } from '@/api-data/api'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
 import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
@@ -207,6 +207,9 @@ const RPA = () => {
   const [rpaTechData, setRpaTechData] = useState<any>([]);
   const [rpaPageTrustedData, setRpaPageTrustedData] = useState<any>([]);
 
+  const [rpaPageImplimentationSubData, setRpaPageImplimentationSubData] = useState<any>([]);
+  const [rpaPageManagedSubData, setRpaPageManagedSubData] = useState<any>([]);
+
   const [loading, setLoading] = useState<boolean>(true);
 
   const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
@@ -286,11 +289,38 @@ const RPA = () => {
 
     fetchHeaderDataResponse();
   }, [])
+  
+  useEffect(() => {
+    const fetchImplimentSubResponse = async () => {
+      try {
+        const response = await fetchRpaImplimentationSubSection();
+        setRpaPageImplimentationSubData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    }
+
+    fetchImplimentSubResponse();
+  }, [])
+  
+  useEffect(() => {
+    const fetchManagedSubResponse = async () => {
+      try {
+        const response = await fetchRpaManagedSubSection();
+        setRpaPageManagedSubData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    }
+
+    fetchManagedSubResponse();
+  }, [])
 
   if (loading) {
     return <LoaderSpinner />;
   }
-  
   return (
     <div className='poppins'>
         <TopBanner bannerData={rpaPageData?.introduction} />
@@ -304,6 +334,8 @@ const RPA = () => {
           serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/2 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
           serviceIconHeader='w-full flex flex-col md:flex-row gap-4 md:items-center items-start'
           serviceItemDescription='w-full text-left flex flex-col gap-2'
+          rpaPageImplimentationSubData={rpaPageImplimentationSubData[0]?.attributes?.service_data}
+          rpaPageManagedSubData={rpaPageManagedSubData[0]?.attributes?.service_data}
         />
         <Parterners
           title={rpaPageData?.technologies_we_use?.heading || ''}

@@ -25,22 +25,22 @@ interface FooterBottomProps {
 const FooterBottom: React.FC<FooterBottomProps> = ({ attributes }) => {
   return (
     <div className='w-full md:h-[100px] h-full flex md:items-center bg-[#101010] md:p-0 p-4'>
-        <div className='w-full max-w-[1240px] mx-auto flex flex-col md:flex-row md:gap-0 gap-4 md:justify-between md:items-center'>
+        <div className='w-full max-w-[1440px] mx-auto flex flex-col md:flex-row md:gap-0 gap-4 md:justify-between md:items-center'>
             <p className='text-md text-white'>
                 {attributes?.copyright_text} 
             </p>
-            {/* <ul className='flex flex-wrap md:flex-nowrap gap-4 text-white'>
-                {attributes?.about_tags?.map((tag) => (
+            <ul className='flex flex-wrap md:flex-nowrap gap-4 text-white'>
+                {attributes?.about_tags?.map((tag, index) => (
                     <li key={tag.id} className='text-md text-white'>
                         <Link className='pr-4' href={tag.technologyLinks}>
                             {tag.technologyDetails}
                         </Link>
-                        |
+                        {index < attributes?.about_tags.length - 1 && '|'}
                     </li>
                 ))}
-            </ul> */}
+            </ul>
             <div className='relative w-auto'>
-                <ul className='flex gap-4'>
+                <ul className='flex items-center gap-4'>
                     <li className='text-md text-white'>
                         <Link className='text-3xl' href={attributes?.instagram?.link} target='_blank'>
                             <FaInstagram />
