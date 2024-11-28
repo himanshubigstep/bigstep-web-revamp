@@ -64,7 +64,7 @@ const ServiceDataBlock = ({
                                     alt={service.heading}
                                 />
                             </div>
-                            <h4 className='md:line-clamp-none line-clamp-2 text-left md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.heading}</h4>
+                            <h4 className='md:line-clamp-none line-clamp-2 md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.heading}</h4>
                         </div>
                         <div className={serviceItemDescription}>
                             <p className='line-clamp-3 md:line-clamp-none text-md font-normal'>{service.description}</p>
