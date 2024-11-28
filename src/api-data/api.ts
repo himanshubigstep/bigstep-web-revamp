@@ -1975,10 +1975,29 @@ export const fetchPartnershipDataService = async () => {
 }
 
 // Modal Box Api
+
+// HomePage and related ModalBox
 export const fetchModalBoxHomePage = async () => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/modal-closing-boxes?filters[$and][0][category][$eq]=Homepage&populate[Modal_closing][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// PropTech ModalBox
+export const fetchModalBoxPropTechPage = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/modal-closing-boxes?filters[$and][0][category][$eq]=PropTech%20Development%20Page&populate[Modal_closing][populate]=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

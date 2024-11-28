@@ -38,8 +38,8 @@ const Footer = () => {
           alt='Footer Background'
           className='absolute left-0 right-0 top-0 bottom-0 w-full h-full object-contain bg-repeat-x opacity-80'
         />
-        <div className='relative w-full h-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-20'>
-          <div className='h-full md:w-[30%] w-full flex flex-col'>
+        <div className='relative w-full h-full max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between'>
+          <div className='h-full md:w-1/4 w-full flex flex-col'>
             <Image
               src={`http://103.209.145.167:4000${logoSrc}`}
               alt='Footer Logo'
