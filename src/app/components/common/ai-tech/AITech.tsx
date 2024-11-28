@@ -48,7 +48,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                     />
                 </div>
             }
-            <div className='relative w-full h-full max-w-[1440px] mx-auto flex flex-col items-center justify-center'>
+            <div className='relative w-full h-full max-w-[1440px] mx-auto flex flex-col items-center justify-center px-4'>
                 <div className='w-full h-full flex justify-center flex-col items-center mb-8 md:px-0 px-4'>
                     <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
                         <h2 className='text-3xl font-semibold text-center mb-4'>{bannerTitle}</h2>

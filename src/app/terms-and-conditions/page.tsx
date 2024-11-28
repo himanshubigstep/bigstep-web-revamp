@@ -13,8 +13,8 @@ const TermsAndConditions = () => {
     }
     return (
         <div className='poppins'>
-            <div className='relative w-full md:h-[42rem] h-[48rem] flex justify-center items-center bg-[#603813] md:px-0 px-4'>
-                    <div className='relative w-full max-w-[1440px] mx-auto h-full flex md:flex-row flex-col md:justify-evenly justify-center items-center'>
+            <div className='relative w-full md:h-[42rem] h-[48rem] flex justify-center items-center bg-[#603813]'>
+                    <div className='px-4 relative w-full max-w-[1440px] mx-auto h-full flex md:flex-row flex-col md:justify-evenly justify-center items-center'>
                         <div className='flex flex-col justify-center items-start gap-4 md:w-[40%] w-full md:h-full h-auto'>
                             <h1 className='md:text-4xl text-2xl font-bold text-white'>Terms & Conditions</h1>
                             <p className='md:text-lg text-md font-normal text-white'>
@@ -35,7 +35,7 @@ const TermsAndConditions = () => {
                         </div>
                     </div>
             </div>
-            <div className='relative w-full h-full max-w-[1240px] mx-auto flex md:px-0 px-4'>
+            <div className='relative w-full h-full max-w-[1440px] mx-auto flex px-4'>
                 <div id='privacy-policy' className='w-full flex flex-col md:py-16 py-8'>
                     <h2 className='text-3xl font-semibold text-center mb-4 text-black dark:text-white'>Terms & Conditions</h2>
                     <p className='text-md text-[#555] dark:text-white font-normal mb-4'>

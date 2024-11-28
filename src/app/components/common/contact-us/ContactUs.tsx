@@ -14,7 +14,7 @@ const ContactUs = ({ contactUsData }: { contactUsData: any }) => {
                     className='absolute top-0 left-0 right-0 bottom-0 md:object-fill object-cover w-full h-full rounded-3xl'
                 />
             )}
-            <div className='relative w-full flex flex-col justify-center items-center text-center md:px-0 px-4'>
+            <div className='relative w-full flex flex-col justify-center items-center text-center px-4'>
                 <h2 className='text-3xl font-semibold text-center mb-4 text-white'>{contactUsData?.heading}</h2>
                 <p className='text-lg font-normal text-white'>{contactUsData?.description}</p>
             </div>

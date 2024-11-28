@@ -46,7 +46,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                 <h2 className='text-3xl font-semibold text-center mb-4'>{heading}</h2>
                 <p className='text-lg'>{description}</p>
             </div>
-            <div className='client-logos-row overflow-hidden md:max-w-[1440px] max-w-full mx-auto'>
+            <div className='client-logos-row overflow-hidden md:max-w-[1440px] max-w-full mx-auto px-4'>
                 <div className="flex whitespace-nowrap gap-4" ref={containerRef} style={{ transform: `translateX(${offset}px)` }}>
                     {row1 && row1.map((item, index) => (
                         <div key={index} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white dark:bg-black rounded-lg flex justify-center items-center">
@@ -69,7 +69,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                 </div>
             </div>
             <div className='md:block hidden w-full h-[1px] bg-gray-200' />
-            <div className="client-logos-row overflow-hidden md:max-w-[1440px] max-w-full mx-auto">
+            <div className="client-logos-row overflow-hidden md:max-w-[1440px] max-w-full mx-auto px-4">
                 <div className="flex whitespace-nowrap gap-4 animate-marquee-reverse" ref={containerRef} style={{ transform: `translateX(${offset}px)` }}>
                     {row2.map((item, index) => (
                         <div key={index} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white dark:bg-black rounded-lg flex justify-center items-center">

@@ -19,7 +19,7 @@ interface EmpoweringValue {
 
 const ImageBlocks = ({ topHeading, section }: { topHeading: string, section: EmpoweringValue[] }) => {
   return (
-    <div className='w-full max-w-[1440px] mx-auto md:py-16 py-8'>
+    <div className='w-full max-w-[1440px] mx-auto md:py-16 py-8 px-4'>
         <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4 md:mb-16 mb-8'>
             <h2 className='text-3xl font-semibold text-center'>
                 {topHeading}

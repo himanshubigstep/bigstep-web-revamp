@@ -86,7 +86,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
 
     return (
         <div className="w-full h-full relative bg-white dark:bg-black md:pb-16 p-8">
-            <div className="w-full h-full max-w-[1440px] mx-auto">
+            <div className="w-full h-full max-w-[1440px] mx-auto px-4">
                 {categories.map((category) => (
                     <Fragment key={category.name}>
                         <div className="w-full h-full mb-16 relative">

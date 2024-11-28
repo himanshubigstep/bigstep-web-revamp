@@ -179,7 +179,7 @@ const BlogPostPage = () => {
     return (
         <div className='poppins'>
             <BlogPageBanner bannerData={blog?.attributes} />
-            <div id='read-more-section' className='w-full h-full max-w-[1440px] mx-auto md:py-16 py-6 flex md:flex-row flex-col justify-between items-start md:gap-8 gap-4 md:px-0 px-4'>
+            <div id='read-more-section' className='w-full h-full max-w-[1440px] mx-auto md:py-16 py-6 flex md:flex-row flex-col justify-between items-start md:gap-8 gap-4 px-4'>
                 <div className='w-full md:max-w-[70%] max-w-full h-full flex flex-col md:justify-between md:items-center gap-4 relative'>
                     <img
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog?.attributes?.image?.data?.attributes?.url}`}

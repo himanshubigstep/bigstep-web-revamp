@@ -174,8 +174,8 @@ const AboutUs = () => {
           backgroundImage={aboutUsData?.attributes?.startdom_heading?.images?.data?.attributes?.formats?.large?.url || ''}
           heading={aboutUsData?.attributes?.startdom_heading?.heading || ''}
           description={aboutUsData?.attributes?.startdom_heading?.description || ''}
-          firstRowClass="grid w-full grid-cols-2 gap-8 justify-center items-center px-8 relative z-10"
-          secondRowClass="grid w-full grid-cols-3 gap-8 justify-center items-center px-8 relative z-10 mt-8"
+          firstRowClass="grid w-full grid-cols-2 gap-8 justify-center items-center relative z-10"
+          secondRowClass="grid w-full grid-cols-3 gap-8 justify-center items-center relative z-10 mt-8"
           firstRowData={firstRowData}
           secondRowData={secondRowData}
       />

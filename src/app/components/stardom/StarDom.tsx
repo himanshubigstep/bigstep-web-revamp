@@ -48,7 +48,7 @@ const StarDom = ({
                     <p className="text-lg font-normal text-white">{description}</p>
                 </div>
                 
-                <div className="w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl">
+                <div className="w-full max-w-[1440px] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl px-4">
                     <div className={firstRowClass}>
                         {firstRowData.map((item: any, index: number) => (
                             <div
@@ -72,7 +72,7 @@ const StarDom = ({
                     </div>
                 </div>
                 
-                <div className="w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl mt-12">
+                <div className="w-full max-w-[1440px] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl mt-12 px-4">
                     <div className={secondRowClass}>
                         {secondRowData.map((item: any, index: number) => (
                             <div

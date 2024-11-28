@@ -5,7 +5,7 @@ import CommonBlock from "./components/common/common-blocks-division/CommonBlock"
 import SuccessStoriesBlocks from "./components/common/sucess-stories-blocks/SuccessStoriesBlocks";
 import ClientCarousel from "./components/common/client-carousel/ClientCarousel";
 import PartnersBlock from "./components/common/partners-section/PartnersBlock";
-import { fetchHomepageData, fetchHomePageCarousel, fetchPaternershipData, fetchHeaderData, fetchServiceDataHome, fetchtrustedClients } from "@/api-data/api";
+import { fetchHomepageData, fetchHomePageCarousel, fetchPaternershipData, fetchHeaderData, fetchServiceDataHome, fetchtrustedClients, fetchModalBoxHomePage } from "@/api-data/api";
 import MilesTone from "./components/common/milestones-data/MilesTone";
 import Clients from "./components/common/clients/Clients";
 import NewsLetter from "./components/common/news-letter/NewsLetter";
@@ -281,6 +281,29 @@ interface headerDataLink {
   }
 }
 
+interface closingModalBoxData {
+  id: number;
+  attributes: {
+    category: string;
+    Modal_closing: {
+      id: number;
+      heading: string;
+      description: string;
+      label: string;
+      link: string;
+      buttonText: string;
+      backgroundImage: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+          }
+        }[]
+      }
+    }[]
+  }
+}
+
 export default function Home() {
   const [homePageData, setHomePageData] = useState<HomePageData | null>(null)
   const [homePageCarousel, setHomePageCarousel] = useState<HomePageCarousel[]>([])
@@ -289,6 +312,24 @@ export default function Home() {
   const [homePageServiceData, setHomePageServiceData] = useState<any>([]);
   const [truestedClientsData, setTrustedClientsData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+
+  useEffect(() => {
+    const fetchModalBoxDataSection = async () => {
+      try {
+        const response = await fetchModalBoxHomePage();
+        setModalBoxData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchModalBoxDataSection();
+  }, [])
 
   useEffect(() => {
     const fetchHeaderDataResponse = async () => {
@@ -462,7 +503,7 @@ export default function Home() {
         bannerImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.home_page_blogs[0].background_image.data.attributes.url}` : ''}
       />
       <ContactUs contactUsData={homePageData?.get_in_touch[0]} />
-      <ModelBox />
+      <ModelBox modalBoxData={modalBoxData} />
     </div>
   );
 }

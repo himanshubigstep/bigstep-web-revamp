@@ -62,7 +62,7 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                     <h2 className='text-3xl font-semibold text-center mb-4 text-white'>{sucessStoriesData?.heading}</h2>
                     <p className='text-lg font-normal text-white'>{sucessStoriesData?.description}</p>
                 </div>
-                <div className='w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl'>
+                <div className='w-full max-w-[1440px] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl px-4'>
                     {carouselImagesArray.slice(0, 2).map((imageData, index) => (
                         <div className='w-1/2 md:h-96 relative p-2 on-hover' key={imageData.id}>
                             <div className='w-full h-full rounded-3xl flex justify-center items-center'>
@@ -86,7 +86,7 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                         </div>
                     ))}
                 </div>
-                <div className='w-full max-w-[90%] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl'>
+                <div className='w-full max-w-[1440px] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl px-4'>
                     {carouselImagesArray.slice(2).map((imageData, index) => (
                         <div className='w-1/2 md:h-96 relative p-2 on-hover' key={imageData.id}>
                             <div className='w-full h-full rounded-3xl flex justify-center items-center'>

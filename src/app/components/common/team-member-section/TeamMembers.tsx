@@ -75,7 +75,7 @@ const TeamMembers = ({ heading, members }: { heading: string, members: TeamMembe
     const sortedTeamMembers = [...members].sort((a, b) => a.id - b.id);
     return (
         <div className='w-full h-full relative py-8 md:py-16'>
-            <div className='w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4'>
+            <div className='w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center text-center px-4'>
                 <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
                     <h2 className='text-3xl font-semibold text-center mb-4'>{heading}</h2>
                 </div>

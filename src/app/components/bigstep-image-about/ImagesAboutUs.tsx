@@ -55,12 +55,12 @@ const ImagesAboutUs = ({
                     className="w-[240px] bg-blue-500 hover:bg-blue-800 text-white py-4 rounded-xl"
                 />
             </div>
-            <div className='w-full h-full relative max-w-[1440px] mx-auto flex flex-col items-center justify-center md:pt-16 pt-8'>
-                <div className='w-full h-full flex items-center justify-center gap-4'>
+            <div className='w-full h-full relative max-w-[1440px] mx-auto flex flex-col items-center justify-center md:pt-16 pt-8 px-4'>
+                <div className='w-full h-full flex items-center gap-4'>
                     {images && images.map((item: any) => (
                         <div
                             key={item.id}
-                            className={`relative cursor-pointer transition-all duration-1000 h-[32rem] ${item.id === selectedImageId ? 'w-[55%]' : 'w-[20%]'} overflow-hidden`}
+                            className={`relative cursor-pointer transition-all duration-1000 h-[32rem] ${item.id === selectedImageId ? 'w-[55%]' : 'w-[25%]'} overflow-hidden`}
                             onClick={() => handleClick(item.id)}
                         >
                             <img

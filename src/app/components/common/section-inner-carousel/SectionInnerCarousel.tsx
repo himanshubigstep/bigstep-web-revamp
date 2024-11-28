@@ -15,7 +15,7 @@ const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProduct
 
     return (
         <div className='w-full h-full bg-white dark:bg-black md:py-16 py-8'>
-            <div className='w-full md:h-[30rem] h-full max-w-[1440px] mx-auto flex md:flex-row flex-col justify-center items-center text-center md:rounded-3xl'>
+            <div className='w-full md:h-[30rem] h-full max-w-[1440px] px-4 mx-auto flex md:flex-row flex-col justify-center items-center text-center md:rounded-3xl'>
                 <div className='md:w-[40%] w-full md:h-full md:py-0 py-8 md:px-16 px-8 flex flex-col justify-center items-center bg-blue-500 md:rounded-tl-3xl md:rounded-bl-3xl'>
                     <div className='w-full h-full flex flex-col gap-8 justify-center'>
                         {hasData && carouselProductEngineerData.map((item: { id: React.Key | null | undefined; heading: string }, index: number) => (

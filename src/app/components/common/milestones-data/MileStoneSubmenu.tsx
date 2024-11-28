@@ -14,7 +14,7 @@ const MileStoneSubmenu = ({ homePageData }: { homePageData: any }) => {
         }))
         .sort((a: { id: number; }, b: { id: number; }) => a.id - b.id);
     return (
-        <div className='w-full max-w-[1440px] mx-auto py-16'>
+        <div className='w-full max-w-[1440px] mx-auto py-16 px-4'>
             <div className='w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center mb-8 md:px-0 px-4'>
                 <h2 className='text-3xl font-semibold text-center mb-4 text-black dark:text-white'>{homePageData?.outstanding_results?.heading}</h2>
                 <p className='text-lg font-normal text-black dark:text-white'>{homePageData?.outstanding_results?.description}</p>
