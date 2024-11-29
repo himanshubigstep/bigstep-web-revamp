@@ -1,11 +1,12 @@
 'use client'
-import { fetchPartnershipData, fetchPartnershipDataService, fetchPaternershipData } from '@/api-data/api';
+import { fetchModalBoxHomePage, fetchPartnershipData, fetchPartnershipDataService, fetchPaternershipData } from '@/api-data/api';
 import { useEffect, useState } from 'react';
 import LoaderSpinner from '../components/common/loader-spinner/LoadingSpinner';
 import TopBanner from '../components/common/top-banner/TopBanner';
 import ContactUs from '../components/common/contact-us/ContactUs';
 import ServiceDataBlock from '../components/common/service-data-block/ServiceDataBlock';
 import PartnersBlock from '../components/common/partners-section/PartnersBlock';
+import ModelBox from '../components/model-box/ModelBox';
 // import CommonBlock from '@/app/components/common/common-blocks-division/CommonBlock'
 // import ContactUs from '@/app/components/common/contact-us/ContactUs';
 // import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
@@ -85,11 +86,52 @@ interface PartnerShipData {
   }
 }
 
+interface closingModalBoxData {
+  id: number;
+  attributes: {
+    category: string;
+    Modal_closing: {
+      id: number;
+      heading: string;
+      description: string;
+      label: string;
+      link: string;
+      buttonText: string;
+      backgroundImage: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+          }
+        }[]
+      }
+    }[]
+  }
+}
+
 const Partnership = () => {
   const [partnershipData, setPartnershipData] = useState<PartnerShipData | null>(null)
   const [partnershipPageServiceData, setPartnershipPageServiceData] = useState<any>([]);
   const [partnersData, setPartnersData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+
+  useEffect(() => {
+    const fetchModalBoxDataSection = async () => {
+      try {
+        const response = await fetchModalBoxHomePage();
+        setModalBoxData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchModalBoxDataSection();
+  }, [])
 
   useEffect(() => {
     const fetchPartnershipDataResponse = async () => {
@@ -193,6 +235,7 @@ const Partnership = () => {
         buttonText={partnershipData?.technology_partnerships?.button_text || ''}
       />
       <ContactUs contactUsData={partnershipData?.get_in_touch} />
+      <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }

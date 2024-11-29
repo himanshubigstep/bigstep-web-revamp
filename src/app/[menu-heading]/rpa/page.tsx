@@ -1,5 +1,5 @@
 'use client'
-import { fetchHeaderData, fetchRpaData, fetchRpaImplimentationSubSection, fetchRpaManagedSubSection, fetchRpaServiceHelp, fetchRpaTechnologiesused, fetchRpaTrustedPartner } from '@/api-data/api'
+import { fetchHeaderData, fetchModalBoxHomePage, fetchRpaData, fetchRpaImplimentationSubSection, fetchRpaManagedSubSection, fetchRpaServiceHelp, fetchRpaTechnologiesused, fetchRpaTrustedPartner } from '@/api-data/api'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
 import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import AITech from '@/app/components/common/ai-tech/AITech'
 import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
+import ModelBox from '@/app/components/model-box/ModelBox'
 
 interface rpaPageData {
   software: {
@@ -201,6 +202,29 @@ interface headerDataLink {
   }
 }
 
+interface closingModalBoxData {
+  id: number;
+  attributes: {
+    category: string;
+    Modal_closing: {
+      id: number;
+      heading: string;
+      description: string;
+      label: string;
+      link: string;
+      buttonText: string;
+      backgroundImage: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+          }
+        }[]
+      }
+    }[]
+  }
+}
+
 const RPA = () => {
   const [rpaPageData, setRpaPageData] = useState<rpaPageData | null>(null)
   const [rpaPageHelpServiceData, setRpaPageHelpServiceData] = useState<any>([]);
@@ -215,6 +239,24 @@ const RPA = () => {
   const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
 
   const router = useRouter();
+
+  const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+
+  useEffect(() => {
+    const fetchModalBoxDataSection = async () => {
+      try {
+        const response = await fetchModalBoxHomePage();
+        setModalBoxData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchModalBoxDataSection();
+  }, [])
 
   useEffect(() => {
     const fetchrpaPage = async () => {
@@ -365,6 +407,7 @@ const RPA = () => {
           onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
         />
         <ContactUs contactUsData = {rpaPageData?.get_in_touch} />
+        <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }

@@ -1,10 +1,11 @@
 'use client'
-import { fetchHeaderData, fetchReactAndReactNativeBenifits, fetchReactAndReactNativeData, fetchReactAndReactNativeFeatures, fetchReactAndReactNativeTechData } from '@/api-data/api';
+import { fetchHeaderData, fetchModalBoxHomePage, fetchReactAndReactNativeBenifits, fetchReactAndReactNativeData, fetchReactAndReactNativeFeatures, fetchReactAndReactNativeTechData } from '@/api-data/api';
 import ContactUs from '@/app/components/common/contact-us/ContactUs';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock';
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
+import ModelBox from '@/app/components/model-box/ModelBox';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -150,6 +151,29 @@ interface headerDataLink {
   }
 }
 
+interface closingModalBoxData {
+  id: number;
+  attributes: {
+    category: string;
+    Modal_closing: {
+      id: number;
+      heading: string;
+      description: string;
+      label: string;
+      link: string;
+      buttonText: string;
+      backgroundImage: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+          }
+        }[]
+      }
+    }[]
+  }
+}
+
 const ReactNativeDevelopment = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [reactAndReactNativeData, setReactAndReactNativeData] = useState<ReactAndReactNativeData | null>(null)
@@ -160,6 +184,24 @@ const ReactNativeDevelopment = () => {
     const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
   
     const router = useRouter();
+
+    const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+  
+    useEffect(() => {
+      const fetchModalBoxDataSection = async () => {
+        try {
+          const response = await fetchModalBoxHomePage();
+          setModalBoxData(response);
+        } catch (error) {
+          console.log(error);
+          return null;
+        } finally {
+          setLoading(false);
+        }
+      }
+  
+      fetchModalBoxDataSection();
+    }, [])
 
     useEffect(() => {
         const fetchHeaderDataResponse = async () => {
@@ -274,6 +316,7 @@ const ReactNativeDevelopment = () => {
           buttonText={reactAndReactNativeData?.transformative_benefits?.button_text || ''}
         />
         <ContactUs contactUsData = {reactAndReactNativeData?.get_in_touch || []} />
+        <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }

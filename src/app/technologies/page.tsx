@@ -1,11 +1,12 @@
 'use client'
-import { fetchtechnologies, fetchTechnologyData, fetchTechnologyDataService } from '@/api-data/api';
+import { fetchModalBoxHomePage, fetchtechnologies, fetchTechnologyData, fetchTechnologyDataService } from '@/api-data/api';
 import React, { useEffect, useState } from 'react'
 import TopBanner from '../components/common/top-banner/TopBanner';
 import LoaderSpinner from '../components/common/loader-spinner/LoadingSpinner';
 import PartnersTech from '../components/common/partner-common-block/PartnersTech';
 import ServiceDataBlock from '../components/common/service-data-block/ServiceDataBlock';
 import ContactUs from '../components/common/contact-us/ContactUs';
+import ModelBox from '../components/model-box/ModelBox';
 
 interface TechnologiesPageData {
   get_in_touch: {
@@ -79,11 +80,52 @@ interface TechnologiesPageData {
   }
 }
 
+interface closingModalBoxData {
+  id: number;
+  attributes: {
+    category: string;
+    Modal_closing: {
+      id: number;
+      heading: string;
+      description: string;
+      label: string;
+      link: string;
+      buttonText: string;
+      backgroundImage: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+          }
+        }[]
+      }
+    }[]
+  }
+}
+
 const Technologies = () => {
     const [technologyData, setTechnologyData] = useState<TechnologiesPageData | null>(null)
     const [technologiesData, setTechnologiesData] = useState<any>([]);
     const [techPageServiceData, setTechPageServiceData] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+  
+    useEffect(() => {
+      const fetchModalBoxDataSection = async () => {
+        try {
+          const response = await fetchModalBoxHomePage();
+          setModalBoxData(response);
+        } catch (error) {
+          console.log(error);
+          return null;
+        } finally {
+          setLoading(false);
+        }
+      }
+  
+      fetchModalBoxDataSection();
+    }, [])
   
     useEffect(() => {
       const fetchTechnologyPageDataResponse = async () => {
@@ -166,6 +208,7 @@ const Technologies = () => {
           buttonText={technologyData?.technological_experties?.button_text || ''}
         />
         <ContactUs contactUsData={technologyData?.get_in_touch} />
+        <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }

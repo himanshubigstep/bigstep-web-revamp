@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { fetchCtoAsServiceData, fetchCtoAsServiceHolisticApproach } from '@/api-data/api'
+import { fetchCtoAsServiceData, fetchCtoAsServiceHolisticApproach, fetchModalBoxHomePage } from '@/api-data/api'
 import Clients from '@/app/components/common/clients/Clients'
 import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
@@ -8,6 +8,7 @@ import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
 import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
 import MileStoneSubmenu from '@/app/components/common/milestones-data/MileStoneSubmenu'
+import ModelBox from '@/app/components/model-box/ModelBox'
 
 interface CtoAsServiceProps {
   id: number;
@@ -159,10 +160,51 @@ interface CtoAsServiceProps {
   }
 }
 
+interface closingModalBoxData {
+  id: number;
+  attributes: {
+    category: string;
+    Modal_closing: {
+      id: number;
+      heading: string;
+      description: string;
+      label: string;
+      link: string;
+      buttonText: string;
+      backgroundImage: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+          }
+        }[]
+      }
+    }[]
+  }
+}
+
 const CtoAsService = () => {
     const [ctoAsServiceData, setCtoAsServiceData] = useState<CtoAsServiceProps | null>(null)
     const [ctoAsServiceHolisticData, setCtoAsServiceHolisticData] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+  
+    useEffect(() => {
+      const fetchModalBoxDataSection = async () => {
+        try {
+          const response = await fetchModalBoxHomePage();
+          setModalBoxData(response);
+        } catch (error) {
+          console.log(error);
+          return null;
+        } finally {
+          setLoading(false);
+        }
+      }
+  
+      fetchModalBoxDataSection();
+    }, [])
 
     useEffect(() => {
       const fetchCtoAsServiceDataResponse = async () => {
@@ -218,6 +260,7 @@ const CtoAsService = () => {
           />
         </div>
         <ContactUs contactUsData = {ctoAsServiceData?.client_query || []} />
+        <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }
