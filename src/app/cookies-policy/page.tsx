@@ -24,7 +24,7 @@ const CookiesPolicies = () => {
                         <Button
                             text='Slide Down'
                             onClick={handleClick}
-                            className='w-44 px-8 py-4 bg-[#3F3B7A] hover:bg-[#30255D] text-white rounded-lg'
+                            className='w-44 px-8 py-4 bg-[#57606F] hover:bg-[#5F4535] text-white rounded-lg'
                         />
                     </div>
                     <div className='flex flex-col justify-center items-start gap-4 md:w-[60%] w-full md:h-full h-auto'>

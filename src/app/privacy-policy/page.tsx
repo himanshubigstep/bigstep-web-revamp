@@ -27,7 +27,7 @@ const PrivacyPolicies = () => {
                             className='w-44 px-8 py-4 bg-[#4A6292] hover:bg-[#3D62AD] text-white rounded-lg'
                         />
                     </div>
-                    <div className='flex flex-col justify-center items-start gap-4 md:w-[60%] w-full md:h-full h-auto'>
+                    <div className='flex flex-col justify-center items-start gap-4 md:w-[60%] w-full md:h-full h-auto md:p-24 p-4'>
                         <Image
                             src={privacyBanner}
                             alt='image'

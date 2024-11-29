@@ -259,7 +259,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                 }`}
                             >
                               <img
-                                className="w-4 h-4 mt-1 mr-2"
+                                className="w-6 h-6"
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${submenu.icon.data.attributes.url}`}
                                 alt=""
                               />

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Image, { StaticImageData } from 'next/image';
-import BigsteLogo from '@/app/assets/bigstep logo.png'
-import Button from '../common/button/Button';
 
 const CultureServiceBlock = ({
     title,
@@ -66,13 +63,13 @@ const CultureServiceBlock = ({
 
     return (
         <div className={`${containerClassName}`}>
-            <div className='absolute top-0 bottom-0 left-0 right-0 w-full flex justify-center items-center text-center py-8'>
+            {/* <div className='absolute top-0 bottom-0 left-0 right-0 w-full flex justify-center items-center text-center py-8'>
                 <Image
                     src={BigsteLogo}
                     alt='image'
                     className={`${logoClassName}`}
                 />
-            </div>
+            </div> */}
             <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
                 <h2 className={`${titleClassName}`}>{title}</h2>
                 {description &&

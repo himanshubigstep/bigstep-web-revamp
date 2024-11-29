@@ -61,7 +61,7 @@ const Slide: React.FC<{ slide: CulturePageCarousel; isActive: boolean }> = ({ sl
                 <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10" />
                 <div className={`md:w-full w-full max-w-[1440px] mx-auto h-full flex flex-col justify-center items-center relative z-20 px-4`}>
                     <h2 className="md:text-4xl text-xl mb-4 font-medium text-center">{slide?.attributes?.title}</h2>
-                    <p className="md:mb-16 mb-4 md:text-lg text-md font-normal text-center">{slide?.attributes?.text_body}</p>
+                    <p className="md:text-lg text-md font-normal text-center">{slide?.attributes?.text_body}</p>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@ const CultureTopSlider: React.FC<SlideShowTextProps> = ({ slides = [] }) => {
                 ))}
             </div>
 
-            <div className="absolute z-20 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            {/* <div className="absolute z-20 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
                 {sortedSlides.map((slide, index) => (
                     <button
                         key={slide.id}
@@ -124,7 +124,7 @@ const CultureTopSlider: React.FC<SlideShowTextProps> = ({ slides = [] }) => {
                         onClick={() => handleSlideChange(index)}
                     />
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 };

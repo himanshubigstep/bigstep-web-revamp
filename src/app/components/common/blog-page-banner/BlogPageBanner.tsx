@@ -1,5 +1,5 @@
 import React from 'react'
-import BigstepBlogDetailsBanner from '@/app/assets/bigstep-blog-details-banner.jpeg'
+import BigstepBlogDetailsBanner from '@/app/assets/bigstep-blog-details-banner.png'
 
 const BlogPageBanner = ({ bannerData }: { bannerData: any }) => {
     const formatDate = (dateString: string) => {
