@@ -33,9 +33,14 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
     const firstItem = Array.isArray(rightSectionItems) && rightSectionItems.length > 0 ? rightSectionItems[0] : null;
     const remainingItems = Array.isArray(rightSectionItems) && rightSectionItems.length > 1 ? rightSectionItems.slice(1) : [];
 
-    const handleItemClick = (id: string) => {
-        router.push(`/blog/${id}`);
-    }
+    const handleItemClick = (slug: string) => {
+        const formattedSlug = decodeURIComponent(slug)
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/\//g, '-')
+        .replace(/[^a-z0-9\-]/g, '');
+        router.push(`/blog/${formattedSlug}`);
+    };
 
     return (
         <div className='relative w-full h-full md:py-16 py-8 bg-white dark:bg-black'>
@@ -60,7 +65,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                     {firstItem && (
                         <div
                             className="md:w-1/2 w-full flex flex-col items-start rounded-lg gap-8 cursor-pointer"
-                            onClick={() => handleItemClick(firstItem?.id)}
+                            onClick={() => handleItemClick(firstItem?.attributes?.slug)}
                         >
                             <div className="w-full flex flex-col justify-center items-start rounded-lg">
                                 <img
@@ -88,7 +93,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                                     <div
                                         key={item.id}
                                         className="w-full h-full flex md:flex-row flex-col md:justify-between items-center rounded-lg gap-4 cursor-pointer"
-                                        onClick={() => handleItemClick(item.id)}
+                                        onClick={() => handleItemClick(item?.attributes?.slug)}
                                     >
                                         <div className="md:w-1/6 md:aspect-square h-20 md:h-auto flex justify-center items-center rounded-lg">
                                             <img

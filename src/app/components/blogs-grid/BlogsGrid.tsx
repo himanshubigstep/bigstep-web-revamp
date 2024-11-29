@@ -22,6 +22,7 @@ interface BlogItem {
         };
         heading: string;
         description: string;
+        slug: string;
         image: {
             data: {
                 id: number;
@@ -52,7 +53,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
     const router = useRouter();
 
     const itemsPerPage = 3;
-    
+
     const getCurrentItems = (categoryName: string, categoryItems: BlogItem[]) => {
         const currentPage = currentPageMap[categoryName] || 0;
         const startIndex = currentPage * itemsPerPage;
@@ -80,8 +81,13 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
 
     if (!categories || !Array.isArray(categories)) return null;
 
-    const handleItemClick = (id: number) => {
-        router.push(`/blog/${id}`);
+    const handleItemClick = (slug: string) => {
+        const formattedSlug = decodeURIComponent(slug)
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/\//g, '-')
+        .replace(/[^a-z0-9\-]/g, '');
+        router.push(`/blog/${formattedSlug}`);
     };
 
     return (
@@ -95,9 +101,9 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
                             </div>
                             <div className="w-full h-full grid md:grid-cols-3 grid-cols-2 gap-8 items-center">
                                 {getCurrentItems(category.name, category.items).map((item) => (
-                                    <div onClick={() => handleItemClick(item.id)} key={item.id} className="relative border-[1px] h-full bg-white dark:bg-black rounded-3xl cursor-pointer">
+                                    <div onClick={() => handleItemClick(item.attributes.slug)} key={item.id} className="relative border-[1px] h-full bg-white dark:bg-black rounded-3xl cursor-pointer">
                                         <img
-                                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.formats?.large?.url}`}
+                                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.url}`}
                                             alt="blog image"
                                             className="w-full h-[14rem] rounded-3xl rounded-b-none"
                                         />

@@ -13,9 +13,14 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
         return date.toLocaleDateString('en-US', options);
     };
 
-    const handleItemClick = (id: number) => {
-        router.push(`/blog/${id}`);
-    };
+    const handleItemClick = (slug: string) => {
+      const formattedSlug = decodeURIComponent(slug)
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/\//g, '-')
+      .replace(/[^a-z0-9\-]/g, '');
+      router.push(`/blog/${formattedSlug}`);
+  };
 
     const getImageUrl = (imagePath: string) => `${process.env.NEXT_PUBLIC_IMAGE_URL}${imagePath}`;
     
@@ -32,7 +37,7 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
             sortedBlogs.map((item: any) => (
               <div
                 key={item.id}
-                onClick={() => handleItemClick(item.id)}
+                onClick={() => handleItemClick(item?.attributes?.slug)}
                 className="cursor-pointer w-full h-full flex flex-col rounded-2xl border-[1px] border-gray-300 dark:border-gray-800 hover:shadow-lg hover:scale-105 transition-all"
               >
                 <div className="w-full h-36 flex justify-center items-center rounded-tl-2xl rounded-tr-2xl">

@@ -55,6 +55,7 @@ interface BlogData {
                 }
             }
         }
+        slug: string;
     };
 }
 
@@ -113,7 +114,7 @@ interface BlogDetailsPage {
 }
 
 const BlogPostPage = () => {
-    const { id } = useParams();
+    const { slug } = useParams();
     const [blog, setBlog] = useState<BlogData | null>(null);
     const [blogData, setBlogData] = useState<BlogData[]>([]);
     const [loading, setLoading] = useState(true);
@@ -140,13 +141,19 @@ const BlogPostPage = () => {
             try {
                 const data = await fetchBlogsData();
                 setBlogData(data.data);
-                const blogId = Array.isArray(id) ? id[0] : id;
-                const blogPost = data.data.find((item: BlogData) => item.id === parseInt(blogId));
+                const blogSlug = Array.isArray(slug) ? slug[0] : slug;
+                const blogPost = data.data.find((item: BlogData) => item.attributes.slug.toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/\//g, '-')
+                .replace(/[^a-z0-9\-]/g, '') == decodeURIComponent(blogSlug).toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/\//g, '-')
+                .replace(/[^a-z0-9\-]/g, ''));
                 setBlog(blogPost || null);
                 if (blogPost) {
                     const categoryName = blogPost.attributes.category.data.attributes.name;
                     const relatedBlogs = data.data.filter((item: BlogData) =>
-                        item.attributes.category.data.attributes.name === categoryName && item.id !== blogPost.id
+                        item.attributes.category.data.attributes.name === categoryName && item.attributes.slug !== blogPost.attributes.slug
                     );
                     setRelatedBlogsByCategory(relatedBlogs);
                 }
@@ -157,10 +164,10 @@ const BlogPostPage = () => {
             }
         };
 
-        if (id) {
+        if (slug) {
             fetchBlogData();
         }
-    }, [id]);
+    }, [slug]);
 
     const formatDate = (dateString: string) => {
         const options: Intl.DateTimeFormatOptions = {
@@ -229,6 +236,7 @@ const BlogPostPage = () => {
                         latest_info={blogPageData?.attributes?.latest_info}
                         classNameOptional={true}
                         formClass={true}
+                        isBanner={false}
                     />
                     <RelatedBlogs
                         related_blogs={blogPageData?.attributes?.related_blogs}

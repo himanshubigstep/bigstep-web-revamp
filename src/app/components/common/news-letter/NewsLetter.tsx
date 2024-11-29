@@ -25,9 +25,10 @@ interface SubscribeFormProps {
     latest_info?: LatestInfo;
     classNameOptional?: boolean;
     formClass?: boolean;
+    isBanner?: boolean
 }
 
-const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOptional, formClass }) => {
+const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOptional, formClass, isBanner }) => {
     const [inputValue, setInputValue] = useState({
         name: '',
         email: ''
@@ -99,14 +100,16 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
     };
 
     return (
-        <div className={classNameOptional ? 'w-full h-full md:rounded-3xl md:py-0 py-0' : 'w-full h-full md:rounded-3xl md:py-16 py-8'}>
+        <div className={`${classNameOptional ? 'w-full h-full md:rounded-3xl md:py-0 py-0' : 'w-full h-full md:rounded-3xl md:py-16 py-8'} ${isBanner === false ? 'bg-black' : ''}`}>
             <div className='relative w-full h-full max-w-[1440px] mx-auto md:rounded-3xl md:py-24 py-8 rounded-3xl'>
-                <img
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${latest_info?.background_image?.data?.attributes?.url}`}
-                    alt='Background Icon'
-                    className='absolute 0 left-0 right-0 bottom-0 md:object-fill object-cover w-full h-full rounded-3xl'
-                />
-                <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
+                {isBanner !== false &&
+                    <img
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${latest_info?.background_image?.data?.attributes?.url}`}
+                        alt='Background Icon'
+                        className='absolute 0 left-0 right-0 bottom-0 md:object-fill object-cover w-full h-full rounded-3xl'
+                    />
+                }
+                <div className={`${isBanner === false ? 'w-[90%]' : 'w-full'} relative max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center`}>
                     <h2 className='text-3xl font-semibold text-white text-center mb-4'>{latest_info?.heading}</h2>
                 </div>
                 <form onSubmit={handelSubscription} className={formClass ? 'md:w-[90%] w-[90%] mx-auto h-full relative flex flex-col items-center justify-between md:gap-8 pt-8' : 'md:w-[70%] w-[90%] mx-auto h-full relative flex md:flex-row flex-col items-center justify-between md:gap-8 pt-8'}>
