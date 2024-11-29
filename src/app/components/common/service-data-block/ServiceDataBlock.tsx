@@ -69,28 +69,30 @@ const ServiceDataBlock = ({
                         <div className={serviceItemDescription}>
                             <p className='line-clamp-3 md:line-clamp-none text-md font-normal'>{service.description}</p>
                         </div>
-                        {service.heading === "RPA Implementation" &&
-                            rpaPageImplimentationSubData && rpaPageImplimentationSubData.map((item: any) => (
-                                <div key={item.id} className='w-full px-4 flex flex-col'>
-                                    <div className={serviceIconHeader}>
-                                        <h4 className='md:line-clamp-none text-left line-clamp-2 md:text-lg text-md font-semibold menu-item-text hover:text-blue-500'>{item.heading}</h4>
-                                    </div>
-                                    <div className={serviceItemDescription}>
-                                        <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
-                                    </div>
-                                </div>
+                            <ul className='flex flex-col gap-4 list-disc md:pl-8 pl-4'>
+                                {service.heading === "RPA Implementation" &&
+                                    rpaPageImplimentationSubData && rpaPageImplimentationSubData.map((item: any) => (
+                                <li className='text-left' key={item.id}>
+                                    <h4 className='md:line-clamp-none text-left line-clamp-2 md:text-lg text-md font-semibold'>{item.heading}</h4>
+                                    <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
+                                </li>
                             ))}
-                        {service.heading === "RPA Managed Services" &&
-                            rpaPageManagedSubData && rpaPageManagedSubData.map((item: any) => (
-                                <div key={item.id} className='w-full px-4 flex flex-col'>
-                                    <div className={serviceIconHeader}>
-                                        <h4 className='md:line-clamp-none text-left line-clamp-2 md:text-lg text-md font-semibold menu-item-text hover:text-blue-500'>{item.heading}</h4>
-                                    </div>
-                                    <div className={serviceItemDescription}>
+                            {/* <div className={serviceItemDescription}>
+                                <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
+                            </div> */}
+                            </ul>
+                            <ul className='flex flex-col gap-4 list-disc md:pl-8 pl-4'>
+                                {service.heading === "RPA Managed Services" &&
+                                    rpaPageManagedSubData && rpaPageManagedSubData.map((item: any) => (
+                                    <li className='text-left' key={item.id}>
+                                        <h4 className='md:line-clamp-none text-left line-clamp-2 md:text-lg text-md font-semibold'>{item.heading}</h4>
                                         <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
-                                    </div>
-                                </div>
-                            ))}
+                                    </li>
+                                ))}
+                                {/* <div className={serviceItemDescription}>
+                                    <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
+                                </div> */}
+                            </ul>
                     </div>
                 ))}
             </div>
