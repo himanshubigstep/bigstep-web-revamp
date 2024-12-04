@@ -12,7 +12,7 @@ const BlogPageBanner = ({ bannerData }: { bannerData: any }) => {
         return date.toLocaleDateString('en-US', options);
     };
     return (
-        <div className='w-full relative h-screen lg:h-[85vh] md:h-[85vh] sm:h-[85vh] lg:px-4 px-4'>
+        <div className='w-full relative h-screen lg:h-[85vh] md:h-screen sm:h-screen lg:px-4 px-4'>
             <div className='w-full h-full absolute right-0 left-0 top-0 bottom-0'>
                 <div className='w-full h-full absolute top-0 bottom-0 bg-black opacity-75' />
                 <img

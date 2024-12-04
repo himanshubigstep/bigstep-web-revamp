@@ -185,7 +185,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                   className={`${menu.items_on_right.length !== 0
                     ? "w-full flex lg:flex-row flex-col justify-between left-0"
                     : "small-menu left-auto right-auto"
-                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white dark:bg-black lg:absolute left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 lg:gap-8 gap-4 rounded-2xl lg:p-8 p-2 shadow-xl`}
+                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white dark:bg-black lg:absolute lg:max-h-full md:max-h-[50vh] sm:max-h-[80vh] max-h-[80vh] overflow-y-auto left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 lg:gap-8 gap-4 rounded-2xl lg:p-8 p-2 shadow-xl`}
                 >
                   <ul
                     className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "grid md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4 lg:w-[65%]" : "grid grid-cols-1 lg:gap-8 gap-4 w-[100%]"
