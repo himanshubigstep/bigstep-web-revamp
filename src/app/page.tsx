@@ -439,19 +439,19 @@ export default function Home() {
   }
 
   return (
-    <div className="poppins w-full h-full bg-white dark:bg-black">
+    <div className="poppins w-full h-full">
       <SlideShowText slides={homePageCarousel} />
       <CommonBlock
         title={homePageData?.technologies[0]?.heading || ''}
         description={homePageData?.technologies[0]?.description || ''}
         services={homePageServiceData}
-        containerClassName='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 px-4'
-        logoClassName='md:w-auto w-auto md:h-full md:object-fill object-cover'
-        titleClassName='text-3xl font-semibold text-center mb-4'
-        descriptionClassName='text-lg font-normal '
-        serviceContainerClassName='relative w-full flex flex-wrap md:justify-center text-center'
-        serviceItemClassName='md:mt-8 flex flex-col justify-center md:w-1/3 w-1/2 md:px-12 md:py-6 md:px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-        serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center md:mr-4 md:mb-0 mb-4'
+        containerClassName='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 px-4'
+        logoClassName='lg:w-auto w-auto lg:h-full lg:object-fill object-cover'
+        titleClassName='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4'
+        descriptionClassName='lg:text-lg md:text-md sm:text-sm text-xs font-normal '
+        serviceContainerClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+        serviceItemClassName='lg:mt-8 flex flex-col justify-center lg:w-1/3 md:w-1/3 w-1/2 lg:px-12 lg:py-6 px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center lg:mr-4 lg:mb-0 mb-4'
         buttonClassName='px-4 py-2 mx-2 bg-gray-300 rounded'
         serviceHeaderClassName="w-full text-left flex flex-col gap-2"
         backgroundImage={homePageData?.technologies[0]?.background_image?.data?.attributes?.url}
@@ -481,8 +481,8 @@ export default function Home() {
           },
         }}
         mainClass="relative w-full md:py-16 py-8"
-        headingClass="text-3xl font-semibold text-center mb-4"
-        descriptionClass="text-lg font-normal"
+        headingClass="lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4 dark:text-black"
+        descriptionClass="lg:text-lg md:text-md sm:text-sm text-xs font-normal dark:text-black"
         partnerShipData={partnerShipData}
       />
       <MilesTone homePageData={homePageData} />

@@ -57,11 +57,11 @@ const Slide: React.FC<{ slide: CulturePageCarousel; isActive: boolean }> = ({ sl
                     alt={`Slide ${slide.id}`}
                 />
             )}
-            <div className="absolute bottom-0 left-0 right-0 w-full text-white z-20 py-6 md:py-8">
+            <div className="absolute bottom-0 left-0 right-0 w-full text-white z-20 py-6 lg:py-8">
                 <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10" />
-                <div className={`md:w-full w-full max-w-[1440px] mx-auto h-full flex flex-col justify-center items-center relative z-20 px-4`}>
-                    <h2 className="md:text-4xl text-xl mb-4 font-medium text-center">{slide?.attributes?.title}</h2>
-                    <p className="md:text-lg text-md font-normal text-center">{slide?.attributes?.text_body}</p>
+                <div className={`lg:w-full w-full max-w-[1440px] mx-auto h-full flex flex-col justify-center items-center relative z-20 px-4`}>
+                    <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-xl mb-4 font-medium text-center">{slide?.attributes?.title}</h2>
+                    <p className="lg:text-lg md:text-md sm:text-sm text-xs text-md font-normal text-center">{slide?.attributes?.text_body}</p>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@ const CultureTopSlider: React.FC<SlideShowTextProps> = ({ slides = [] }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="relative overflow-hidden min-h-[80vh]">
+            <div className="relative overflow-hidden lg:min-h-[80vh] md:min-h-[70vh] sm:min-h-screen min-h-screen">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-b from-black via-gray-900 to-black opacity-50 z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />

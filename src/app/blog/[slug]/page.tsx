@@ -186,15 +186,15 @@ const BlogPostPage = () => {
     return (
         <div className='poppins'>
             <BlogPageBanner bannerData={blog?.attributes} />
-            <div id='read-more-section' className='w-full h-full max-w-[1440px] mx-auto md:py-16 py-6 flex md:flex-row flex-col justify-between items-start md:gap-8 gap-4 px-4'>
-                <div className='w-full md:max-w-[70%] max-w-full h-full flex flex-col md:justify-between md:items-center gap-4 relative'>
+            <div id='read-more-section' className='w-full h-full max-w-[1440px] mx-auto lg:py-16 py-6 flex lg:flex-row md:flex-row flex-col justify-between items-start lg:gap-8 gap-4 px-4'>
+                <div className='w-full lg:max-w-[70%] max-w-full h-full flex flex-col lg:justify-between lg:items-center gap-4 relative'>
                     <img
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog?.attributes?.image?.data?.attributes?.url}`}
                         alt='image'
                         className='w-full h-full rounded-2xl'
                     />
                     <div className='w-full h-full flex flex-col justify-center items-start'>
-                        <h2 className='text-3xl font-semibold mb-4'>{blog?.attributes?.heading}</h2>
+                        <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold mb-4'>{blog?.attributes?.heading}</h2>
                         <span className='flex justify-start items-center gap-4 mb-4'>
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url}`}
@@ -202,17 +202,17 @@ const BlogPostPage = () => {
                                 className='w-12 h-12 rounded-full border-[1px]'
                             />
                             <span className='flex flex-col justify-center items-start'>
-                                <p className='text-md font-normal'>{blog?.attributes?.author?.data?.attributes?.name}</p>
-                                <p className='text-md font-normal'>{`Updated on : ${formatDate(blog?.attributes?.updatedAt)}`}</p>
+                                <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{blog?.attributes?.author?.data?.attributes?.name}</p>
+                                <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{`Updated on : ${formatDate(blog?.attributes?.updatedAt)}`}</p>
                             </span>
                         </span>
 
-                        <div className='text-xl font-normal'>
+                        <div className='lg:text-xl md:text-lg sm:text-md text-sm font-normal'>
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
-                                    h2: ({ children }) => <h2 className="text-3xl font-bold my-4">{children}</h2>,
-                                    h3: ({ children }) => <h3 className="text-2xl font-semibold my-3">{children}</h3>,
+                                    h2: ({ children }) => <h2 className="lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold my-4">{children}</h2>,
+                                    h3: ({ children }) => <h3 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold my-3">{children}</h3>,
                                     p: ({ children }) => <p className="mb-4">{children}</p>,
                                     ul: ({ children }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
                                     li: ({ children }) => <li className="mb-2">{children}</li>,
@@ -231,7 +231,7 @@ const BlogPostPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className='w-full md:max-w-[30%] max-w-full'>
+                <div className='w-full lg:max-w-[30%] md:max-w-[30%] max-w-full'>
                     <NewsLetter
                         latest_info={blogPageData?.attributes?.latest_info}
                         classNameOptional={true}

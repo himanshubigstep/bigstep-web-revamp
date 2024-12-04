@@ -210,7 +210,7 @@ const OffShoreDevelopment = () => {
         />
         <ProductDevelopment developmentData={offShoreProductDevelopmentData} />
         <MileStoneSubmenu homePageData={offShoreProductDevelopmentData} />
-        <div className='w-full h-full md:py-16 py-8'>
+        <div className='w-full h-full'>
           <Clients
               title={offShoreProductDevelopmentData?.client_review?.heading || ''}
               description={offShoreProductDevelopmentData?.client_review?.description || ''}

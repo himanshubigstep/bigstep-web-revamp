@@ -19,14 +19,14 @@ interface EmpoweringValue {
 
 const ImageBlocks = ({ topHeading, section }: { topHeading: string, section: EmpoweringValue[] }) => {
   return (
-    <div className='w-full max-w-[1440px] mx-auto md:py-16 py-8 px-4'>
-        <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4 md:mb-16 mb-8'>
-            <h2 className='text-3xl font-semibold text-center'>
+    <div className='w-full max-w-[1440px] mx-auto lg:py-16 py-8 px-4'>
+        <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center lg:px-0 px-4 lg:mb-16 mb-8'>
+            <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center'>
                 {topHeading}
             </h2>
         </div>
-        <div className='w-full h-full flex flex-col justify-center items-center relative md:px-0 px-4'>
-            <div className='w-full grid md:grid-cols-3 grid-cols-1 md:gap-16 gap-8'>
+        <div className='w-full h-full flex flex-col justify-center items-center relative lg:px-0 px-4'>
+            <div className='w-full grid lg:grid-cols-3 grid-cols-1 lg:gap-16 gap-8'>
                 {section && section.map((item) => (
                     <div key={item.id} className='w-full h-full flex flex-col rounded-2xl border-[1px] border-gray-300 dark:border-gray-800'>
                         <div className='w-full h-72 flex justify-center items-center rounded-tl-2xl rounded-tr-2xl'>

@@ -91,15 +91,15 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
     };
 
     return (
-        <div className="w-full h-full relative bg-white dark:bg-black md:pb-16 p-8">
+        <div className="w-full h-full relative bg-white dark:bg-black lg:pb-16 p-8">
             <div className="w-full h-full max-w-[1440px] mx-auto px-4">
                 {categories.map((category) => (
                     <Fragment key={category.name}>
                         <div className="w-full h-full mb-16 relative">
                             <div className="w-full h-full flex justify-between items-center mb-8">
-                                <h2 className="text-black dark:text-white text-2xl font-bold">{category.name}</h2>
+                                <h2 className="text-black dark:text-white lg:text-2xl md:text-xl sm:text-lg text-md font-bold">{category.name}</h2>
                             </div>
-                            <div className="w-full h-full grid md:grid-cols-3 grid-cols-2 gap-8 items-center">
+                            <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-3 grid-cols-2 gap-8 items-center">
                                 {getCurrentItems(category.name, category.items).map((item) => (
                                     <div onClick={() => handleItemClick(item.attributes.slug)} key={item.id} className="relative border-[1px] h-full bg-white dark:bg-black rounded-3xl cursor-pointer">
                                         <img
@@ -108,7 +108,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
                                             className="w-full h-[14rem] rounded-3xl rounded-b-none"
                                         />
                                         <div className="w-full h-auto flex flex-col justify-between items-start p-4">
-                                            <h2 className="line-clamp-2 md:line-clamp-1 font-medium mb-4 text-black dark:text-white text-lg">
+                                            <h2 className="line-clamp-2 lg:line-clamp-1 font-medium mb-4 text-black dark:text-white lg:text-lg md:text-md sm:text-sm text-xs">
                                                 {item?.attributes?.heading}
                                             </h2>
                                             <div className="w-full flex gap-4 items-center">

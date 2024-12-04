@@ -106,7 +106,7 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
       <div className={`${serviceContainerClassName}`}>
         {currentServices.map((service, index) => (
           <div key={service.id} className={`${serviceItemClassName}`}>
-            <div className='w-full flex md:flex-row flex-col md:justify-start justify-center md:items-start items-center'>
+            <div className='w-full flex lg:flex-row flex-col lg:justify-start justify-center lg:items-start items-center'>
               <div className={`${serviceIconClassName}`} style={{ backgroundColor: service.attributes.hex_code }}>
                 <img
                   className='w-12 p-2'
@@ -114,12 +114,12 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
                   alt={service.attributes.heading}
                 />
               </div>
-              <Link href={service.attributes.link}>
-                <h4 className='md:w-[60%] w-full md:text-left text-center md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.attributes.heading}</h4>
+              <Link href={service.attributes.link} className='lg:w-[calc(100%-4rem)] md:w-[calc(100%-4rem)]'>
+                <h4 className='w-full lg:text-left text-center lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'>{service.attributes.heading}</h4>
               </Link>
             </div>
             <div className={serviceHeaderClassName}>
-              <p className='text-md font-normal md:flex hidden'>{service.attributes.discription}</p>
+              <p className='lg:text-md md:text-sm sm:text-xs text-xs lg:text-left text-center font-normal md:flex hidden'>{service.attributes.discription}</p>
             </div>
           </div>
         ))}
@@ -135,9 +135,9 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
       }
       {isMobile && (
         <div className='relative flex justify-between items-center mt-8'>
-          <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt; Previous</button>
+          <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt;</button>
           <span>Page {currentPage} of {totalPages}</span>
-          <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>Next &gt;</button>
+          <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>&gt;</button>
         </div>
       )}
     </div>

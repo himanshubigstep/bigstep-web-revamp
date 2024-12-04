@@ -2,17 +2,18 @@ import React from 'react'
 
 const VideoPlayerComponent = ({ videoSectionData }: { videoSectionData: any }) => {
     return (
-        <div className='w-full h-full relative md:py-16 py-8'>
+        <div className='w-full h-full relative lg:py-16 py-8'>
             <div className='w-full h-full max-w-[1440px] mx-auto flex justify-center items-center'>
-                <div className='w-full h-full max-w-[1080px] mx-auto flex flex-col justify-center items-center'><h2 className='text-3xl font-semibold text-center mb-4'>
-                    {videoSectionData?.heading}
-                </h2>
-                    <p className='text-lg font-normal text-center'>
+                <div className='w-full h-full max-w-[1080px] mx-auto flex flex-col justify-center items-center'>
+                    <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4'>
+                        {videoSectionData?.heading}
+                    </h2>
+                    <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal text-center'>
                         {videoSectionData?.description}
                     </p>
                 </div>
             </div>
-            <div className='relative w-full max-w-[1440px] mx-auto md:mt-16 mt-8 rounded-2xl'>
+            <div className='relative w-full max-w-[1440px] mx-auto lg:mt-16 mt-8 rounded-2xl'>
                 {/* Embed YouTube video using iframe */}
                 <video className='w-full h-full rounded-2xl' controls title={videoSectionData?.images?.data?.attributes?.name}>
                     <source

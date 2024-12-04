@@ -252,7 +252,7 @@ const RemoteEngineeringTeam = () => {
         />
         <ProductDevelopment developmentData={remoteEngineeringTeamData} />
         <MileStoneSubmenu homePageData={remoteEngineeringTeamData} />
-        <div className='w-full h-full md:py-16 py-8'>
+        <div className='w-full h-full'>
           <Clients
               title={remoteEngineeringTeamData?.client_review?.heading || ''}
               description={remoteEngineeringTeamData?.client_review?.description || ''}

@@ -147,15 +147,15 @@ const CulturePage = () => {
         title={culturalPageData?.core_values_heading?.heading || ''}
         description={culturalPageData?.core_values_heading?.description || ''}
         services={culturalPageData?.core_values_data}
-        containerClassName='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 px-4'
-        logoClassName='md:w-auto w-full md:h-full md:object-fill object-cover'
+        containerClassName='relative w-full max-w-[1440px] mx-auto lg:pt-16 md:pt-16 pt-8 px-4'
+        logoClassName='lg:w-auto w-full lg:h-full lg:object-fill object-cover'
         titleClassName='text-3xl font-semibold text-center mb-4'
         descriptionClassName='text-lg font-normal '
         serviceContainerClassName='relative w-full flex flex-wrap text-center'
-        serviceItemClassName='md:mt-8 flex flex-col justify-center md:w-1/3 w-1/2 md:px-12 md:py-6 md:px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-        serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center md:mr-4 md:mb-0 mb-4'
+        serviceItemClassName='lg:mt-8 flex flex-col justify-center lg:w-1/3 md:w-1/3 w-1/2 lg:px-12 lg:py-6 lg:px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center lg:mr-4 md:mr-4 mr-0 lg:mb-0 md:mb-0 mb-4'
         buttonClassName='px-4 py-2 mx-2 bg-gray-300 rounded'
-        serviceHeaderClassName="w-auto text-left flex flex-col gap-2"
+        serviceHeaderClassName="w-[calc(100%-4rem)] text-left flex flex-col gap-2"
       />
       <StarDom
         heading={culturalPageData?.cultural_bigstepians?.heading || ''}

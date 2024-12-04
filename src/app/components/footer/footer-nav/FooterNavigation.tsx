@@ -22,7 +22,7 @@ interface FooterNavigationProps {
 const FooterNavigation: React.FC<FooterNavigationProps> = ({ attributes }) => {
   const footerNav = attributes?.about_organisation || [];
   return (
-    <div className='flex flex-col md:flex-row gap-8 md:w-[70%] w-full'>
+    <div className='flex flex-col lg:flex-row gap-8 lg:w-[70%] w-full mt-8 lg:mt-auto'>
       {footerNav.map((item) => (
         <div key={item.id} className='w-full h-full'>
           <h2 className='text-gray-200 not-italic text-2xl'>{item.heading}</h2>

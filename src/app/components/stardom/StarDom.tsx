@@ -32,8 +32,8 @@ const StarDom = ({
     }
 
     return (
-        <div className="relative w-full h-full md:py-16 py-8">
-            <div className="relative w-full h-full md:py-16 py-8">
+        <div className="relative w-full h-full lg:py-16 py-8">
+            <div className="relative w-full h-full lg:py-16 py-8">
                 
                 <div className="absolute top-0 bottom-0 w-full flex justify-center items-center text-center">
                     <img
@@ -43,12 +43,12 @@ const StarDom = ({
                     />
                 </div>
                 
-                <div className="relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4 mb-8">
-                    <h2 className="text-3xl font-semibold text-center text-white mb-4">{heading}</h2>
-                    <p className="text-lg font-normal text-white">{description}</p>
+                <div className="relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center lg:px-0 px-4 mb-8">
+                    <h2 className="lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center text-white mb-4">{heading}</h2>
+                    <p className="lg:text-lg md:text-md sm:text-sm text-xs font-normal text-white">{description}</p>
                 </div>
                 
-                <div className="w-full max-w-[1440px] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl px-4">
+                <div className="w-full max-w-[1440px] mx-auto lg:flex md:flex hidden flex-wrap lg:justify-center rounded-3xl px-4">
                     <div className={firstRowClass}>
                         {firstRowData.map((item: any, index: number) => (
                             <div
@@ -63,8 +63,8 @@ const StarDom = ({
                                 <div className="rounded-bl-xl rounded-br-xl absolute bottom-0 w-full flex bg-black opacity-80 justify-start items-center px-4 h-24">
                                     <div className="w-[2px] h-12 bg-purple-500 mr-4" />
                                     <div className="w-auto h-full flex flex-col justify-center items-start">
-                                        <h3 className="text-md font-semibold text-white text-left">{item?.heading}</h3>
-                                        <p className="text-sm font-normal text-white text-left">{item?.description}</p>
+                                        <h3 className="lg:text-md md:text-sm sm:text-xs text-xs font-semibold text-white text-left">{item?.heading}</h3>
+                                        <p className="lg:text-sm md:text-xs sm:text-xs text-xs font-normal text-white text-left">{item?.description}</p>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@ const StarDom = ({
                     </div>
                 </div>
                 
-                <div className="w-full max-w-[1440px] mx-auto md:flex hidden flex-wrap md:justify-center rounded-3xl mt-12 px-4">
+                <div className="w-full max-w-[1440px] mx-auto lg:flex md:flex hidden flex-wrap lg:justify-center rounded-3xl mt-12 px-4">
                     <div className={secondRowClass}>
                         {secondRowData.map((item: any, index: number) => (
                             <div
@@ -87,8 +87,8 @@ const StarDom = ({
                                 <div className="rounded-bl-xl rounded-br-xl absolute bottom-0 w-full flex bg-black opacity-80 justify-start items-center px-4 h-24">
                                     <div className="w-[2px] h-12 bg-purple-500 mr-4" />
                                     <div className="w-auto h-full flex flex-col justify-center items-start">
-                                        <h3 className="text-md font-semibold text-white text-left">{item?.heading}</h3>
-                                        <p className="text-sm font-normal text-white text-left">{item?.description}</p>
+                                        <h3 className="lg:text-md md:text-sm sm:text-xs text-xs font-semibold text-white text-left">{item?.heading}</h3>
+                                        <p className="lg:text-sm md:text-xs sm:text-xs text-xs font-normal text-white text-left">{item?.description}</p>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@ const StarDom = ({
                     </div>
                 </div>
                 
-                <div className="w-full max-w-[90%] mx-auto md:hidden flex flex-wrap md:justify-center rounded-3xl mt-12 relative">
+                <div className="w-full max-w-[90%] mx-auto lg:hidden md:hidden flex flex-wrap lg:justify-center rounded-3xl mt-12 relative">
                     <div className="relative w-full h-full">
                         {combinedData.length > 0 && (
                             <>
@@ -107,9 +107,9 @@ const StarDom = ({
                                         className="object-contain w-full h-full rounded-xl"
                                     />
                                 </div>
-                                <div className="display-hover md:flex justify-center absolute p-4 flex-col bg-black bottom-0 left-0 right-0">
-                                    <h3 className="text-xl font-medium text-white">{combinedData[currentIndex]?.heading}</h3>
-                                    <p className="text-md font-normal text-white">{combinedData[currentIndex]?.description}</p>
+                                <div className="display-hover lg:flex justify-center absolute p-4 flex-col bg-black bottom-0 left-0 right-0">
+                                    <h3 className="lg:text-xl md:text-lg sm:text-md text-sm font-medium text-white">{combinedData[currentIndex]?.heading}</h3>
+                                    <p className="lg:text-md md:text-sm sm:text-xs text-xs font-normal text-white">{combinedData[currentIndex]?.description}</p>
                                 </div>
                             </>
                         )}

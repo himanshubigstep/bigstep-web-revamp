@@ -15,23 +15,23 @@ const MileStoneSubmenu = ({ homePageData }: { homePageData: any }) => {
         .sort((a: { id: number; }, b: { id: number; }) => a.id - b.id);
     return (
         <div className='w-full max-w-[1440px] mx-auto py-16 px-4'>
-            <div className='w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center mb-8 md:px-0 px-4'>
-                <h2 className='text-3xl font-semibold text-center mb-4 text-black dark:text-white'>{homePageData?.outstanding_results?.heading}</h2>
-                <p className='text-lg font-normal text-black dark:text-white'>{homePageData?.outstanding_results?.description}</p>
+            <div className='w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center mb-8 lg:px-0 px-4'>
+                <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4 text-black dark:text-white'>{homePageData?.outstanding_results?.heading}</h2>
+                <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal text-black dark:text-white'>{homePageData?.outstanding_results?.description}</p>
             </div>
-            <div className='w-full relative md:rounded-[3rem] md:h-[30rem] mt-8'>
+            <div className='w-full relative rounded-[3rem] lg:h-[28rem] md:h-[24rem] sm:h-[20rem] h-auto mt-8'>
                 <img
                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData?.outstanding_results?.background_image?.data?.attributes?.formats?.large?.url}`}
                     alt={homePageData?.milestones?.background_image?.data?.attributes?.name}
-                    className='flex absolute left-0 right-0 top-0 bottom-0 w-full md:h-auto h-full md:rounded-[3rem] md:object-fill object-cover'
+                    className='flex absolute left-0 right-0 top-0 bottom-0 w-full h-full rounded-[3rem] lg:object-fill object-cover'
                 />
-                <div className='relative w-full md:items-center md:h-full flex'>
-                    <div className='md:w-[65%] w-full grid md:grid-cols-2 grid-cols-2 justify-center md:items-center md:px-16 px-8 md:py-0 py-8 md:gap-16 gap-2'>
+                <div className='relative w-full lg:items-center lg:h-full flex'>
+                    <div className='lg:w-[65%] w-full grid lg:grid-cols-2 grid-cols-2 justify-center lg:items-center lg:px-16 px-8 lg:py-0 py-8 lg:gap-16 gap-2'>
                         {mappedData.map((item: any) => (
                             <div key={item.id} className='md:p-0 p-2'>
-                                <h2 className='md:text-4xl text-3xl font-bold mb-2 text-white'>{item?.heading}</h2>
-                                <h3 className='md:text-xl text-xl font-bold text-white'>{item?.subHeading}</h3>
-                                <p className='md:w-[90%] md:text-sm text-sm font-normal text-white'>{item?.description}</p>
+                                <h2 className='lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold mb-2 text-white'>{item?.heading}</h2>
+                                <h3 className='lg:text-xl md:text-lg sm:text-md text-sm font-bold text-white'>{item?.subHeading}</h3>
+                                <p className='md:w-[90%] lg:text-sm md:text-xs sm:text-xs text-xs font-normal text-white'>{item?.description}</p>
                             </div>
                         ))}
                     </div>

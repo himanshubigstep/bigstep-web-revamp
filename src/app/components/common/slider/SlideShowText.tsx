@@ -56,13 +56,13 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
                 alt={`Slide ${slide.id}`}
             />
         )}
-        <div className="relative w-full max-w-[1440px] mx-auto h-full text-white z-20 px-4 md:px-4">
-            <div className={`md:w-[45%] w-full h-full flex flex-col justify-center items-start transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                <h2 className="md:text-4xl text-xl mb-4 font-medium">{slide.attributes.title}</h2>
-                <p className="md:mb-16 mb-4 md:text-lg text-md font-normal">{slide.attributes.text_body}</p>
+        <div className="relative w-full max-w-[1440px] mx-auto h-full text-white z-20 px-4 lg:px-4">
+            <div className={`lg:w-[60%] md:w-[70%] sm:w-[80%] w-full h-full flex flex-col justify-center items-start transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-xl mb-4 font-medium">{slide.attributes.title}</h2>
+                <p className="lg:mb-8 mb-8 lg:text-lg md:text-md sm:text-sm text-xs font-normal">{slide.attributes.text_body}</p>
                 <Button
                     text={slide.attributes.button_text}
-                    className="md:text-lg text-sm bg-blue-500 hover:bg-blue-800 text-white py-4 px-4 rounded-xl w-auto font-medium"
+                    className="lg:text-md text-sm bg-blue-500 hover:bg-blue-800 text-white py-4 px-4 rounded-xl w-auto font-medium"
                     onClick={() => window.open(slide.attributes.button_link, '_blank')}
                 />
             </div>
@@ -77,12 +77,12 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
 
     useEffect(() => {
         if (slides && slides.length > 0) {
-            // Sorting slides only once when slides are received or updated
+            
             const sorted = [...slides].sort((a, b) => a.id - b.id);
-            setSortedSlides(sorted); // Store sorted slides in state
-            setCurrentSlideIndex(0); // Reset to the first slide
+            setSortedSlides(sorted);
+            setCurrentSlideIndex(0);
         }
-    }, [slides]); // Re-run if `slides` prop changes
+    }, [slides]);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -109,7 +109,7 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="relative overflow-hidden min-h-[80vh]">
+            <div className="relative overflow-hidden lg:min-h-[80vh] md:min-h-[70vh] sm:min-h-screen min-h-screen">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-r from-black via-gray-900 to-transparent opacity-90 z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />

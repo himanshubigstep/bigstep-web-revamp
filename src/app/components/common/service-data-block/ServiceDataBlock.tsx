@@ -18,7 +18,8 @@ const ServiceDataBlock = ({
     bgImage,
     logoClassName,
     rpaPageImplimentationSubData,
-    rpaPageManagedSubData
+    rpaPageManagedSubData,
+    serviceHeding
 }: {
     title: string;
     description?: string;
@@ -34,7 +35,8 @@ const ServiceDataBlock = ({
     bgImage?: string,
     logoClassName?: string,
     rpaPageImplimentationSubData?: [],
-    rpaPageManagedSubData?: []
+    rpaPageManagedSubData?: [],
+    serviceHeding?: string
 }) => {
     // Sort the services by ID
     const sortedServices = services.sort((a: any, b: any) => a.id - b.id);
@@ -50,8 +52,8 @@ const ServiceDataBlock = ({
                 </div>
             }
             <div className={headingClassName}>
-                <h2 className='text-3xl font-semibold text-center mb-4'>{title}</h2>
-                {description && <p className='text-lg font-normal'>{description}</p>}
+                <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4'>{title}</h2>
+                {description && <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal'>{description}</p>}
             </div>
             <div className={serviceBlockClassName}>
                 {sortedServices.map((service: any) => (
@@ -64,44 +66,44 @@ const ServiceDataBlock = ({
                                     alt={service.heading}
                                 />
                             </div>
-                            <h4 className='md:line-clamp-none line-clamp-2 md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service.heading}</h4>
+                            <h4 className={serviceHeding}>{service.heading}</h4>
                         </div>
                         <div className={serviceItemDescription}>
-                            <p className='line-clamp-3 md:line-clamp-none text-md font-normal'>{service.description}</p>
+                            <p className='line-clamp-3 lg:line-clamp-none lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{service.description}</p>
                         </div>
-                            <ul className='flex flex-col gap-4 list-disc md:pl-8 pl-4'>
+                            <ul className='flex flex-col gap-4 list-disc lg:pl-8 pl-4'>
                                 {service.heading === "RPA Implementation" &&
                                     rpaPageImplimentationSubData && rpaPageImplimentationSubData.map((item: any) => (
                                 <li className='text-left' key={item.id}>
-                                    <h4 className='md:line-clamp-none text-left line-clamp-2 md:text-lg text-md font-semibold'>{item.heading}</h4>
-                                    <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
+                                    <h4 className='lg:line-clamp-none text-left line-clamp-2 lg:text-lg md:text-md sm:text-sm text-xs text-md font-semibold'>{item.heading}</h4>
+                                    <p className='line-clamp-3 lg:line-clamp-none text-sm font-normal'>{item.description}</p>
                                 </li>
                             ))}
                             {/* <div className={serviceItemDescription}>
-                                <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
+                                <p className='line-clamp-3 lg:line-clamp-none text-sm font-normal'>{item.description}</p>
                             </div> */}
                             </ul>
-                            <ul className='flex flex-col gap-4 list-disc md:pl-8 pl-4'>
+                            <ul className='flex flex-col gap-4 list-disc lg:pl-8 pl-4'>
                                 {service.heading === "RPA Managed Services" &&
                                     rpaPageManagedSubData && rpaPageManagedSubData.map((item: any) => (
                                     <li className='text-left' key={item.id}>
-                                        <h4 className='md:line-clamp-none text-left line-clamp-2 md:text-lg text-md font-semibold'>{item.heading}</h4>
-                                        <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
+                                        <h4 className='lg:line-clamp-none text-left line-clamp-2 lg:text-lg md:text-md sm:text-sm text-xs text-md font-semibold'>{item.heading}</h4>
+                                        <p className='line-clamp-3 lg:line-clamp-none text-sm font-normal'>{item.description}</p>
                                     </li>
                                 ))}
                                 {/* <div className={serviceItemDescription}>
-                                    <p className='line-clamp-3 md:line-clamp-none text-sm font-normal'>{item.description}</p>
+                                    <p className='line-clamp-3 lg:line-clamp-none text-sm font-normal'>{item.description}</p>
                                 </div> */}
                             </ul>
                     </div>
                 ))}
             </div>
             {showButton && buttonText &&
-                <div className='relative w-full h-auto px-4 pt-8 flex justify-center items-center mt-8'>
+                <div className='relative w-full h-auto px-4 pt-8 flex justify-center items-center'>
                     <Button
                         text={buttonText}
                         onClick={() => console.log('Get Started')}
-                        className='py-4 px-8 md:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
+                        className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-normal'
                     />
                 </div>
             }

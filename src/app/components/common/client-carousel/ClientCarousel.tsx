@@ -41,19 +41,19 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
     }, []);
 
     return (
-        <div className='relative w-full h-full md:pt-16 pt-8 bg-white dark:bg-black md:px-0 px-4 md:mb-16 mb-8'>
+        <div className='relative w-full h-full lg:pt-16 pt-8 bg-white dark:bg-black lg:px-0 px-4 lg:mb-16 mb-8'>
             <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
-                <h2 className='text-3xl font-semibold text-center mb-4'>{heading}</h2>
-                <p className='text-lg'>{description}</p>
+                <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4'>{heading}</h2>
+                <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal'>{description}</p>
             </div>
-            <div className='client-logos-row overflow-hidden md:max-w-[1440px] max-w-full mx-auto px-4'>
+            <div className='client-logos-row overflow-hidden lg:max-w-[1440px] max-w-full mx-auto px-4'>
                 <div className="flex whitespace-nowrap gap-4" ref={containerRef} style={{ transform: `translateX(${offset}px)` }}>
                     {row1 && row1.map((item, index) => (
                         <div key={index} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white dark:bg-black rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
                                 alt={`client ${index + 1}`}
-                                className="md:w-40 md:h-24 w-20 h-20 object-contain mx-2"
+                                className="lg:w-40 lg:h-24 w-20 h-20 object-contain mx-2"
                             />
                         </div>
                     ))}
@@ -62,21 +62,21 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
                                 alt={`client ${index + 1}`}
-                                className="md:w-40 md:h-24 w-20 h-20 object-contain mx-2"
+                                className="lg:w-40 lg:h-24 w-20 h-20 object-contain mx-2"
                             />
                         </div>
                     ))}
                 </div>
             </div>
-            <div className='md:block hidden w-full h-[1px] bg-gray-200' />
-            <div className="client-logos-row overflow-hidden md:max-w-[1440px] max-w-full mx-auto px-4">
+            <div className='lg:block hidden w-full h-[1px] bg-gray-200' />
+            <div className="client-logos-row overflow-hidden lg:max-w-[1440px] max-w-full mx-auto px-4">
                 <div className="flex whitespace-nowrap gap-4 animate-marquee-reverse" ref={containerRef} style={{ transform: `translateX(${offset}px)` }}>
                     {row2.map((item, index) => (
                         <div key={index} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white dark:bg-black rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
                                 alt={`client ${index + 1}`}
-                                className="md:w-40 md:h-24 w-20 h-20 object-contain mx-2"
+                                className="lg:w-40 lg:h-24 w-20 h-20 object-contain mx-2"
                             />
                         </div>
                     ))}
@@ -85,7 +85,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
                                 alt={`client ${index + 1}`}
-                                className="md:w-40 md:h-24 w-20 h-20 object-contain mx-2"
+                                className="lg:w-40 lg:h-24 w-20 h-20 object-contain mx-2"
                             />
                         </div>
                     ))}

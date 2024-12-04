@@ -11,7 +11,7 @@ const Slide: React.FC<{ slide: any; isActive: boolean }> = ({ slide, isActive })
         >
             <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${imageUrl}`}
-                className="absolute block w-full h-full object-cover"
+                className="absolute block w-full h-full object-cover object-top"
                 alt={`Slide ${slide.id}`}
             />
         </div>
@@ -55,7 +55,7 @@ const SlideShow = ({valuesData=[]}: { valuesData: any[] }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="relative overflow-hidden md:min-h-[48rem] min-h-96">
+            <div className="relative overflow-hidden lg:min-h-[48rem] md:min-h[42rem] sm:min-h-[36rem] min-h-96">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />

@@ -252,7 +252,7 @@ const CtoAsService = () => {
         />
         <ProductDevelopment developmentData={ctoAsServiceData} />
         <MileStoneSubmenu homePageData={ctoAsServiceData} />
-        <div className='w-full h-full md:py-16 py-8'>
+        <div className='w-full h-full'>
           <Clients
               title={ctoAsServiceData?.client_review?.heading || ''}
               description={ctoAsServiceData?.client_review?.description || ''}

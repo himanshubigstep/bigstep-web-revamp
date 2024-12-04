@@ -57,12 +57,12 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
     };
 
     return (
-        <div className='w-full h-full md:py-16 py-8 px-4 flex flex-col justify-center items-center'>
+        <div className='w-full h-full lg:py-16 py-8 px-4 flex flex-col justify-center items-center'>
             <div className='w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center text-center'>
-                <h2 className='text-3xl font-bold text-center mb-4'>{title}</h2>
-                <p className='text-lg'>{description}</p>
+                <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold text-center mb-4'>{title}</h2>
+                <p className='lg:text-lg md:text-md sm:text-sm text-xs'>{description}</p>
             </div>
-            <div className='md:block hidden relative w-full max-w-[1440px] mx-auto mt-8 md:h-[40rem] h-auto'>
+            <div className='lg:block hidden relative w-full max-w-[1440px] mx-auto mt-8 lg:h-[40rem] h-auto'>
                 <div className='flex w-full h-1 bg-[#E1E1E1] absolute top-1/2 z-10 px-8 justify-evenly items-center' />
                 <div className='w-full h-full flex justify-evenly items-center'>
                     {sortedApproach.map((item, index) => {
@@ -95,7 +95,7 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                                         top: item.id % 2 === 0 ? '340%' : 'auto',
                                     }}
                                 >
-                                    <h3 className='text-center text-xl font-semibold dark:text-white text-black'>{item.heading}</h3>
+                                    <h3 className='text-center lg:text-xl md:text-lg sm:text-md text-sm font-semibold dark:text-white text-black'>{item.heading}</h3>
                                     <p className='text-center text-sm font-normal dark:text-white text-black'>{item.description}</p>
                                 </div>
                                 <div
@@ -119,7 +119,7 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                 </div>
             </div>
 
-            <div className='md:hidden block relative w-full max-w-[1440px] mx-auto mt-8 md:h-[48rem] h-auto'>
+            <div className='lg:hidden block relative w-full max-w-[1440px] mx-auto mt-8 lg:h-[48rem] h-auto'>
                 <div className='w-full h-full grid grid-cols-1 gap-4 justify-center items-center'>
                     {sortedApproach.map((item, index) => {
                         const hexColor = item.hex_code || '#ccc';
@@ -153,7 +153,7 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
             <Button
                 text={buttonText}
                 onClick={() => console.log('clicked')}
-                className='py-4 px-8 md:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
+                className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-normal'
             />
         </div>
     );

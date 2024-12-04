@@ -254,7 +254,7 @@ const CompleteProductDevelopment = () => {
           developmentData={completeProductDevelopmentData}
         />
         <MileStoneSubmenu homePageData={completeProductDevelopmentData} />
-        <div className='w-full h-full md:py-16 py-8'>
+        <div className='w-full h-full'>
           <Clients
               title={completeProductDevelopmentData?.client_review?.heading || ''}
               description={completeProductDevelopmentData?.client_review?.description || ''}

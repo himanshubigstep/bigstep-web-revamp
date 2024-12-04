@@ -79,7 +79,7 @@ const CultureServiceBlock = ({
             <div className={`${serviceContainerClassName}`}>
                 {currentServices.map((service: any) => (
                     <div key={service.id} className={`${serviceItemClassName}`}>
-                        <div className='w-full flex md:flex-row flex-col md:justify-start justify-center md:items-start items-center'>
+                        <div className='w-full flex lg:flex-row md:flex-row flex-col lg:justify-start justify-center lg:items-start items-center'>
                             <div className={`${serviceIconClassName}`} style={{ backgroundColor: service.hex_code }}>
                                 <img
                                     className='w-12 h-12 p-2'
@@ -88,8 +88,8 @@ const CultureServiceBlock = ({
                                 />
                             </div>
                             <div className={serviceHeaderClassName}>
-                                <h4 className='md:w-[60%] w-full md:text-left text-center md:text-xl text-lg font-semibold menu-item-text hover:text-blue-500'>{service?.heading}</h4>
-                                <p className='text-md font-normal md:flex hidden w-[80%]'>{service?.description}</p>
+                                <h4 className='lg:w-[60%] w-full lg:text-left md:text-left text-center lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'>{service?.heading}</h4>
+                                <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal lg:flex md:flex hidden w-[80%]'>{service?.description}</p>
                             </div>
                         </div>
                     </div>

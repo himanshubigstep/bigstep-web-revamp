@@ -27,12 +27,12 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
     const sortedBlogs = related_blogs_by_category.sort((a: { attributes: { updatedAt: string | number | Date; }; }, b: { attributes: { updatedAt: string | number | Date; }; }) => new Date(b?.attributes?.updatedAt).getTime() - new Date(a?.attributes?.updatedAt).getTime()).slice(0, 4);
 
   return (
-    <div className='w-full h-full max-w-[1440px] mx-auto md:py-16 py-8'>
-        <div className='w-full max-w-[1080px] mx-auto flex flex-col md:px-0 px-4 mb-4'>
+    <div className='w-full h-full max-w-[1440px] mx-auto lg:py-16 py-8'>
+        <div className='w-full max-w-[1080px] mx-auto flex flex-col lg:px-0 px-4 mb-4'>
             <h2 className='text-3xl font-semibold text-left'>{related_blogs?.heading}</h2>
         </div>
-        <div className='w-full max-w-[1080px] mx-auto flex flex-col md:px-0 px-4'>
-            <div className='w-full h-full grid md:grid-cols-1 grid-cols-1 gap-8'>
+        <div className='w-full max-w-[1080px] mx-auto flex flex-col lg:px-0 px-4'>
+            <div className='w-full h-full grid lg:grid-cols-1 grid-cols-1 gap-8'>
             {sortedBlogs?.length > 0 ? (
             sortedBlogs.map((item: any) => (
               <div
@@ -48,7 +48,7 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
                   />
                 </div>
                 <div className="w-full h-auto flex flex-col p-4">
-                  <h3 className="text-xl font-semibold line-clamp-2">{item?.attributes?.heading}</h3>
+                  <h3 className="lg:text-xl md:text-lg sm:text-md text-sm font-semibold line-clamp-2">{item?.attributes?.heading}</h3>
                   <p className="text-sm font-semibold">{item?.attributes?.category?.data?.attributes?.name}</p>
                   <p className="text-sm font-semibold">{`Updated on: ${formatDate(item?.attributes?.updatedAt)}`}</p>
                   <div className="w-auto h-auto flex items-center py-2 gap-2">

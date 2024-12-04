@@ -143,23 +143,23 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
   };
 
   return (
-    <div className="h-full flex items-center md:gap-8 gap-4 md:flex-row flex-row-reverse">
-      <nav className="h-full flex items-center md:justify-unset justify-end">
+    <div className="h-full flex items-center lg:gap-8 gap-4 lg:flex-row flex-row-reverse">
+      <nav className="h-full flex items-center lg:justify-unset justify-end">
         <button
           onClick={toggelMobileMenu}
-          className={`md:hidden flex items-center text-2xl ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
+          className={`lg:hidden flex items-center text-2xl ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
         >
           <RxHamburgerMenu />
         </button>
         <ul
-          className={`md:overflow-y-visible overflow-y-auto z-10 w-full md:h-full h-auto absolute md:static md:top-0 top-full md:border-0 border-[1px] md:border-transparent border-gray-200 md:dark:border-transparent dark:border-gray-800 md:left-auto md:right-auto left-0 right-0 md:items-center items-start md:p-0 p-4 gap-8 md:bg-transparent bg-white md:dark:bg-transparent dark:bg-black md:flex-row flex-col ${isMobileMenu ? "flex" : "hidden md:flex"
+          className={`lg:overflow-y-visible overflow-y-auto z-10 w-full lg:h-full h-auto absolute lg:static lg:top-0 top-full lg:border-0 border-[1px] lg:border-transparent border-gray-200 lg:dark:border-transparent dark:border-gray-800 lg:left-auto lg:right-auto left-0 right-0 lg:items-center items-start lg:p-0 p-4 gap-8 lg:bg-transparent bg-white lg:dark:bg-transparent dark:bg-black lg:flex-row flex-col ${isMobileMenu ? "flex" : "hidden lg:flex"
             }`}
           ref={dropdownRef}
         >
           {menuItems.map((menu: any) => (
             <li
               key={menu.id}
-              className="md:h-full md:w-auto w-full md:flex items-center"
+              className="lg:h-full lg:w-auto w-full lg:flex items-center"
               onMouseEnter={() => handleMouseEnter(menu)}
               onMouseLeave={handleMouseLeave}
             >
@@ -170,9 +170,9 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                     handleLinkClick();
                   }
                 }}
-                className={`text-md md:w-auto w-full text-md z-30 flex items-center md:justify-normal justify-between gap-2 md:hover:text-blue-500 md:dark:text-inherit dark:text-white
+                className={`text-md lg:w-auto w-full text-md z-30 flex items-center lg:justify-normal justify-between gap-2 lg:hover:text-blue-500 lg:dark:text-inherit dark:text-white
                     ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
-                    ${scrolled ? 'md:text-black md:dark:text-white' : 'md:text-white md:hover:text-white'} menu-item-button`}
+                    ${scrolled ? 'lg:text-black lg:dark:text-white' : 'lg:text-white lg:hover:text-white'} menu-item-button`}
               >
                 <span className="underline-gap">{menu.heading}</span>
                 {!menu.link && !menu.item_link && (
@@ -183,12 +183,12 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
               {isDropdownOpen === menu.heading && !menu.link && (
                 <ul
                   className={`${menu.items_on_right.length !== 0
-                    ? "w-full flex md:flex-row flex-col justify-between left-0"
+                    ? "w-full flex lg:flex-row flex-col justify-between left-0"
                     : "small-menu left-auto right-auto"
-                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white dark:bg-black md:absolute left-0 right-0 top-full md:border-gray-200 md:border-t-[1px] md:dark:border-gray-800 md:gap-8 gap-4 rounded-2xl md:p-8 p-2 shadow-xl`}
+                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white dark:bg-black lg:absolute left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 lg:gap-8 gap-4 rounded-2xl lg:p-8 p-2 shadow-xl`}
                 >
                   <ul
-                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "grid md:grid-cols-2 grid-cols-1 md:gap-8 gap-4 md:w-[65%]" : "grid grid-cols-1 md:gap-8 gap-4 w-[100%]"
+                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "grid md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4 lg:w-[65%]" : "grid grid-cols-1 lg:gap-8 gap-4 w-[100%]"
                       }`}
                   >
                     {menu.items_on_left &&
@@ -236,7 +236,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                       ))}
                   </ul>
                   <ul
-                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "flex flex-col md:w-[35%] w-full gap-8" : "flex flex-col w-[100%] md:gap-8 gap-4"
+                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "flex flex-col lg:w-[35%] w-full gap-8" : "flex flex-col w-[100%] lg:gap-8 gap-4"
                       }`}
                   >
                     {menu.items_on_right &&
@@ -299,7 +299,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
           ))}
         </ul>
       </nav>
-      <div className={`border-[1px] rounded-xl md:w-40 w-32 md:py-4 py-2 flex items-center justify-center ${scrolled ? 'bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white hover:border-transparent' : 'bg-transparent text-white border-white hover:bg-white hover:text-blue-500 hover:border-blue-500'}`}>
+      <div className={`border-[1px] rounded-xl lg:w-40 w-32 lg:py-4 py-2 flex items-center justify-center ${scrolled ? 'bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white hover:border-transparent' : 'bg-transparent text-white border-white hover:bg-white hover:text-blue-500 hover:border-blue-500'}`}>
         <Button
           onClick={handelContactUs}
           text={lastItemData?.item}

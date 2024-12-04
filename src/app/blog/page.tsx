@@ -147,6 +147,7 @@ const Blogs = () => {
       <AITech
         bannerTitle={blogPageData?.attributes?.blog_page_section.heading || ''}
         bannerDescription={blogPageData?.attributes?.blog_page_section.description || ''}
+        isBlog={true}
       />
       <BlogsGrid
         categories={processedCategories()}

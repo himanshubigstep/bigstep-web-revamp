@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <div
-      className={`poppins w-full h-[100px] fixed left-0 right-0 top-0 z-30 transition-all duration-300 ease-in-out ${
+      className={`poppins w-full md:h-[120px] lg:h-[100px] sm:h-[75px] h-[100px] fixed left-0 right-0 top-0 z-30 transition-all duration-300 ease-in-out ${
         scrolled ? 'bg-white dark:bg-black shadow-2xl' : 'bg-transparent'
       }`}
     >

@@ -13,18 +13,18 @@ const OurValues = ({ valuesData }: { valuesData: any }) => {
     };
     return (
         <div className='w-full h-auto bg-black'>
-            <div className='w-full flex md:flex-row flex-col justify-center items-center text-center md:px-0'>
-                <div className='w-full md:w-1/2 flex flex-col justify-center items-center md:px-0'>
+            <div className='w-full flex lg:flex-row flex-col justify-center items-center text-center lg:px-0'>
+                <div className='w-full lg:w-1/2 flex flex-col justify-center items-center lg:px-0'>
                     <SlideShow valuesData={valuesData?.value_photos?.data} />
                 </div>
-                <div className='w-full md:w-1/2 flex flex-col justify-center items-center text-left md:p-16 p-4'>
-                    <div className='w-full flex flex-col text-left md:px-0'>
-                        <h2 className='text-3xl font-semibold text-left mb-4 text-white'>{valuesData?.title}</h2>
-                        <p className='text-lg font-normal text-white'>{valuesData?.description}</p>
+                <div className='w-full lg:w-1/2 flex flex-col justify-center items-center text-left lg:p-16 p-4'>
+                    <div className='w-full flex flex-col text-left lg:px-0'>
+                        <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-left mb-4 text-white'>{valuesData?.title}</h2>
+                        <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal text-white'>{valuesData?.description}</p>
                     </div>
-                    <div className='w-full flex md:py-16 py-8'>
+                    <div className='w-full flex lg:py-16 py-8'>
                         <div className='w-full flex'>
-                            <div className='md:grid hidden md:grid-cols-3 grid-cols-2 gap-16'>
+                            <div className='lg:grid hidden lg:grid-cols-3 grid-cols-2 gap-16'>
                                 {valuesData && valuesData?.value_1.map((value: any) => (
                                     <div key={value.id} className='relative flex flex-col justify-center items-center'>
                                         <div className='mb-4'>
@@ -35,14 +35,14 @@ const OurValues = ({ valuesData }: { valuesData: any }) => {
                                             />
                                         </div>
                                         <div className='w-full max-w-[80%] flex flex-col justify-center items-center'>
-                                            <h2 className='text-xl text-center font-semibold mb-2 text-white line-clamp-2'>{value?.link}</h2>
+                                            <h2 className='lg:text-2xl md:text-xl sm:text-lg text-md text-center font-semibold mb-2 text-white line-clamp-2'>{value?.link}</h2>
                                             {/* <p className='text-lg text-left font-normal text-white'>{value.description}</p> */}
                                         </div>
                                     </div>
                                 ))}
                             </div>
                             
-                            <div className="md:hidden w-full flex flex-col md:items-center">
+                            <div className="lg:hidden w-full flex flex-col lg:items-center">
                                 <div className="mb-4">
                                     <img
                                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${valuesData?.value_1[currentIndex]?.image?.data?.attributes?.url}`}
@@ -50,8 +50,8 @@ const OurValues = ({ valuesData }: { valuesData: any }) => {
                                         className="object-contain min-w-24 max-w-24"
                                     />
                                 </div>
-                                <div className="w-full max-w-[80%] flex flex-col md:justify-center md:items-center">
-                                    <h2 className="text-xl md:text-center font-semibold mb-2 text-white">
+                                <div className="w-full max-w-[80%] flex flex-col lg:justify-center lg:items-center">
+                                    <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold mb-2 text-white">
                                         {valuesData?.value_1[currentIndex]?.link}
                                     </h2>
                                 </div>
