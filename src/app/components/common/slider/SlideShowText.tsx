@@ -41,7 +41,7 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
     >
         {slide.attributes.image.data.attributes.ext.endsWith('.mp4') ? (
             <video
-                className="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                className="absolute block w-full h-full lg:object-cover object-fill -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                 autoPlay
                 loop
                 muted
@@ -52,7 +52,7 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
         ) : (
             <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.url}`}
-                className="absolute block w-full h-full lg:object-cover md:object-cover sm:object-cover"
+                className="absolute block w-full h-full lg:object-cover"
                 alt={`Slide ${slide.id}`}
             />
         )}
