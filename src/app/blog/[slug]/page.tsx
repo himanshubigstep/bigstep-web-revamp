@@ -47,6 +47,7 @@ interface BlogData {
         author: Author;
         image: Image;
         updatedAt: string;
+        upload_date: string;
         category: {
             data: {
                 id: number;
@@ -139,21 +140,44 @@ const BlogPostPage = () => {
     useEffect(() => {
         const fetchBlogData = async () => {
             try {
-                const data = await fetchBlogsData();
-                setBlogData(data.data);
+                let allBlogsData: BlogData[] = [];
+                let serviceResponse = await fetchBlogsData(1); // Fetch the first page of blog data
+
+                // Concatenate data from the first page
+                allBlogsData = allBlogsData.concat(serviceResponse?.data || []);
+
+                // Loop through and fetch remaining pages
+                while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
+                    const nextPage = serviceResponse.meta.pagination.page + 1;
+                    serviceResponse = await fetchBlogsData(nextPage);
+                    allBlogsData = allBlogsData.concat(serviceResponse?.data || []);
+                }
+
+                setBlogData(allBlogsData); // Set all blog data in state
+
                 const blogSlug = Array.isArray(slug) ? slug[0] : slug;
-                const blogPost = data.data.find((item: BlogData) => item.attributes.slug.toLowerCase()
-                .replace(/\s+/g, '-')
-                .replace(/\//g, '-')
-                .replace(/[^a-z0-9\-]/g, '') == decodeURIComponent(blogSlug).toLowerCase()
-                .replace(/\s+/g, '-')
-                .replace(/\//g, '-')
-                .replace(/[^a-z0-9\-]/g, ''));
+                const blogPost = allBlogsData.find(
+                    (item: BlogData) =>
+                        item.attributes.slug
+                            .toLowerCase()
+                            .replace(/\s+/g, '-')
+                            .replace(/\//g, '-')
+                            .replace(/[^a-z0-9\-]/g, '') ===
+                        decodeURIComponent(blogSlug)
+                            .toLowerCase()
+                            .replace(/\s+/g, '-')
+                            .replace(/\//g, '-')
+                            .replace(/[^a-z0-9\-]/g, '')
+                );
+
                 setBlog(blogPost || null);
+
                 if (blogPost) {
                     const categoryName = blogPost.attributes.category.data.attributes.name;
-                    const relatedBlogs = data.data.filter((item: BlogData) =>
-                        item.attributes.category.data.attributes.name === categoryName && item.attributes.slug !== blogPost.attributes.slug
+                    const relatedBlogs = allBlogsData.filter(
+                        (item: BlogData) =>
+                            item.attributes.category.data.attributes.name === categoryName &&
+                            item.attributes.slug !== blogPost.attributes.slug
                     );
                     setRelatedBlogsByCategory(relatedBlogs);
                 }
@@ -176,7 +200,7 @@ const BlogPostPage = () => {
             day: 'numeric',
         };
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', options); // You can change 'en-US' to your desired locale
+        return date.toLocaleDateString('en-US', options);
     };
 
     if (loading || !blog) {
@@ -203,7 +227,7 @@ const BlogPostPage = () => {
                             />
                             <span className='flex flex-col justify-center items-start'>
                                 <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{blog?.attributes?.author?.data?.attributes?.name}</p>
-                                <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{`Updated on : ${formatDate(blog?.attributes?.updatedAt)}`}</p>
+                                <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{`Published on : ${formatDate(blog?.attributes?.upload_date)}`}</p>
                             </span>
                         </span>
 

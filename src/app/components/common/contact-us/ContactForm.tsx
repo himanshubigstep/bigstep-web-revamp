@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import InputField from '../input-fields/InputField';
 import { contactFormData } from '@/api-data/api';
 import LoaderSpinner from '../loader-spinner/LoadingSpinner';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ContactFormProps {
     buttonText?: string;
@@ -39,23 +41,23 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
         let isValid = true;
 
         if (!formData.name.trim()) {
-            errors.name = 'Name is required';
+            errors.name = 'Name is Required';
             isValid = false;
         }
 
         if (!formData.business_mail.trim()) {
-            errors.business_mail = 'business_mail is required';
+            errors.business_mail = 'Business Mail is Required';
             isValid = false;
         } else if (!/\S+@\S+\.\S+/.test(formData.business_mail)) {
-            errors.business_mail = 'business_mail is invalid';
+            errors.business_mail = 'Business Mail is Invalid';
             isValid = false;
         }
 
         if (!formData.phone_number.trim()) {
-            errors.phone_number = 'phone_number number is required';
+            errors.phone_number = 'Phone Number is Required';
             isValid = false;
         } else if (!/^\d{10}$/.test(formData.phone_number)) {
-            errors.phone_number = 'Phone number must be exactly 10 digits';
+            errors.phone_number = 'Phone Number must be exactly 10 digits';
             isValid = false;
         }
 
@@ -75,6 +77,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
 
         try {
             const response = await contactFormData(formData);
+            console.log(response)
             if (response) {
                 console.log('Form submitted successfully:', response);
                 setFormData({
@@ -85,15 +88,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                     phone_number: '',
                     message: ''
                 });
+                toast.success('Form has been submitted successfully!');
             } else {
                 setSubmitError('Failed to submit the form. Please try again.');
+                toast.error('Failed to submit the form. Please try again.');
             }
         } catch (error) {
             console.error('Error submitting the form:', error);
 
             if (error instanceof Error) {
                 if (error.message === 'This attribute must be unique') {
-                    setSubmitError('Email should be unique');
+                    setSubmitError('Email should be Unique');
                 } else {
                     setSubmitError('An error occurred. Please try again.');
                 }
@@ -180,6 +185,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                     </button>
                 </div>
             </form>
+            <ToastContainer position='bottom-right' autoClose={5000} />
         </div>
     );
 };

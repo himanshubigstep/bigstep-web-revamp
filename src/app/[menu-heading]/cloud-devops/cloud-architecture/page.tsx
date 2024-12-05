@@ -81,6 +81,7 @@ interface CloudArchitechPageProps {
   }
   technologies: {
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -238,6 +239,8 @@ const CloudArchitech = () => {
       <Parterners
         title={cloudArchitechData?.technologies?.heading || ''}
         description={cloudArchitechData?.technologies?.description || ''}
+        buttonText={cloudArchitechData?.technologies?.button_text || ''}
+        buttonLink={cloudArchitechData?.technologies?.button_link || ''}
         techData={cloudArchitechTechData || []}
         bgImage={cloudArchitechData?.technologies?.background_image?.data?.attributes?.url || ''}
       />

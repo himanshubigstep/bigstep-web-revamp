@@ -37,9 +37,11 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
 
   const toggleDropdown = (menu: any) => {
     if (menu.link) {
+      // If the menu item has a direct link, navigate to it and close the dropdown
       router.push(menu.link);
       handleLinkClick();
     } else {
+      // If the menu item has a dropdown, toggle it
       if (isDropdownOpen === menu.heading) {
         setDropdownOpen(null);
         setOpenSubmenus({});
@@ -59,6 +61,11 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
         }));
       }
     }
+  
+    // Only open the mobile menu if it was previously closed
+    if (!isDropdownOpen) {
+      setIsmobileMenu(true);
+    }
   };
 
   const handleMouseEnter = (menu: any) => {
@@ -75,16 +82,17 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
     key: string,
     link: string | null,
     hasTechnology: boolean,
-    menuHeading: string,
+    menuHeading: string
   ) => {
-    const formattedHeading = menuHeading.toLowerCase().replace(/\s+/g, '-');
-    const finalHeading = formattedHeading === 'what-we-do' ? 'services' : formattedHeading;
-    const urlHeading = formattedHeading === 'how-we-do' ? 'engagement-models' : finalHeading;
-    
-    if (key === 'Technologies' || key === 'Partnerships') {
+    const formattedHeading = menuHeading.toLowerCase().replace(/\s+/g, "-");
+    const finalHeading =
+      formattedHeading === "what-we-do" ? "services" : formattedHeading;
+    const urlHeading =
+      formattedHeading === "how-we-do" ? "engagement-models" : finalHeading;
+  
+    if (key === "Technologies" || key === "Partnerships") {
       if (link) {
-        
-        const formattedLink = link.startsWith('/') ? link.slice(1) : link;
+        const formattedLink = link.startsWith("/") ? link.slice(1) : link;
         router.push(`/${formattedLink}`);
         handleLinkClick();
       }
@@ -92,7 +100,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
     }
   
     if (link) {
-      const formattedLink = link.startsWith('/') ? link.slice(1) : link;
+      const formattedLink = link.startsWith("/") ? link.slice(1) : link;
       router.push(`/${urlHeading}/${formattedLink}`);
       handleLinkClick();
     } else if (hasTechnology) {
@@ -101,12 +109,16 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
         [key]: !prev[key],
       }));
     }
+  
+    // Close the mobile menu after selecting a submenu item
+    setIsmobileMenu(false);
   };
 
   const handleLinkClick = () => {
     setDropdownOpen(null);
     setOpenSubmenus({});
     setSubmenuClicked({});
+    setIsmobileMenu(false); // Close the mobile menu when a link is clicked
   };
 
   const toggelMobileMenu = () => {

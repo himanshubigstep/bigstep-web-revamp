@@ -81,6 +81,7 @@ interface KubernatesAdoptionsPageProps {
   }
   technologies: {
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -238,6 +239,8 @@ const KubernatesAdoptions = () => {
       <Parterners
         title={kubernatesAdoptionsData?.technologies?.heading || ''}
         description={kubernatesAdoptionsData?.technologies?.description || ''}
+        buttonText={kubernatesAdoptionsData?.technologies?.button_text || ''}
+        buttonLink={kubernatesAdoptionsData?.technologies?.button_link || ''}
         techData={kubernatesAdoptionsTechData || []}
         bgImage={kubernatesAdoptionsData?.technologies?.background_image?.data?.attributes?.url || ''}
       />

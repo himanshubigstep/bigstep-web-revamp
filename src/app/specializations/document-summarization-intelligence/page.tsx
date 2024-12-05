@@ -83,6 +83,7 @@ interface DocumentSummarizationsData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -258,6 +259,8 @@ const DocumentSummarizationInteligence = () => {
         <Parterners
           title={documentSummarizationsData?.cutting_edge_technologies?.heading || ''}
           description={documentSummarizationsData?.cutting_edge_technologies?.description || ''}
+          buttonText={documentSummarizationsData?.cutting_edge_technologies?.button_text || ''}
+          buttonLink={documentSummarizationsData?.cutting_edge_technologies?.button_link || ''}
           techData={documentSummarizationsTechData || []}
           bgImage={documentSummarizationsData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />

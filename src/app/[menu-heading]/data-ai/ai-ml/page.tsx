@@ -81,6 +81,7 @@ interface AiMlPageData {
   }
   technologies: {
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -238,6 +239,8 @@ const AiMl = () => {
       <Parterners
         title={aiMlData?.technologies?.heading || ''}
         description={aiMlData?.technologies?.description || ''}
+        buttonText={aiMlData?.technologies?.button_text || ''}
+        buttonLink={aiMlData?.technologies?.button_link || ''}
         techData={aiMlTechData || []}
         bgImage={aiMlData?.technologies?.background_image?.data?.attributes?.url || ''}
       />

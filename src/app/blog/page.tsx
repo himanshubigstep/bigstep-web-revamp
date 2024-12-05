@@ -101,12 +101,26 @@ const Blogs = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [pageData, blogsData] = await Promise.all([
-          fetchBlogsPageData(),
-          fetchBlogsData()
-        ]);
+
+        // Fetch the page data (static)
+        const pageData = await fetchBlogsPageData();
         setBlogPageData(pageData);
-        setCategories(blogsData.data);
+
+        // Fetch all blog data with pagination
+        let allBlogsData: BlogDataProps[] = [];
+        let serviceResponse = await fetchBlogsData(1); // Start from the first page
+
+        // Push the first page's data
+        allBlogsData = allBlogsData.concat(serviceResponse?.data || []);
+
+        // Loop through and fetch remaining pages
+        while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
+          const nextPage = serviceResponse.meta.pagination.page + 1;
+          serviceResponse = await fetchBlogsData(nextPage);
+          allBlogsData = allBlogsData.concat(serviceResponse?.data || []);
+        }
+
+        setCategories(allBlogsData);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -143,7 +157,7 @@ const Blogs = () => {
   return (
     <div className='poppins relative bg-white dark:bg-black w-full h-full'>
       <TopBanner bannerData={blogPageData?.attributes?.intro[0]} />
-      <NewsLetter latest_info={blogPageData?.attributes?.latest_info} />      
+      <NewsLetter latest_info={blogPageData?.attributes?.latest_info} />
       <AITech
         bannerTitle={blogPageData?.attributes?.blog_page_section.heading || ''}
         bannerDescription={blogPageData?.attributes?.blog_page_section.description || ''}

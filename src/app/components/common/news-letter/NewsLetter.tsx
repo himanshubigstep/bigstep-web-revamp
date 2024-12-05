@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import InputField from '../input-fields/InputField';
 import { subscriberFormData } from '@/api-data/api';
 import LoaderSpinner from '../loader-spinner/LoadingSpinner';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface LatestInfo {
     heading?: string;
@@ -83,8 +85,10 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
             if (response) {
                 console.log('Form submitted successfully:', response);
                 setInputValue({ name: '', email: '' });
+                toast.success('Form has been submitted successfully!');
             } else {
                 setSubmitError('Failed to submit the form. Please try again.');
+                toast.error('Failed to submit the form. Please try again.');
             }
         } catch (error: any) {
             console.error('Error submitting the form:', error);
@@ -140,9 +144,10 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
                     >
                         {isSubmitting ? <LoaderSpinner /> : latest_info?.button_text}
                     </button>
-                    {submitError && <p className='text-red-500 text-left absolute left-0 bottom-0'>{submitError}</p>}
+                    {submitError && <p className='text-red-500 text-left absolute left-0 top-32'>{submitError}</p>}
                 </form>
             </div>
+            <ToastContainer position="bottom-right" autoClose={5000} />
         </div>
     );
 }

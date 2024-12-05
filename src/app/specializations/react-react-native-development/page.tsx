@@ -84,6 +84,7 @@ interface ReactAndReactNativeData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -300,6 +301,8 @@ const ReactNativeDevelopment = () => {
         <Parterners
           title={reactAndReactNativeData?.cutting_edge_technologies?.heading || ''}
           description={reactAndReactNativeData?.cutting_edge_technologies?.description || ''}
+          buttonText={reactAndReactNativeData?.cutting_edge_technologies?.button_text || ''}
+          buttonLink={reactAndReactNativeData?.cutting_edge_technologies?.button_link || ''}
           techData={reactAndReactNativeTechData || []}
           bgImage={reactAndReactNativeData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />

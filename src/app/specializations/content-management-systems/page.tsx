@@ -83,6 +83,7 @@ interface ContentManagementSystemsData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -258,6 +259,8 @@ const ContentManagementSystems = () => {
         <Parterners
           title={contentManagementSystemsData?.cutting_edge_technologies?.heading || ''}
           description={contentManagementSystemsData?.cutting_edge_technologies?.description || ''}
+          buttonText={contentManagementSystemsData?.cutting_edge_technologies?.button_text || ''}
+          buttonLink={contentManagementSystemsData?.cutting_edge_technologies?.button_link || ''}
           techData={contentManagementSystemsTechData || []}
           bgImage={contentManagementSystemsData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />

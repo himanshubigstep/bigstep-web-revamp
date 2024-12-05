@@ -10,16 +10,31 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
     useEffect(() => {
         const fetchHomePageServiceData = async () => {
             try {
-                const response = await fetchBlogsData();
-                setRightSectionItems(response.data);
+                let serviceResponse = await fetchBlogsData();
+                let allServiceData = serviceResponse?.data || [];
+
+                while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
+                    const nextPage = serviceResponse.meta.pagination.page + 1;
+                    serviceResponse = await fetchBlogsData(nextPage);
+                    allServiceData = allServiceData.concat(serviceResponse?.data || []);
+                }
+
+                const sortedItems = allServiceData.sort((a: any, b: any) => {
+                    const dateA = new Date(a?.attributes?.upload_date);
+                    const dateB = new Date(b?.attributes?.upload_date);
+                    return dateB.getTime() - dateA.getTime();
+                });
+
+                setRightSectionItems(sortedItems);
+
             } catch (error) {
                 console.log(error);
                 return null;
             }
-        }
+        };
 
         fetchHomePageServiceData();
-    }, [])
+    }, []);
 
     function formatDate(date: string) {
         const options: Intl.DateTimeFormatOptions = {
@@ -35,11 +50,11 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
 
     const handleItemClick = (slug: string) => {
         const formattedSlug = decodeURIComponent(slug)
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/\//g, '-')
-        .replace(/[^a-z0-9\-]/g, '');
-        router.push(`/blog/${formattedSlug}`);
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/\//g, '-')
+            .replace(/[^a-z0-9\-]/g, '');
+        window.open(`/blog/${formattedSlug}`, '_blank');
     };
 
     return (
@@ -74,7 +89,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                                     className="w-full object-contain rounded-lg"
                                 />
                                 <span className="text-black dark:text-white text-sm my-4">
-                                    {formatDate(firstItem?.attributes?.publishedAt)}
+                                    {formatDate(firstItem?.attributes?.upload_date)}
                                 </span>
                                 <h2 className="text-black dark:text-white lg:text-xl md:text-lg sm:text-md text-sm font-medium mb-4">
                                     {firstItem?.attributes?.heading}
@@ -107,7 +122,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                                                 {item?.attributes?.heading}
                                             </h4>
                                             <p className="text-gray-400 dark:text-white lg:text-md md:text-sm sm:text-xs text-xs font-normal">
-                                                {formatDate(item?.attributes?.publishedAt)}
+                                                {formatDate(item?.attributes?.upload_date)}
                                             </p>
                                         </div>
                                     </div>

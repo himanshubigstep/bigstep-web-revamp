@@ -135,6 +135,7 @@ interface rpaPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -383,6 +384,8 @@ const RPA = () => {
         <Parterners
           title={rpaPageData?.technologies_we_use?.heading || ''}
           description={rpaPageData?.technologies_we_use?.description || ''}
+          buttonText={rpaPageData?.technologies_we_use?.button_text || ''}
+          buttonLink={rpaPageData?.technologies_we_use?.button_link || ''}
           techData={rpaTechData || []}
           bgImage={rpaPageData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />

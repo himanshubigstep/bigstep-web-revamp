@@ -135,6 +135,7 @@ interface dataandAiPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -311,6 +312,8 @@ const DataAndAI = () => {
         <Parterners
           title={dataandAiPageData?.technologies_we_use?.heading || ''}
           description={dataandAiPageData?.technologies_we_use?.description || ''}
+          buttonText={dataandAiPageData?.technologies_we_use?.button_text || ''}
+          buttonLink={dataandAiPageData?.technologies_we_use?.button_link || ''}
           techData={dataAndAITechData || []}
           bgImage={dataandAiPageData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />

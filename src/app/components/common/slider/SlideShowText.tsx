@@ -36,7 +36,7 @@ interface SlideShowTextProps {
 
 const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide, isActive }) => (
     <div
-        className={`absolute w-full h-full transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute w-full h-full ${isActive ? 'opacity-100' : 'opacity-0'}`}
         data-carousel-item
     >
         {slide.attributes.image.data.attributes.ext.endsWith('.mp4') ? (

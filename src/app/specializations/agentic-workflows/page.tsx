@@ -83,6 +83,7 @@ interface AgenticWorkflowsData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -258,6 +259,8 @@ const AgenticWorkFlows = () => {
         <Parterners
           title={agenticWorkflowsData?.cutting_edge_technologies?.heading || ''}
           description={agenticWorkflowsData?.cutting_edge_technologies?.description || ''}
+          buttonText={agenticWorkflowsData?.cutting_edge_technologies?.button_text || ''}
+          buttonLink={agenticWorkflowsData?.cutting_edge_technologies?.button_link || ''}
           techData={agenticWorkflowsTechData || []}
           bgImage={agenticWorkflowsData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />

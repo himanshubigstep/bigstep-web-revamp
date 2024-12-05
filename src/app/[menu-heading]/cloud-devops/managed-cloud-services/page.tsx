@@ -81,6 +81,7 @@ interface CloudServicesPageProps {
   }
   technologies: {
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -238,6 +239,8 @@ const CloudServices = () => {
       <Parterners
         title={cloudServicesData?.technologies?.heading || ''}
         description={cloudServicesData?.technologies?.description || ''}
+        buttonText={cloudServicesData?.technologies?.button_text || ''}
+        buttonLink={cloudServicesData?.technologies?.button_link || ''}
         techData={cloudServicesTechData || []}
         bgImage={cloudServicesData?.technologies?.background_image?.data?.attributes?.url || ''}
       />

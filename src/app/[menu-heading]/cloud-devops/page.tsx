@@ -135,6 +135,7 @@ interface cloudDevOpsPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -311,6 +312,8 @@ const CloudDevOps = () => {
         <Parterners
           title={cloudDevOpsData?.technologies_we_use?.heading || ''}
           description={cloudDevOpsData?.technologies_we_use?.description || ''}
+          buttonText={cloudDevOpsData?.technologies_we_use?.button_text || ''}
+          buttonLink={cloudDevOpsData?.technologies_we_use?.button_link || ''}
           techData={cloudDevOpsTechData || []}
           bgImage={cloudDevOpsData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />

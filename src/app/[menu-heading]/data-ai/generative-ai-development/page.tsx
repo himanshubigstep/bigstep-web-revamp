@@ -81,6 +81,7 @@ interface GenerativeAiPageData {
   }
   technologies: {
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -238,6 +239,8 @@ const GenerativeAiDevelopment = () => {
       <Parterners
         title={generativeAiData?.technologies?.heading || ''}
         description={generativeAiData?.technologies?.description || ''}
+        buttonText={generativeAiData?.technologies?.button_text || ''}
+        buttonLink={generativeAiData?.technologies?.button_link || ''}
         techData={generativeAiTechData || []}
         bgImage={generativeAiData?.technologies?.background_image?.data?.attributes?.url || ''}
       />

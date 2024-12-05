@@ -134,6 +134,7 @@ interface internetOfThingsPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -309,6 +310,8 @@ const InternetOfThings = () => {
         <Parterners
           title={internetOfThingsPageData?.technologies_we_use?.heading || ''}
           description={internetOfThingsPageData?.technologies_we_use?.description || ''}
+          buttonText={internetOfThingsPageData?.technologies_we_use?.button_text || ''}
+          buttonLink={internetOfThingsPageData?.technologies_we_use?.button_link || ''}
           techData={internetOfThingsTechData || []}
           bgImage={internetOfThingsPageData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />

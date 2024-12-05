@@ -82,6 +82,7 @@ interface BackendDevelopmentPageData {
   }
   technologies: {
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -280,6 +281,8 @@ const BackendEngineering = () => {
       <Parterners
         title={backendDevelopmentData?.technologies?.heading || ''}
         description={backendDevelopmentData?.technologies?.description || ''}
+        buttonText={backendDevelopmentData?.technologies?.button_text || ''}
+        buttonLink={backendDevelopmentData?.technologies?.button_link || ''}
         techData={backendDevelopmentTechData || []}
         bgImage={backendDevelopmentData?.technologies?.background_image?.data?.attributes?.url || ''}
       />

@@ -84,6 +84,7 @@ interface PropTechDevelopmentData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -300,6 +301,8 @@ const PropTechDevelopment = () => {
         <Parterners
           title={propsTechDevelopmentData?.cutting_edge_technology?.heading || ''}
           description={propsTechDevelopmentData?.cutting_edge_technology?.description || ''}
+          buttonText={propsTechDevelopmentData?.cutting_edge_technology?.button_text || ''}
+          buttonLink={propsTechDevelopmentData?.cutting_edge_technology?.button_link || ''}
           techData={propsTechDevelopmentTechData || []}
           bgImage={propsTechDevelopmentData?.cutting_edge_technology?.background_image?.data?.attributes?.url || ''}
         />

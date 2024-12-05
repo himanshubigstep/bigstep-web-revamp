@@ -48,13 +48,15 @@ const ImagesAboutUs = ({
                 <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4 text-white'>{heartHeading}</h2>
                 <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal text-center text-white'>{heartDescription}</p>
             </div>
-            <div className='relative w-full h-full flex items-center justify-center mt-16'>
-                <Button
-                    text={heartButtonText}
-                    onClick={() => console.log('clicked')}
-                    className="w-[240px] bg-blue-500 hover:bg-blue-800 text-white py-4 rounded-xl"
-                />
-            </div>
+            {heartButtonText && heartButtonLink && (
+                <div className='relative w-full h-full flex items-center justify-center mt-16'>
+                    <Button
+                        text={heartButtonText}
+                        onClick={() => window.open(heartButtonLink, '_blank')}
+                        className="w-[240px] bg-blue-500 hover:bg-blue-800 text-white py-4 rounded-xl"
+                    />
+                </div>
+            )}
             <div className='w-full h-full relative max-w-[1440px] mx-auto flex flex-col items-center justify-center lg:pt-16 pt-8 px-4'>
                 <div className='w-full h-full flex items-center gap-4'>
                     {images && images.map((item: any) => (

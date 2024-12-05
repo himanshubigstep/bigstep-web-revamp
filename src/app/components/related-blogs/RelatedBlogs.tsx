@@ -1,8 +1,6 @@
 import React from 'react'
-import { useRouter } from 'next/navigation';
 
 const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_blogs: any, related_blogs_by_category: any }) => {
-    const router = useRouter();
     const formatDate = (dateString: string) => {
         const options: Intl.DateTimeFormatOptions = {
             year: 'numeric',
@@ -19,12 +17,12 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
       .replace(/\s+/g, '-')
       .replace(/\//g, '-')
       .replace(/[^a-z0-9\-]/g, '');
-      router.push(`/blog/${formattedSlug}`);
+      window.open(`/blog/${formattedSlug}`, '_blank');
   };
 
     const getImageUrl = (imagePath: string) => `${process.env.NEXT_PUBLIC_IMAGE_URL}${imagePath}`;
     
-    const sortedBlogs = related_blogs_by_category.sort((a: { attributes: { updatedAt: string | number | Date; }; }, b: { attributes: { updatedAt: string | number | Date; }; }) => new Date(b?.attributes?.updatedAt).getTime() - new Date(a?.attributes?.updatedAt).getTime()).slice(0, 4);
+    const sortedBlogs = related_blogs_by_category.sort((a: { attributes: { upload_date: string | number | Date; }; }, b: { attributes: { upload_date: string | number | Date; }; }) => new Date(b?.attributes?.upload_date).getTime() - new Date(a?.attributes?.upload_date).getTime()).slice(0, 4);
 
   return (
     <div className='w-full h-full max-w-[1440px] mx-auto lg:py-16 py-8'>
@@ -50,7 +48,7 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
                 <div className="w-full h-auto flex flex-col p-4">
                   <h3 className="lg:text-xl md:text-lg sm:text-md text-sm font-semibold line-clamp-2">{item?.attributes?.heading}</h3>
                   <p className="text-sm font-semibold">{item?.attributes?.category?.data?.attributes?.name}</p>
-                  <p className="text-sm font-semibold">{`Updated on: ${formatDate(item?.attributes?.updatedAt)}`}</p>
+                  <p className="text-sm font-semibold">{`Published on: ${formatDate(item?.attributes?.upload_date)}`}</p>
                   <div className="w-auto h-auto flex items-center py-2 gap-2">
                     <img
                       src={getImageUrl(item?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url)}

@@ -84,6 +84,7 @@ interface LiveStreamingData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -300,6 +301,8 @@ const LiveStreaming = () => {
         <Parterners
           title={liveStreamingData?.cutting_edge_technologies?.heading || ''}
           description={liveStreamingData?.cutting_edge_technologies?.description || ''}
+          buttonText={liveStreamingData?.cutting_edge_technologies?.button_text || ''}
+          buttonLink={liveStreamingData?.cutting_edge_technologies?.button_link || ''}
           techData={liveStreamingTechData || []}
           bgImage={liveStreamingData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />

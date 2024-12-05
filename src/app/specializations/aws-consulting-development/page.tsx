@@ -83,6 +83,7 @@ interface AwsConsultingDevelopmentData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -258,6 +259,8 @@ const AwsConsultingDevelopment = () => {
         <Parterners
           title={awsConsultingDevelopmentData?.cutting_edge_technologies?.heading || ''}
           description={awsConsultingDevelopmentData?.cutting_edge_technologies?.description || ''}
+          buttonText={awsConsultingDevelopmentData?.cutting_edge_technologies?.button_text || ''}
+          buttonLink={awsConsultingDevelopmentData?.cutting_edge_technologies?.button_link || ''}
           techData={awsConsultingDevelopmentTechData || []}
           bgImage={awsConsultingDevelopmentData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />

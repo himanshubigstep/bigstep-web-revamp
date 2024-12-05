@@ -22,11 +22,15 @@ interface Partner {
 const Partners = ({
     title,
     description,
+    buttonText,
+    buttonLink,
     techData,
     bgImage,
 }: {
     title: string;
     description: string;
+    buttonText: string;
+    buttonLink: string;
     techData: Partner[];
     bgImage: string;
 }) => {
@@ -51,12 +55,12 @@ const Partners = ({
                 className="w-full h-full absolute left-0 right-0 top-0 bottom-0 object-cover object-top"
             />
             <div className="relative w-full h-full max-w-[1440px] mx-auto">
-                <div className="w-full text-left flex flex-col gap-2 lg:max-w-[75%] mx-auto">
+                <div className="w-full text-left flex flex-col gap-2 lg:max-w-[1080px] mx-auto">
                     <h4 className="font-semibold text-center lg:text-3xl md:text-2xl sm:text-xl text-lg mb-4 text-white">{title}</h4>
                     <p className="font-normal text-center lg:text-lg md:text-md sm:text-sm text-xs mb-16 text-white">{description}</p>
                 </div>
 
-                <div className="w-full h-full flex lg:flex-none md:flex-none flex-wrap gap-6 lg:items-center justify-center mb-16 lg:max-w-[75%] mx-auto">
+                <div className="w-full h-full flex lg:flex-none md:flex-none flex-wrap gap-6 justify-center lg:items-center mb-16 mx-auto">
                     {sortedTechData.map((partner) => (
                         <Button
                             key={partner.id}
@@ -67,7 +71,7 @@ const Partners = ({
                     ))}
                 </div>
 
-                <div className="border-[1px] border-gray-500 lg:max-w-[75%] mx-auto rounded-2xl w-full h-full lg:py-8 py-4">
+                <div className="border-[1px] border-gray-500  max-w-[75%] mx-auto rounded-2xl w-full h-full lg:py-8 py-4">
                     <div className="w-full grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center gap-8 items-start lg:px-8 px-4">
                         {selectedPartnerData && selectedPartnerData.attributes.logos.data?.length > 0 ? (
                             selectedPartnerData.attributes.logos.data.map((logo, index) => (
@@ -87,6 +91,16 @@ const Partners = ({
                         )}
                     </div>
                 </div>
+
+                {buttonLink && buttonText &&
+                <div className='w-full flex justify-center items-center mt-8'>
+                    <Button
+                        text={buttonText}
+                        onClick={() => window.open(buttonLink, '_blank')}
+                        className="py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-medium"
+                    />
+                </div>
+                }
 
             </div>
         </div>

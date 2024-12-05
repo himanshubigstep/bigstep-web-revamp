@@ -97,11 +97,11 @@ const TeamMembers = ({ heading, members }: { heading: string, members: TeamMembe
                             </div>
                         ))}
                     </div>
-                    <Button
+                    {/* <Button
                         onClick={() => console.log('clicked')}
                         text='Meet Our Leaders'
                         className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-normal'
-                    />
+                    /> */}
                 </div>
             </div>
         </div>

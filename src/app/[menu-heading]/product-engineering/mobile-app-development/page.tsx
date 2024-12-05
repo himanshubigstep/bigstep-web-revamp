@@ -82,6 +82,7 @@ interface MobileAppDevelopmentPageData {
   }
   technologies: {
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -280,6 +281,8 @@ const MobileAppDevelopment = () => {
       <Parterners
         title={mobileAppDevelopmentData?.technologies[0].heading || ''}
         description={mobileAppDevelopmentData?.technologies[0].description || ''}
+        buttonText={mobileAppDevelopmentData?.technologies[0].button_text || ''}
+        buttonLink={mobileAppDevelopmentData?.technologies[0].button_link || ''}
         techData={customerSoftwareDevelopmentTechData || []}
         bgImage={mobileAppDevelopmentData?.technologies[0]?.background_image?.data?.attributes?.url || ''}
       />

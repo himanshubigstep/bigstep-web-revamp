@@ -84,6 +84,7 @@ interface SaasProductDevelopmentData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -300,6 +301,8 @@ const SaasProductDevelopment = () => {
         <Parterners
           title={saasProductDevelopmentData?.cutting_edge_technologies?.heading || ''}
           description={saasProductDevelopmentData?.cutting_edge_technologies?.description || ''}
+          buttonText={saasProductDevelopmentData?.cutting_edge_technologies?.button_text || ''}
+          buttonLink={saasProductDevelopmentData?.cutting_edge_technologies?.button_link || ''}
           techData={saasProductDevelopmentTechData || []}
           bgImage={saasProductDevelopmentData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
         />

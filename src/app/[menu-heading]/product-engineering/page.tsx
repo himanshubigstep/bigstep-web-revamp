@@ -145,6 +145,7 @@ interface productEngineeringPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -362,6 +363,8 @@ const ProductEngineering = () => {
         <Parterners
           title={productEngineeringData?.technologies_we_use?.heading || ''}
           description={productEngineeringData?.technologies_we_use?.description || ''}
+          buttonText={productEngineeringData?.technologies_we_use?.button_text || ''}
+          buttonLink={productEngineeringData?.technologies_we_use?.button_link || ''}
           techData={productEngineeringTechData || []}
           bgImage={productEngineeringData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />

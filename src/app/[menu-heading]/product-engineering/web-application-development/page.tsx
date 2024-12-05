@@ -82,6 +82,7 @@ interface WebApplicationDevelopmentPageData {
   }
   technologies: {
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -280,6 +281,8 @@ const WebApplicationDevelopment = () => {
       <Parterners
         title={webApplicationDevelopmentData?.technologies?.heading || ''}
         description={webApplicationDevelopmentData?.technologies?.description || ''}
+        buttonText={webApplicationDevelopmentData?.technologies?.button_text || ''}
+        buttonLink={webApplicationDevelopmentData?.technologies?.button_link || ''}
         techData={webApplicationDevelopmentTechData || []}
         bgImage={webApplicationDevelopmentData?.technologies?.background_image?.data?.attributes?.url || ''}
       />
