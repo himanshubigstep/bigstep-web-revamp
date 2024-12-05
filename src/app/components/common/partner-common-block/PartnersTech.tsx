@@ -152,7 +152,7 @@ const PartnersTech = ({
                                 key={index}
                                 text={category}
                                 onClick={() => handleCategoryClick(category)}
-                                className={`py-4 px-8 rounded-md ${selectedCategory === category ? 'bg-blue-500 text-lg text-white font-medium' : 'bg-[#D1E7FF] hover:bg-blue-500 text-lg text-blue-500 hover:text-white font-medium'}`}
+                                className={`py-4 lg:px-8 md:px-8 sm:px-8 px-4 rounded-md ${selectedCategory === category ? 'bg-blue-500 lg:text-lg md:text-md sm:text-sm text-xs hover:text-white hover:bg-blue-500 text-white font-medium' : 'bg-[#D1E7FF] hover:bg-blue-500 lg:text-lg md:text-md sm:text-sm text-xs text-blue-500 hover:text-white font-medium'}`}
                             />
                         ))}
                     </div>
@@ -183,7 +183,7 @@ const PartnersTech = ({
                                             <div>No logo available</div>
                                         )}
                                     </div>
-                                    <span className='text-lg md:w-[75%] mx-auto text-center text-white font-medium line-clamp-2'>
+                                    <span className='lg:text-lg md:text-md sm:text-sm text-xs md:w-[75%] mx-auto text-center text-white font-medium line-clamp-2'>
                                         {partner.attributes.heading}
                                     </span>
                                 </div>

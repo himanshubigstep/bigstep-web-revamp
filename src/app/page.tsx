@@ -452,7 +452,7 @@ export default function Home() {
         serviceContainerClassName='relative w-full flex flex-wrap lg:justify-center text-center'
         serviceItemClassName='lg:mt-8 flex flex-col justify-center lg:w-1/3 md:w-1/3 w-1/2 lg:px-12 lg:py-6 px-4 py-4 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
         serviceIconClassName='rounded-full w-16 h-16 flex justify-center items-center lg:mr-4 lg:mb-0 mb-4'
-        buttonClassName='px-4 py-2 mx-2 bg-gray-300 rounded'
+        buttonClassName='rounded-full text-white px-4 py-2 mx-2 bg-blue-500 dark:bg-gray-800/30 group-hover:bg-blue-500 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-blue-500 dark:group-focus:ring-gray-800/70 group-focus:outline-none'
         serviceHeaderClassName="w-full text-left flex flex-col gap-2"
         backgroundImage={homePageData?.technologies[0]?.background_image?.data?.attributes?.url}
       />

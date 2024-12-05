@@ -52,7 +52,7 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
         ) : (
             <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.url}`}
-                className="absolute block w-full h-full object-cover"
+                className="absolute block w-full h-full lg:object-cover md:object-cover sm:object-cover"
                 alt={`Slide ${slide.id}`}
             />
         )}
@@ -109,7 +109,7 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="relative overflow-hidden lg:min-h-[80vh] md:min-h-screen sm:min-h-screen min-h-screen">
+            <div className="relative overflow-hidden lg:min-h-[80vh] md:min-h-screen sm:min-h-screen min-h-[80vh]">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-r from-black via-gray-900 to-transparent opacity-90 z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />

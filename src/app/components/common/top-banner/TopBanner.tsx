@@ -23,7 +23,7 @@ const TopBanner = ({bannerData}: {bannerData: any}) => {
                     <img
                         src={imageUrl}
                         alt='image'
-                        className='w-full h-full object-cover'
+                        className='w-full h-full lg:object-cover md:object-cover sm:object-cover'
                     />
                 )}
             </div>

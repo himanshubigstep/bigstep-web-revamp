@@ -63,6 +63,7 @@ interface CompleteProductDevelopmentProps {
   holistic_approach: {
     id: number;
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -248,6 +249,7 @@ const CompleteProductDevelopment = () => {
           title={completeProductDevelopmentData?.holistic_approach?.heading || ''}
           description={completeProductDevelopmentData?.holistic_approach?.description || ''}
           buttonText={completeProductDevelopmentData?.holistic_approach?.button_text || ''}
+          buttonLink={completeProductDevelopmentData?.holistic_approach?.button_link || ''}
           holisticData={completeProductDevelopmentHolisticData[0] || []}
         />
         <ProductDevelopment

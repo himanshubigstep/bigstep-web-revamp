@@ -63,7 +63,7 @@ const Carousel = () => {
                 {reviews && reviews.sort((a: any, b: any) => a.id - b.id).map((item, index) => {
 
                     return (
-                        <div key={index} className={`max-w-[1140px] mx-auto relative dark:bg-black shadow-2xl bg-white rounded-2xl lg:p-16 px-8 py-16 lg:mt-0 mt-8 w-full lg:h-[26rem] flex flex-col justify-between items-center gap-4 duration-700 ease-in-out ${index === currentIndex ? 'block' : 'hidden'}`}>
+                        <div key={index} className={`max-w-[1140px] mx-auto relative dark:bg-black shadow-2xl bg-white rounded-2xl lg:p-16 lg:px-8 md:px-8 sm:px-8 px-20 py-16 lg:mt-0 mt-8 w-full lg:h-[26rem] flex flex-col justify-between items-center gap-4 duration-700 ease-in-out ${index === currentIndex ? 'block' : 'hidden'}`}>
                             <div className='w-[100%]'>
                                 <blockquote className="relative">
                                     <svg className="absolute -top-16 -start-8 size-16 text-black dark:text-neutral-700" width="16" height="8" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -116,7 +116,7 @@ const Carousel = () => {
                 </button>
             </div>
             {/* )} */}
-            <div className="w-full px-4 justify-center absolute lg:bottom-4 bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 lg:mb-16 md:mb-12 sm:mb-8 gap-2 flex-wrap">
+            <div className="w-full px-4 justify-center absolute lg:bottom-4 bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 lg:mb-16 md:mb-12 sm:mb-8 mb-8 gap-2 flex-wrap">
                 {reviews && reviews.map((item, index) => (
                     <button
                         key={index}

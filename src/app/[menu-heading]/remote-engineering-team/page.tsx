@@ -63,6 +63,7 @@ interface RemoteEngineeringTeamProps {
   holistic_approach: {
     id: number;
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -248,6 +249,7 @@ const RemoteEngineeringTeam = () => {
           title={remoteEngineeringTeamData?.holistic_approach?.heading || ''}
           description={remoteEngineeringTeamData?.holistic_approach?.description || ''}
           buttonText={remoteEngineeringTeamData?.holistic_approach?.button_text || ''}
+          buttonLink={remoteEngineeringTeamData?.holistic_approach?.button_link || ''}
           holisticData={remoteEngineeringTeamHolisticData[0] || []}
         />
         <ProductDevelopment developmentData={remoteEngineeringTeamData} />

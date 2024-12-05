@@ -63,6 +63,7 @@ interface CtoAsServiceProps {
   holistic_approach: {
     id: number;
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -248,6 +249,7 @@ const CtoAsService = () => {
           title={ctoAsServiceData?.holistic_approach?.heading || ''}
           description={ctoAsServiceData?.holistic_approach?.description || ''}
           buttonText={ctoAsServiceData?.holistic_approach?.button_text || ''}
+          buttonLink={ctoAsServiceData?.holistic_approach?.button_link || ''}
           holisticData={ctoAsServiceHolisticData[0] || []}
         />
         <ProductDevelopment developmentData={ctoAsServiceData} />

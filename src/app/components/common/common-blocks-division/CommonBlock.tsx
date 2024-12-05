@@ -136,7 +136,7 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
       {isMobile && (
         <div className='relative flex justify-between items-center mt-8'>
           <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt;</button>
-          <span>Page {currentPage} of {totalPages}</span>
+          {/* <span>Page {currentPage} of {totalPages}</span> */}
           <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>&gt;</button>
         </div>
       )}

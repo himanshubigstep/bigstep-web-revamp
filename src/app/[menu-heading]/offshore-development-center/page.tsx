@@ -62,6 +62,7 @@ interface OffShoreDevelopmentProps {
   holistic_approach: {
     id: number;
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -206,6 +207,7 @@ const OffShoreDevelopment = () => {
           title={offShoreProductDevelopmentData?.holistic_approach?.heading || ''}
           description={offShoreProductDevelopmentData?.holistic_approach?.description || ''}
           buttonText={offShoreProductDevelopmentData?.holistic_approach?.button_text || ''}
+          buttonLink={offShoreProductDevelopmentData?.holistic_approach?.button_link || ''}
           holisticData={offShoreDevelopmentHolisticData[0] || []}
         />
         <ProductDevelopment developmentData={offShoreProductDevelopmentData} />

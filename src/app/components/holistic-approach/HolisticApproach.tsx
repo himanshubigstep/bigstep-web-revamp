@@ -28,6 +28,7 @@ interface HolisticApproachProps {
     title: string;
     description: string;
     buttonText: string;
+    buttonLink: string;
     holisticData: {
         attributes: {
             service_data: HolisticData[];
@@ -35,7 +36,7 @@ interface HolisticApproachProps {
     };
 }
 
-const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description, buttonText, holisticData }) => {
+const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description, buttonText, holisticData, buttonLink }) => {
     const holisticApproach = holisticData?.attributes?.service_data || [];
     const sortedApproach = holisticApproach.sort((a, b) => a.id - b.id);
 
@@ -140,7 +141,8 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                                             style={{ backgroundColor: hexColor, color: darkenHex(hexColor, 0.3) }}
                                         >
                                             {index + 1}
-                                        </span>{item.heading}
+                                        </span>
+                                        <span className='w-[calc(100%-2rem)]'>{item.heading}</span>
                                     </h3>
                                     <p className='text-left text-md font-normal dark:text-white text-black'>{item.description}</p>
                                 </div>
@@ -149,12 +151,13 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                     })}
                 </div>
             </div>
-
-            <Button
-                text={buttonText}
-                onClick={() => console.log('clicked')}
-                className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-normal'
-            />
+            {buttonText && buttonLink &&
+                <Button
+                    text={buttonText}
+                    onClick={() => console.log('clicked')}
+                    className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-normal'
+                />
+            }
         </div>
     );
 };
