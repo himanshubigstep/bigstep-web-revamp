@@ -30,6 +30,7 @@ const Footer = () => {
   const logoSrc = attributes?.logo?.data[0]?.attributes?.url || null;
   const logoWidth = 240;
   const logoHeight = 100;
+  console.log(logoSrc)
   return (
     <Fragment>
       <div className='poppins relative w-full bg-[#242424] dark:border-t-gray-800 dark:border-t-2 lg:p-16 p-8'>
@@ -41,7 +42,7 @@ const Footer = () => {
         <div className='relative w-full h-full max-w-[1440px] mx-auto flex flex-col lg:flex-row justify-between'>
           <div className='h-full lg:w-1/4 w-full flex flex-col'>
             <Image
-              src={`http://103.209.145.167:4000${logoSrc}`}
+              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${logoSrc}`}
               alt='Footer Logo'
               width={logoWidth}
               height={logoHeight}
