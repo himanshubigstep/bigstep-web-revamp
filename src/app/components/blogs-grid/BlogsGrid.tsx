@@ -119,7 +119,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
                         <Fragment key={category.name}>
                             <div className="w-full h-full mb-16 relative">
                                 <div className="w-full h-full flex justify-between items-center mb-8">
-                                    <h2 className="text-black dark:text-white lg:text-2xl md:text-xl sm:text-lg text-md font-bold">{category.name}</h2>
+                                    <h2 className="text-black dark:text-white lg:text-2xl md:text-xl sm:text-lg text-md font-bold lg:line-clamp-none md::line-clamp-none sm::line-clamp-none line-clamp-2 lg:w-auto md:w-auto sm:w-auto w-[80%]">{category.name}</h2>
                                 </div>
                                 <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 items-center">
                                     {getCurrentItems(category.name, category.items).map((item) => (

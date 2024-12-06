@@ -43,15 +43,15 @@ const OurValues = ({ valuesData }: { valuesData: any }) => {
                             </div>
 
                             <div className="lg:hidden w-full flex flex-col lg:items-center">
-                                <div className="mb-4">
+                                <div className="mb-4 lg:block md:block sm:block flex justify-center items-center">
                                     <img
                                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${valuesData?.value_1[currentIndex]?.image?.data?.attributes?.url}`}
                                         alt={valuesData?.value_1[currentIndex]?.link}
                                         className="object-contain min-w-24 max-w-24"
                                     />
                                 </div>
-                                <div className="w-full max-w-[80%] flex flex-col lg:justify-center lg:items-center">
-                                    <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold mb-2 text-white">
+                                <div className="w-full lg:max-w-[80%] md:max-w-[80%] sm:max-w-[80%] max-w-full flex flex-col justify-center items-center">
+                                    <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold mb-2 text-white lg:text-left md:text-left sm:text-left text-center">
                                         {valuesData?.value_1[currentIndex]?.link}
                                     </h2>
                                 </div>

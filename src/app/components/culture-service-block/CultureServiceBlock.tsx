@@ -97,10 +97,10 @@ const CultureServiceBlock = ({
             </div>
             {isMobile && (
                 <div className='relative flex justify-between items-center mt-8'>
-                    <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt; Previous</button>
-                    <span>Page {currentPage} of {totalPages}</span>
-                    <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>Next &gt;</button>
-                </div>
+                    <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt;</button>
+                    {/* <span>Page {currentPage} of {totalPages}</span> */}
+                    <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>&gt;</button>
+              </div>
             )}
         </div>
     );
