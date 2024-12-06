@@ -30,7 +30,6 @@ const Footer = () => {
   const logoSrc = attributes?.logo?.data[0]?.attributes?.url || null;
   const logoWidth = 240;
   const logoHeight = 100;
-  console.log(logoSrc)
   return (
     <Fragment>
       <div className='poppins relative w-full bg-[#242424] dark:border-t-gray-800 dark:border-t-2 lg:p-16 p-8'>

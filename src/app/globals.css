@@ -51,6 +51,32 @@ pre code {
   overflow-wrap: break-word;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+table th,
+table td {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #e2e2e2;
+}
+
 .menu-item-button::after {
   content: '';
   position: absolute;

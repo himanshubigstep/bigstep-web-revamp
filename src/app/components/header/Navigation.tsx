@@ -63,7 +63,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
         }));
       }
     }
-  
+
     // Open the mobile menu if it's not already open
     if (!isDropdownOpen) {
       setIsmobileMenu(true);
@@ -115,7 +115,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
       formattedHeading === "what-we-do" ? "services" : formattedHeading;
     const urlHeading =
       formattedHeading === "how-we-do" ? "engagement-models" : finalHeading;
-  
+
     if (key === "Technologies" || key === "Partnerships") {
       if (link) {
         const formattedLink = link.startsWith("/") ? link.slice(1) : link;
@@ -124,7 +124,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
       }
       return;
     }
-  
+
     if (link) {
       const formattedLink = link.startsWith("/") ? link.slice(1) : link;
       router.push(`/${urlHeading}/${formattedLink}`);
@@ -135,7 +135,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
         [key]: !prev[key],
       }));
     }
-  
+
     // Close the mobile menu after selecting a submenu item
     setIsmobileMenu(false);
   };
@@ -202,16 +202,22 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
               onMouseLeave={handleMouseLeave}
             >
               <button
-  onClick={() => handleArrowClick(menu)} // Call the new handler here
-  className={`text-md lg:w-auto w-full text-md z-30 flex items-center lg:justify-normal justify-between gap-2 lg:hover:text-blue-500 lg:dark:text-inherit dark:text-white
+                onClick={() => {
+                  if (menu.link) {
+                    router.push(menu.link);
+                    handleLinkClick();
+                  }
+                  handleArrowClick(menu);
+                }}
+                className={`text-md lg:w-auto w-full text-md z-30 flex items-center lg:justify-normal justify-between gap-2 lg:hover:text-blue-500 lg:dark:text-inherit dark:text-white
       ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
       ${scrolled ? 'lg:text-black lg:dark:text-white' : 'lg:text-white lg:hover:text-white'} menu-item-button`}
->
-  <span className="underline-gap">{menu.heading}</span>
-  {!menu.link && !menu.item_link && (
-    <IoIosArrowDown className={`ml-2 transition-transform ${isDropdownOpen === menu.heading ? 'rotate-180' : ''}`} />
-  )}
-</button>
+              >
+                <span className="underline-gap">{menu.heading}</span>
+                {!menu.link && !menu.item_link && (
+                  <IoIosArrowDown className={`ml-2 transition-transform ${isDropdownOpen === menu.heading ? 'rotate-180' : ''}`} />
+                )}
+              </button>
 
               {isDropdownOpen === menu.heading && !menu.link && (
                 <ul
@@ -287,8 +293,8 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                 )
                               }
                               className={`${menu.items_on_right && menu.items_on_right.some((submenu: any) => submenu.technology)
-                                  ? "text-md text-left flex items-center gap-2 pb-4 font-semibold text-blue-500"
-                                  : "flex items-center text-black dark:text-white gap-2 text-md hover:text-blue-500"
+                                ? "text-md text-left flex items-center gap-2 pb-4 font-semibold text-blue-500"
+                                : "flex items-center text-black dark:text-white gap-2 text-md hover:text-blue-500"
                                 }`}
                             >
                               <img
