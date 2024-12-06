@@ -43,10 +43,12 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
     } else {
       // If the menu item has a dropdown, toggle it
       if (isDropdownOpen === menu.heading) {
+        // Close the dropdown if it's already open
         setDropdownOpen(null);
         setOpenSubmenus({});
         setSubmenuClicked({});
       } else {
+        // Open the dropdown and close other submenus
         setDropdownOpen(menu.heading);
         setOpenSubmenus((prev) => {
           const newSubmenus = { ...prev };
@@ -62,9 +64,33 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
       }
     }
   
-    // Only open the mobile menu if it was previously closed
+    // Open the mobile menu if it's not already open
     if (!isDropdownOpen) {
       setIsmobileMenu(true);
+    }
+  };
+
+  const handleArrowClick = (menu: any) => {
+    // This function is triggered when the down arrow is clicked
+    if (isDropdownOpen === menu.heading) {
+      // Close the dropdown if it's already open
+      setDropdownOpen(null);
+      setOpenSubmenus({});
+      setSubmenuClicked({});
+    } else {
+      // Open the dropdown
+      setDropdownOpen(menu.heading);
+      setOpenSubmenus((prev) => {
+        const newSubmenus = { ...prev };
+        for (const k in newSubmenus) {
+          newSubmenus[k] = false;
+        }
+        return newSubmenus;
+      });
+      setSubmenuClicked((prev) => ({
+        ...prev,
+        [menu.heading]: false,
+      }));
     }
   };
 
@@ -176,21 +202,16 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
               onMouseLeave={handleMouseLeave}
             >
               <button
-                onClick={() => {
-                  if (menu.link) {
-                    router.push(menu.link);
-                    handleLinkClick();
-                  }
-                }}
-                className={`text-md lg:w-auto w-full text-md z-30 flex items-center lg:justify-normal justify-between gap-2 lg:hover:text-blue-500 lg:dark:text-inherit dark:text-white
-                    ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
-                    ${scrolled ? 'lg:text-black lg:dark:text-white' : 'lg:text-white lg:hover:text-white'} menu-item-button`}
-              >
-                <span className="underline-gap">{menu.heading}</span>
-                {!menu.link && !menu.item_link && (
-                  <IoIosArrowDown className={`ml-2 transition-transform ${isDropdownOpen === menu.heading ? 'rotate-180' : ''}`} />
-                )}
-              </button>
+  onClick={() => handleArrowClick(menu)} // Call the new handler here
+  className={`text-md lg:w-auto w-full text-md z-30 flex items-center lg:justify-normal justify-between gap-2 lg:hover:text-blue-500 lg:dark:text-inherit dark:text-white
+      ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
+      ${scrolled ? 'lg:text-black lg:dark:text-white' : 'lg:text-white lg:hover:text-white'} menu-item-button`}
+>
+  <span className="underline-gap">{menu.heading}</span>
+  {!menu.link && !menu.item_link && (
+    <IoIosArrowDown className={`ml-2 transition-transform ${isDropdownOpen === menu.heading ? 'rotate-180' : ''}`} />
+  )}
+</button>
 
               {isDropdownOpen === menu.heading && !menu.link && (
                 <ul
