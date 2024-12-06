@@ -116,7 +116,7 @@ const Carousel = () => {
                 </button>
             </div>
             {/* )} */}
-            <div className="w-full px-4 justify-center absolute lg:bottom-4 bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 lg:mb-16 md:mb-12 sm:mb-8 mb-8 gap-2 flex-wrap">
+            <div className="w-full px-4 justify-center absolute lg:bottom-4 bottom-0 left-1/2 transform -translate-x-1/2 lg:flex md:flex sm:flex hidden space-x-2 lg:mb-16 md:mb-12 sm:mb-8 mb-8 gap-2 flex-wrap">
                 {reviews && reviews.map((item, index) => (
                     <button
                         key={index}

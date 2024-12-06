@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react';
+'use client'
+import React, { Fragment, useEffect, useState } from 'react';
 import { MdNavigateNext } from "react-icons/md";
 import { MdNavigateBefore } from "react-icons/md";
 
@@ -49,8 +50,26 @@ interface CommonGridProps {
 
 const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
     const [currentPageMap, setCurrentPageMap] = useState<Record<string, number>>({});
+    const [itemsPerPage, setItemsPerPage] = useState<number>(3);
 
-    const itemsPerPage = 3;
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 640) {
+                setItemsPerPage(1); // For mobile devices (small screens)
+            } else {
+                setItemsPerPage(3); // For larger screens
+            }
+        };
+
+        // Initial check
+        handleResize();
+
+        // Add event listener for resize
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup on unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const getCurrentItems = (categoryName: string, categoryItems: BlogItem[]) => {
         const currentPage = currentPageMap[categoryName] || 0;
@@ -102,7 +121,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
                                 <div className="w-full h-full flex justify-between items-center mb-8">
                                     <h2 className="text-black dark:text-white lg:text-2xl md:text-xl sm:text-lg text-md font-bold">{category.name}</h2>
                                 </div>
-                                <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-3 grid-cols-2 gap-8 items-center">
+                                <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 items-center">
                                     {getCurrentItems(category.name, category.items).map((item) => (
                                         <div onClick={() => handleItemClick(item.attributes.slug)} key={item.id} className="relative border-[1px] h-full bg-white dark:bg-black rounded-3xl cursor-pointer">
                                             <img

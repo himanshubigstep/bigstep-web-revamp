@@ -231,7 +231,7 @@ const BlogPostPage = () => {
                             </span>
                         </span>
 
-                        <div className='lg:text-xl md:text-lg sm:text-md text-sm font-normal'>
+                        <div className='lg:text-xl md:text-lg sm:text-md text-sm font-normal w-full'>
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{

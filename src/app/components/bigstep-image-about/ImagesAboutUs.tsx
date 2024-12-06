@@ -44,7 +44,7 @@ const ImagesAboutUs = ({
                 alt='Background Image'
                 className='absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover object-top'
             />
-            <div className='relative w-full h-full max-w-[1080px] mx-auto mb-16 lg:p-0 p-4'>
+            <div className={`relative w-full h-full max-w-[1080px] mx-auto lg:p-0 p-4 ${heartButtonLink && heartButtonText && 'mb-16'}`}>
                 <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4 text-white'>{heartHeading}</h2>
                 <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal text-center text-white'>{heartDescription}</p>
             </div>
@@ -62,7 +62,7 @@ const ImagesAboutUs = ({
                     {images && images.map((item: any) => (
                         <div
                             key={item.id}
-                            className={`relative cursor-pointer transition-all duration-1000 h-[32rem] ${item.id === selectedImageId ? 'w-[55%]' : 'w-[25%]'} overflow-hidden`}
+                            className={`relative cursor-pointer transition-all duration-1000 lg:h-[32rem] md:h-[28rem] sm:h-[24rem] h-48 ${item.id === selectedImageId ? 'lg:w-[55%] md:w-[55%] sm:w-[55%] w-full' : 'w-[25%]'} overflow-hidden`}
                             onClick={() => handleClick(item.id)}
                         >
                             <img

@@ -106,7 +106,7 @@ const CultureTopSlider: React.FC<SlideShowTextProps> = ({ slides = [] }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="relative overflow-hidden lg:min-h-[80vh] md:min-h-[70vh] sm:min-h-screen min-h-screen">
+            <div className="relative overflow-hidden lg:min-h-[80vh] md:min-h-[70vh] sm:min-h-[70vh] min-h-[65vh]">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-b from-black via-gray-900 to-black opacity-50 z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />

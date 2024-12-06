@@ -66,7 +66,7 @@ const Partners = ({
                             key={partner.id}
                             text={partner.attributes.heading}
                             onClick={() => handleButtonClick(partner.id)}
-                            className={`py-4 px-8 rounded-md ${selectedPartner === partner.id ? 'bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-medium' : 'bg-[#D1E7FF] hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-blue-500 hover:text-white font-medium'}`}
+                            className={`py-4 w-[45%] rounded-md ${selectedPartner === partner.id ? 'bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-medium' : 'bg-[#D1E7FF] hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-blue-500 hover:text-white font-medium'}`}
                         />
                     ))}
                 </div>

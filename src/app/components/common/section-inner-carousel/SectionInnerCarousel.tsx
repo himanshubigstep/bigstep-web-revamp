@@ -62,7 +62,7 @@ const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProduct
                                             }
                                         }}
                                         text={carouselProductEngineerData[selectedIndex]?.buttonText}
-                                        className='w-44 py-4 lg:mt-0 mt-4 lg:rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
+                                        className='w-44 py-4 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
                                     />
                                 </div>
                             </>

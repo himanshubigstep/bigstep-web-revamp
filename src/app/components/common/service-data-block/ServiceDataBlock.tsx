@@ -59,9 +59,9 @@ const ServiceDataBlock = ({
                 {sortedServices.map((service: any) => (
                     <div key={service.id} className={serviceItemClassName}>
                         <div className={serviceIconHeader}>
-                            <div className='rounded-full lg:w-20 lg:h-20 md:w-16 md:h-16 sm:w-12 sm:h-12 w-10 h-10 flex justify-center items-center' style={{ backgroundColor: service.hex_code }}>
+                            <div className='rounded-full w-16 h-16 flex justify-center items-center' style={{ backgroundColor: service.hex_code }}>
                                 <img
-                                    className='lg:w-16 md:w-12 sm:w-10 w-8 p-2'
+                                    className='w-12 p-2'
                                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${service.serviceLogo.data.attributes.url}`}
                                     alt={service.heading}
                                 />
