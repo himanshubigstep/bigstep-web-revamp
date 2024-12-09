@@ -129,6 +129,11 @@ interface AboutUsPageData {
         }
       }
     }[]
+    seo: {
+      id: number;
+      metaTitle: string;
+      metaDescription: string;
+    }
   }
 }
 
@@ -154,6 +159,20 @@ const AboutUs = () => {
 
   const firstRowData = aboutUsData?.attributes?.stardom_data.slice(0, 2)
   const secondRowData = aboutUsData?.attributes?.stardom_data.slice(2)
+
+  useEffect(() => {
+    if (aboutUsData) {
+      document.title = aboutUsData?.attributes?.seo?.metaTitle || "Default Title";
+      // if (metaDescription) {
+      //   metaDescription.setAttribute("content", aboutUsData?.seo?.metaDescription || "Default description");
+      // } else {
+      //   const newMeta = document.createElement("meta");
+      //   newMeta.name = "description";
+      //   newMeta.content = aboutUsData?.seo?.metaDescription || "Default description";
+      //   document.head.appendChild(newMeta);
+      // }
+    }
+  }, [aboutUsData]);
 
   if (loading) {
     return <LoaderSpinner />;

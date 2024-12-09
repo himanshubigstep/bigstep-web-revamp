@@ -109,7 +109,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
     };
 
     return (
-        <div className="w-full h-full relative bg-white dark:bg-black lg:pb-16 p-8">
+        <div className="w-full h-full relative bg-white dark:bg-black lg:pb-16 pb-8">
             <div className="w-full h-full max-w-[1440px] mx-auto px-4">
                 {categories.map((category) => {
                     const totalItems = category.items.length;

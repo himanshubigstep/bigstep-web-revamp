@@ -14,7 +14,7 @@ const ProductDevelopment = ({ developmentData }: { developmentData: any }) => {
                     <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold text-center mb-4 text-white'>{developmentData?.why_choose?.heading}</h2>
                     {/* <p className='text-lg text-white'>Our process integrates multiple disciplines into a cohesive workflow to deliver a complete, high-quality product.</p> */}
                 </div>
-                <div className='relative w-full max-w-[1080px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 lg:mt-8 mt-4'>
+                <div className='relative w-full max-w-[1440px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 lg:mt-8 mt-4'>
                     {productDevelopmentData && productDevelopmentData.map((item: any, index: number) => (
                         <div key={item.id} className='w-full flex justify-between items-start gap-4 mb-4'>
                             <div className='flex flex-col justify-center text-white text-4xl'>
@@ -27,9 +27,9 @@ const ProductDevelopment = ({ developmentData }: { developmentData: any }) => {
                                     {index + 1}
                                 </span>
                             </div>
-                            <div key={item.id} className='w-full flex flex-col justify-center'>
+                            <div key={item.id} className='w-full flex flex-col justify-center gap-4'>
                                 <h2 className='lg:text-lg md:text-md sm:text-sm text-xs font-bold text-white'>{item?.heading}</h2>
-                                <p className='lg:text-md md:text-sm sm:text-xs text-xs text-white'>{item?.description}</p>
+                                <p className='lg:text-md md:text-sm sm:text-xs text-xs text-white leading-normal'>{item?.description}</p>
                             </div>
                         </div>
                     ))}

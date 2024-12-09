@@ -8,10 +8,24 @@ interface FooterBottomProps {
         facebook: {
             id: number;
             link: string;
+            image: {
+                data: {
+                    attributes: {
+                        url: string
+                    }
+                }
+            }
         }
         instagram: {
             id: number;
             link: string;
+            image: {
+                data: {
+                    attributes: {
+                        url: string
+                    }
+                }
+            }
         }
         copyright_text: string;
         about_tags: Array<{
@@ -24,7 +38,7 @@ interface FooterBottomProps {
 
 const FooterBottom: React.FC<FooterBottomProps> = ({ attributes }) => {
   return (
-    <div className='w-full lg:h-[100px] h-full flex lg:items-center bg-[#101010] px-4'>
+    <div className='w-full lg:h-[100px] h-full flex lg:items-center bg-[#101010] px-4 lg:py-0 md:py-0 sm:py-4 py-4'>
         <div className='w-full max-w-[1440px] mx-auto flex flex-col lg:flex-row lg:gap-0 gap-4 lg:justify-between lg:items-center'>
             <p className='text-md text-white'>
                 {attributes?.copyright_text} 
@@ -43,12 +57,20 @@ const FooterBottom: React.FC<FooterBottomProps> = ({ attributes }) => {
                 <ul className='flex items-center gap-4'>
                     <li className='text-md text-white'>
                         <Link className='text-3xl' href={attributes?.instagram?.link} target='_blank'>
-                            <FaInstagram />
+                            <img
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${attributes?.instagram?.image?.data?.attributes?.url}`}
+                            alt='image'
+                            className='w-8'
+                        />
                         </Link>
                     </li>
                     <li className='text-md text-white'>
                         <Link className='text-3xl' href={attributes?.facebook?.link} target='_blank'>
-                            <FaLinkedinIn />
+                        <img
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${attributes?.facebook?.image?.data?.attributes?.url}`}
+                        alt='image'
+                        className='w-8'
+                    />
                         </Link>
                     </li>
                 </ul>

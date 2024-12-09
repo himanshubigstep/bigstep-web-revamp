@@ -26,10 +26,10 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
 
   return (
     <div className='w-full h-full max-w-[1440px] mx-auto lg:py-16 py-8'>
-        <div className='w-full max-w-[1080px] mx-auto flex flex-col lg:px-0 px-4 mb-4'>
+        <div className='w-full max-w-[1080px] mx-auto flex flex-col mb-4'>
             <h2 className='text-3xl font-semibold text-left'>{related_blogs?.heading}</h2>
         </div>
-        <div className='w-full max-w-[1080px] mx-auto flex flex-col lg:px-0 px-4'>
+        <div className='w-full max-w-[1080px] mx-auto flex flex-col'>
             <div className='w-full h-full grid lg:grid-cols-1 grid-cols-1 gap-8'>
             {sortedBlogs?.length > 0 ? (
             sortedBlogs.map((item: any) => (

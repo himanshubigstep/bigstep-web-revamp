@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Button from '../button/Button';
+import Link from 'next/link';
 
 interface Logo {
     attributes: {
@@ -66,7 +67,7 @@ const Partners = ({
                             key={partner.id}
                             text={partner.attributes.heading}
                             onClick={() => handleButtonClick(partner.id)}
-                            className={`py-4 w-[45%] rounded-md ${selectedPartner === partner.id ? 'bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-medium' : 'bg-[#D1E7FF] hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-blue-500 hover:text-white font-medium'}`}
+                            className={`py-4 lg:w-[20%] md:w-[20%] sm:w-[45%] w-[45%] rounded-md ${selectedPartner === partner.id ? 'bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-medium' : 'bg-[#D1E7FF] hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-blue-500 hover:text-white font-medium'}`}
                         />
                     ))}
                 </div>
@@ -93,13 +94,12 @@ const Partners = ({
                 </div>
 
                 {buttonLink && buttonText &&
-                <div className='w-full flex justify-center items-center mt-8'>
-                    <Button
-                        text={buttonText}
-                        onClick={() => window.open(buttonLink, '_blank')}
-                        className="py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-medium"
-                    />
-                </div>
+                    <div className='w-full flex justify-center items-center mt-8'>
+                        <Link href={buttonLink} passHref target='_blank'
+                            className="py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-medium inline-block">
+                            {buttonText}
+                        </Link>
+                    </div>
                 }
 
             </div>

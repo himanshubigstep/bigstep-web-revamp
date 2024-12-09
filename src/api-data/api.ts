@@ -41,7 +41,7 @@ export const fetchFooterData = async () => {
 export const fetchHomepageData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/home-page?populate[0]=home_introduction&populate[1]=Message&populate[2]=success_stories.background_image&populate[3]=technologies.background_image&populate[4]=partners.background_image&populate[5]=culture&populate[6]=client_reviews.background_image&populate[7]=faq&populate[8]=home_page_blogs.background_image&populate[9]=get_in_touch.background_image&populate[10]=trusted_by.background_image&populate[11]=milestones1&populate[12]=value&populate[13]=value.value_photos&populate[14]=value.value_1.image&populate[15]=milestones1.Years.images&populate[16]=milestones1.deliveries.images&populate[17]=milestones1.cloud_projects.images&populate[18]=milestones1.experts.images&populate[19]=milestones1.retention_rate.images&populate[20]=milestones1.bigstep_logo&populate[21]=milestones.background_image&populate[22]=latest_info.background_image`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/home-page?populate[0]=home_introduction&populate[1]=Message&populate[2]=success_stories.background_image&populate[3]=technologies.background_image&populate[4]=partners.background_image&populate[5]=culture&populate[6]=client_reviews.background_image&populate[7]=faq&populate[8]=home_page_blogs.background_image&populate[9]=get_in_touch.background_image&populate[10]=trusted_by.background_image&populate[11]=milestones1&populate[12]=value&populate[13]=value.value_photos&populate[14]=value.value_1.image&populate[15]=milestones1.Years.images&populate[16]=milestones1.deliveries.images&populate[17]=milestones1.cloud_projects.images&populate[18]=milestones1.experts.images&populate[19]=milestones1.retention_rate.images&populate[20]=milestones1.bigstep_logo&populate[21]=milestones.background_image&populate[22]=latest_info.background_image&populate[23]=seo`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -1816,7 +1816,7 @@ export const fetchTechnologyData = async () => {
 export const fetchAboutUsData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/about-page?populate[0]=about_intro.backgroundImage&populate[1]=empowering.images&populate[2]=empowering_values.images&populate[3]=startdom_heading.images&populate[4]=stardom_data.images&populate[5]=visnories_heading&populate[6]=visnories_data.images&populate[7]=heartbeat_heading.background_image&populate[8]=heartbeat_data.images`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/about-page?populate[0]=about_intro.backgroundImage&populate[1]=empowering.images&populate[2]=empowering_values.images&populate[3]=startdom_heading.images&populate[4]=stardom_data.images&populate[5]=visnories_heading&populate[6]=visnories_data.images&populate[7]=heartbeat_heading.background_image&populate[8]=heartbeat_data.images&populate[9]=seo`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

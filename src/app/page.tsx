@@ -14,6 +14,8 @@ import ContactUs from "./components/common/contact-us/ContactUs";
 import LoaderSpinner from "./components/common/loader-spinner/LoadingSpinner";
 import OurValues from "./components/our-values/OurValues";
 import ModelBox from "./components/model-box/ModelBox";
+import Head from "next/head";
+import { Metadata } from "next";
 
 interface HomePageData {
   id: number;
@@ -222,6 +224,11 @@ interface HomePageData {
       }[]
     }
   }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+  }
 }
 
 interface HomePageCarousel {
@@ -304,7 +311,12 @@ interface closingModalBoxData {
   }
 }
 
+// export const metadata: Metadata = {
+//   title: "About Us - My Website"
+// };
+
 export default function Home() {
+  const [homePageMetaData, setHomePageMetaData] = useState({ title: "Home Page" });
   const [homePageData, setHomePageData] = useState<HomePageData | null>(null)
   const [homePageCarousel, setHomePageCarousel] = useState<HomePageCarousel[]>([])
   const [partnerShipData, setPartnerShipData] = useState<any>();
@@ -434,12 +446,30 @@ export default function Home() {
     fetchHomePageCarouselData();
   }, [])
 
+  useEffect(() => {
+    if (homePageData) {
+      document.title = homePageData?.seo?.metaTitle || "Default Title";
+      // if (metaDescription) {
+      //   metaDescription.setAttribute("content", homePageData?.seo?.metaDescription || "Default description");
+      // } else {
+      //   const newMeta = document.createElement("meta");
+      //   newMeta.name = "description";
+      //   newMeta.content = homePageData?.seo?.metaDescription || "Default description";
+      //   document.head.appendChild(newMeta);
+      // }
+    }
+  }, [homePageData]);
+
   if (loading) {
     return <LoaderSpinner />;
   }
 
   return (
     <div className="poppins w-full h-full">
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="title" content={homePageData?.seo?.metaTitle || "Default description"} />
+      </Head>
       <SlideShowText slides={homePageCarousel} />
       <CommonBlock
         title={homePageData?.technologies[0]?.heading || ''}

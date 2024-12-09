@@ -32,7 +32,7 @@ const Footer = () => {
   const logoHeight = 100;
   return (
     <Fragment>
-      <div className='poppins relative w-full bg-[#242424] dark:border-t-gray-800 dark:border-t-2 lg:p-16 p-8'>
+      <div className='poppins relative w-full bg-[#242424] dark:border-t-gray-800 dark:border-t-2 lg:p-16 md:p-16 p-4'>
         <img
           src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${footerData?.attributes?.background_image?.data?.attributes?.url}`}
           alt='Footer Background'
@@ -45,7 +45,7 @@ const Footer = () => {
               alt='Footer Logo'
               width={logoWidth}
               height={logoHeight}
-              className='mb-12'
+              className='lg:mb-12 md:mb-12 mb-8'
             />
             <Address attributes={attributes} />
             <FooterTags attributes={attributes} />

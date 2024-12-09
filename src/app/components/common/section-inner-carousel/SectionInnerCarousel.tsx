@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Button from '../button/Button'
+import Link from 'next/link';
 
 const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProductEngineerData: any }) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -54,7 +55,7 @@ const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProduct
                                     <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal text-white text-left'>
                                         {carouselProductEngineerData[selectedIndex]?.description}
                                     </p>
-                                    <Button
+                                    {/* <Button
                                         onClick={() => {
                                             const selectedItem = carouselProductEngineerData[selectedIndex];
                                             if (selectedItem && selectedItem.technologyText[0]) {
@@ -63,7 +64,14 @@ const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProduct
                                         }}
                                         text={carouselProductEngineerData[selectedIndex]?.buttonText}
                                         className='w-44 py-4 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
-                                    />
+                                    /> */}
+                                    <Link
+                                        className="w-44 py-4 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-md text-xs text-white font-normal inline-block"
+                                        href={carouselProductEngineerData[selectedIndex]?.technologyText[0]?.technologyLinks || '#'}
+                                        passHref
+                                    >
+                                        {carouselProductEngineerData[selectedIndex]?.buttonText}
+                                    </Link>
                                 </div>
                             </>
                         )}
