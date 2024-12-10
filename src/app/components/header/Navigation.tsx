@@ -148,7 +148,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
   };
 
   const toggelMobileMenu = () => {
-    setIsmobileMenu(!isMobileMenu);
+    setIsmobileMenu((prevState) => !prevState);
   };
 
   useEffect(() => {

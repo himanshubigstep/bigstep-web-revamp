@@ -116,6 +116,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                             <div className="w-full flex lg:flex-col flex-row rounded-lg lg:gap-8 gap-4 overflow-y-auto lg:h-[32rem] hide-scrollbar lg:mb-auto mb-8">
                                 {remainingItems.map((item: any) => (
                                     <Link
+                                        key={item.id}
                                         href={`/blog/${decodeURIComponent(firstItem?.attributes?.slug)
                                             .toLowerCase()
                                             .replace(/\s+/g, '-')
@@ -124,7 +125,6 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                                         className="lg:w-full lg:min-w-auto min-w-[50%] flex flex-col justify-center items-start rounded-lg"
                                     >
                                         <div
-                                            key={item.id}
                                             className="w-full h-full flex lg:flex-row flex-col lg:justify-between items-center rounded-lg gap-4 cursor-pointer"
                                             onClick={() => handleItemClick(item?.attributes?.slug)}
                                         >

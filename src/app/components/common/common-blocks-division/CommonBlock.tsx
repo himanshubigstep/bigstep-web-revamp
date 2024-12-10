@@ -106,13 +106,15 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
       <div className={`${serviceContainerClassName}`}>
         {currentServices.map((service, index) => (
           <div key={service.id} className={`${serviceItemClassName}`}>
-            <div className='w-full flex lg:flex-row flex-col lg:justify-start justify-center lg:items-start items-center'>
+            <div className='w-full flex lg:flex-row flex-col lg:justify-start justify-center items-center'>
               <div className={`${serviceIconClassName}`} style={{ backgroundColor: service.attributes.hex_code }}>
-                <img
-                  className='w-12 p-2'
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${service.attributes.logo.data.attributes.url}`}
-                  alt={service.attributes.heading}
-                />
+                <Link href={service.attributes.link} className='w-12 p-2'>
+                  <img
+                    className='w-full'
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${service.attributes.logo.data.attributes.url}`}
+                    alt={service.attributes.heading}
+                  />
+                </Link>
               </div>
               <Link href={service.attributes.link} className='lg:w-[calc(100%-4rem)] md:w-[calc(100%-4rem)]'>
                 <h4 className='w-full lg:text-left text-center lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'>{service.attributes.heading}</h4>

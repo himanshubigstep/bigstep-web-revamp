@@ -1,6 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import Button from '../button/Button';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 interface ImageFormats {
@@ -79,6 +78,7 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     const [sortedSlides, setSortedSlides] = useState<HomePageCarousel[]>([]);
+    const startTouchX = useRef(0);
 
     useEffect(() => {
         if (slides && slides.length > 0) {
@@ -106,6 +106,24 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
         setCurrentSlideIndex(index);
     };
 
+    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+        const touchStart = e.touches[0].clientX;
+        startTouchX.current = touchStart;
+    };
+    const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+        e.preventDefault();
+    };
+    const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+        const touchEnd = e.changedTouches[0].clientX;
+        const touchDiff = startTouchX.current - touchEnd;
+
+        if (touchDiff > 50) {
+            setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % sortedSlides.length);
+        } else if (touchDiff < -50) {
+            setCurrentSlideIndex((prevIndex) => (prevIndex - 1 + sortedSlides.length) % sortedSlides.length);
+        }
+    };
+
     return (
         <div
             id="default-carousel"
@@ -113,6 +131,9 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
             data-carousel="slide"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
         >
             <div className="relative overflow-hidden lg:h-[80vh] md:h-[80vh] sm:h-screen h-[45vh]">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-r from-black via-gray-900 to-transparent opacity-90 z-20' data-carousel-item></div>

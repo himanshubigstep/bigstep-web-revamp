@@ -34,13 +34,34 @@ body {
 }
 
 .hide-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.hide-scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(59 130 246); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.hide-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgb(30 64 175); 
+}
+
+/* .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
+} */
 
 pre code {
   display: inline-block;
@@ -71,10 +92,6 @@ table th {
 
 table tr:nth-child(even) {
   background-color: #f9f9f9;
-}
-
-table tr:hover {
-  background-color: #e2e2e2;
 }
 
 .menu-item-button::after {
@@ -119,6 +136,31 @@ table tr:hover {
   max-width: 60%;
   margin-left: auto;
   margin-right: 1rem;
+}
+
+.input-field-phone {
+  border: 1px solid rgb(209 213 219)
+}
+
+.input-field-phone input {
+  background-color: black;
+}
+.input-field-phone input:focus {
+  outline: none;
+}
+
+.PhoneInputCountrySelect {
+  background-color: black;
+}
+
+.PhoneInputCountry {
+  padding: 0.5rem;
+  border-radius: 0.3rem 0 0 0.3rem;
+}
+
+.PhoneInputCountrySelectArrow {
+  width: 0.3rem;
+  height: 0.3rem;
 }
 
 

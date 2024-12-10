@@ -17,20 +17,47 @@
   }
   
   .animate-marquee {
-    animation: marquee 15s linear infinite;
+    animation: marquee 200s linear infinite;
   }
   
   .animate-marquee-reverse {
-    animation: marqueeReverse 15s linear infinite;
+    animation: marqueeReverse 200s linear infinite;
   }
   
   .paused {
     animation-play-state: paused;
+  }
+
+  .client-logos-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  .client-logos {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1rem;
+  }
+
+  .client-logo {
+      min-width: 150px;
+      max-width: 240px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background-color: white;
+      border-radius: 8px;
   }
   
   @media screen and (max-width: 768px) {
     .paused {
       animation-play-state: running;
     }
+
   }
   
