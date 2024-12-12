@@ -52,7 +52,7 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
         ) : (
             <img
                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.url}`}
-                className="absolute block w-full h-full lg:object-cover md:object-cover sm:object-cover object-cover lg:object-top md:object-top object-right"
+                className="absolute block w-full h-full object-cover object-right"
                 alt={`Slide ${slide.id}`}
             />
         )}
@@ -97,7 +97,7 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
                     return nextIndex;
                 });
             }
-        }, 3000);
+        }, 10000);
 
         return () => clearInterval(timer);
     }, [sortedSlides, isHovered]);
@@ -135,7 +135,7 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
-            <div className="relative overflow-hidden lg:h-[80vh] md:h-[80vh] sm:h-screen h-[45vh]">
+            <div className="relative overflow-hidden lg:h-[80vh] md:h-[60vh] sm:h-screen h-[50vh]">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-r from-black via-gray-900 to-transparent opacity-90 z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />

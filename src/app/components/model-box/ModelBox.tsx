@@ -40,10 +40,24 @@ const ModelBox = ({modalBoxData}: {modalBoxData: any}) => {
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('click', handleOutsideClick);
-    
+    const checkScreenSize = () => {
+      if (window.innerWidth > 1024) {
+        window.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('click', handleOutsideClick);
+      } else {
+        setIsVisible(false);
+        window.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('click', handleOutsideClick);
+      }
+    };
+
+    checkScreenSize();
+
+    // Handle resizing
+    window.addEventListener('resize', checkScreenSize);
+
     return () => {
+      window.removeEventListener('resize', checkScreenSize);
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('click', handleOutsideClick);
     };
@@ -54,7 +68,7 @@ const ModelBox = ({modalBoxData}: {modalBoxData: any}) => {
       {isVisible && (
         <>
           <div className="fixed inset-0 top-0 bottom-0 left-0 right-0 bg-black opacity-60 z-10" />
-          <div ref={modalRef} className='fixed z-20 top-[15%] left-0 right-0 mx-auto w-[95%] max-w-[65%] lg:h-[60%] md:h-[36rem] h-[calc(100%-20%)] bg-white dark:bg-black rounded-2xl overflow-y-auto shadow-2xl'>
+          <div ref={modalRef} className='fixed z-20 top-[15%] left-0 right-0 mx-auto w-[95%] max-w-[65%] lg:h-[80%] md:h-[36rem] h-[calc(100%-20%)] bg-white dark:bg-black rounded-2xl overflow-y-auto shadow-2xl'>
             <div className='w-full h-full flex lg:flex-row flex-col-reverse overflow-y-auto lg:p-8 p-4 gap-4 items-center'>
               <div className='lg:w-[50%] w-full h-full flex flex-col justify-center gap-8'>
                 <span className='text-3xl font-semibold'>{modalBoxData[0]?.attributes?.Modal_closing[0]?.label}</span>

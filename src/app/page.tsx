@@ -15,7 +15,6 @@ import LoaderSpinner from "./components/common/loader-spinner/LoadingSpinner";
 import OurValues from "./components/our-values/OurValues";
 import ModelBox from "./components/model-box/ModelBox";
 import Head from "next/head";
-import { Metadata } from "next";
 
 interface HomePageData {
   id: number;
@@ -228,6 +227,7 @@ interface HomePageData {
     id: number;
     metaTitle: string;
     metaDescription: string;
+    canonicalURL: string;
   }
 }
 
@@ -448,15 +448,34 @@ export default function Home() {
 
   useEffect(() => {
     if (homePageData) {
+      // Set document title
       document.title = homePageData?.seo?.metaTitle || "Default Title";
-      // if (metaDescription) {
-      //   metaDescription.setAttribute("content", homePageData?.seo?.metaDescription || "Default description");
-      // } else {
-      //   const newMeta = document.createElement("meta");
-      //   newMeta.name = "description";
-      //   newMeta.content = homePageData?.seo?.metaDescription || "Default description";
-      //   document.head.appendChild(newMeta);
-      // }
+  
+      // Select meta description tag
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+  
+      // If meta description doesn't exist, create it
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+  
+      // Set content for the meta description
+      metaDescription.content = homePageData?.seo?.metaDescription || "Default description";
+  
+      // Select canonical link tag
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  
+      // If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+  
+      // Set href for the canonical link
+      canonicalLink.href = homePageData?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [homePageData]);
 
@@ -467,8 +486,9 @@ export default function Home() {
   return (
     <div className="poppins w-full h-full">
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href={homePageData?.seo?.canonicalURL || "default-canonical-url"} />
         <meta name="title" content={homePageData?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={homePageData?.seo?.metaDescription || "Default Description"} />
       </Head>
       <SlideShowText slides={homePageCarousel} />
       <CommonBlock

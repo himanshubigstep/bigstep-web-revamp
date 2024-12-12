@@ -3,6 +3,8 @@ import { fetchBlogsData } from '@/api-data/api';
 import { useRouter } from 'next/navigation';
 import Button from '../button/Button';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, bannerImage, isBlog }: { bannerTitle: string, bannerDescription: string, buttonTitle?: string, onButtonClick?: string, bannerImage?: string, isBlog?: boolean }) => {
     const router = useRouter();
@@ -104,7 +106,27 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                                         {firstItem?.attributes?.heading}
                                     </h2>
                                     <h4 className="text-black dark:text-white lg:text-md md:text-sm sm:text-xs text-xs font-normal lg:line-clamp-6 line-clamp-2 break-all">
-                                        {firstItem?.attributes?.description}
+                                        {/* {firstItem?.attributes?.description} */}
+                                        <ReactMarkdown
+                                            remarkPlugins={[remarkGfm]}
+                                            components={{
+                                                h2: ({ children }) => <h2 className="lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold my-4">{children}</h2>,
+                                                h3: ({ children }) => <h3 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold my-3">{children}</h3>,
+                                                p: ({ children }) => <p className="mb-4">{children}</p>,
+                                                ul: ({ children }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
+                                                li: ({ children }) => <li className="mb-2">{children}</li>,
+                                                a: ({ href, children }) => {
+                                                    if (href && href.includes("mailto:")) {
+                                                        return (
+                                                            <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>
+                                                        );
+                                                    }
+                                                    return <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>;
+                                                }
+                                            }}
+                                        >
+                                            {firstItem?.attributes?.description || ''}
+                                        </ReactMarkdown>
                                     </h4>
                                 </div>
                             </div>
@@ -113,7 +135,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
 
                     <div className='lg:w-1/2 w-full flex flex-col items-center rounded-lg lg:gap-8 gap-4 overflow-y-auto'>
                         {remainingItems.length > 0 && (
-                            <div className="w-full flex lg:flex-col flex-row rounded-lg lg:gap-8 gap-4 overflow-y-auto lg:h-[32rem] hide-scrollbar lg:mb-auto mb-8">
+                            <div className="w-full flex lg:flex-col flex-row rounded-lg lg:gap-8 gap-4 lg:overflow-y-auto md:overflow-y-auto overflow-y-hidden lg:h-[32rem] hide-scrollbar lg:mb-auto mb-8">
                                 {remainingItems.map((item: any) => (
                                     <Link
                                         key={item.id}

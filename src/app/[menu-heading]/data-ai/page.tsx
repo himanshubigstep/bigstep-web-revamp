@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import AITech from '@/app/components/common/ai-tech/AITech'
 import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
+import Head from 'next/head'
 
 interface dataandAiPageData {
   software: {
@@ -168,6 +169,12 @@ interface dataandAiPageData {
       }
     }
   }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
+  }
 }
 
 interface headerDataLink {
@@ -289,12 +296,50 @@ const DataAndAI = () => {
     fetchHeaderDataResponse();
   }, [])
 
+  useEffect(() => {
+    if (dataandAiPageData) {
+      // Set document title
+      document.title = dataandAiPageData?.seo?.metaTitle || "Default Title";
+  
+      // Select meta description tag
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+  
+      // If meta description doesn't exist, create it
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+  
+      // Set content for the meta description
+      metaDescription.content = dataandAiPageData?.seo?.metaDescription || "Default description";
+  
+      // Select canonical link tag
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  
+      // If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+  
+      // Set href for the canonical link
+      canonicalLink.href = dataandAiPageData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [dataandAiPageData]);
+
   if (loading) {
     return <LoaderSpinner />;
   }
   
   return (
     <div className='poppins'>
+        <Head>
+          <link rel="canonical" href={dataandAiPageData?.seo?.canonicalURL || "default-canonical-url"} />
+          <meta name="title" content={dataandAiPageData?.seo?.metaTitle || "Default description"} />
+          <meta name="description" content={dataandAiPageData?.seo?.metaDescription || "Default Description"} />
+        </Head>
         <TopBanner bannerData={dataandAiPageData?.introduction} />
         <SectionInnerCarousel carouselProductEngineerData={dataandAiPageData?.software} />
         <ServiceDataBlock

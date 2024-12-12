@@ -6,6 +6,7 @@ import TopBanner from '../components/common/top-banner/TopBanner';
 import NewsLetter from '../components/common/news-letter/NewsLetter';
 import AITech from '../components/common/ai-tech/AITech';
 import BlogsGrid from '../components/blogs-grid/BlogsGrid';
+import Head from 'next/head';
 
 interface Author {
   data: {
@@ -90,6 +91,12 @@ interface blogPageProps {
       heading: string;
       description: string;
     }
+    seo: {
+      id: number;
+      metaTitle: string;
+      metaDescription: string;
+      canonicalURL: string;
+    }
   }
 }
 
@@ -131,6 +138,39 @@ const Blogs = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (blogPageData) {
+      // Set document title
+      document.title = blogPageData?.attributes?.seo?.metaTitle || "Default Title";
+  
+      // Select meta description tag
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+  
+      // If meta description doesn't exist, create it
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+  
+      // Set content for the meta description
+      metaDescription.content = blogPageData?.attributes?.seo?.metaDescription || "Default description";
+  
+      // Select canonical link tag
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  
+      // If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+  
+      // Set href for the canonical link
+      canonicalLink.href = blogPageData?.attributes?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [blogPageData]);
+
   if (loading) {
     return <LoaderSpinner />
   }
@@ -156,6 +196,11 @@ const Blogs = () => {
 
   return (
     <div className='poppins relative bg-white dark:bg-black w-full h-full'>
+      <Head>
+        <link rel="canonical" href={blogPageData?.attributes?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="title" content={blogPageData?.attributes?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={blogPageData?.attributes?.seo?.metaDescription || "Default Description"} />
+      </Head>
       <TopBanner bannerData={blogPageData?.attributes?.intro[0]} />
       <NewsLetter latest_info={blogPageData?.attributes?.latest_info} />
       <AITech

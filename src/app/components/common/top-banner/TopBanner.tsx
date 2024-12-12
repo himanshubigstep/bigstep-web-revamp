@@ -17,14 +17,14 @@ const TopBanner = ({ bannerData }: { bannerData: any }) => {
         ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${bannerData?.backgroundImage?.data[0]?.attributes?.url}`
         : null;
     return (
-        <div className='w-full relative lg:h-[80vh] md:h-[80vh] sm:h-screen h-[45vh] lg:px-4'>
+        <div className='w-full relative lg:h-[80vh] md:h-[60vh] sm:h-screen h-[50vh] lg:px-4'>
             <div className='w-full h-full absolute right-0 left-0 top-0 bottom-0'>
                 <div className='w-full h-full absolute top-0 bottom-0 bg-gradient-to-r from-black to-transparent' />
                 {imageUrl && (
                     <img
                         src={imageUrl}
                         alt='image'
-                        className='w-full h-full object-cover lg:object-top md:object-top object-right'
+                        className='w-full h-full object-cover object-right-top'
                     />
                 )}
             </div>

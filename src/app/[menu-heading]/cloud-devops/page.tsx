@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import AITech from '@/app/components/common/ai-tech/AITech'
 import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
+import Head from 'next/head'
 
 interface cloudDevOpsPageData {
   software: {
@@ -168,6 +169,12 @@ interface cloudDevOpsPageData {
       }
     }
   }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
+  }
 }
 
 interface headerDataLink {
@@ -289,12 +296,50 @@ const CloudDevOps = () => {
     fetchHeaderDataResponse();
   }, [])
 
+  useEffect(() => {
+    if (cloudDevOpsData) {
+      // Set document title
+      document.title = cloudDevOpsData?.seo?.metaTitle || "Default Title";
+  
+      // Select meta description tag
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+  
+      // If meta description doesn't exist, create it
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+  
+      // Set content for the meta description
+      metaDescription.content = cloudDevOpsData?.seo?.metaDescription || "Default description";
+  
+      // Select canonical link tag
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  
+      // If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+  
+      // Set href for the canonical link
+      canonicalLink.href = cloudDevOpsData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [cloudDevOpsData]);
+
   if (loading) {
     return <LoaderSpinner />;
   }
   
   return (
     <div className='poppins'>
+        <Head>
+          <link rel="canonical" href={cloudDevOpsData?.seo?.canonicalURL || "default-canonical-url"} />
+          <meta name="title" content={cloudDevOpsData?.seo?.metaTitle || "Default description"} />
+          <meta name="description" content={cloudDevOpsData?.seo?.metaDescription || "Default Description"} />
+        </Head>
         <TopBanner bannerData={cloudDevOpsData?.introduction} />
         <SectionInnerCarousel carouselProductEngineerData={cloudDevOpsData?.software} />
         <ServiceDataBlock

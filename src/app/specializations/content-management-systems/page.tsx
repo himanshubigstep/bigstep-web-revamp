@@ -5,6 +5,7 @@ import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock';
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
+import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -115,6 +116,12 @@ interface ContentManagementSystemsData {
         }
       }
     }
+  }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
   }
 }
 
@@ -235,6 +242,39 @@ const ContentManagementSystems = () => {
     
         contentManagementSystemsBenifits();
       }, [])
+
+      useEffect(() => {
+        if (contentManagementSystemsData) {
+          // Set document title
+          document.title = contentManagementSystemsData?.seo?.metaTitle || "Default Title";
+      
+          // Select meta description tag
+          let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+      
+          // If meta description doesn't exist, create it
+          if (!metaDescription) {
+            metaDescription = document.createElement("meta");
+            metaDescription.name = "description";
+            document.head.appendChild(metaDescription);
+          }
+      
+          // Set content for the meta description
+          metaDescription.content = contentManagementSystemsData?.seo?.metaDescription || "Default description";
+      
+          // Select canonical link tag
+          let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+      
+          // If canonical link doesn't exist, create it
+          if (!canonicalLink) {
+            canonicalLink = document.createElement("link");
+            canonicalLink.rel = "canonical";
+            document.head.appendChild(canonicalLink);
+          }
+      
+          // Set href for the canonical link
+          canonicalLink.href = contentManagementSystemsData?.seo?.canonicalURL || "default-canonical-url";
+        }
+      }, [contentManagementSystemsData]);
     
       if (loading) {
         return <LoaderSpinner />;
@@ -242,6 +282,11 @@ const ContentManagementSystems = () => {
       
   return (
     <div className='poppins'>
+        <Head>
+          <link rel="canonical" href={contentManagementSystemsData?.seo?.canonicalURL || "default-canonical-url"} />
+          <meta name="title" content={contentManagementSystemsData?.seo?.metaTitle || "Default description"} />
+          <meta name="description" content={contentManagementSystemsData?.seo?.metaDescription || "Default Description"} />
+        </Head>
         <TopBanner bannerData={contentManagementSystemsData?.introduction} />
         <ServiceDataBlock
           title={contentManagementSystemsData?.engaging_streaming_experience?.heading || ''}

@@ -9,6 +9,7 @@ import HolisticApproach from '@/app/components/holistic-approach/HolisticApproac
 import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
 import MileStoneSubmenu from '@/app/components/common/milestones-data/MileStoneSubmenu'
 import ModelBox from '@/app/components/model-box/ModelBox'
+import Head from 'next/head'
 
 interface CompleteProductDevelopmentProps {
   id: number;
@@ -159,6 +160,12 @@ interface CompleteProductDevelopmentProps {
     heading: string;
     description: string
   }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
+  }
 }
 
 interface closingModalBoxData {
@@ -238,12 +245,50 @@ const CompleteProductDevelopment = () => {
       fetchCompleteProductDevelopmentHolisticData();
     }, [])
 
+    useEffect(() => {
+      if (completeProductDevelopmentData) {
+        // Set document title
+        document.title = completeProductDevelopmentData?.seo?.metaTitle || "Default Title";
+    
+        // Select meta description tag
+        let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+    
+        // If meta description doesn't exist, create it
+        if (!metaDescription) {
+          metaDescription = document.createElement("meta");
+          metaDescription.name = "description";
+          document.head.appendChild(metaDescription);
+        }
+    
+        // Set content for the meta description
+        metaDescription.content = completeProductDevelopmentData?.seo?.metaDescription || "Default description";
+    
+        // Select canonical link tag
+        let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    
+        // If canonical link doesn't exist, create it
+        if (!canonicalLink) {
+          canonicalLink = document.createElement("link");
+          canonicalLink.rel = "canonical";
+          document.head.appendChild(canonicalLink);
+        }
+    
+        // Set href for the canonical link
+        canonicalLink.href = completeProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
+      }
+    }, [completeProductDevelopmentData]);
+
     if (loading) {
       return <LoaderSpinner />;
     }
     
   return (    
     <div className='poppins'>
+        <Head>
+          <link rel="canonical" href={completeProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url"} />
+          <meta name="title" content={completeProductDevelopmentData?.seo?.metaTitle || "Default description"} />
+          <meta name="description" content={completeProductDevelopmentData?.seo?.metaDescription || "Default Description"} />
+        </Head>
         <TopBanner bannerData={completeProductDevelopmentData?.introduction} />
         <HolisticApproach
           title={completeProductDevelopmentData?.holistic_approach?.heading || ''}

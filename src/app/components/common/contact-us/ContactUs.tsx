@@ -18,7 +18,7 @@ const ContactUs = ({ contactUsData }: { contactUsData: any }) => {
                 <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4 text-white'>{contactUsData?.heading}</h2>
                 <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal text-white'>{contactUsData?.description}</p>
             </div>
-            <div className='relative w-full md:px-32 px-4 h-full mx-auto'>
+            <div className='relative w-full lg:px-32 px-4 h-full mx-auto'>
                 <ContactForm buttonText={contactUsData?.button_text} />
             </div>
         </div>

@@ -7,6 +7,7 @@ import ContactUs from '../components/common/contact-us/ContactUs';
 import ServiceDataBlock from '../components/common/service-data-block/ServiceDataBlock';
 import PartnersBlock from '../components/common/partners-section/PartnersBlock';
 import ModelBox from '../components/model-box/ModelBox';
+import Head from 'next/head';
 // import CommonBlock from '@/app/components/common/common-blocks-division/CommonBlock'
 // import ContactUs from '@/app/components/common/contact-us/ContactUs';
 // import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
@@ -83,6 +84,12 @@ interface PartnerShipData {
         }
       }
     }
+  }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
   }
 }
 
@@ -193,12 +200,50 @@ const Partnership = () => {
     fetchPartnersResponse();
   }, []);
 
+  useEffect(() => {
+    if (partnershipData) {
+      // Set document title
+      document.title = partnershipData?.seo?.metaTitle || "Default Title";
+  
+      // Select meta description tag
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+  
+      // If meta description doesn't exist, create it
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+  
+      // Set content for the meta description
+      metaDescription.content = partnershipData?.seo?.metaDescription || "Default description";
+  
+      // Select canonical link tag
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  
+      // If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+  
+      // Set href for the canonical link
+      canonicalLink.href = partnershipData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [partnershipData]);
+
   if (loading) {
     return <LoaderSpinner />;
   }
 
   return (
     <div className='poppins'>
+      <Head>
+        <link rel="canonical" href={partnershipData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="title" content={partnershipData?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={partnershipData?.seo?.metaDescription || "Default Description"} />
+      </Head>
       <TopBanner bannerData={partnershipData?.partner_Intro} />
       <PartnersBlock
         homePageData={{

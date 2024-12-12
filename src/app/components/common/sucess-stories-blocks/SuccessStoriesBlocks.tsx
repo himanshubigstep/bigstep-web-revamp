@@ -30,6 +30,7 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                         logoSrc: process.env.NEXT_PUBLIC_IMAGE_URL + story.attributes.logo.data.attributes.url
                     };
                 });
+                successStories.sort((a: { id: number }, b: { id: number }) => a.id - b.id);
                 setCarouselImagesArray(successStories);
 
             } catch (error) {

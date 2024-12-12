@@ -20,7 +20,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
         company: '',
         location: '',
         phone_number: '' as string | undefined,
-        message: ''
+        query_description: ''
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -100,7 +100,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                     company: '',
                     location: '',
                     phone_number: '',
-                    message: ''
+                    query_description: ''
                 });
     
                 toast.success('Form has been submitted successfully!');
@@ -200,10 +200,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                 </div>
                 <InputField
                     type='textarea'
-                    name='message'
+                    name='query_description'
                     label='Message'
                     placeholder='Enter your message'
-                    value={formData.message}
+                    value={formData.query_description}
                     onChange={handleChange}
                     className='w-full h-32 bg-black px-4 rounded-lg outline-0 text-white'
                 />

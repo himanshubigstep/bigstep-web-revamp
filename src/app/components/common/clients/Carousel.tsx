@@ -72,7 +72,7 @@ const Carousel = () => {
                 {reviews && reviews.sort((a: any, b: any) => a.id - b.id).map((item, index) => {
                     const isExpanded = expanded[item.id];
                     return (
-                        <div key={item.id} className={`z-10 max-w-[1140px] mx-auto relative dark:bg-black shadow-2xl bg-white rounded-2xl lg:p-16 lg:px-8 md:px-8 sm:px-8 px-20 py-16 lg:mt-0 mt-8 w-full lg:h-[26rem] flex flex-col justify-between items-center gap-4 duration-700 ease-in-out ${index === currentIndex ? 'block' : 'hidden'}`}>
+                        <div key={item.id} className={`z-10 max-w-[1140px] mx-auto relative dark:bg-black shadow-2xl bg-white rounded-2xl lg:p-16 lg:px-8 md:px-16 sm:px-16 px-20 py-16 lg:mt-0 mt-8 w-full lg:h-[26rem] flex flex-col justify-between items-center gap-4 duration-700 ease-in-out ${index === currentIndex ? 'block' : 'hidden'}`}>
                             <div className='w-[100%]'>
                                 <blockquote className="relative">
                                     <svg className="lg:block md:block hidden absolute -top-16 -start-8 size-16 text-black dark:text-neutral-700" width="16" height="8" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

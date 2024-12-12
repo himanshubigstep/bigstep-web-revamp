@@ -8,6 +8,7 @@ import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock';
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import ModelBox from '@/app/components/model-box/ModelBox';
+import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -113,6 +114,12 @@ interface MobileAppDevelopmentPageData {
         }
       }[]
     }
+  }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
   }
 }
 
@@ -258,12 +265,50 @@ const MobileAppDevelopment = () => {
     customerSoftwareDevelopmentChoose();
   }, []);
 
+  useEffect(() => {
+    if (mobileAppDevelopmentData) {
+      // Set document title
+      document.title = mobileAppDevelopmentData?.seo?.metaTitle || "Default Title";
+  
+      // Select meta description tag
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+  
+      // If meta description doesn't exist, create it
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+  
+      // Set content for the meta description
+      metaDescription.content = mobileAppDevelopmentData?.seo?.metaDescription || "Default description";
+  
+      // Select canonical link tag
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  
+      // If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+  
+      // Set href for the canonical link
+      canonicalLink.href = mobileAppDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [mobileAppDevelopmentData]);
+
   if (loading) {
     return <LoaderSpinner />;
   }
 
   return (
     <div className='poppins'>
+      <Head>
+        <link rel="canonical" href={mobileAppDevelopmentData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="title" content={mobileAppDevelopmentData?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={mobileAppDevelopmentData?.seo?.metaDescription || "Default Description"} />
+      </Head>
       <TopBanner bannerData={mobileAppDevelopmentData?.mobile_intro} />
       <ServiceDataBlock
         title={mobileAppDevelopmentData?.why_choose?.heading || ''}

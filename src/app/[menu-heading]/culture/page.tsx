@@ -7,6 +7,7 @@ import CultureTopSlider from '@/app/components/culture-top-slider/CultureTopSlid
 import StarDom from '@/app/components/stardom/StarDom';
 import StrengthStrip from '@/app/components/streanth-strip/StrengthStrip';
 import VideoPlayerComponent from '@/app/components/video-player-component/VideoPlayerComponent';
+import Head from 'next/head';
 import React, { useEffect, useState } from 'react'
 
 interface CulturePageData {
@@ -91,6 +92,12 @@ interface CulturePageData {
       }
     }
   }[]
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
+  }
 }
 
 const CulturePage = () => {
@@ -112,6 +119,39 @@ const CulturePage = () => {
 
     fetchCulturePageDataResponse();
   }, []);
+
+  useEffect(() => {
+    if (culturalPageData) {
+      // Set document title
+      document.title = culturalPageData?.seo?.metaTitle || "Default Title";
+  
+      // Select meta description tag
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+  
+      // If meta description doesn't exist, create it
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+  
+      // Set content for the meta description
+      metaDescription.content = culturalPageData?.seo?.metaDescription || "Default description";
+  
+      // Select canonical link tag
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  
+      // If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+  
+      // Set href for the canonical link
+      canonicalLink.href = culturalPageData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [culturalPageData]);
 
   if (loading) {
     return <LoaderSpinner />;
@@ -141,6 +181,11 @@ const CulturePage = () => {
 
   return (
     <div className='poppins relative w-full h-full'>
+      <Head>
+        <link rel="canonical" href={culturalPageData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="title" content={culturalPageData?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={culturalPageData?.seo?.metaDescription || "Default Description"} />
+      </Head>
       <CultureTopSlider slides={mappedSlides} />
       <StrengthStrip employeeData={culturalPageData?.employee_data} />
       <CultureServiceBlock
