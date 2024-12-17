@@ -56,17 +56,17 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
                 alt={`Slide ${slide.id}`}
             />
         )}
-        <div className="relative w-full max-w-[1440px] mx-auto lg:h-auto md:h-auto sm:h-full h-auto text-white z-20 px-4 lg:px-4 lg:pb-0 md:pb-0 pb-16">
-            <div className={`lg:w-[60%] md:w-[70%] sm:w-[80%] w-full h-full flex flex-col justify-center items-start transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="relative w-full max-w-[1440px] mx-auto lg:h-auto md:h-auto sm:h-full h-auto lg:mt-0 md:mt-0 md:landscape:mt-16 sm:mt-0 sm:landscape:mt-4 mt-4 landscape:mt-4 text-white z-20 px-4 lg:px-4 lg:pb-0 md:pb-0 pb-16">
+            <div className={`lg:w-1/2 md:w-1/2 sm:w-[80%] w-full h-full flex flex-col justify-center items-start transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}>
                 <h2 className="lg:text-4xl md:text-3xl sm:text-md text-md lg:mb-4 md:mb-4 sm:mb-2 mb-2 font-medium">{slide.attributes.title}</h2>
-                <p className="lg:mb-8 mb-8 lg:text-lg md:text-md sm:text-sm text-sm font-normal lg:block md:block sm:hidden hidden">{slide.attributes.text_body}</p>
+                <p className="lg:mb-8 md:mb-4 sm:mb-2 mb-2 lg:text-lg md:text-md sm:text-sm text-sm font-normal lg:block md:block sm:hidden hidden">{slide.attributes.text_body}</p>
                 {/* <Button
                     text={slide.attributes.button_text}
                     className="lg:text-md text-xs bg-blue-500 hover:bg-blue-800 text-white lg:py-4 lg:px-4 md:py-4 md:px-4 px-4 py-2 rounded-xl w-auto font-medium"
                     onClick={() => window.open(slide.attributes.button_link, '_blank')}
                 /> */}
                 <Link href={slide.attributes.button_link} passHref target='_blank'
-                    className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-md text-xs text-white font-normal'>
+                    className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-lg text-md text-white font-normal'>
                     {slide.attributes.button_text}
                 </Link>
             </div>
@@ -135,7 +135,7 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
-            <div className="relative overflow-hidden lg:h-[80vh] md:h-[60vh] sm:h-screen h-[50vh]">
+            <div className="relative overflow-hidden lg:h-[80vh] md:h-[60vh] sm:h-[80vh] h-[50vh] md:landscape:h-[80vh] sm:landscape:h-[90vh] landscape:h-screen">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-r from-black via-gray-900 to-transparent opacity-90 z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />

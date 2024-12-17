@@ -222,10 +222,10 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                   className={`${menu.items_on_right.length !== 0
                     ? "w-full flex lg:flex-row flex-col justify-between left-0"
                     : "small-menu left-auto right-auto"
-                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white dark:bg-black lg:absolute lg:max-h-[100vh] md:max-h-[80vh] sm:max-h-[45vh] max-h-[70vh] overflow-y-auto left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 gap-8 rounded-2xl lg:p-8 p-2`}
+                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white lg:items-center dark:bg-black lg:absolute lg:max-h-[100vh] md:max-h-[80vh] sm:max-h-[45vh] max-h-[70vh] overflow-y-auto left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 gap-8 rounded-2xl`}
                 >
                   <ul
-                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "grid md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4 lg:w-[65%]" : "grid grid-cols-1 lg:gap-8 gap-4 w-[100%]"
+                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "grid md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4 lg:w-[65%] lg:p-8 p-2 lg:border-r-[1px]" : "grid grid-cols-1 lg:gap-8 gap-4 w-[100%] lg:p-8 p-2"
                       }`}
                   >
                     {menu.items_on_left &&
@@ -235,7 +235,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                           className={`${!submenu.technology ? "relative" : "relative"}`}
                         >
                           <Link
-                            href={submenu.item_link || "#"}
+                            href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-').replace('what-we-do', 'services').replace('how-we-do', 'engagement-models')}${submenu.item_link.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}`}
                             onClick={(e) => {
                               e.preventDefault();
                               toggleSubmenu(
@@ -278,14 +278,14 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                       ))}
                   </ul>
                   <ul
-                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "flex flex-col lg:w-[35%] w-full gap-8" : "flex flex-col w-[100%] lg:gap-8 gap-4"
+                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "flex flex-col lg:w-[35%] w-full gap-8 lg:p-8 p-2 lg:bg-blue-500 lg:justify-center lg:items-center lg:max-h-[65vh] lg:mr-8 lg:rounded-[3rem] specialization-block" : "flex flex-col w-[100%] lg:gap-8 gap-4 lg:p-8 p-2"
                       }`}
                   >
                     {menu.items_on_right &&
                       menu.items_on_right.map((submenu: any) => {
                         let baseUrl = `/${menu.heading.toLowerCase().replace(/\s+/g, '-')}`;
                         return (
-                          <li key={submenu.id} className="relative flex flex-col">
+                          <li key={submenu.id} className="relative flex flex-col lg:w-full">
                             <Link
                               href={submenu.item_link || "#"}  // If there's a link, navigate to it; otherwise, stay at the current page
                               onClick={(e) => {
@@ -298,12 +298,15 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                 );
                               }}
                               className={`${menu.items_on_right && menu.items_on_right.some((submenu: any) => submenu.technology)
-                                ? "text-md text-left flex items-center gap-2 pb-4 font-semibold text-blue-500"
+                                ? "text-md text-left flex items-center gap-2 pb-4 font-semibold lg:text-white lg:text-2xl text-blue-500"
                                 : "flex items-center text-black dark:text-white gap-2 text-md hover:text-blue-500"
                                 }`}
                             >
                               <img
-                                className="w-6 h-6"
+                                className={`${menu.items_on_right && menu.items_on_right.some((submenu: any) => submenu.technology)
+                                  ? "lg:w-[1.5rem] lg:h-[1.5rem] w-6 h-6 lg:brightness-200"
+                                  : "w-6 h-6"
+                                  }`}
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${submenu.icon.data.attributes.url}`}
                                 alt=""
                               />
@@ -324,7 +327,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                   }
 
                                   return (
-                                    <li key={index} className="relative text-black dark:text-white pb-4 text-md hover:text-blue-500">
+                                    <li key={index} className="relative lg:text-white text-black dark:text-white pb-4 text-md lg:hover:text-gray-200 hover:text-blue-500">
                                       <Link href={baseUrl} className="text-md" onClick={handleLinkClick}>
                                         {item.title}
                                       </Link>

@@ -10,6 +10,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import RelatedBlogs from '@/app/components/related-blogs/RelatedBlogs';
 import Link from 'next/link';
+import Head from 'next/head';
 
 interface Author {
     data: {
@@ -57,6 +58,11 @@ interface BlogData {
             }
         }
         slug: string;
+        seo: {
+            metaTitle: string;
+            metaDescription: string;
+            canonicalURL: string;
+        }
     };
 }
 
@@ -203,12 +209,50 @@ const BlogPostPage = () => {
         return date.toLocaleDateString('en-US', options);
     };
 
+    useEffect(() => {
+        if (blog) {
+            // Set document title
+            document.title = blog?.attributes?.seo?.metaTitle || "Default Title";
+
+            // Select meta description tag
+            let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+
+            // If meta description doesn't exist, create it
+            if (!metaDescription) {
+                metaDescription = document.createElement("meta");
+                metaDescription.name = "description";
+                document.head.appendChild(metaDescription);
+            }
+
+            // Set content for the meta description
+            metaDescription.content = blog?.attributes?.seo?.metaDescription || "Default description";
+
+            // Select canonical link tag
+            let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+
+            // If canonical link doesn't exist, create it
+            if (!canonicalLink) {
+                canonicalLink = document.createElement("link");
+                canonicalLink.rel = "canonical";
+                document.head.appendChild(canonicalLink);
+            }
+
+            // Set href for the canonical link
+            canonicalLink.href = blog?.attributes?.seo?.canonicalURL || "default-canonical-url";
+        }
+    }, [blog]);
+
     if (loading || !blog) {
         return <LoaderSpinner />;
     }
 
     return (
         <div className='poppins'>
+            <Head>
+                <link rel="canonical" href={blog?.attributes?.seo?.canonicalURL || "default-canonical-url"} />
+                <meta name="title" content={blog?.attributes?.seo?.metaTitle || "Default description"} />
+                <meta name="description" content={blog?.attributes?.seo?.metaDescription || "Default Description"} />
+            </Head>
             <BlogPageBanner bannerData={blog?.attributes} />
             <div id='read-more-section' className='w-full h-full max-w-[1440px] mx-auto lg:py-16 py-6 flex lg:flex-row md:flex-row flex-col justify-between items-start lg:gap-8 gap-4 px-4'>
                 <div className='w-full lg:max-w-[70%] max-w-full h-full flex flex-col lg:justify-between lg:items-center gap-4 relative'>

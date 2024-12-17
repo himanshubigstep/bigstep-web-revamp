@@ -51,6 +51,11 @@ interface BlogDataProps {
     author: Author;
     category: Category;
     image: Image;
+    seo: {
+        metaTitle: string;
+        metaDescription: string;
+        canonicalURL: string;
+    }
   }
 }
 

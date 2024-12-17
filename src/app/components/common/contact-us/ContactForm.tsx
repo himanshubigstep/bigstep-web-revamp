@@ -29,6 +29,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
         name: '',
         business_mail: '',
         phone_number: '',
+        query_description: ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -40,7 +41,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
     };
 
     const validateForm = () => {
-        const errors = { name: '', business_mail: '', phone_number: '' };
+        const errors = { name: '', business_mail: '', phone_number: '', query_description: '' };
         let isValid = true;
 
         if (!formData.name.trim()) {
@@ -72,6 +73,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
             isValid = false;
         } else if (formData.phone_number && !/^(\+?[\d]{1,4})?[\d]{7,15}$/.test(formData.phone_number)) {
             errors.phone_number = 'Phone Number is Invalid';
+            isValid = false;
+        }
+
+        if (!formData.query_description.trim()) {
+            errors.query_description = 'Message is Required';
             isValid = false;
         }
 
@@ -206,6 +212,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                     value={formData.query_description}
                     onChange={handleChange}
                     className='w-full h-32 bg-black px-4 rounded-lg outline-0 text-white'
+                    error={formErrors.query_description}
                 />
                 {submitError && <p className='text-red-500 text-center'>{submitError}</p>}
                 <div className='w-full flex justify-center'>

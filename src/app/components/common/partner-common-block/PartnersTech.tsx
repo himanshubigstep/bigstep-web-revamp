@@ -123,11 +123,11 @@ const PartnersTech = ({
             />
             <div className="relative w-full h-full max-w-[1440px] mx-auto px-4">
                 <div className="w-full text-left flex flex-col gap-2 md:max-w-[75%] mx-auto">
-                    <h4 className="font-semibold text-center text-3xl mb-4 text-white">{title}</h4>
-                    <p className="font-normal text-center text-lg mb-16 text-white">{description}</p>
+                    <h4 className="font-semibold text-center text-3xl mb-16 text-white">{title}</h4>
+                    {/* <p className="font-normal text-center text-lg mb-16 text-white">{description}</p> */}
                 </div>
 
-                <div className="relative w-full h-full flex md:flex-none flex-wrap gap-6 md:items-center justify-center mb-16 mx-auto">
+                <div className="relative w-full h-full flex md:flex-none flex-wrap gap-6 md:items-center justify-center mb-12 mx-auto">
                     <div className='absolute top-[-4rem] right-0 flex justify-between items-center gap-4'>
                         {visibleStart > 0 && (
                             <button
@@ -159,25 +159,25 @@ const PartnersTech = ({
                 </div>
 
                 {selectedCategory && sortedFilteredPartners.length > 0 ? (
-                    <div className="border-[1px] border-gray-500 rounded-2xl w-full h-full md:py-8 py-4">
+                    <div className="rounded-2xl w-full h-full">
                         <div className="w-full grid md:grid-cols-5 grid-cols-3 justify-center gap-8 items-start md:px-8 px-4">
                             {paginatedPartners.map((partner, index) => (
-                                <div key={index} className='flex flex-col gap-4 justify-center items-center'>
-                                    <div className="bg-white rounded-xl flex justify-center items-center md:p-4 p-2">
+                                <div key={index} className='w-full h-full flex flex-col gap-4 items-center'>
+                                    <div className="bg-white w-full h-[8rem] rounded-xl flex justify-center items-center md:p-4 p-2">
                                         {partner.attributes.logo.data && Array.isArray(partner.attributes.logo.data) ? (
                                             partner.attributes.logo.data.map((logo, logoIndex) => (
                                                 <img
                                                     key={logoIndex}
                                                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.attributes.url}`}
                                                     alt={`partner logo for ${partner.attributes.heading}`}
-                                                    className="object-contain w-[8rem] aspect-square"
+                                                    className="object-contain w-[5rem] aspect-square"
                                                 />
                                             ))
                                         ) : partner.attributes.logo.data ? (
                                             <img
                                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${partner.attributes.logo.data.attributes.url}`}
                                                 alt={`partner logo for ${partner.attributes.heading}`}
-                                                className="object-contain w-[8rem] aspect-square"
+                                                className="object-contain w-[5rem] aspect-square"
                                             />
                                         ) : (
                                             <div>No logo available</div>
@@ -191,7 +191,7 @@ const PartnersTech = ({
                         </div>
                         {/* Render pagination controls only if there are more than 10 partners */}
                         {sortedFilteredPartners.length > partnersPerPage && (
-                            <div className="flex justify-between items-center max-w-[80%] mx-auto mt-8">
+                            <div className="flex justify-between items-center mx-auto mt-8 md:px-8 px-4">
                                 <button
                                     onClick={handlePrevPage}
                                     disabled={currentPage === 0}

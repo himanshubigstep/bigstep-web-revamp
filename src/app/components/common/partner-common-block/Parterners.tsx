@@ -58,10 +58,10 @@ const Partners = ({
             <div className="relative w-full h-full max-w-[1440px] mx-auto">
                 <div className="w-full text-left flex flex-col gap-2 lg:max-w-[1080px] mx-auto">
                     <h4 className="font-semibold text-center lg:text-3xl md:text-2xl sm:text-xl text-lg mb-4 text-white">{title}</h4>
-                    <p className="font-normal text-center lg:text-lg md:text-md sm:text-sm text-xs mb-16 text-white">{description}</p>
+                    <p className="font-normal text-center lg:text-lg md:text-md sm:text-sm text-xs mb-6 text-white">{description}</p>
                 </div>
 
-                <div className="w-full h-full flex lg:flex-none md:flex-none flex-wrap gap-6 justify-center lg:items-center mb-16 mx-auto">
+                <div className="w-full h-full flex lg:flex-none md:flex-none flex-wrap gap-6 justify-center lg:items-center mb-12 mx-auto">
                     {sortedTechData.map((partner) => (
                         <Button
                             key={partner.id}
@@ -72,16 +72,16 @@ const Partners = ({
                     ))}
                 </div>
 
-                <div className="border-[1px] border-gray-500  lg:max-w-[75%] md:max-w-[75%] sm:max-w-[75%] max-w-full mx-auto rounded-2xl w-full h-full lg:py-8 py-4">
+                <div className="lg:max-w-[75%] md:max-w-[75%] sm:max-w-[75%] max-w-full mx-auto rounded-2xl w-full h-full">
                     <div className="w-full grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center gap-8 items-start lg:px-8 px-4">
                         {selectedPartnerData && selectedPartnerData.attributes.logos.data?.length > 0 ? (
                             selectedPartnerData.attributes.logos.data.map((logo, index) => (
-                                <div key={index} className='flex flex-col gap-4 justify-center items-center'>
-                                    <div className="bg-white rounded-xl flex justify-center items-center lg:p-4 p-2">
+                                <div key={index} className='w-full h-full flex flex-col gap-4 items-center'>
+                                    <div className="bg-white w-full h-[8rem] rounded-xl flex justify-center items-center lg:p-4 p-2">
                                         <img
                                             src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.attributes.url}`}
                                             alt="partner logo"
-                                            className="object-contain w-[8rem] aspect-square"
+                                            className="object-contain w-[5rem] aspect-square"
                                         />
                                     </div>
                                     <span className='lg:text-lg md:text-md sm:text-sm text-xs lg:w-[75%] mx-auto text-center text-white font-medium'>{logo.attributes.name.replace(/\.[^.]+$/, '')}</span>
@@ -94,7 +94,7 @@ const Partners = ({
                 </div>
 
                 {buttonLink && buttonText &&
-                    <div className='w-full flex justify-center items-center mt-8'>
+                    <div className='w-full flex justify-center items-center mt-6'>
                         <Link href={buttonLink} passHref target='_blank'
                             className="py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-medium inline-block">
                             {buttonText}
