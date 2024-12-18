@@ -200,7 +200,7 @@ const ContactFormSimple: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) 
                             defaultCountry="US"
                             value={formData.phone_number}
                             onChange={(value) => setFormData({ ...formData, phone_number: value })}
-                            className="w-full h-12 rounded-lg border border-gray-300 outline-0 input-field-phone relative"
+                            className="w-full h-12 rounded-lg border border-gray-300 outline-0 input-field-phone relative bg-white dark:bg-black"
                             error={formErrors.phone_number}
                         />
                         {formErrors.phone_number && (
