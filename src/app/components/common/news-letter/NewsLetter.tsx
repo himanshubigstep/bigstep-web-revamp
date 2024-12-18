@@ -146,7 +146,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
     }, []);
 
     return (
-        <div className={`${classNameOptional ? 'max-w-[1440px] mx-auto w-full h-full lg:rounded-3xl lg:py-0 py-0 px-4' : 'px-4 max-w-[1440px] mx-auto w-full h-full lg:rounded-3xl lg:py-16 py-8'} ${isBanner === false ? 'bg-black' : ''}`}>
+        <div className={`${classNameOptional ? 'max-w-[1440px] mx-auto w-full h-full lg:rounded-3xl lg:py-0 py-0 px-4' : 'px-4 max-w-[1440px] mx-auto w-full h-full lg:rounded-3xl lg:py-16 py-8'} ${isBanner === false ? 'bg-black' : ''} ${formClass && 'lg:mt-16 mt-8'}`}>
             <div className='relative w-full h-full lg:rounded-3xl lg:py-24 py-8 rounded-3xl'>
                 {isBanner !== false &&
                     <img
@@ -181,7 +181,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
                     />
                     <button
                         type='submit'
-                        className={`${formClass ? 'lg:w-full w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white' : 'lg:w-48 w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-8 text-white'}`}
+                        className={`${formClass ? 'lg:w-full w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white' : 'lg:w-48 w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-8 text-white'} lg:text-lg md:text-lg`}
                         disabled={isSubmitting}
                     >
                         {isSubmitting ? <LoaderSpinner /> : latest_info?.button_text}

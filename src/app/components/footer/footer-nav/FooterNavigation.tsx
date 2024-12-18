@@ -23,8 +23,8 @@ const FooterNavigation: React.FC<FooterNavigationProps> = ({ attributes }) => {
   const footerNav = attributes?.about_organisation || [];
   return (
     <div className='flex flex-col lg:flex-row gap-8 lg:w-[70%] w-full mt-8 lg:mt-auto'>
-      {footerNav.map((item) => (
-        <div key={item.id} className='w-full h-full'>
+      {footerNav.map((item, index) => (
+        <div key={item.id} className={`w-full h-full ${index < 2 ? 'lg:w-[30%]' : 'lg:w-[20%]'}`}>
           <h2 className='text-gray-200 not-italic text-2xl'>{item.heading}</h2>
           <ul className='flex flex-col gap-4 mt-4'>
             {item.technologyText.map((text) => (

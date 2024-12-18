@@ -9,6 +9,7 @@ import AITech from '@/app/components/common/ai-tech/AITech'
 import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
 import Head from 'next/head'
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm'
 
 interface internetOfThingsPageData {
   software: {
@@ -382,7 +383,8 @@ const InternetOfThings = () => {
           buttonTitle={internetOfThingsPageData?.latest_info?.button_text || ''}
           onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
         />
-        <ContactUs contactUsData = {internetOfThingsPageData?.get_in_touch} />
+        {/* <ContactUs contactUsData = {internetOfThingsPageData?.get_in_touch} /> */}
+        <SimpleContactForm contactUsData={internetOfThingsPageData?.get_in_touch} />
     </div>
   )
 }

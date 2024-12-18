@@ -5,6 +5,7 @@ import ContactUs from '../components/common/contact-us/ContactUs';
 import { fetchContactUsPage } from '@/api-data/api';
 import LoaderSpinner from '../components/common/loader-spinner/LoadingSpinner';
 import Head from 'next/head';
+import SimpleContactForm from '../components/common/contact-us/simple-contact-form/SimpleContactForm';
 
 interface ContactUsData {
   attributes: {
@@ -106,7 +107,8 @@ const ContactUsPage = () => {
       </Head>
       <TopBanner bannerData={contactUsData?.attributes?.intro} />
       <div className='w-full h-full flex justify-center items-center md:pt-16 pt-8'>
-        <ContactUs contactUsData={contactUsData?.attributes?.get_in_touch} />
+        {/* <ContactUs contactUsData={contactUsData?.attributes?.get_in_touch} /> */}
+        <SimpleContactForm contactUsData={contactUsData?.attributes?.get_in_touch} />
       </div>
     </div>
   )

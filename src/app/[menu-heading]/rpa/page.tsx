@@ -10,6 +10,7 @@ import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
 import ModelBox from '@/app/components/model-box/ModelBox'
 import Head from 'next/head'
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm'
 
 interface rpaPageData {
   software: {
@@ -456,7 +457,8 @@ const RPA = () => {
           buttonTitle={rpaPageData?.latest_info?.button_text || ''}
           onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
         />
-        <ContactUs contactUsData = {rpaPageData?.get_in_touch} />
+        {/* <ContactUs contactUsData = {rpaPageData?.get_in_touch} /> */}
+        <SimpleContactForm contactUsData={rpaPageData?.get_in_touch} />
         <ModelBox modalBoxData={modalBoxData} />
     </div>
   )

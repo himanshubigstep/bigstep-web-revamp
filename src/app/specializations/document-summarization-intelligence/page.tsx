@@ -1,6 +1,7 @@
 'use client'
 import { fetchDocumentSummarizationsBenifits, fetchDocumentSummarizationsData, fetchDocumentSummarizationsFeatures, fetchDocumentSummarizationsTechData, fetchHeaderData } from '@/api-data/api';
 import ContactUs from '@/app/components/common/contact-us/ContactUs';
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock';
@@ -323,7 +324,8 @@ const DocumentSummarizationInteligence = () => {
           serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
           buttonText={documentSummarizationsData?.transformative_benefits?.button_text || ''}
         />
-        <ContactUs contactUsData = {documentSummarizationsData?.get_in_touch || []} />
+        {/* <ContactUs contactUsData = {documentSummarizationsData?.get_in_touch || []} /> */}
+        <SimpleContactForm contactUsData = {documentSummarizationsData?.get_in_touch || []} />
     </div>
   )
 }

@@ -10,6 +10,7 @@ import ProductDevelopment from '@/app/components/product-development/ProductDeve
 import MileStoneSubmenu from '@/app/components/common/milestones-data/MileStoneSubmenu'
 import ModelBox from '@/app/components/model-box/ModelBox'
 import Head from 'next/head'
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm'
 
 interface CtoAsServiceProps {
   id: number;
@@ -306,7 +307,10 @@ const CtoAsService = () => {
               bgImage={ctoAsServiceData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${ctoAsServiceData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
           />
         </div>
-        <ContactUs contactUsData = {ctoAsServiceData?.client_query || []} />
+        {/* <ContactUs contactUsData = {ctoAsServiceData?.client_query || []} /> */}
+        <div className='w-full h-full lg:mt-16 md:mt-16 mt-8'>
+          <SimpleContactForm contactUsData={ctoAsServiceData?.client_query || []} />
+        </div>
         <ModelBox modalBoxData={modalBoxData} />
     </div>
   )

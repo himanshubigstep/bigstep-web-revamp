@@ -17,7 +17,7 @@ const TopBanner = ({ bannerData }: { bannerData: any }) => {
         ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${bannerData?.backgroundImage?.data[0]?.attributes?.url}`
         : null;
     return (
-        <div className='w-full relative lg:h-[80vh] md:h-[60vh] sm:h-screen h-[50vh] lg:px-4'>
+        <div className='w-full relative lg:h-[90vh] md:h-[60vh] sm:h-screen h-[50vh] lg:px-4'>
             <div className='w-full h-full absolute right-0 left-0 top-0 bottom-0'>
                 <div className='w-full h-full absolute top-0 bottom-0 bg-gradient-to-r from-black to-transparent' />
                 {imageUrl && (
@@ -29,7 +29,7 @@ const TopBanner = ({ bannerData }: { bannerData: any }) => {
                 )}
             </div>
             <div className='w-full max-w-[1440px] mx-auto h-full flex lg:justify-between lg:items-center gap-4 relative px-4'>
-                <div className='lg:w-1/2 md:w-1/2 w-[80%] h-full flex flex-col lg:justify-center md:justify-center justify-end lg:pb-0 md:pb-0 pb-8 items-start gap-4'>
+                <div className='lg:w-[80%] w-full h-full flex flex-col lg:justify-center md:justify-center justify-end lg:pb-0 md:pb-0 pb-8 items-start gap-4'>
                     <h3 className='lg:text-2xl lg:t-xl sm:text-lg text-md font-light uppercase text-white lg:block md:block hidden'>{bannerData?.label}</h3>
                     <h2 className='lg:text-4xl md:text-3xl sm:text-lg text-lg font-semibold text-white'>{bannerData?.heading}</h2>
                     <p className='lg:text-xl md:text-lg sm:text-md text-sm font-normal text-white lg:block md:block sm:hidden hidden'>{bannerData?.description}</p>

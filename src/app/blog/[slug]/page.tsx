@@ -262,8 +262,8 @@ const BlogPostPage = () => {
                         className='w-full h-full rounded-2xl'
                     />
                     <div className='w-full h-full flex flex-col justify-center items-start'>
-                        <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold mb-4'>{blog?.attributes?.heading}</h2>
-                        <span className='flex justify-start items-center gap-4 mb-4'>
+                        <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold my-4'>{blog?.attributes?.heading}</h2>
+                        {/* <span className='flex justify-start items-center gap-4 mb-4'>
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url}`}
                                 alt={blog?.attributes?.author?.data?.attributes?.name}
@@ -273,13 +273,13 @@ const BlogPostPage = () => {
                                 <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{blog?.attributes?.author?.data?.attributes?.name}</p>
                                 <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{`Published on : ${formatDate(blog?.attributes?.upload_date)}`}</p>
                             </span>
-                        </span>
+                        </span> */}
 
                         <div className='lg:text-xl md:text-lg sm:text-md text-sm font-normal w-full'>
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
-                                    h2: ({ children }) => <h2 className="lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold my-4">{children}</h2>,
+                                    h2: ({ children }) => <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md font-bold my-4">{children}</h2>,
                                     h3: ({ children }) => <h3 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold my-3">{children}</h3>,
                                     p: ({ children }) => <p className="mb-4">{children}</p>,
                                     ul: ({ children }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
@@ -300,15 +300,15 @@ const BlogPostPage = () => {
                     </div>
                 </div>
                 <div className='w-full lg:max-w-[30%] md:max-w-[30%] max-w-full'>
+                    <RelatedBlogs
+                        related_blogs={blogPageData?.attributes?.related_blogs}
+                        related_blogs_by_category={relatedBlogsByCategory}
+                    />
                     <NewsLetter
                         latest_info={blogPageData?.attributes?.latest_info}
                         classNameOptional={true}
                         formClass={true}
                         isBanner={false}
-                    />
-                    <RelatedBlogs
-                        related_blogs={blogPageData?.attributes?.related_blogs}
-                        related_blogs_by_category={relatedBlogsByCategory}
                     />
                     {/* <div className='w-full h-full flex flex-col gap-4 md:p-8 p-4 md:mt-16 mt-8 bg-blue-300 rounded-3xl'>
                         <div className='w-full h-full flex flex-col gap-4'>

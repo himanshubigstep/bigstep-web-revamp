@@ -39,7 +39,7 @@ body {
 
 /* Track */
 .hide-scrollbar::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); 
+  /* box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);  */
   border-radius: 10px;
 }
  
@@ -136,7 +136,7 @@ table tr:nth-child(even) {
   position: relative;
 }
 
-.specialization-block:before {
+/* .specialization-block:before {
   content: '';
   position: absolute;
   left: 0;
@@ -147,8 +147,8 @@ table tr:nth-child(even) {
   width: 100%;
   height: 100%;
   background-color: #1c4644;
-  opacity: 0.5;
-}
+  opacity: 0.8;
+} */
 
 .short-menu {
   max-width: 60%;
@@ -161,13 +161,18 @@ table tr:nth-child(even) {
   padding: 0;
 }
 
-.input-field-phone {
+/* .input-field-phone {
   border: 1px solid rgb(209 213 219)
-}
+} */
 
 .input-field-phone input {
   background-color: black;
 }
+
+.phone-number-section .input-field-phone input {
+  background-color: transparent;
+}
+
 .input-field-phone input:focus {
   outline: none;
 }
@@ -188,13 +193,24 @@ table tr:nth-child(even) {
   border-radius: 10px;
 }
 
+.phone-number-section .PhoneInputCountrySelect::-webkit-scrollbar-thumb {
+  background: black; 
+  border-radius: 10px;
+}
+
 .PhoneInputCountrySelect {
   background-color: black;
-  right: 0;
+}
+
+.phone-number-section .PhoneInputCountrySelect {
+  background-color: #ffffff;
+}
+
+.phone-number-section .PhoneInputCountry {
+  background-color: #f1f1f1;
 }
 
 .PhoneInputCountry {
-  position: static !important;
   padding: 0.5rem;
   border-radius: 0.3rem 0 0 0.3rem;
 }

@@ -66,7 +66,7 @@ const SectionInnerCarousel = ({ carouselProductEngineerData }: { carouselProduct
                                         className='w-44 py-4 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
                                     /> */}
                                     <Link
-                                        className="w-44 py-4 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-md text-xs text-white font-normal inline-block"
+                                        className="w-44 py-4 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-lg text-white font-normal inline-block"
                                         href={carouselProductEngineerData[selectedIndex]?.technologyText[0]?.technologyLinks || '#'}
                                         passHref
                                     >

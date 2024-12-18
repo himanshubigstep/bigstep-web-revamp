@@ -15,6 +15,7 @@ import LoaderSpinner from "./components/common/loader-spinner/LoadingSpinner";
 import OurValues from "./components/our-values/OurValues";
 import ModelBox from "./components/model-box/ModelBox";
 import Head from "next/head";
+import SimpleContactForm from "./components/common/contact-us/simple-contact-form/SimpleContactForm";
 
 interface HomePageData {
   id: number;
@@ -552,7 +553,8 @@ export default function Home() {
         onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
         bannerImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.home_page_blogs[0].background_image.data.attributes.url}` : ''}
       />
-      <ContactUs contactUsData={homePageData?.get_in_touch[0]} />
+      {/* <ContactUs contactUsData={homePageData?.get_in_touch[0]} /> */}
+      <SimpleContactForm contactUsData={homePageData?.get_in_touch[0]} />
       <ModelBox modalBoxData={modalBoxData} />
     </div>
   );

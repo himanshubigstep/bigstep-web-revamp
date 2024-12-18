@@ -1,6 +1,7 @@
 'use client'
 import { fetchHeaderData, fetchLiveStreamingAndMediaData, fetchLiveStreamingBenifits, fetchLiveStreamingFeatures, fetchLiveStreamingTechData, fetchModalBoxHomePage } from '@/api-data/api';
 import ContactUs from '@/app/components/common/contact-us/ContactUs';
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock';
@@ -365,7 +366,8 @@ const LiveStreaming = () => {
           serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
           buttonText={liveStreamingData?.transformative_benefits?.button_text || ''}
         />
-        <ContactUs contactUsData = {liveStreamingData?.get_in_touch || []} />
+        {/* <ContactUs contactUsData = {liveStreamingData?.get_in_touch || []} /> */}
+        <SimpleContactForm contactUsData = {liveStreamingData?.get_in_touch || []} />
         <ModelBox modalBoxData={modalBoxData} />
     </div>
   )

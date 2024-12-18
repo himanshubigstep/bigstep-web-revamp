@@ -8,6 +8,7 @@ import ServiceDataBlock from '../components/common/service-data-block/ServiceDat
 import ContactUs from '../components/common/contact-us/ContactUs';
 import ModelBox from '../components/model-box/ModelBox';
 import Head from 'next/head';
+import SimpleContactForm from '../components/common/contact-us/simple-contact-form/SimpleContactForm';
 
 interface TechnologiesPageData {
   get_in_touch: {
@@ -253,7 +254,8 @@ const Technologies = () => {
           buttonText={technologyData?.technological_experties?.button_text || ''}
           serviceHeding='lg:line-clamp-none text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
         />
-        <ContactUs contactUsData={technologyData?.get_in_touch} />
+        {/* <ContactUs contactUsData={technologyData?.get_in_touch} /> */}
+        <SimpleContactForm contactUsData={technologyData?.get_in_touch} />
         <ModelBox modalBoxData={modalBoxData} />
     </div>
   )

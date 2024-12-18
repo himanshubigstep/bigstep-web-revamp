@@ -25,7 +25,7 @@ const RelatedBlogs = ({ related_blogs, related_blogs_by_category }: { related_bl
     const sortedBlogs = related_blogs_by_category.sort((a: { attributes: { upload_date: string | number | Date; }; }, b: { attributes: { upload_date: string | number | Date; }; }) => new Date(b?.attributes?.upload_date).getTime() - new Date(a?.attributes?.upload_date).getTime()).slice(0, 4);
 
   return (
-    <div className='w-full h-full max-w-[1440px] mx-auto lg:py-16 py-8'>
+    <div className='w-full h-full max-w-[1440px] mx-auto'>
         <div className='w-full max-w-[1080px] mx-auto flex flex-col mb-4'>
             <h2 className='text-3xl font-semibold text-left'>{related_blogs?.heading}</h2>
         </div>

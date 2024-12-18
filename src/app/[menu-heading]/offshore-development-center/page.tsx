@@ -9,6 +9,7 @@ import HolisticApproach from '@/app/components/holistic-approach/HolisticApproac
 import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
 import MileStoneSubmenu from '@/app/components/common/milestones-data/MileStoneSubmenu'
 import Head from 'next/head'
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm'
 
 interface OffShoreDevelopmentProps {
   id: number;
@@ -264,7 +265,10 @@ const OffShoreDevelopment = () => {
               bgImage={offShoreProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${offShoreProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
           />
         </div>
-        <ContactUs contactUsData = {offShoreProductDevelopmentData?.client_query || []} />
+        {/* <ContactUs contactUsData = {offShoreProductDevelopmentData?.client_query || []} /> */}
+        <div className='w-full h-full lg:mt-16 md:mt-16 mt-8'>
+          <SimpleContactForm contactUsData={offShoreProductDevelopmentData?.client_query || []} />
+        </div>
     </div>
   )
 }

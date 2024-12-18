@@ -3,6 +3,7 @@ import { fetchHeaderData, fetchKubernatesAdoptionsChooseUs, fetchKubernatesAdopt
 import AITech from '@/app/components/common/ai-tech/AITech';
 import Clients from '@/app/components/common/clients/Clients';
 import ContactUs from '@/app/components/common/contact-us/ContactUs';
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock';
@@ -300,7 +301,10 @@ const KubernatesAdoptions = () => {
         description={kubernatesAdoptionsData?.client_reviews?.description || ''}
         bgImage={kubernatesAdoptionsData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${kubernatesAdoptionsData.client_reviews?.background_image.data.attributes.formats.large.url}` : ''}
       />
-      <ContactUs contactUsData={kubernatesAdoptionsData?.get_in_touch || []} />
+      {/* <ContactUs contactUsData={kubernatesAdoptionsData?.get_in_touch || []} /> */}
+      <div className='w-full h-full lg:pt-16 pt-8'>
+        <SimpleContactForm contactUsData={kubernatesAdoptionsData?.get_in_touch || []} />
+      </div>
     </div>
   )
 }

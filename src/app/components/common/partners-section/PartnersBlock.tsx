@@ -73,7 +73,7 @@ const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShip
       </div>
       {homePageData.button_text && homePageData?.button_link &&
         <div className='relative w-full h-auto px-4 pt-8 flex justify-center items-center'>
-          <Link href={homePageData?.button_link} className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-md text-sm text-white font-normal'>
+          <Link href={homePageData?.button_link} className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-lg text-white font-normal'>
             {homePageData.button_text}
           </Link>
           {/* <Button text={homePageData.button_text} className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-md text-sm text-white font-normal' onClick={handelClick} /> */}
