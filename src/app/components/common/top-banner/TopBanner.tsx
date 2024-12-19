@@ -29,10 +29,10 @@ const TopBanner = ({ bannerData }: { bannerData: any }) => {
                 )}
             </div>
             <div className='w-full max-w-[1440px] mx-auto h-full flex lg:justify-between lg:items-center gap-4 relative px-4'>
-                <div className='lg:w-[80%] w-full h-full flex flex-col lg:justify-center md:justify-center justify-end lg:pb-0 md:pb-0 pb-8 items-start gap-4'>
+                <div className='lg:w-[50%] w-full h-full flex flex-col lg:justify-center md:justify-center justify-end lg:pb-0 md:pb-0 pb-8 items-start gap-4'>
                     <h3 className='lg:text-2xl lg:t-xl sm:text-lg text-md font-light uppercase text-white lg:block md:block hidden'>{bannerData?.label}</h3>
                     <h2 className='lg:text-4xl md:text-3xl sm:text-lg text-lg font-semibold text-white'>{bannerData?.heading}</h2>
-                    <p className='lg:text-xl md:text-lg sm:text-md text-sm font-normal text-white lg:block md:block sm:hidden hidden'>{bannerData?.description}</p>
+                    <p className='lg:text-xl md:text-lg sm:text-md text-sm font-normal text-white top-banner-desc'>{bannerData?.description}</p>
                     {bannerData?.buttonText &&
                         // <Button
                         //     onClick={handleClick}

@@ -7,7 +7,7 @@ const SimpleContactForm = ({ contactUsData }: { contactUsData: any }) => {
     const bgImageUrl = contactUsData?.background_image?.data?.attributes?.url;
 
     return (
-        <div className='relative w-full h-full bg-gray-200 dark:bg-black'>
+        <div className='relative w-full h-full bg-blue-50 dark:bg-black'>
             <div className='w-full max-w-[1440px] mx-auto h-full flex lg:flex-row md:flex-row flex-col justify-between items-start rounded-lg lg:py-16 lg:px-8 px-4 py-8 lg:gap-16 gap-8'>
                 {/* {bgImageUrl && (
                         <img

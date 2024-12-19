@@ -543,9 +543,9 @@ export default function Home() {
         description={homePageData?.client_reviews[0].description || ''}
         bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.url}` : ''}
       />
-      <NewsLetter
+      {/* <NewsLetter
         latest_info={homePageData?.latest_info}
-      />
+      /> */}
       <AITech
         bannerTitle={homePageData?.home_page_blogs[0].heading || ''}
         bannerDescription={homePageData?.home_page_blogs[0].description || ''}

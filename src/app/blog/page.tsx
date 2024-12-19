@@ -207,11 +207,11 @@ const Blogs = () => {
         <meta name="description" content={blogPageData?.attributes?.seo?.metaDescription || "Default Description"} />
       </Head>
       <TopBanner bannerData={blogPageData?.attributes?.intro[0]} />
-      <NewsLetter latest_info={blogPageData?.attributes?.latest_info} />
+      {/* <NewsLetter latest_info={blogPageData?.attributes?.latest_info} /> */}
       <AITech
         bannerTitle={blogPageData?.attributes?.blog_page_section.heading || ''}
         bannerDescription={blogPageData?.attributes?.blog_page_section.description || ''}
-        isBlog={true}
+        // isBlog={true}
       />
       <BlogsGrid
         categories={processedCategories()}

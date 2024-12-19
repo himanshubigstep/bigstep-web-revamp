@@ -106,7 +106,7 @@ const ContactUsPage = () => {
         <meta name="description" content={contactUsData?.attributes?.seo?.metaDescription || "Default Description"} />
       </Head>
       <TopBanner bannerData={contactUsData?.attributes?.intro} />
-      <div className='w-full h-full flex justify-center items-center md:pt-16 pt-8'>
+      <div className='w-full h-full flex justify-center items-center'>
         {/* <ContactUs contactUsData={contactUsData?.attributes?.get_in_touch} /> */}
         <SimpleContactForm contactUsData={contactUsData?.attributes?.get_in_touch} />
       </div>

@@ -125,6 +125,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
                                 <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 items-center">
                                     {getCurrentItems(category.name, category.items).map((item) => (
                                         <Link
+                                            key={item.id}
                                             href={`/blog/${decodeURIComponent(item?.attributes?.slug)
                                                 .toLowerCase()
                                                 .replace(/\s+/g, '-')
@@ -133,7 +134,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
                                             target='_blank'
                                             className="relative border-[1px] h-full bg-white dark:bg-black rounded-3xl cursor-pointer"
                                         >
-                                            <div key={item.id} className="w-full h-full">
+                                            <div className="w-full h-full">
                                                 <img
                                                     src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.url}`}
                                                     alt="blog image"

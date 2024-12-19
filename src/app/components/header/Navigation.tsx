@@ -5,7 +5,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoMdClose } from 'react-icons/io';
 
-const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean }) => {
+const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrolled: boolean, isBlogPage: boolean }) => {
   const router = useRouter();
   const [isDropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>(
@@ -208,8 +208,9 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                   handleArrowClick(menu);
                 }}
                 className={`text-md lg:w-auto w-full text-md z-30 flex items-center lg:justify-normal justify-between gap-2 lg:hover:text-blue-500 lg:dark:text-inherit dark:text-white
-      ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
-      ${scrolled ? 'lg:text-black lg:dark:text-white' : 'lg:text-white lg:hover:text-white'} menu-item-button`}
+                  ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
+                  ${!scrolled && isBlogPage ? 'text-black dark:text-white' : (scrolled ? 'lg:text-black lg:dark:text-white' : 'lg:text-white lg:hover:text-white')}
+                  menu-item-button`}
               >
                 <span className="underline-gap">{menu.heading}</span>
                 {!menu.link && !menu.item_link && (
@@ -222,7 +223,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                   className={`${menu.items_on_right.length !== 0
                     ? "w-full flex lg:flex-row flex-col justify-between left-0"
                     : "small-menu left-auto right-auto"
-                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white lg:items-center dark:bg-black lg:absolute lg:max-h-[100vh] md:max-h-[80vh] sm:max-h-[45vh] max-h-[70vh] overflow-y-auto left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 gap-8 rounded-2xl`}
+                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white lg:items-center dark:bg-black lg:absolute lg:max-h-[100vh] md:max-h-[80vh] sm:max-h-[45vh] max-h-[70vh] overflow-y-auto left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 gap-8 rounded-2xl shadow-2xl`}
                 >
                   <ul
                     className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "grid md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4 lg:w-[65%] lg:p-8 p-2 lg:border-r-[1px]" : "grid grid-cols-1 lg:gap-8 gap-4 w-[100%] lg:p-8 p-2"
@@ -246,8 +247,8 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                               );
                             }}
                             className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology)
-                              ? "text-md text-left flex items-center gap-2 pb-4 font-semibold text-blue-500"
-                              : "flex items-center gap-2 text-md text-black dark:text-white hover:text-blue-500"}`}
+                              ? "text-md text-left flex items-center gap-2 pb-4 font-semibold text-blue-500 hover:underline"
+                              : "flex items-center gap-2 text-md text-black dark:text-white hover:text-blue-500 hover:underline"}`}
                           >
                             <img
                               className="w-6 h-6"
@@ -265,7 +266,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                 >
                                   <Link
                                     href={`/${menu.heading.toLowerCase().replace(/\s+/g, '-').replace('what-we-do', 'services')}/${submenu.item.toLowerCase().replace(/\s+/g, '-').replace(/&-/g, '')}/${item.link}`}
-                                    className="text-md"
+                                    className="text-md hover:underline"
                                     onClick={handleLinkClick}
                                   >
                                     {item.title}
@@ -278,7 +279,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                       ))}
                   </ul>
                   <ul
-                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "flex flex-col lg:w-[35%] w-full gap-8 lg:p-8 p-2 lg:bg-blue-500 lg:justify-center lg:items-center lg:max-h-[65vh] lg:mr-8 lg:rounded-[3rem] specialization-block" : "flex flex-col w-[100%] lg:gap-8 gap-4 lg:p-8 p-2"
+                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "flex flex-col lg:w-[35%] w-full gap-8 lg:p-8 p-2 lg:bg-blue-500 lg:justify-center lg:items-center lg:max-h-[65vh] lg:mr-8 lg:rounded-[1rem] specialization-block" : "flex flex-col w-[100%] lg:gap-8 gap-4 lg:p-8 p-2"
                       }`}
                   >
                     {menu.items_on_right &&
@@ -298,8 +299,8 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
                                 );
                               }}
                               className={`${menu.items_on_right && menu.items_on_right.some((submenu: any) => submenu.technology)
-                                ? "text-md text-left flex items-center gap-2 pb-4 font-semibold lg:text-white lg:text-2xl text-blue-500"
-                                : "flex items-center text-black dark:text-white gap-2 text-md hover:text-blue-500"
+                                ? "text-md text-left flex items-center gap-2 pb-4 font-semibold lg:text-white lg:text-2xl text-blue-500 cursor-default"
+                                : "flex items-center text-black dark:text-white gap-2 text-md hover:text-blue-500 hover:underline"
                                 }`}
                             >
                               <img
@@ -328,7 +329,7 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
 
                                   return (
                                     <li key={index} className="relative lg:text-white text-black dark:text-white pb-4 text-md lg:hover:text-gray-200 hover:text-blue-500">
-                                      <Link href={baseUrl} className="text-md" onClick={handleLinkClick}>
+                                      <Link href={baseUrl} className="text-md hover:underline" onClick={handleLinkClick}>
                                         {item.title}
                                       </Link>
                                     </li>
@@ -346,7 +347,14 @@ const Navigation = ({ menuItems, scrolled }: { menuItems: any, scrolled: boolean
           ))}
         </ul>
       </nav>
-      <div className={`border-[1px] rounded-xl lg:w-40 w-32 lg:py-4 py-2 flex items-center justify-center ${scrolled ? 'bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white hover:border-transparent' : 'bg-transparent text-white border-white hover:bg-white hover:text-blue-500 hover:border-blue-500'}`}>
+      <div className={`border-[1px] rounded-xl lg:w-40 w-32 lg:py-4 py-2 flex items-center justify-center 
+  ${!scrolled && isBlogPage
+          ? 'bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white hover:border-transparent'
+          : (scrolled
+            ? 'bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white hover:border-transparent'
+            : 'bg-transparent text-white border-white hover:bg-white hover:text-blue-500 hover:border-blue-500')}`}
+      >
+
         {/* <Button
           onClick={handelContactUs}
           text={lastItemData?.item}

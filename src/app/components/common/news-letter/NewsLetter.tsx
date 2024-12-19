@@ -147,7 +147,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
 
     return (
         <div className={`${classNameOptional ? 'max-w-[1440px] mx-auto w-full h-full lg:rounded-3xl lg:py-0 py-0 px-4' : 'px-4 max-w-[1440px] mx-auto w-full h-full lg:rounded-3xl lg:py-16 py-8'} ${isBanner === false ? 'bg-black' : ''} ${formClass && 'lg:mt-16 mt-8'}`}>
-            <div className='relative w-full h-full lg:rounded-3xl lg:py-24 py-8 rounded-3xl'>
+            <div className={`${!formClass ? 'relative w-full h-full lg:rounded-3xl lg:py-24 py-8 rounded-3xl' : 'relative w-full h-full lg:rounded-3xl lg:py-12 py-8 rounded-3xl' }`}>
                 {isBanner !== false &&
                     <img
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${latest_info?.background_image?.data?.attributes?.url}`}

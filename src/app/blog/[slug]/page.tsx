@@ -253,7 +253,7 @@ const BlogPostPage = () => {
                 <meta name="title" content={blog?.attributes?.seo?.metaTitle || "Default description"} />
                 <meta name="description" content={blog?.attributes?.seo?.metaDescription || "Default Description"} />
             </Head>
-            <BlogPageBanner bannerData={blog?.attributes} />
+            {/* <BlogPageBanner bannerData={blog?.attributes} /> */}
             <div id='read-more-section' className='w-full h-full max-w-[1440px] mx-auto lg:py-16 py-6 flex lg:flex-row md:flex-row flex-col justify-between items-start lg:gap-8 gap-4 px-4'>
                 <div className='w-full lg:max-w-[70%] max-w-full h-full flex flex-col lg:justify-between lg:items-center gap-4 relative'>
                     <img
@@ -263,17 +263,17 @@ const BlogPostPage = () => {
                     />
                     <div className='w-full h-full flex flex-col justify-center items-start'>
                         <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold my-4'>{blog?.attributes?.heading}</h2>
-                        {/* <span className='flex justify-start items-center gap-4 mb-4'>
-                            <img
+                        <span className='flex justify-start items-center gap-4 mb-4'>
+                            {/* <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url}`}
                                 alt={blog?.attributes?.author?.data?.attributes?.name}
                                 className='w-12 h-12 rounded-full border-[1px]'
-                            />
+                            /> */}
                             <span className='flex flex-col justify-center items-start'>
-                                <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{blog?.attributes?.author?.data?.attributes?.name}</p>
-                                <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{`Published on : ${formatDate(blog?.attributes?.upload_date)}`}</p>
+                                {/* <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{blog?.attributes?.author?.data?.attributes?.name}</p> */}
+                                <p className='lg:text-lg md:text-md sm:text-sm text-xs font-semibold'>{`Published on : ${formatDate(blog?.attributes?.upload_date)}`}</p>
                             </span>
-                        </span> */}
+                        </span>
 
                         <div className='lg:text-xl md:text-lg sm:text-md text-sm font-normal w-full'>
                             <ReactMarkdown
@@ -290,7 +290,7 @@ const BlogPostPage = () => {
                                                 <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>
                                             );
                                         }
-                                        return <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>;
+                                        return <a href={href} className="text-blue-500 hover:text-blue-800" target='_blank'>{children}</a>;
                                     }
                                 }}
                             >
@@ -304,12 +304,12 @@ const BlogPostPage = () => {
                         related_blogs={blogPageData?.attributes?.related_blogs}
                         related_blogs_by_category={relatedBlogsByCategory}
                     />
-                    <NewsLetter
+                    {/* <NewsLetter
                         latest_info={blogPageData?.attributes?.latest_info}
                         classNameOptional={true}
                         formClass={true}
                         isBanner={false}
-                    />
+                    /> */}
                     {/* <div className='w-full h-full flex flex-col gap-4 md:p-8 p-4 md:mt-16 mt-8 bg-blue-300 rounded-3xl'>
                         <div className='w-full h-full flex flex-col gap-4'>
                             <h2 className='text-3xl font-semibold'>Categories</h2>

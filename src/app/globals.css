@@ -235,6 +235,12 @@ table tr:nth-child(even) {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .top-banner-desc {
+    display: none;
+  }
+}
+
 .list-alpha {
   list-style-type: lower-alpha;
 }
