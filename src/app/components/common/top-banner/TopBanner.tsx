@@ -4,7 +4,7 @@ import Button from '../button/Button'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-const TopBanner = ({ bannerData, isBlog, isAboutUs }: { bannerData: any, isBlog?: boolean, isAboutUs: boolean }) => {
+const TopBanner = ({ bannerData, isBlog, isAboutUs }: { bannerData: any, isBlog?: boolean, isAboutUs?: boolean }) => {
     const router = useRouter()
     const handleClick = () => {
         if (bannerData?.link) {
