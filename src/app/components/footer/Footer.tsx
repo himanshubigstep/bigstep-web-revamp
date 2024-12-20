@@ -157,12 +157,12 @@ const Footer = () => {
           alt='Footer Background'
           className='absolute left-0 right-0 top-0 bottom-0 w-full h-full object-contain bg-repeat-x opacity-80'
         />
-        <div className='relative flex items-center justify-evenly mb-8 w-full mx-auto border-b-[1px] border-gray-500 pb-8 max-w-[1440px]'>
-          <div className='lg:w-[35%] w-full'>
+        <div className='relative flex lg:flex-row flex-col items-center justify-evenly mb-8 w-full mx-auto border-b-[1px] border-gray-500 pb-8 max-w-[1440px]'>
+          <div className='lg:w-[35%] w-full lg:mb-0 mb-4'>
             <h2 className='lg:text-4xl md:text-3xl sm:text-lg text-lg font-semibold text-white capitalize'>Sign up for our newsletter</h2>
             {/* <p className='lg:text-xl md:text-lg sm:text-md text-sm font-normal text-white top-banner-desc'>Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email.</p> */}
           </div>
-          <form onSubmit={handelSubscription} className='flex gap-4 lg:max-w-[65%] max-w-full'>
+          <form onSubmit={handelSubscription} className='flex lg:flex-row flex-col gap-4 lg:w-[65%] w-full'>
             <InputField
               type='text'
               label='Name'

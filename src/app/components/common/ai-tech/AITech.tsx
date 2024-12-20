@@ -157,8 +157,8 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
 
                     <div className='lg:w-1/2 w-full flex flex-col items-center rounded-lg lg:gap-8 gap-4 overflow-y-auto'>
                         {remainingItems.length > 0 && (
-                            <div className="w-full flex lg:flex-col flex-row rounded-lg lg:gap-8 gap-4 lg:overflow-y-auto md:overflow-y-auto overflow-y-hidden lg:h-[32rem] hide-scrollbar lg:mb-auto mb-8">
-                                {remainingItems.map((item: any) => (
+                            <div className="w-full flex lg:flex-col flex-row rounded-lg lg:gap-8 gap-4 lg:mb-auto mb-8">
+                                {remainingItems.slice(0, 5).map((item: any) => (
                                     <Link
                                         key={item.id}
                                         href={`/blog/${decodeURIComponent(item?.attributes?.slug)
@@ -199,7 +199,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                             //     text={buttonTitle}
                             //     className='text-white bg-blue-500 hover:bg-blue-800 py-4 rounded-xl w-[180px]'
                             // />
-                            <Link href={onButtonClick} passHref target='_blank'
+                            <Link href={onButtonClick} passHref target='_self'
 
                                 className='text-white bg-blue-500 hover:bg-blue-800 py-4 rounded-xl w-[180px] text-center lg:text-lg md:text-lg'>
                                 {buttonTitle}

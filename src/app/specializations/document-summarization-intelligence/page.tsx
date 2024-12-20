@@ -319,7 +319,7 @@ const DocumentSummarizationInteligence = () => {
           headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
           serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
           serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex lg:flex-row md:flex-row sm:flex-row flex-col lg:items-center items-start'
+          serviceIconHeader='w-full flex lg:flex-row md:flex-row sm:flex-row flex-col items-center'
           serviceItemDescription='w-full text-left flex flex-col gap-2'
           serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
           buttonText={documentSummarizationsData?.transformative_benefits?.button_text || ''}

@@ -72,7 +72,7 @@ const Partners = ({
                     ))}
                 </div>
 
-                <div className="lg:max-w-[75%] md:max-w-[75%] sm:max-w-[75%] max-w-full mx-auto rounded-2xl w-full h-full">
+                <div className="lg:max-w-[75%] max-w-full mx-auto rounded-2xl w-full h-full">
                     <div className="w-full grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center gap-8 items-start lg:px-8 px-4">
                         {selectedPartnerData && selectedPartnerData.attributes.logos.data?.length > 0 ? (
                             selectedPartnerData.attributes.logos.data.map((logo, index) => (

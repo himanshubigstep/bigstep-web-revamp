@@ -212,7 +212,7 @@ const AboutUs = () => {
         <meta name="title" content={aboutUsData?.attributes?.seo?.metaTitle || "Default description"} />
         <meta name="description" content={aboutUsData?.attributes?.seo?.metaDescription || "Default Description"} />
       </Head>
-      <TopBanner bannerData={aboutUsData?.attributes?.about_intro} />
+      <TopBanner bannerData={aboutUsData?.attributes?.about_intro} isAboutUs={true} />
       <ImageBlocks
         topHeading={aboutUsData?.attributes?.empowering?.heading || ''}
         section={empoweringValues}
