@@ -65,7 +65,7 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
                     className="lg:text-md text-xs bg-blue-500 hover:bg-blue-800 text-white lg:py-4 lg:px-4 md:py-4 md:px-4 px-4 py-2 rounded-xl w-auto font-medium"
                     onClick={() => window.open(slide.attributes.button_link, '_blank')}
                 /> */}
-                <Link href={slide.attributes.button_link} passHref target='_blank'
+                <Link href={slide.attributes.button_link} passHref target='_self'
                     className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-lg text-md text-white font-normal'>
                     {slide.attributes.button_text}
                 </Link>

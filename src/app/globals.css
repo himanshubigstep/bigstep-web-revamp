@@ -29,6 +29,10 @@ body {
   position: relative;
 }
 
+.not-visible {
+  display: none !important;
+}
+
 .menu-item-button:hover {
   padding-bottom: 4px;
 }

@@ -257,6 +257,12 @@ const CloudServices = () => {
     }
   }, [cloudServicesData]);
 
+  useEffect(() => {
+    if (!loading) {
+      window.scrollTo(0, 0);
+    }
+  }, [loading]);
+
   if (loading) {
     return <LoaderSpinner />;
   }

@@ -318,6 +318,12 @@ const SaasProductDevelopment = () => {
           canonicalLink.href = saasProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
         }
       }, [saasProductDevelopmentData]);
+
+      useEffect(() => {
+        if (!loading) {
+          window.scrollTo(0, 0);
+        }
+      }, [loading]);
     
       if (loading) {
         return <LoaderSpinner />;

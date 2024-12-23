@@ -276,6 +276,12 @@ const DocumentSummarizationInteligence = () => {
           canonicalLink.href = documentSummarizationsData?.seo?.canonicalURL || "default-canonical-url";
         }
       }, [documentSummarizationsData]);
+
+      useEffect(() => {
+        if (!loading) {
+          window.scrollTo(0, 0);
+        }
+      }, [loading]);
     
       if (loading) {
         return <LoaderSpinner />;

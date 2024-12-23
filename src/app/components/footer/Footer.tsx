@@ -162,7 +162,7 @@ const Footer = () => {
             <h2 className='lg:text-4xl md:text-3xl sm:text-lg text-lg font-semibold text-white capitalize'>Sign up for our newsletter</h2>
             {/* <p className='lg:text-xl md:text-lg sm:text-md text-sm font-normal text-white top-banner-desc'>Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email.</p> */}
           </div>
-          <form onSubmit={handelSubscription} className='flex lg:flex-row flex-col gap-4 lg:w-[65%] w-full'>
+          <form onSubmit={handelSubscription} className='flex lg:flex-row flex-col gap-4 lg:w-1/2 w-full'>
             <InputField
               type='text'
               label='Name'

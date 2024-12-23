@@ -1,7 +1,8 @@
-'use client'
+'use client';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+import React, { Fragment, useEffect, useState } from 'react';
+import { MdNavigateNext } from "react-icons/md";
+import { MdNavigateBefore } from "react-icons/md";
 
 interface BlogItem {
     id: number;
@@ -36,8 +37,6 @@ interface BlogItem {
                 };
             };
         };
-        category: string; // Assuming each blog item has a `category` attribute
-        date: string; // Assuming each blog has a `date` attribute
     };
 }
 
@@ -51,66 +50,66 @@ interface CommonGridProps {
 }
 
 const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
+    const [currentPageMap, setCurrentPageMap] = useState<Record<string, number>>({});
     const [itemsPerPage, setItemsPerPage] = useState<number>(4);
     const [selectedCategory, setSelectedCategory] = useState<string>('');
-    const [filteredItems, setFilteredItems] = useState<BlogItem[]>([]);
 
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth <= 640) {
                 setItemsPerPage(1);
+            } else if (window.innerWidth <= 768) {
+                setItemsPerPage(3);
             } else {
                 setItemsPerPage(4);
             }
         };
-
-        // Initial check
+        
         handleResize();
-
-        // Add event listener for resize
+        
         window.addEventListener('resize', handleResize);
-
-        // Cleanup on unmount
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    useEffect(() => {
-        filterItems();
-    }, [selectedCategory]);
-
-    const filterItems = () => {
-        let filtered: BlogItem[] = [];
-
-        categories.forEach((category) => {
-            category.items.forEach((item) => {
-                const categoryMatch = selectedCategory ? category.name.toLowerCase() === selectedCategory.toLowerCase() : true;
-
-                if (categoryMatch) {
-                    filtered.push(item);
-                }
-            });
-        });
-
-        setFilteredItems(filtered);
+    const getCurrentItems = (categoryName: string, categoryItems: BlogItem[]) => {
+        const currentPage = currentPageMap[categoryName] || 0;
+        const startIndex = currentPage * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return categoryItems.slice(startIndex, endIndex);
     };
 
-    const getCategories = () => {
-        const categoriesSet = new Set<string>();
-        categories.forEach((category) => {
-            categoriesSet.add(category.name);
-        });
-        return Array.from(categoriesSet);
+    const handleNextPage = (categoryName: string, categoryItems: BlogItem[]) => {
+        const currentPage = currentPageMap[categoryName] || 0;
+        if ((currentPage + 1) * itemsPerPage < categoryItems.length) {
+            setCurrentPageMap((prev) => ({
+                ...prev,
+                [categoryName]: currentPage + 1,
+            }));
+        }
+    };
+
+    const handlePrevPage = (categoryName: string) => {
+        const currentPage = currentPageMap[categoryName] || 0;
+        if (currentPage > 0) {
+            setCurrentPageMap((prev) => ({
+                ...prev,
+                [categoryName]: currentPage - 1,
+            }));
+        }
     };
 
     if (!categories || !Array.isArray(categories)) return null;
+    
+    const filteredCategories = selectedCategory
+        ? categories.filter(category => category.name === selectedCategory)
+        : categories;
 
     return (
-        <div className="w-full h-full relative bg-white dark:bg-black lg:py-8 lg:pb-16 py-8">
-            <div className="w-full h-full max-w-[1440px] mx-auto px-4 flex flex-col gap-8">
+        <div className="w-full h-full relative bg-white dark:bg-black lg:py-16 py-8">
+            <div className="w-full h-full max-w-[1440px] mx-auto px-4">
 
-                {/* Filters Section (Left Side) */}
-                <div className="p-4 rounded-lg ml-auto mr-0">
-                    <div className="flex lg:flex-row md:flex-row flex-col items-center w-full gap-4">
+                <div className="flex justify-end items-center ml-auto mr-0">
+                    <div className="flex lg:flex-row md:flex-row flex-col justify-end items-center w-full gap-4 pb-8">
                         <label htmlFor="category" className="block text-lg font-medium text-gray-700 dark:text-gray-300">Filter By Category:</label>
                         <select
                             id="category"
@@ -119,51 +118,83 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
                             onChange={(e) => setSelectedCategory(e.target.value)}
                         >
                             <option value="">All Categories</option>
-                            {getCategories().map((category) => (
-                                <option key={category} value={category}>{category}</option>
+                            {categories.map((category) => (
+                                <option key={category.name} value={category.name}>
+                                    {category.name}
+                                </option>
                             ))}
                         </select>
                     </div>
                 </div>
 
-                {/* Blog Listing Section (Right Side) */}
-                <div className="w-full">
-                    <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 items-center">
-                        {filteredItems.length > 0 ? filteredItems.map((item) => (
-                            <Link
-                                key={item.id}
-                                href={`/blog/${decodeURIComponent(item?.attributes?.slug)
-                                    .toLowerCase()
-                                    .replace(/\s+/g, '-')
-                                    .replace(/\//g, '-')
-                                    .replace(/[^a-z0-9\-]/g, '')}`}
-                                target='_blank'
-                                className="relative border-[1px] bg-white dark:bg-black rounded-3xl cursor-pointer"
-                            >
-                                <div className="w-full">
-                                    <img
-                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.url}`}
-                                        alt="blog image"
-                                        className="w-full rounded-3xl rounded-b-none"
-                                    />
-                                    <div className="w-full h-auto flex flex-col justify-between items-start p-4">
-                                        <h2 className="line-clamp-2 lg:line-clamp-1 font-medium mb-4 text-black dark:text-white lg:text-lg md:text-md sm:text-sm text-xs">
-                                            {item?.attributes?.heading}
-                                        </h2>
-                                        <div className="w-full flex gap-4 items-center">
-                                            <img
-                                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url}`}
-                                                alt="profile image"
-                                                className="w-12 h-12 rounded-full object-cover"
-                                            />
-                                            <span className="text-black dark:text-white text-sm">By: {item?.attributes?.author?.data?.attributes?.name}</span>
-                                        </div>
-                                    </div>
+                {filteredCategories.map((category) => {
+                    const totalItems = category.items.length;
+                    const isPaginationVisible = totalItems > itemsPerPage;
+
+                    return (
+                        <Fragment key={category.name}>
+                            <div className="w-full h-full mb-16 relative">
+                                <div className="w-full h-full flex justify-between items-center mb-8">
+                                    <h2 className="text-black dark:text-white lg:text-2xl md:text-xl sm:text-lg text-md font-bold lg:line-clamp-none md::line-clamp-none sm::line-clamp-none line-clamp-2 lg:w-auto md:w-auto sm:w-auto w-[80%]">{category.name}</h2>
                                 </div>
-                            </Link>
-                        )) : <p>No blogs match your filters.</p>}
-                    </div>
-                </div>
+                                <div className="w-full h-full grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 items-center">
+                                    {getCurrentItems(category.name, category.items).map((item) => (
+                                        <Link
+                                            key={item.id}
+                                            href={`/blog/${decodeURIComponent(item?.attributes?.slug)
+                                                .toLowerCase()
+                                                .replace(/\s+/g, '-')
+                                                .replace(/\//g, '-')
+                                                .replace(/[^a-z0-9\-]/g, '')}`}
+                                            target='_blank'
+                                            className="relative border-[1px] h-full bg-white dark:bg-black rounded-3xl cursor-pointer"
+                                        >
+                                            <div className="w-full h-full">
+                                                <img
+                                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.url}`}
+                                                    alt="blog image"
+                                                    className="w-full lg:h-48 md:h-36 sm:h-32 h-auto rounded-3xl rounded-b-none"
+                                                />
+                                                <div className="w-full h-auto flex flex-col justify-between items-start p-4">
+                                                    <h2 className="line-clamp-2 lg:line-clamp-1 font-medium mb-4 text-black dark:text-white lg:text-lg md:text-md sm:text-sm text-xs">
+                                                        {item?.attributes?.heading}
+                                                    </h2>
+                                                    <div className="w-full flex gap-4 items-center">
+                                                        <img
+                                                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url}`}
+                                                            alt="profile image"
+                                                            className="w-12 h-12 rounded-full object-cover"
+                                                        />
+                                                        <span className="text-black dark:text-white text-sm">By: {item?.attributes?.author?.data?.attributes?.name}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                                
+                                {isPaginationVisible && (
+                                    <div className="absolute top-0 right-0 flex justify-between items-center gap-2">
+                                        <button
+                                            onClick={() => handlePrevPage(category.name)}
+                                            disabled={currentPageMap[category.name] === 0}
+                                            className={`bg-blue-500 ${currentPageMap[category.name] === 0 ? 'disabled:bg-gray-400' : ''} rounded-md text-white w-8 h-8 flex justify-center items-center text-2xl`}
+                                        >
+                                            <MdNavigateBefore />
+                                        </button>
+                                        <button
+                                            onClick={() => handleNextPage(category.name, category.items)}
+                                            disabled={(currentPageMap[category.name] + 1) * itemsPerPage >= totalItems}
+                                            className={`bg-blue-500 ${(currentPageMap[category.name] + 1) * itemsPerPage >= totalItems ? 'disabled:bg-gray-400' : ''} rounded-md text-white w-8 h-8 flex justify-center items-center text-2xl`}
+                                        >
+                                            <MdNavigateNext />
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </Fragment>
+                    );
+                })}
             </div>
         </div>
     );

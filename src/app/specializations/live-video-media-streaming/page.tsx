@@ -318,6 +318,12 @@ const LiveStreaming = () => {
           canonicalLink.href = liveStreamingData?.seo?.canonicalURL || "default-canonical-url";
         }
       }, [liveStreamingData]);
+
+      useEffect(() => {
+        if (!loading) {
+          window.scrollTo(0, 0);
+        }
+      }, [loading]);
     
       if (loading) {
         return <LoaderSpinner />;

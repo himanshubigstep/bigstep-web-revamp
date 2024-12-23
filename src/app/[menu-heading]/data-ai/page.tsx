@@ -330,6 +330,12 @@ const DataAndAI = () => {
     }
   }, [dataandAiPageData]);
 
+  useEffect(() => {
+    if (!loading) {
+      window.scrollTo(0, 0);
+    }
+  }, [loading]);
+
   if (loading) {
     return <LoaderSpinner />;
   }

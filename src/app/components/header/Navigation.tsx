@@ -185,16 +185,17 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
           {isMobileMenu ? <IoMdClose /> : <RxHamburgerMenu />}
         </button>
         <ul
-          className={`lg:overflow-y-visible overflow-y-auto z-10 w-full lg:h-full h-[calc(100vh-100px)] absolute lg:static lg:top-0 top-[100px] lg:border-0 border-[1px] lg:border-transparent border-gray-200 lg:dark:border-transparent dark:border-gray-800 lg:left-auto lg:right-auto left-0 right-0 lg:items-center items-start lg:p-0 p-4 lg:gap-8 md:-ga-8 gap-4 lg:bg-transparent bg-white lg:dark:bg-transparent dark:bg-black flex lg:flex-row flex-col ${isMobileMenu ? "translate-x-0" : "translate-x-full"
+          className={`lg:overflow-y-visible overflow-y-auto z-10 w-full lg:h-full h-[calc(100vh-100px)] absolute lg:static lg:top-0 top-[100px] lg:border-0 border-[1px] lg:border-transparent border-gray-200 lg:dark:border-transparent dark:border-gray-800 lg:left-auto lg:right-auto left-0 right-0 lg:items-center items-start lg:p-0 p-4 lg:bg-transparent bg-white lg:dark:bg-transparent dark:bg-black flex lg:flex-row flex-col ${isMobileMenu ? "translate-x-0" : "translate-x-full"
             } lg:transform-none transition-transform duration-300`}
           ref={dropdownRef}
         >
           {menuItems.map((menu: any) => (
+            console.log(menu),
             <li
               key={menu.id}
               className={`lg:h-full lg:w-auto w-full lg:flex items-center 
                 ${menu.heading ? 'lg:border-b-0 md:border-b-0 border-b-[1px]' : ''} 
-                lg:pb-0 md:pb-0 pb-4`}
+                lg:pb-0 md:pb-0 pb-4 ${menu.item === "Let's Talk" && 'not-visible'}`}
               onMouseEnter={() => handleMouseEnter(menu)}
               onMouseLeave={handleMouseLeave}
             >
@@ -207,7 +208,7 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
                   }
                   handleArrowClick(menu);
                 }}
-                className={`text-md lg:w-auto w-full text-md z-30 flex items-center lg:justify-normal justify-between gap-2 lg:hover:text-blue-500 lg:dark:text-inherit dark:text-white
+                className={`text-md lg:w-auto w-full text-md z-30 flex items-center lg:justify-normal justify-between gap-2 lg:hover:text-blue-500 lg:dark:text-inherit dark:text-white mx-4
                   ${isMenuActive(menu) ? 'font-bold' : 'font-medium text-black'}
                   ${!scrolled && isBlogPage ? 'text-black dark:text-white' : (scrolled ? 'lg:text-black lg:dark:text-white' : 'lg:text-white lg:hover:text-white')}
                   menu-item-button`}

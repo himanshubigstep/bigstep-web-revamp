@@ -276,6 +276,12 @@ const AgenticWorkFlows = () => {
           canonicalLink.href = agenticWorkflowsData?.seo?.canonicalURL || "default-canonical-url";
         }
       }, [agenticWorkflowsData]);
+
+      useEffect(() => {
+        if (!loading) {
+          window.scrollTo(0, 0);
+        }
+      }, [loading]);
     
       if (loading) {
         return <LoaderSpinner />;

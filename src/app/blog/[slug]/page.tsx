@@ -242,6 +242,12 @@ const BlogPostPage = () => {
         }
     }, [blog]);
 
+    useEffect(() => {
+      if (!loading) {
+        window.scrollTo(0, 0);
+      }
+    }, [loading]);
+
     if (loading || !blog) {
         return <LoaderSpinner />;
     }

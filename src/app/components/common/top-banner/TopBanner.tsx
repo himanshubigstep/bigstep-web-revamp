@@ -39,7 +39,7 @@ const TopBanner = ({ bannerData, isBlog, isAboutUs }: { bannerData: any, isBlog?
                         //     text={bannerData?.buttonText}
                         //     className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
                         // />
-                        <Link href={bannerData?.link} passHref target='_blank'
+                        <Link href={bannerData?.link} passHref target='_self'
                             className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-lg text-md text-white font-normal'>
                             {bannerData?.buttonText}
                         </Link>

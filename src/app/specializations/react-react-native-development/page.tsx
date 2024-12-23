@@ -318,6 +318,12 @@ const ReactNativeDevelopment = () => {
           canonicalLink.href = reactAndReactNativeData?.seo?.canonicalURL || "default-canonical-url";
         }
       }, [reactAndReactNativeData]);
+
+      useEffect(() => {
+        if (!loading) {
+          window.scrollTo(0, 0);
+        }
+      }, [loading]);
     
       if (loading) {
         return <LoaderSpinner />;
