@@ -80,14 +80,14 @@ const TeamMembers = ({ heading, members }: { heading: string, members: TeamMembe
                     <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-center mb-4'>{heading}</h2>
                 </div>
                 <div className='w-full h-full flex flex-col gap-16 justify-center items-center relative lg:pt-16 pt-8'>
-                    <div className='w-full grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 lg:gap-16 gap-8'>
+                    <div className='w-full grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-2 lg:gap-16 gap-8'>
                         {sortedTeamMembers && sortedTeamMembers.map((item) => (
-                            <div className='w-full h-full flex flex-col rounded-2xl' key={item.id}>
-                                <div className='w-full lg:h-full md:h-full h-42 flex rounded-2xl shadow-2xl'>
+                            <div className='w-full aspect-square flex flex-col rounded-full' key={item.id}>
+                                <div className='w-full aspect-square flex rounded-full'>
                                     <img
                                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.images?.data?.attributes?.url}`}
                                         alt={item?.heading}
-                                        className='w-auto lg:h-auto h-full object-cover rounded-2xl'
+                                        className='w-auto aspect-square object-cover rounded-full'
                                     />
                                 </div>
                                 <div className='w-full h-auto flex flex-col p-4'>

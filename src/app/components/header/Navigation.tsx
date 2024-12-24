@@ -190,7 +190,6 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
           ref={dropdownRef}
         >
           {menuItems.map((menu: any) => (
-            console.log(menu),
             <li
               key={menu.id}
               className={`lg:h-full lg:w-auto w-full lg:flex items-center 
@@ -280,7 +279,7 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
                       ))}
                   </ul>
                   <ul
-                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "flex flex-col lg:w-[35%] w-full gap-8 lg:p-8 p-2 lg:bg-blue-500 lg:justify-center lg:items-center lg:max-h-[65vh] lg:mr-8 lg:rounded-[1rem] specialization-block" : "flex flex-col w-[100%] lg:gap-8 gap-4 lg:p-8 p-2"
+                    className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "flex flex-col lg:w-[35%] w-full gap-8 lg:p-8 p-2 lg:bg-blue-500 lg:justify-center lg:items-center lg:mr-8 lg:rounded-[1rem] specialization-block" : "flex flex-col w-[100%] lg:gap-8 gap-4 lg:p-8 p-2"
                       }`}
                   >
                     {menu.items_on_right &&
