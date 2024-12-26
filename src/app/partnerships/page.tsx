@@ -269,8 +269,8 @@ const Partnership = () => {
           },
         }}
         mainClass='relative w-full lg:py-16 py-8'
-        headingClass='text-3xl font-semibold text-center mb-4 text-white'
-        descriptionClass='text-lg font-normal text-white'
+        headingClass='text-3xl font-semibold text-center mb-4 text-black'
+        descriptionClass='text-lg font-normal text-black'
         partnerShipData={partnersData}
       />
       <ServiceDataBlock

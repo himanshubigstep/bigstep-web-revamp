@@ -57,7 +57,7 @@ const PartnersBlock: React.FC<PartnersBlockProps> = ({ homePageData, partnerShip
         <p className={descriptionClass}>{homePageData.description}</p>
       </div>
       <div className='relative w-full max-w-[1140px] mx-auto bg-white rounded-2xl flex flex-wrap md:justify-center text-center mt-8'>
-        <div className='dark:bg-gray-200 w-full h-full flex justify-center items-center bg-white md:rounded-xl py-8 relative'>
+        <div className='w-full h-full flex justify-center items-center bg-white md:rounded-xl py-8 relative'>
           <div className='flex flex-wrap w-full relative z-10 px-8 justify-center items-start'>
             {partnerShipData && partnerShipData.map((partner, index) => (
               <div key={index} className='md:w-1/4 w-1/2 px-4 flex justify-center items-start grayscale hover:grayscale-0 hover:scale-105 py-8'>

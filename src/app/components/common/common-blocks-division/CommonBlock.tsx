@@ -38,7 +38,7 @@ interface CommonBlockProps {
   backgroundImage?: string | null;
 }
 
-const CommonBlock: React.FC<CommonBlockProps> = ({ 
+const CommonBlock: React.FC<CommonBlockProps> = ({
   title,
   description,
   services = [],
@@ -53,15 +53,15 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
   serviceHeaderClassName = '',
   mainbutton = '',
   backgroundImage,
- }) => {
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const itemsPerPage = 4;
-  
+
   const sortedServices = services?.sort((a, b) => a.id - b.id) || [];
   const totalItems = sortedServices.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -72,7 +72,7 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentServices = isMobile ? sortedServices.slice(startIndex, startIndex + itemsPerPage) : sortedServices;
 
@@ -136,10 +136,29 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
         </div>
       }
       {isMobile && (
-        <div className='relative flex justify-between items-center mt-8'>
-          <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt;</button>
-          {/* <span>Page {currentPage} of {totalPages}</span> */}
-          <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>&gt;</button>
+        // <div className='relative flex justify-between items-center mt-8'>
+        //   <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt;</button>
+        //   {/* <span>Page {currentPage} of {totalPages}</span> */}
+        //   <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>&gt;</button>
+        // </div>
+
+        <div className='relative flex justify-between w-full mt-4'>
+          <button onClick={handlePrevious} className='flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none'>
+            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 dark:bg-gray-400/30 group-hover:bg-blue-500 dark:group-hover:bg-gray-500/60 group-focus:ring-4 group-focus:ring-blue-500 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg className="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
+              </svg>
+              <span className="sr-only">Previous</span>
+            </span>
+          </button>
+          <button onClick={handleNext} className='flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none'>
+            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 dark:bg-gray-400/30 group-hover:bg-blue-500 dark:group-hover:bg-gray-500/60 group-focus:ring-4 group-focus:ring-blue-500 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg className="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+              </svg>
+              <span className="sr-only">Next</span>
+            </span>
+          </button>
         </div>
       )}
     </div>

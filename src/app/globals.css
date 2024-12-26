@@ -240,6 +240,12 @@ table tr:nth-child(even) {
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .menu-item-button::after {
+    display: none;
+  }
+  .menu-item-button::before {
+    display: none;
+  }
 }
 
 /* @media only screen and (max-width: 600px) {

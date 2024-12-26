@@ -160,7 +160,7 @@ const PartnersTech = ({
 
                 {selectedCategory && sortedFilteredPartners.length > 0 ? (
                     <div className="rounded-2xl w-full h-full">
-                        <div className="w-full grid md:grid-cols-5 grid-cols-3 justify-center gap-8 items-start md:px-8 px-4">
+                        <div className="w-full grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 justify-center gap-8 items-start md:px-8 px-4">
                             {paginatedPartners.map((partner, index) => (
                                 <div key={index} className='w-full h-full flex flex-col gap-4 items-center'>
                                     <div className="bg-white w-full h-[8rem] rounded-xl flex justify-center items-center md:p-4 p-2">

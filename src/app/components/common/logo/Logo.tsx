@@ -14,7 +14,7 @@ const Logo = ({ scrolled, logo, isBlogPage }: { scrolled: boolean, logo: any, is
         <img
             src={logoUrl}
             alt='logo'
-            className='w-60 h-auto object-contain'
+            className='w-48 h-auto object-contain'
         />
     </Link>
   )
