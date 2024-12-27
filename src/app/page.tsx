@@ -312,12 +312,7 @@ interface closingModalBoxData {
   }
 }
 
-// export const metadata: Metadata = {
-//   title: "About Us - My Website"
-// };
-
 export default function Home() {
-  const [homePageMetaData, setHomePageMetaData] = useState({ title: "Home Page" });
   const [homePageData, setHomePageData] = useState<HomePageData | null>(null)
   const [homePageCarousel, setHomePageCarousel] = useState<HomePageCarousel[]>([])
   const [partnerShipData, setPartnerShipData] = useState<any>();
