@@ -1,5 +1,5 @@
 'use client'
-import { fetchHeaderData, fetchInternetOfThingsData, fetchInternetOfThingsServiceHelp, fetchInternetOfThingsTechnologiesused, fetchInternetOfThingsTrustedPartner } from '@/api-data/api'
+import { fetchInternetOfThingsData, fetchInternetOfThingsServiceHelp, fetchInternetOfThingsTechnologiesused, fetchInternetOfThingsTrustedPartner } from '@/api-data/api'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
 import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
@@ -67,6 +67,7 @@ interface internetOfThingsPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -177,39 +178,6 @@ interface internetOfThingsPageData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 const InternetOfThings = () => {
   const [internetOfThingsPageData, setInternetOfThingsPageData] = useState<internetOfThingsPageData | null>(null)
   const [internetOfThingsPageHelpServiceData, setInternetOfThingsPageHelpServiceData] = useState<any>([]);
@@ -217,8 +185,6 @@ const InternetOfThings = () => {
   const [internetOfThingsPageTrustedData, setInternetOfThingsPageTrustedData] = useState<any>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
-
-  const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
 
   const router = useRouter();
 
@@ -280,20 +246,6 @@ const InternetOfThings = () => {
     }
 
     internetOfThingsTrustedData();
-  }, [])
-  
-  useEffect(() => {
-    const fetchHeaderDataResponse = async () => {
-      try {
-        const response = await fetchHeaderData();
-        setHeaderDataLink(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      }
-    }
-
-    fetchHeaderDataResponse();
   }, [])
 
   useEffect(() => {
@@ -387,7 +339,7 @@ const InternetOfThings = () => {
           bannerTitle={internetOfThingsPageData?.latest_info?.heading || ''}
           bannerDescription={internetOfThingsPageData?.latest_info?.description || ''}
           buttonTitle={internetOfThingsPageData?.latest_info?.button_text || ''}
-          onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+          onButtonClick={internetOfThingsPageData?.latest_info?.button_link || ''}
         />
         {/* <ContactUs contactUsData = {internetOfThingsPageData?.get_in_touch} /> */}
         <SimpleContactForm contactUsData={internetOfThingsPageData?.get_in_touch} />

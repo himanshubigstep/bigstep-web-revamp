@@ -1,5 +1,5 @@
 'use client'
-import { fetchDataEngineeringModernizationChooseUs, fetchDataEngineeringModernizationData, fetchDataEngineeringModernizationTech, fetchHeaderData } from '@/api-data/api';
+import { fetchDataEngineeringModernizationChooseUs, fetchDataEngineeringModernizationData, fetchDataEngineeringModernizationTech } from '@/api-data/api';
 import AITech from '@/app/components/common/ai-tech/AITech';
 import Clients from '@/app/components/common/clients/Clients';
 import ContactUs from '@/app/components/common/contact-us/ContactUs';
@@ -29,6 +29,7 @@ interface DataEngineeringModernizationPageData {
     button_text: string
     description: string
     heading: string
+    button_link: string
   }
   client_reviews: {
     background_image: {
@@ -123,61 +124,13 @@ interface DataEngineeringModernizationPageData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 const DataEngineeringModernization = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [dataEngineeringModernizationData, setDataEngineeringModernizationData] = useState<DataEngineeringModernizationPageData | null>(null)
   const [dataEngineeringModernizationChooseUs, setDataEngineeringModernizationChooseUs] = useState<any>([]);
   const [dataEngineeringModernizationTechData, setDataEngineeringModernizationTechData] = useState<any>([]);
-  const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
 
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchHeaderDataResponse = async () => {
-      try {
-        const response = await fetchHeaderData();
-        setHeaderDataLink(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      }
-    }
-
-    fetchHeaderDataResponse();
-  }, [])
 
   useEffect(() => {
     const fetchdataEngineeringModernizationResponse = async () => {
@@ -300,7 +253,7 @@ const DataEngineeringModernization = () => {
         bannerTitle={dataEngineeringModernizationData?.blogs?.heading || ''}
         bannerDescription={dataEngineeringModernizationData?.blogs?.description || ''}
         buttonTitle={dataEngineeringModernizationData?.blogs?.button_text || ''}
-        onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+        onButtonClick={dataEngineeringModernizationData?.blogs?.button_link || ''}
       />
       <Clients
         title={dataEngineeringModernizationData?.client_reviews?.heading || ''}

@@ -68,6 +68,7 @@ interface rpaPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -178,39 +179,6 @@ interface rpaPageData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 interface closingModalBoxData {
   id: number;
   attributes: {
@@ -244,8 +212,6 @@ const RPA = () => {
   const [rpaPageManagedSubData, setRpaPageManagedSubData] = useState<any>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
-
-  const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
 
   const router = useRouter();
 
@@ -325,20 +291,6 @@ const RPA = () => {
     }
 
     rpaTrustedData();
-  }, [])
-  
-  useEffect(() => {
-    const fetchHeaderDataResponse = async () => {
-      try {
-        const response = await fetchHeaderData();
-        setHeaderDataLink(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      }
-    }
-
-    fetchHeaderDataResponse();
   }, [])
   
   useEffect(() => {
@@ -461,7 +413,7 @@ const RPA = () => {
           bannerTitle={rpaPageData?.latest_info?.heading || ''}
           bannerDescription={rpaPageData?.latest_info?.description || ''}
           buttonTitle={rpaPageData?.latest_info?.button_text || ''}
-          onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+          onButtonClick={rpaPageData?.latest_info?.button_link || ''}
         />
         {/* <ContactUs contactUsData = {rpaPageData?.get_in_touch} /> */}
         <SimpleContactForm contactUsData={rpaPageData?.get_in_touch} />

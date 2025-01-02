@@ -50,7 +50,7 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
         setSubmenuClicked({});
       } else {
         // Open the dropdown and close other submenus
-        setDropdownOpen(menu.heading);
+        setDropdownOpen((prev) => prev === menu.heading ? null : menu.heading);
         setOpenSubmenus((prev) => {
           const newSubmenus = { ...prev };
           for (const k in newSubmenus) {

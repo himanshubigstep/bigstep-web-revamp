@@ -116,7 +116,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
             <div className='lg:block hidden w-full h-[1px] bg-gray-200' />
             <div className="client-logos-row overflow-hidden lg:max-w-[1440px] max-w-full mx-auto px-4">
                 <div className="flex whitespace-nowrap gap-4 animate-marquee-reverse">
-                    {row2.map((item, index) => (
+                    {row2 && row2.map((item, index) => (
                         <div key={index} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
@@ -125,7 +125,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                             />
                         </div>
                     ))}
-                    {row2.map((item, index) => (
+                    {row2 && row2.map((item, index) => (
                         <div key={`clone-${index}`} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
@@ -134,7 +134,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                             />
                         </div>
                     ))}
-                    {row2.map((item, index) => (
+                    {row2 && row2.map((item, index) => (
                         <div key={`clone-${index}`} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
@@ -143,7 +143,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                             />
                         </div>
                     ))}
-                    {row2.map((item, index) => (
+                    {row2 && row2.map((item, index) => (
                         <div key={`clone-${index}`} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
@@ -152,7 +152,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                             />
                         </div>
                     ))}
-                    {row2.map((item, index) => (
+                    {row2 && row2.map((item, index) => (
                         <div key={`clone-${index}`} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
@@ -161,7 +161,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                             />
                         </div>
                     ))}
-                    {row2.map((item, index) => (
+                    {row2 && row2.map((item, index) => (
                         <div key={`clone-${index}`} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}
@@ -170,7 +170,7 @@ const ClientCarousel = ({ clients = [], heading, description }: { clients?: Clie
                             />
                         </div>
                     ))}
-                    {row2.map((item, index) => (
+                    {row2 && row2.map((item, index) => (
                         <div key={`clone-${index}`} className="min-w-[150px] sm:min-w-[240px] h-[100px] sm:h-[140px] px-2 sm:px-4 py-2 sm:py-4 bg-white rounded-lg flex justify-center items-center">
                             <img
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.attributes.image.data.attributes.url}`}

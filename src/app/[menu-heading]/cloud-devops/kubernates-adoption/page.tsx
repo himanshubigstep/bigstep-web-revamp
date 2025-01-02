@@ -1,5 +1,5 @@
 'use client'
-import { fetchHeaderData, fetchKubernatesAdoptionsChooseUs, fetchKubernatesAdoptionsData, fetchKubernatesAdoptionsTech } from '@/api-data/api';
+import { fetchKubernatesAdoptionsChooseUs, fetchKubernatesAdoptionsData, fetchKubernatesAdoptionsTech } from '@/api-data/api';
 import AITech from '@/app/components/common/ai-tech/AITech';
 import Clients from '@/app/components/common/clients/Clients';
 import ContactUs from '@/app/components/common/contact-us/ContactUs';
@@ -29,6 +29,7 @@ interface KubernatesAdoptionsPageProps {
     button_text: string
     description: string
     heading: string
+    button_link: string
   }
   client_reviews: {
     background_image: {
@@ -123,61 +124,13 @@ interface KubernatesAdoptionsPageProps {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 const KubernatesAdoptions = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [kubernatesAdoptionsData, setKubernatesAdoptionshData] = useState<KubernatesAdoptionsPageProps | null>(null)
   const [kubernatesAdoptionsChooseUs, setKubernatesAdoptionsChooseUs] = useState<any>([]);
   const [kubernatesAdoptionsTechData, setKubernatesAdoptionsTechData] = useState<any>([]);
-  const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
 
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchHeaderDataResponse = async () => {
-      try {
-        const response = await fetchHeaderData();
-        setHeaderDataLink(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      }
-    }
-
-    fetchHeaderDataResponse();
-  }, [])
 
   useEffect(() => {
     const fetchKubernatesAdoptionsResponse = async () => {
@@ -300,7 +253,7 @@ const KubernatesAdoptions = () => {
         bannerTitle={kubernatesAdoptionsData?.blogs?.heading || ''}
         bannerDescription={kubernatesAdoptionsData?.blogs?.description || ''}
         buttonTitle={kubernatesAdoptionsData?.blogs?.button_text || ''}
-        onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+        onButtonClick={kubernatesAdoptionsData?.blogs?.button_link || ''}
       />
       <Clients
         title={kubernatesAdoptionsData?.client_reviews?.heading || ''}

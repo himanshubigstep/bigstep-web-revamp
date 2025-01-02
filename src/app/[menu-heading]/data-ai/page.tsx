@@ -1,5 +1,5 @@
 'use client'
-import { fetchDataAndAiData, fetchDataAndAiServiceHelp, fetchDataAndAITechnologiesused, fetchDataAndAITrustedPartner, fetchHeaderData } from '@/api-data/api'
+import { fetchDataAndAiData, fetchDataAndAiServiceHelp, fetchDataAndAITechnologiesused, fetchDataAndAITrustedPartner } from '@/api-data/api'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
 import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import SectionInnerCarousel from '@/app/components/common/section-inner-carousel/SectionInnerCarousel'
@@ -68,6 +68,7 @@ interface dataandAiPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -178,39 +179,6 @@ interface dataandAiPageData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 const DataAndAI = () => {
   const [dataandAiPageData, setDataandAiPageData] = useState<dataandAiPageData | null>(null)
   const [dataAndAIPageHelpServiceData, setDataAndAIPageHelpServiceData] = useState<any>([]);
@@ -218,8 +186,6 @@ const DataAndAI = () => {
   const [dataAndAIPageTrustedData, setDataAndAIPageTrustedData] = useState<any>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
-
-  const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
 
   const router = useRouter();
 
@@ -281,20 +247,6 @@ const DataAndAI = () => {
     }
 
     dataAndAiTrustedData();
-  }, [])
-  
-  useEffect(() => {
-    const fetchHeaderDataResponse = async () => {
-      try {
-        const response = await fetchHeaderData();
-        setHeaderDataLink(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      }
-    }
-
-    fetchHeaderDataResponse();
   }, [])
 
   useEffect(() => {
@@ -389,7 +341,7 @@ const DataAndAI = () => {
           bannerTitle={dataandAiPageData?.latest_info?.heading || ''}
           bannerDescription={dataandAiPageData?.latest_info?.description || ''}
           buttonTitle={dataandAiPageData?.latest_info?.button_text || ''}
-          onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+          onButtonClick={dataandAiPageData?.latest_info?.button_link || ''}
         />
         {/* <ContactUs contactUsData = {dataandAiPageData?.get_in_touch} /> */}
         <SimpleContactForm contactUsData={dataandAiPageData?.get_in_touch} />

@@ -1,5 +1,5 @@
 'use client'
-import { fetchHeaderData, fetchModalBoxHomePage, fetchWebApplicationDevelopmentChooseUs, fetchWebApplicationDevelopmentData, fetchWebApplicationDevelopmentTech } from '@/api-data/api';
+import { fetchModalBoxHomePage, fetchWebApplicationDevelopmentChooseUs, fetchWebApplicationDevelopmentData, fetchWebApplicationDevelopmentTech } from '@/api-data/api';
 import AITech from '@/app/components/common/ai-tech/AITech';
 import Clients from '@/app/components/common/clients/Clients';
 import ContactUs from '@/app/components/common/contact-us/ContactUs';
@@ -30,6 +30,7 @@ interface WebApplicationDevelopmentPageData {
     button_text: string
     description: string
     heading: string
+    button_link: string
   }
   client_reviews: {
     background_image: {
@@ -124,39 +125,6 @@ interface WebApplicationDevelopmentPageData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 interface closingModalBoxData {
   id: number;
   attributes: {
@@ -185,7 +153,6 @@ const WebApplicationDevelopment = () => {
   const [webApplicationDevelopmentData, setWebApplicationDevelopmentData] = useState<WebApplicationDevelopmentPageData | null>(null)
   const [webApplicationDevelopmentChooseUs, setWebApplicationDevelopmentChooseUs] = useState<any>([]);
   const [webApplicationDevelopmentTechData, setWebApplicationDevelopmentTechData] = useState<any>([]);
-  const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
 
   const router = useRouter();
 
@@ -205,20 +172,6 @@ const WebApplicationDevelopment = () => {
     }
 
     fetchModalBoxDataSection();
-  }, [])
-
-  useEffect(() => {
-    const fetchHeaderDataResponse = async () => {
-      try {
-        const response = await fetchHeaderData();
-        setHeaderDataLink(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      }
-    }
-
-    fetchHeaderDataResponse();
   }, [])
 
   useEffect(() => {
@@ -342,7 +295,7 @@ const WebApplicationDevelopment = () => {
         bannerTitle={webApplicationDevelopmentData?.blogs?.heading || ''}
         bannerDescription={webApplicationDevelopmentData?.blogs?.description || ''}
         buttonTitle={webApplicationDevelopmentData?.blogs?.button_text || ''}
-        onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+        onButtonClick={webApplicationDevelopmentData?.blogs?.button_link || ''}
       />
       <Clients
         title={webApplicationDevelopmentData?.client_reviews?.heading || ''}

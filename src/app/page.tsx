@@ -5,7 +5,7 @@ import CommonBlock from "./components/common/common-blocks-division/CommonBlock"
 import SuccessStoriesBlocks from "./components/common/sucess-stories-blocks/SuccessStoriesBlocks";
 import ClientCarousel from "./components/common/client-carousel/ClientCarousel";
 import PartnersBlock from "./components/common/partners-section/PartnersBlock";
-import { fetchHomepageData, fetchHomePageCarousel, fetchPaternershipData, fetchHeaderData, fetchServiceDataHome, fetchtrustedClients, fetchModalBoxHomePage } from "@/api-data/api";
+import { fetchHomepageData, fetchHomePageCarousel, fetchPaternershipData, fetchServiceDataHome, fetchtrustedClients, fetchModalBoxHomePage } from "@/api-data/api";
 import MilesTone from "./components/common/milestones-data/MilesTone";
 import Clients from "./components/common/clients/Clients";
 import NewsLetter from "./components/common/news-letter/NewsLetter";
@@ -151,6 +151,7 @@ interface HomePageData {
     heading: string;
     button_text: string | null;
     description: string | null;
+    button_link: string | null;
     background_image: {
       data: {
         attributes: {
@@ -256,39 +257,6 @@ interface HomePageCarousel {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 interface closingModalBoxData {
   id: number;
   attributes: {
@@ -316,7 +284,6 @@ export default function Home() {
   const [homePageData, setHomePageData] = useState<HomePageData | null>(null)
   const [homePageCarousel, setHomePageCarousel] = useState<HomePageCarousel[]>([])
   const [partnerShipData, setPartnerShipData] = useState<any>();
-  const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
   const [homePageServiceData, setHomePageServiceData] = useState<any>([]);
   const [truestedClientsData, setTrustedClientsData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -337,22 +304,6 @@ export default function Home() {
     }
 
     fetchModalBoxDataSection();
-  }, [])
-
-  useEffect(() => {
-    const fetchHeaderDataResponse = async () => {
-      try {
-        const response = await fetchHeaderData();
-        setHeaderDataLink(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchHeaderDataResponse();
   }, [])
 
   useEffect(() => {
@@ -551,7 +502,7 @@ export default function Home() {
         bannerTitle={homePageData?.home_page_blogs[0].heading || ''}
         bannerDescription={homePageData?.home_page_blogs[0].description || ''}
         buttonTitle={homePageData?.home_page_blogs[0].button_text || ''}
-        onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+        onButtonClick={homePageData?.home_page_blogs[0]?.button_link || ''}
         bannerImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.home_page_blogs[0].background_image.data.attributes.url}` : ''}
       />
       {/* <ContactUs contactUsData={homePageData?.get_in_touch[0]} /> */}
