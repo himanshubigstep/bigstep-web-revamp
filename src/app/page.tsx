@@ -408,9 +408,34 @@ export default function Home() {
         document.head.appendChild(canonicalLink);
       }
       canonicalLink.href = homePageData?.seo?.canonicalURL || "default-canonical-url";
+
+      // Open Graph meta tags
+      let ogTitle = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
+      if (!ogTitle) {
+        ogTitle = document.createElement("meta");
+        ogTitle.setAttribute("property", "og:title");
+        document.head.appendChild(ogTitle);
+      }
+      ogTitle.content = homePageData?.seo?.metaTitle || "Default Title";
+
+      let ogDescription = document.querySelector('meta[property="og:description"]') as HTMLMetaElement;
+      if (!ogDescription) {
+        ogDescription = document.createElement("meta");
+        ogDescription.setAttribute("property", "og:description");
+        document.head.appendChild(ogDescription);
+      }
+      ogDescription.content = homePageData?.seo?.metaDescription || "Default description";
+
+      let ogUrl = document.querySelector('meta[property="og:url"]') as HTMLMetaElement;
+      if (!ogUrl) {
+        ogUrl = document.createElement("meta");
+        ogUrl.setAttribute("property", "og:url");
+        document.head.appendChild(ogUrl);
+      }
+      // Use the canonical URL from the data, or fallback to the current window location
+      ogUrl.content = homePageData?.seo?.canonicalURL || window.location.href;
     }
   }, [homePageData]);
-
   useEffect(() => {
     if (!loading) {
       window.scrollTo(0, 0);
@@ -424,9 +449,21 @@ export default function Home() {
   return (
     <div className="poppins w-full h-full">
       <Head>
-        <link rel="canonical" href={homePageData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta property="og:title" content={homePageData?.seo?.metaTitle || "Default Title"} />
+        <meta property="og:description" content={homePageData?.seo?.metaDescription || "Default description"} />
+        <meta property="og:url" content={homePageData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta property="og:type" content="website" />
+
+        {/* For Twitter cards */}
+        <meta name="twitter:title" content={homePageData?.seo?.metaTitle || "Default Title"} />
+        <meta name="twitter:description" content={homePageData?.seo?.metaDescription || "Default description"} />
+        <meta property="twitter:url" content={homePageData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        {/* Standard meta tags */}
         <meta name="title" content={homePageData?.seo?.metaTitle || "Default description"} />
         <meta name="description" content={homePageData?.seo?.metaDescription || "Default Description"} />
+        <link rel="canonical" href={homePageData?.seo?.canonicalURL || "default-canonical-url"} />
       </Head>
       <SlideShowText slides={homePageCarousel} />
       <CommonBlock
