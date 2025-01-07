@@ -432,7 +432,6 @@ export default function Home() {
         ogUrl.setAttribute("property", "og:url");
         document.head.appendChild(ogUrl);
       }
-      // Use the canonical URL from the data, or fallback to the current window location
       ogUrl.content = homePageData?.seo?.canonicalURL || window.location.href;
     }
   }, [homePageData]);
