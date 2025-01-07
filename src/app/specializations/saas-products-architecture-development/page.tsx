@@ -1,6 +1,5 @@
 'use client'
-import { fetchHeaderData, fetchModalBoxHomePage, fetchSaasProductDevelopmentBenifits, fetchSaasProductDevelopmentData, fetchSaasProductDevelopmentFeatures, fetchSaasProductDevelopmentTechData } from '@/api-data/api';
-import ContactUs from '@/app/components/common/contact-us/ContactUs';
+import { fetchModalBoxHomePage, fetchSaasProductDevelopmentBenifits, fetchSaasProductDevelopmentData, fetchSaasProductDevelopmentFeatures, fetchSaasProductDevelopmentTechData } from '@/api-data/api';
 import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
@@ -127,39 +126,6 @@ interface SaasProductDevelopmentData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 interface closingModalBoxData {
   id: number;
   attributes: {
@@ -184,197 +150,167 @@ interface closingModalBoxData {
 }
 
 const SaasProductDevelopment = () => {
-    const [loading, setLoading] = useState<boolean>(true);
-    const [saasProductDevelopmentData, setSaasProductDevelopmentData] = useState<SaasProductDevelopmentData | null>(null)
-    const [saasProductDevelopmentFeaturesData, setSaasProductDevelopmentFeaturesData] = useState<any>([]);
-    const [saasProductDevelopmentTechData, setSaasProductDevelopmentTechData] = useState<any>([]);
-    const [saasProductDevelopmentBenifitsData, setSaasProductDevelopmentbenifitsData] = useState<any>([]);
-  
-    const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
-  
-    const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [saasProductDevelopmentData, setSaasProductDevelopmentData] = useState<SaasProductDevelopmentData | null>(null)
+  const [saasProductDevelopmentFeaturesData, setSaasProductDevelopmentFeaturesData] = useState<any>([]);
+  const [saasProductDevelopmentTechData, setSaasProductDevelopmentTechData] = useState<any>([]);
+  const [saasProductDevelopmentBenifitsData, setSaasProductDevelopmentbenifitsData] = useState<any>([]);
 
-    const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
-  
-    useEffect(() => {
-      const fetchModalBoxDataSection = async () => {
-        try {
-          const response = await fetchModalBoxHomePage();
-          setModalBoxData(response);
-        } catch (error) {
-          console.log(error);
-          return null;
-        } finally {
-          setLoading(false);
-        }
+  const router = useRouter();
+
+  const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+
+  useEffect(() => {
+    const fetchModalBoxDataSection = async () => {
+      try {
+        const response = await fetchModalBoxHomePage();
+        setModalBoxData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
       }
-  
-      fetchModalBoxDataSection();
-    }, [])
+    }
 
-    useEffect(() => {
-        const fetchHeaderDataResponse = async () => {
-          try {
-            const response = await fetchHeaderData();
-            setHeaderDataLink(response);
-          } catch (error) {
-            console.log(error);
-            return null;
-          }
-        }
-    
-        fetchHeaderDataResponse();
-      }, [])
-      
-      useEffect(() => {
-        const fetchSaasProductDevelopmentDataResponse = async () => {
-          try {
-            const response = await fetchSaasProductDevelopmentData();
-            setSaasProductDevelopmentData(response.attributes)
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchSaasProductDevelopmentDataResponse();
-      }, []);
+    fetchModalBoxDataSection();
+  }, [])
 
-      useEffect(() => {
-        const saasProductDevelopmentFeaturesData = async () => {
-          try {
-            const response = await fetchSaasProductDevelopmentFeatures();
-            setSaasProductDevelopmentFeaturesData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        saasProductDevelopmentFeaturesData();
-      }, [])
-
-      useEffect(() => {
-        const saasProductDevelopmentTechData = async () => {
-          try {
-            const response = await fetchSaasProductDevelopmentTechData();
-            setSaasProductDevelopmentTechData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        saasProductDevelopmentTechData();
-      }, [])
-
-      useEffect(() => {
-        const saasProductDevelopmentBenifits = async () => {
-          try {
-            const response = await fetchSaasProductDevelopmentBenifits();
-            setSaasProductDevelopmentbenifitsData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        saasProductDevelopmentBenifits();
-      }, [])
-
-      useEffect(() => {
-        if (saasProductDevelopmentData) {
-          // Set document title
-          document.title = saasProductDevelopmentData?.seo?.metaTitle || "Default Title";
-      
-          // Select meta description tag
-          let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-      
-          // If meta description doesn't exist, create it
-          if (!metaDescription) {
-            metaDescription = document.createElement("meta");
-            metaDescription.name = "description";
-            document.head.appendChild(metaDescription);
-          }
-      
-          // Set content for the meta description
-          metaDescription.content = saasProductDevelopmentData?.seo?.metaDescription || "Default description";
-      
-          // Select canonical link tag
-          let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-      
-          // If canonical link doesn't exist, create it
-          if (!canonicalLink) {
-            canonicalLink = document.createElement("link");
-            canonicalLink.rel = "canonical";
-            document.head.appendChild(canonicalLink);
-          }
-      
-          // Set href for the canonical link
-          canonicalLink.href = saasProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
-        }
-      }, [saasProductDevelopmentData]);
-
-      useEffect(() => {
-        if (!loading) {
-          window.scrollTo(0, 0);
-        }
-      }, [loading]);
-    
-      if (loading) {
-        return <LoaderSpinner />;
+  useEffect(() => {
+    const fetchSaasProductDevelopmentDataResponse = async () => {
+      try {
+        const response = await fetchSaasProductDevelopmentData();
+        setSaasProductDevelopmentData(response.attributes)
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-      
+    };
+
+    fetchSaasProductDevelopmentDataResponse();
+  }, []);
+
+  useEffect(() => {
+    const saasProductDevelopmentFeaturesData = async () => {
+      try {
+        const response = await fetchSaasProductDevelopmentFeatures();
+        setSaasProductDevelopmentFeaturesData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    saasProductDevelopmentFeaturesData();
+  }, [])
+
+  useEffect(() => {
+    const saasProductDevelopmentTechData = async () => {
+      try {
+        const response = await fetchSaasProductDevelopmentTechData();
+        setSaasProductDevelopmentTechData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    saasProductDevelopmentTechData();
+  }, [])
+
+  useEffect(() => {
+    const saasProductDevelopmentBenifits = async () => {
+      try {
+        const response = await fetchSaasProductDevelopmentBenifits();
+        setSaasProductDevelopmentbenifitsData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    saasProductDevelopmentBenifits();
+  }, [])
+
+  useEffect(() => {
+    if (saasProductDevelopmentData) {
+      document.title = saasProductDevelopmentData?.seo?.metaTitle || "Default Title";
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.content = saasProductDevelopmentData?.seo?.metaDescription || "Default description";
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.href = saasProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [saasProductDevelopmentData]);
+
+  useEffect(() => {
+    if (!loading) {
+      window.scrollTo(0, 0);
+    }
+  }, [loading]);
+
+  if (loading) {
+    return <LoaderSpinner />;
+  }
+
   return (
     <div className='poppins'>
-        <Head>
-          <link rel="canonical" href={saasProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url"} />
-          <meta name="title" content={saasProductDevelopmentData?.seo?.metaTitle || "Default description"} />
-          <meta name="description" content={saasProductDevelopmentData?.seo?.metaDescription || "Default Description"} />
-        </Head>
-        <TopBanner bannerData={saasProductDevelopmentData?.introduction} />
-        <ServiceDataBlock
-          title={saasProductDevelopmentData?.engaging_streaming_experience?.heading || ''}
-          description={saasProductDevelopmentData?.engaging_streaming_experience?.description || ''}
-          services={saasProductDevelopmentFeaturesData[0]?.attributes?.service_data || []}
-          showButton={false}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
-          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
-          serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/3 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex flex-col gap-4 items-center'
-          serviceItemDescription='w-full text-center md:text-center sm:text-center text-left flex flex-col gap-2'
-          serviceHeding='lg:line-clamp-none text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
-        />
-        <Parterners
-          title={saasProductDevelopmentData?.cutting_edge_technologies?.heading || ''}
-          description={saasProductDevelopmentData?.cutting_edge_technologies?.description || ''}
-          buttonText={saasProductDevelopmentData?.cutting_edge_technologies?.button_text || ''}
-          buttonLink={saasProductDevelopmentData?.cutting_edge_technologies?.button_link || ''}
-          techData={saasProductDevelopmentTechData || []}
-          bgImage={saasProductDevelopmentData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
-        />
-        <ServiceDataBlock
-          title={saasProductDevelopmentData?.transformative_benefits?.heading || ''}
-          description={saasProductDevelopmentData?.transformative_benefits?.description || ''}
-          services={saasProductDevelopmentBenifitsData[0]?.attributes?.service_data || []}
-          showButton={true}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
-          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
-          serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex lg:flex-row md:flex-row sm:flex-row flex-col items-center'
-          serviceItemDescription='w-full text-left flex flex-col gap-2'
-          serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
-          buttonText={saasProductDevelopmentData?.transformative_benefits?.button_text || ''}
-        />
-        {/* <ContactUs contactUsData = {saasProductDevelopmentData?.get_in_touch || []} /> */}
-        <SimpleContactForm contactUsData={saasProductDevelopmentData?.get_in_touch || []} />
-        <ModelBox modalBoxData={modalBoxData} />
+      <Head>
+        <link rel="canonical" href={saasProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="title" content={saasProductDevelopmentData?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={saasProductDevelopmentData?.seo?.metaDescription || "Default Description"} />
+      </Head>
+      <TopBanner bannerData={saasProductDevelopmentData?.introduction} />
+      <ServiceDataBlock
+        title={saasProductDevelopmentData?.engaging_streaming_experience?.heading || ''}
+        description={saasProductDevelopmentData?.engaging_streaming_experience?.description || ''}
+        services={saasProductDevelopmentFeaturesData[0]?.attributes?.service_data || []}
+        showButton={false}
+        mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
+        headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+        serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+        serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/3 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconHeader='w-full flex flex-col gap-4 items-center'
+        serviceItemDescription='w-full text-center md:text-center sm:text-center text-left flex flex-col gap-2'
+        serviceHeding='lg:line-clamp-none text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
+      />
+      <Parterners
+        title={saasProductDevelopmentData?.cutting_edge_technologies?.heading || ''}
+        description={saasProductDevelopmentData?.cutting_edge_technologies?.description || ''}
+        buttonText={saasProductDevelopmentData?.cutting_edge_technologies?.button_text || ''}
+        buttonLink={saasProductDevelopmentData?.cutting_edge_technologies?.button_link || ''}
+        techData={saasProductDevelopmentTechData || []}
+        bgImage={saasProductDevelopmentData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
+      />
+      <ServiceDataBlock
+        title={saasProductDevelopmentData?.transformative_benefits?.heading || ''}
+        description={saasProductDevelopmentData?.transformative_benefits?.description || ''}
+        services={saasProductDevelopmentBenifitsData[0]?.attributes?.service_data || []}
+        showButton={true}
+        mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
+        headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+        serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+        serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconHeader='w-full flex lg:flex-row md:flex-row sm:flex-row flex-col items-center'
+        serviceItemDescription='w-full text-left flex flex-col gap-2'
+        serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
+        buttonText={saasProductDevelopmentData?.transformative_benefits?.button_text || ''}
+      />
+      <SimpleContactForm contactUsData={saasProductDevelopmentData?.get_in_touch || []} />
+      <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }

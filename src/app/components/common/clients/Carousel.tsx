@@ -59,15 +59,12 @@ const Carousel = () => {
     const toggleText = (id: number) => {
         setExpanded((prevState) => ({
             ...prevState,
-            [id]: !prevState[id] // Toggle expanded state for the specific item
+            [id]: !prevState[id]
         }));
     };
 
     return (
         <Fragment>
-            {/* {reviews && reviews.length === 0 ? (
-                <div>Loading...</div>
-            ) : ( */}
             <div id="controls-carousel" className='relative w-full h-full max-w-[1440px] mx-auto rounded-2xl lg:p-8 lg:px-16 mb-16'>
                 {reviews && reviews.sort((a: any, b: any) => a.id - b.id).map((item, index) => {
                     const isExpanded = expanded[item.id];
@@ -99,11 +96,6 @@ const Carousel = () => {
                                         )}
                                     </div>
                                     <div className='w-[100%]'>
-                                        {/* <img
-                                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.formats?.small?.url}`}
-                                                className='lg:w-full w-32 mx-auto aspect-square object-cover rounded-full'
-                                                alt='Client Image'
-                                            /> */}
                                         <h4 className='lg:text-2xl md:text-xl sm:text-lg text-md font-bold text-center text-blue-500 mt-4'>{item?.attributes?.client_name}</h4>
                                         <h5 className='lg:text-xl md:text-lg sm:text-md text-sm text-center'>{item?.attributes?.client_designation}</h5>
                                     </div>
@@ -142,7 +134,6 @@ const Carousel = () => {
                     </button>
                 </div>
             </div>
-            {/* )} */}
             <div className="w-full px-4 justify-center absolute lg:bottom-4 bottom-0 left-1/2 transform -translate-x-1/2 lg:flex md:flex sm:flex hidden space-x-2 lg:mb-16 md:mb-12 sm:mb-8 mb-8 gap-2 flex-wrap">
                 {reviews && reviews.map((item, index) => (
                     <button

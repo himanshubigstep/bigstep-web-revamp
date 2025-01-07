@@ -124,7 +124,6 @@ const PartnersTech = ({
             <div className="relative w-full h-full max-w-[1440px] mx-auto px-4">
                 <div className="w-full text-left flex flex-col gap-2 md:max-w-[75%] mx-auto">
                     <h4 className="font-semibold text-center text-3xl mb-16 text-white">{title}</h4>
-                    {/* <p className="font-normal text-center text-lg mb-16 text-white">{description}</p> */}
                 </div>
 
                 <div className="relative w-full h-full flex md:flex-none flex-wrap gap-6 md:items-center justify-center mb-12 mx-auto">

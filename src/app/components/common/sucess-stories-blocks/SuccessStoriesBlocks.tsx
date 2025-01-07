@@ -82,7 +82,6 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                                 <h3 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold mb-4 text-white'>{imageData?.title}</h3>
                                 <h4 className='lg:text-2xl md:text-xl sm:text-md text-sm font-medium mb-4 text-white'>{imageData?.subtitle}</h4>
                                 <p className='lg:text-xl md:text-lg sm:text-md text-sm lg:line-clamp-none line-clamp-2 font-normal text-center text-white'>{imageData?.description}</p>
-                                {/* <p className='text-md font-normal text-white'>hoji aap</p> */}
                             </div>
                         </div>
                     ))}
@@ -106,7 +105,6 @@ const SuccessStoriesBlocks = ({ sucessStoriesData }: { sucessStoriesData: any })
                                 <h3 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold mb-4 text-white'>{imageData?.title}</h3>
                                 <h4 className='lg:text-2xl md:text-xl sm:text-md text-sm font-medium mb-4 text-white'>{imageData?.subtitle}</h4>
                                 <p className='lg:text-xl md:text-lg sm:text-md text-sm lg:line-clamp-none line-clamp-2 font-normal text-center text-white'>{imageData?.description}</p>
-                                {/* <p className='text-md font-normal text-white'>hoji aap</p> */}
                             </div>
                         </div>
                     ))}

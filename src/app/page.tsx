@@ -8,9 +8,7 @@ import PartnersBlock from "./components/common/partners-section/PartnersBlock";
 import { fetchHomepageData, fetchHomePageCarousel, fetchPaternershipData, fetchServiceDataHome, fetchtrustedClients, fetchModalBoxHomePage } from "@/api-data/api";
 import MilesTone from "./components/common/milestones-data/MilesTone";
 import Clients from "./components/common/clients/Clients";
-import NewsLetter from "./components/common/news-letter/NewsLetter";
 import AITech from "./components/common/ai-tech/AITech";
-import ContactUs from "./components/common/contact-us/ContactUs";
 import LoaderSpinner from "./components/common/loader-spinner/LoadingSpinner";
 import OurValues from "./components/our-values/OurValues";
 import ModelBox from "./components/model-box/ModelBox";
@@ -395,33 +393,20 @@ export default function Home() {
 
   useEffect(() => {
     if (homePageData) {
-      // Set document title
       document.title = homePageData?.seo?.metaTitle || "Default Title";
-  
-      // Select meta description tag
       let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-  
-      // If meta description doesn't exist, create it
       if (!metaDescription) {
         metaDescription = document.createElement("meta");
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
-      // Set content for the meta description
       metaDescription.content = homePageData?.seo?.metaDescription || "Default description";
-  
-      // Select canonical link tag
       let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  
-      // If canonical link doesn't exist, create it
       if (!canonicalLink) {
         canonicalLink = document.createElement("link");
         canonicalLink.rel = "canonical";
         document.head.appendChild(canonicalLink);
       }
-  
-      // Set href for the canonical link
       canonicalLink.href = homePageData?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [homePageData]);
@@ -495,9 +480,6 @@ export default function Home() {
         description={homePageData?.client_reviews[0].description || ''}
         bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.url}` : ''}
       />
-      {/* <NewsLetter
-        latest_info={homePageData?.latest_info}
-      /> */}
       <AITech
         bannerTitle={homePageData?.home_page_blogs[0].heading || ''}
         bannerDescription={homePageData?.home_page_blogs[0].description || ''}
@@ -505,7 +487,6 @@ export default function Home() {
         onButtonClick={homePageData?.home_page_blogs[0]?.button_link || ''}
         bannerImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.home_page_blogs[0].background_image.data.attributes.url}` : ''}
       />
-      {/* <ContactUs contactUsData={homePageData?.get_in_touch[0]} /> */}
       <SimpleContactForm contactUsData={homePageData?.get_in_touch[0]} />
       <ModelBox modalBoxData={modalBoxData} />
     </div>

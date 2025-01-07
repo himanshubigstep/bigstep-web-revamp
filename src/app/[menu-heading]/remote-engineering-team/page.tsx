@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { fetchModalBoxHomePage, fetchRemoteEngineeringTeamData, fetchRemoteEngineeringTeamHolisticApproach } from '@/api-data/api'
 import Clients from '@/app/components/common/clients/Clients'
-import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
@@ -248,33 +247,20 @@ const RemoteEngineeringTeam = () => {
 
     useEffect(() => {
       if (remoteEngineeringTeamData) {
-        // Set document title
         document.title = remoteEngineeringTeamData?.seo?.metaTitle || "Default Title";
-    
-        // Select meta description tag
         let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-    
-        // If meta description doesn't exist, create it
         if (!metaDescription) {
           metaDescription = document.createElement("meta");
           metaDescription.name = "description";
           document.head.appendChild(metaDescription);
         }
-    
-        // Set content for the meta description
         metaDescription.content = remoteEngineeringTeamData?.seo?.metaDescription || "Default description";
-    
-        // Select canonical link tag
         let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-    
-        // If canonical link doesn't exist, create it
         if (!canonicalLink) {
           canonicalLink = document.createElement("link");
           canonicalLink.rel = "canonical";
           document.head.appendChild(canonicalLink);
         }
-    
-        // Set href for the canonical link
         canonicalLink.href = remoteEngineeringTeamData?.seo?.canonicalURL || "default-canonical-url";
       }
     }, [remoteEngineeringTeamData]);
@@ -313,7 +299,6 @@ const RemoteEngineeringTeam = () => {
               bgImage={remoteEngineeringTeamData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${remoteEngineeringTeamData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
           />
         </div>
-        {/* <ContactUs contactUsData = {remoteEngineeringTeamData?.client_query || []} /> */}
         <div className='w-full h-full lg:mt-16 md:mt-16 mt-8'>
           <SimpleContactForm contactUsData={remoteEngineeringTeamData?.client_query || []} />
         </div>

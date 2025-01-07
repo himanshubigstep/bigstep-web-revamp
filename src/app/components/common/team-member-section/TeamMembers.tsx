@@ -1,62 +1,4 @@
 import React from 'react'
-import Button from '../button/Button';
-
-const teamMembers = [
-    {
-        id: 1,
-        name: 'Vidit Paliwal',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    },
-    {
-        id: 2,
-        name: 'Niranjan Mangal',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    },
-    {
-        id: 3,
-        name: 'Shiwani Sharma',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    },
-    {
-        id: 4,
-        name: 'Vinit Khandelwal',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    },
-    {
-        id: 5,
-        name: 'Vidit Paliwal',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    },
-    {
-        id: 6,
-        name: 'Niranjan Mangal',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    },
-    {
-        id: 7,
-        name: 'Shiwani Sharma',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    },
-    {
-        id: 8,
-        name: 'Vinit Khandelwal',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    },
-    {
-        id: 9,
-        name: 'Vinit Khandelwal',
-        designation: 'CEO, BigStep Technologies',
-        image: 'https://www.clipartmax.com/png/full/231-2318072_if-you-are-self-employed-passport-size-photo-cartoon.png'
-    }
-]
 
 interface TeamMembersProps {
     id: number;
@@ -97,11 +39,6 @@ const TeamMembers = ({ heading, members }: { heading: string, members: TeamMembe
                             </div>
                         ))}
                     </div>
-                    {/* <Button
-                        onClick={() => console.log('clicked')}
-                        text='Meet Our Leaders'
-                        className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-normal'
-                    /> */}
                 </div>
             </div>
         </div>

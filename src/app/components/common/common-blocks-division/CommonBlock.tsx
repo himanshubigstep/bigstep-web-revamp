@@ -136,12 +136,6 @@ const CommonBlock: React.FC<CommonBlockProps> = ({
         </div>
       }
       {isMobile && (
-        // <div className='relative flex justify-between items-center mt-8'>
-        //   <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt;</button>
-        //   {/* <span>Page {currentPage} of {totalPages}</span> */}
-        //   <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>&gt;</button>
-        // </div>
-
         <div className='relative flex justify-between w-full mt-4'>
           <button onClick={handlePrevious} className='flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none'>
             <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 dark:bg-gray-400/30 group-hover:bg-blue-500 dark:group-hover:bg-gray-500/60 group-focus:ring-4 group-focus:ring-blue-500 dark:group-focus:ring-gray-800/70 group-focus:outline-none">

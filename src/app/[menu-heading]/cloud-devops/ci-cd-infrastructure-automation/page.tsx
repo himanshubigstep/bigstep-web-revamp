@@ -2,14 +2,12 @@
 import { fetchCiCdChooseUs, fetchCiCdData, fetchCiCdTech } from '@/api-data/api';
 import AITech from '@/app/components/common/ai-tech/AITech';
 import Clients from '@/app/components/common/clients/Clients';
-import ContactUs from '@/app/components/common/contact-us/ContactUs';
 import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock';
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import Head from 'next/head';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 interface CiCdPageProps {
@@ -130,8 +128,6 @@ const CiCd = () => {
   const [ciCdChooseUs, setCiCdChooseUs] = useState<any>([]);
   const [ciCdTechData, setCiCdTechData] = useState<any>([]);
 
-  const router = useRouter();
-
   useEffect(() => {
     const fetchCiCdResponse = async () => {
       try {
@@ -179,33 +175,20 @@ const CiCd = () => {
 
   useEffect(() => {
     if (ciCdData) {
-      // Set document title
       document.title = ciCdData?.seo?.metaTitle || "Default Title";
-  
-      // Select meta description tag
       let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-  
-      // If meta description doesn't exist, create it
       if (!metaDescription) {
         metaDescription = document.createElement("meta");
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
-      // Set content for the meta description
       metaDescription.content = ciCdData?.seo?.metaDescription || "Default description";
-  
-      // Select canonical link tag
       let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  
-      // If canonical link doesn't exist, create it
       if (!canonicalLink) {
         canonicalLink = document.createElement("link");
         canonicalLink.rel = "canonical";
         document.head.appendChild(canonicalLink);
       }
-  
-      // Set href for the canonical link
       canonicalLink.href = ciCdData?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [ciCdData]);
@@ -260,7 +243,6 @@ const CiCd = () => {
         description={ciCdData?.client_reviews?.description || ''}
         bgImage={ciCdData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${ciCdData.client_reviews?.background_image.data.attributes.formats.large.url}` : ''}
       />
-      {/* <ContactUs contactUsData={ciCdData?.get_in_touch || []} /> */}
       <div className='w-full h-full lg:pt-16 pt-8'>
         <SimpleContactForm contactUsData={ciCdData?.get_in_touch || []} />
       </div>

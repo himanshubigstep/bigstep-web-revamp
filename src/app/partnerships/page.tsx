@@ -3,18 +3,11 @@ import { fetchModalBoxHomePage, fetchPartnershipData, fetchPartnershipDataServic
 import { useEffect, useState } from 'react';
 import LoaderSpinner from '../components/common/loader-spinner/LoadingSpinner';
 import TopBanner from '../components/common/top-banner/TopBanner';
-import ContactUs from '../components/common/contact-us/ContactUs';
 import ServiceDataBlock from '../components/common/service-data-block/ServiceDataBlock';
 import PartnersBlock from '../components/common/partners-section/PartnersBlock';
 import ModelBox from '../components/model-box/ModelBox';
 import Head from 'next/head';
 import SimpleContactForm from '../components/common/contact-us/simple-contact-form/SimpleContactForm';
-// import CommonBlock from '@/app/components/common/common-blocks-division/CommonBlock'
-// import ContactUs from '@/app/components/common/contact-us/ContactUs';
-// import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
-// import Parterners from '@/app/components/common/partner-common-block/Parterners'
-// import TopBanner from '@/app/components/common/top-banner/TopBanner'
-// import React, { useEffect, useState } from 'react'
 
 interface PartnerShipData {
   get_in_touch: {
@@ -203,33 +196,20 @@ const Partnership = () => {
 
   useEffect(() => {
     if (partnershipData) {
-      // Set document title
       document.title = partnershipData?.seo?.metaTitle || "Default Title";
-  
-      // Select meta description tag
       let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-  
-      // If meta description doesn't exist, create it
       if (!metaDescription) {
         metaDescription = document.createElement("meta");
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
-      // Set content for the meta description
       metaDescription.content = partnershipData?.seo?.metaDescription || "Default description";
-  
-      // Select canonical link tag
       let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  
-      // If canonical link doesn't exist, create it
       if (!canonicalLink) {
         canonicalLink = document.createElement("link");
         canonicalLink.rel = "canonical";
         document.head.appendChild(canonicalLink);
       }
-  
-      // Set href for the canonical link
       canonicalLink.href = partnershipData?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [partnershipData]);
@@ -286,7 +266,6 @@ const Partnership = () => {
         serviceItemDescription='w-full flex flex-col gap-2 text-center'
         serviceHeding='lg:line-clamp-none text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
       />
-      {/* <ContactUs contactUsData={partnershipData?.get_in_touch} /> */}
       <SimpleContactForm contactUsData={partnershipData?.get_in_touch} />
       <ModelBox modalBoxData={modalBoxData} />
     </div>

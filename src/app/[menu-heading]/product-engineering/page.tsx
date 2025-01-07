@@ -5,9 +5,7 @@ import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import SectionInnerCarousel from '@/app/components/common/section-inner-carousel/SectionInnerCarousel'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from "next/navigation";
 import AITech from '@/app/components/common/ai-tech/AITech'
-import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
 import ModelBox from '@/app/components/model-box/ModelBox'
 import Head from 'next/head'
@@ -220,8 +218,6 @@ const ProductEngineering = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  const router = useRouter();
-
   const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
 
   useEffect(() => {
@@ -302,33 +298,20 @@ const ProductEngineering = () => {
 
   useEffect(() => {
     if (productEngineeringData) {
-      // Set document title
       document.title = productEngineeringData?.seo?.metaTitle || "Default Title";
-  
-      // Select meta description tag
       let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-  
-      // If meta description doesn't exist, create it
       if (!metaDescription) {
         metaDescription = document.createElement("meta");
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
-      // Set content for the meta description
       metaDescription.content = productEngineeringData?.seo?.metaDescription || "Default description";
-  
-      // Select canonical link tag
       let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  
-      // If canonical link doesn't exist, create it
       if (!canonicalLink) {
         canonicalLink = document.createElement("link");
         canonicalLink.rel = "canonical";
         document.head.appendChild(canonicalLink);
       }
-  
-      // Set href for the canonical link
       canonicalLink.href = productEngineeringData?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [productEngineeringData]);
@@ -396,7 +379,6 @@ const ProductEngineering = () => {
           buttonTitle={productEngineeringData?.latest_info?.button_text || ''}
           onButtonClick={productEngineeringData?.latest_info?.button_link || ''}
         />
-        {/* <ContactUs contactUsData = {productEngineeringData?.get_in_touch} /> */}
         <SimpleContactForm contactUsData={productEngineeringData?.get_in_touch} />
         <ModelBox modalBoxData={modalBoxData} />
     </div>

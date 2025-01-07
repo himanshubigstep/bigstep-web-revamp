@@ -1,12 +1,10 @@
 'use client'
-import { fetchHeaderData, fetchModalBoxHomePage, fetchRpaData, fetchRpaImplimentationSubSection, fetchRpaManagedSubSection, fetchRpaServiceHelp, fetchRpaTechnologiesused, fetchRpaTrustedPartner } from '@/api-data/api'
+import { fetchModalBoxHomePage, fetchRpaData, fetchRpaImplimentationSubSection, fetchRpaManagedSubSection, fetchRpaServiceHelp, fetchRpaTechnologiesused, fetchRpaTrustedPartner } from '@/api-data/api'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
 import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from "next/navigation";
 import AITech from '@/app/components/common/ai-tech/AITech'
-import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
 import ModelBox from '@/app/components/model-box/ModelBox'
 import Head from 'next/head'
@@ -213,8 +211,6 @@ const RPA = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  const router = useRouter();
-
   const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
 
   useEffect(() => {
@@ -323,33 +319,20 @@ const RPA = () => {
 
   useEffect(() => {
     if (rpaPageData) {
-      // Set document title
       document.title = rpaPageData?.seo?.metaTitle || "Default Title";
-  
-      // Select meta description tag
       let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-  
-      // If meta description doesn't exist, create it
       if (!metaDescription) {
         metaDescription = document.createElement("meta");
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
-      // Set content for the meta description
       metaDescription.content = rpaPageData?.seo?.metaDescription || "Default description";
-  
-      // Select canonical link tag
-      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  
-      // If canonical link doesn't exist, create it
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;// If canonical link doesn't exist, create it
       if (!canonicalLink) {
         canonicalLink = document.createElement("link");
         canonicalLink.rel = "canonical";
         document.head.appendChild(canonicalLink);
       }
-  
-      // Set href for the canonical link
       canonicalLink.href = rpaPageData?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [rpaPageData]);
@@ -415,7 +398,6 @@ const RPA = () => {
           buttonTitle={rpaPageData?.latest_info?.button_text || ''}
           onButtonClick={rpaPageData?.latest_info?.button_link || ''}
         />
-        {/* <ContactUs contactUsData = {rpaPageData?.get_in_touch} /> */}
         <SimpleContactForm contactUsData={rpaPageData?.get_in_touch} />
         <ModelBox modalBoxData={modalBoxData} />
     </div>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import InputField from '../input-fields/InputField';
 import { subscriberFormData } from '@/api-data/api';
 import LoaderSpinner from '../loader-spinner/LoadingSpinner';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface LatestInfo {
@@ -62,13 +62,11 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
             errors.email = 'Email is required';
             isValid = false;
         } else {
-            // Regex to validate email format
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailRegex.test(inputValue.email)) {
                 errors.email = 'Email is invalid';
                 isValid = false;
             } else {
-                // Additional check for multiple domain extensions
                 const domainPart = inputValue.email.split('@')[1];
                 const domainRegex = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 if (domainPart.split('.').length > 2 || !domainRegex.test(domainPart)) {
@@ -189,7 +187,6 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
                     {submitError && <p className='text-red-500 text-left absolute left-0 top-32'>{submitError}</p>}
                 </form>
             </div>
-            {/* <ToastContainer position="bottom-right" autoClose={5000} /> */}
         </div>
     );
 }

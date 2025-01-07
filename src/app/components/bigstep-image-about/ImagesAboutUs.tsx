@@ -70,11 +70,6 @@ const ImagesAboutUs = ({
                                 alt={item?.id}
                                 className={`w-full h-full object-cover rounded-2xl ${item.id === selectedImageId ? '' : 'filter grayscale'}`}
                             />
-                            {/* {item.id === selectedImageId && (
-                                <div className='absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-gray-500 bg-opacity-50 text-white text-md font-medium'>
-                                    {item?.attributes?.heading}
-                                </div>
-                            )} */}
                         </div>
                     ))}
                 </div>

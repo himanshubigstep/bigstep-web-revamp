@@ -52,8 +52,6 @@ const ModelBox = ({modalBoxData}: {modalBoxData: any}) => {
     };
 
     checkScreenSize();
-
-    // Handle resizing
     window.addEventListener('resize', checkScreenSize);
 
     return () => {
@@ -72,7 +70,6 @@ const ModelBox = ({modalBoxData}: {modalBoxData: any}) => {
             <div className='w-full flex lg:flex-row flex-col-reverse overflow-y-auto lg:p-8 p-4 gap-4 items-center'>
               <div className='lg:w-[50%] w-full h-full flex flex-col justify-center gap-8'>
                 <span className='text-3xl font-semibold'>{modalBoxData[0]?.attributes?.Modal_closing[0]?.label}</span>
-                {/* <h2 className='text-xl font-semibold text-blue-400'>{modalBoxData[0]?.attributes?.Modal_closing[0]?.heading}</h2> */}
                 <p className='text-lg font-normal'>{modalBoxData[0]?.attributes?.Modal_closing[0]?.description}</p>
                 <Button
                   text={modalBoxData[0]?.attributes?.Modal_closing[0]?.buttonText}

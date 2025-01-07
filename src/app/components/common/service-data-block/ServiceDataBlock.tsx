@@ -1,7 +1,5 @@
-import Image from 'next/image';
 import React from 'react';
 import Button from '../button/Button';
-import Link from 'next/link';
 
 const ServiceDataBlock = ({
     title,
@@ -38,7 +36,6 @@ const ServiceDataBlock = ({
     rpaPageManagedSubData?: [],
     serviceHeding?: string
 }) => {
-    // Sort the services by ID
     const sortedServices = services.sort((a: any, b: any) => a.id - b.id);
     return (
         <div className={mainContainerClass}>
@@ -79,9 +76,6 @@ const ServiceDataBlock = ({
                                     <p className='line-clamp-3 lg:line-clamp-none text-sm font-normal'>{item.description}</p>
                                 </li>
                             ))}
-                            {/* <div className={serviceItemDescription}>
-                                <p className='line-clamp-3 lg:line-clamp-none text-sm font-normal'>{item.description}</p>
-                            </div> */}
                             </ul>
                             <ul className='flex flex-col gap-4 list-disc lg:pl-8 pl-4'>
                                 {service.heading === "RPA Managed Services" &&
@@ -91,9 +85,6 @@ const ServiceDataBlock = ({
                                         <p className='line-clamp-3 lg:line-clamp-none text-sm font-normal'>{item.description}</p>
                                     </li>
                                 ))}
-                                {/* <div className={serviceItemDescription}>
-                                    <p className='line-clamp-3 lg:line-clamp-none text-sm font-normal'>{item.description}</p>
-                                </div> */}
                             </ul>
                     </div>
                 ))}

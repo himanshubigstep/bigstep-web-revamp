@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import InputField from '../../input-fields/InputField';
 import { contactFormData } from '@/api-data/api';
 import LoaderSpinner from '../../loader-spinner/LoadingSpinner';
@@ -53,13 +53,11 @@ const ContactFormSimple: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) 
             errors.business_mail = 'Business Mail is Required';
             isValid = false;
         } else {
-            // Regex for general email validation
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailRegex.test(formData.business_mail)) {
                 errors.business_mail = 'Business Mail is Invalid';
                 isValid = false;
             } else {
-                // Additional check for multiple domain extensions after @
                 const domainPart = formData.business_mail.split('@')[1];
                 if (domainPart && domainPart.split('.').length > 2) {
                     errors.business_mail = 'Invalid email format. Multiple domain extensions are not allowed.';

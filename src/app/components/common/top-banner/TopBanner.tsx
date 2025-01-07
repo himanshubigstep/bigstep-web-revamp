@@ -1,18 +1,8 @@
 'use client'
 import React from 'react'
-import Button from '../button/Button'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 const TopBanner = ({ bannerData, isBlog, isAboutUs }: { bannerData: any, isBlog?: boolean, isAboutUs?: boolean }) => {
-    const router = useRouter()
-    const handleClick = () => {
-        if (bannerData?.link) {
-            router.push(bannerData?.link)
-        } else {
-            console.log('No link provided')
-        }
-    }
     const imageUrl = bannerData?.backgroundImage?.data
         ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${bannerData?.backgroundImage?.data[0]?.attributes?.url}`
         : null;
@@ -34,11 +24,6 @@ const TopBanner = ({ bannerData, isBlog, isAboutUs }: { bannerData: any, isBlog?
                     <h2 className='lg:text-4xl md:text-3xl sm:text-lg text-lg font-semibold text-white'>{bannerData?.heading}</h2>
                     <p className='lg:text-xl md:text-lg sm:text-md text-sm font-normal text-white top-banner-desc'>{bannerData?.description}</p>
                     {bannerData?.buttonText &&
-                        // <Button
-                        //     onClick={handleClick}
-                        //     text={bannerData?.buttonText}
-                        //     className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
-                        // />
                         <Link href={bannerData?.link} passHref target='_self'
                             className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-lg text-md text-white font-normal'>
                             {bannerData?.buttonText}

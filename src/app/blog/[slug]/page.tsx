@@ -3,13 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { fetchBlogDetail, fetchBlogsData } from '@/api-data/api';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
-import BlogPageBanner from '@/app/components/common/blog-page-banner/BlogPageBanner';
-import NewsLetter from '@/app/components/common/news-letter/NewsLetter';
 import BlogAutor from '@/app/components/blog-detail-author/BlogAutor';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import RelatedBlogs from '@/app/components/related-blogs/RelatedBlogs';
-import Link from 'next/link';
 import Head from 'next/head';
 
 interface Author {
@@ -147,19 +144,16 @@ const BlogPostPage = () => {
         const fetchBlogData = async () => {
             try {
                 let allBlogsData: BlogData[] = [];
-                let serviceResponse = await fetchBlogsData(1); // Fetch the first page of blog data
+                let serviceResponse = await fetchBlogsData(1);
 
-                // Concatenate data from the first page
                 allBlogsData = allBlogsData.concat(serviceResponse?.data || []);
-
-                // Loop through and fetch remaining pages
                 while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
                     const nextPage = serviceResponse.meta.pagination.page + 1;
                     serviceResponse = await fetchBlogsData(nextPage);
                     allBlogsData = allBlogsData.concat(serviceResponse?.data || []);
                 }
 
-                setBlogData(allBlogsData); // Set all blog data in state
+                setBlogData(allBlogsData);
 
                 const blogSlug = Array.isArray(slug) ? slug[0] : slug;
                 const blogPost = allBlogsData.find(
@@ -211,41 +205,28 @@ const BlogPostPage = () => {
 
     useEffect(() => {
         if (blog) {
-            // Set document title
             document.title = blog?.attributes?.seo?.metaTitle || "Default Title";
-
-            // Select meta description tag
             let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-
-            // If meta description doesn't exist, create it
             if (!metaDescription) {
                 metaDescription = document.createElement("meta");
                 metaDescription.name = "description";
                 document.head.appendChild(metaDescription);
             }
-
-            // Set content for the meta description
             metaDescription.content = blog?.attributes?.seo?.metaDescription || "Default description";
-
-            // Select canonical link tag
             let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-
-            // If canonical link doesn't exist, create it
             if (!canonicalLink) {
                 canonicalLink = document.createElement("link");
                 canonicalLink.rel = "canonical";
                 document.head.appendChild(canonicalLink);
             }
-
-            // Set href for the canonical link
             canonicalLink.href = blog?.attributes?.seo?.canonicalURL || "default-canonical-url";
         }
     }, [blog]);
 
     useEffect(() => {
-      if (!loading) {
-        window.scrollTo(0, 0);
-      }
+        if (!loading) {
+            window.scrollTo(0, 0);
+        }
     }, [loading]);
 
     if (loading || !blog) {
@@ -259,7 +240,6 @@ const BlogPostPage = () => {
                 <meta name="title" content={blog?.attributes?.seo?.metaTitle || "Default description"} />
                 <meta name="description" content={blog?.attributes?.seo?.metaDescription || "Default Description"} />
             </Head>
-            {/* <BlogPageBanner bannerData={blog?.attributes} /> */}
             <div id='read-more-section' className='w-full h-full max-w-[1440px] mx-auto lg:py-16 py-6 flex lg:flex-row md:flex-row flex-col justify-between items-start lg:gap-8 gap-4 px-4'>
                 <div className='w-full lg:max-w-[70%] max-w-full h-full flex flex-col lg:justify-between lg:items-center gap-4 relative'>
                     <img
@@ -270,13 +250,7 @@ const BlogPostPage = () => {
                     <div className='w-full h-full flex flex-col justify-center items-start'>
                         <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold my-4'>{blog?.attributes?.heading}</h2>
                         <span className='flex justify-start items-center gap-4 mb-4'>
-                            {/* <img
-                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${blog?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url}`}
-                                alt={blog?.attributes?.author?.data?.attributes?.name}
-                                className='w-12 h-12 rounded-full border-[1px]'
-                            /> */}
                             <span className='flex flex-col justify-center items-start'>
-                                {/* <p className='lg:text-md md:text-sm sm:text-xs text-xs font-normal'>{blog?.attributes?.author?.data?.attributes?.name}</p> */}
                                 <p className='lg:text-lg md:text-md sm:text-sm text-xs font-semibold'>{`Published on : ${formatDate(blog?.attributes?.upload_date)}`}</p>
                             </span>
                         </span>
@@ -310,31 +284,6 @@ const BlogPostPage = () => {
                         related_blogs={blogPageData?.attributes?.related_blogs}
                         related_blogs_by_category={relatedBlogsByCategory}
                     />
-                    {/* <NewsLetter
-                        latest_info={blogPageData?.attributes?.latest_info}
-                        classNameOptional={true}
-                        formClass={true}
-                        isBanner={false}
-                    /> */}
-                    {/* <div className='w-full h-full flex flex-col gap-4 md:p-8 p-4 md:mt-16 mt-8 bg-blue-300 rounded-3xl'>
-                        <div className='w-full h-full flex flex-col gap-4'>
-                            <h2 className='text-3xl font-semibold'>Categories</h2>
-                            <div className='w-full h-full grid md:grid-cols-2 grid-cols-1 gap-2'>
-                                {blogData &&
-                                    // Step 1: Convert Set to array using Array.from()
-                                    Array.from(new Set(blogData.map((item: any) => item?.attributes?.category?.data?.attributes?.name))).map((categoryName: string, index: number) => (
-                                        <Link
-                                            href={`/category/${categoryName}`}
-                                            key={index}
-                                            className='w-full h-full flex p-4 rounded-lg bg-blue-400'
-                                        >
-                                            <p className='text-sm font-medium'>{categoryName}</p>
-                                        </Link>
-                                    ))
-                                }
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
             <BlogAutor authorBlog={blog?.attributes?.author?.data?.attributes} />

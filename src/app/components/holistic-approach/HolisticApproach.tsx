@@ -1,20 +1,12 @@
 'use client'
 import React from 'react'
-import bulb from '../../assets/bulb.png'
-import pencil from '../../assets/pencil.png'
-import code from '../../assets/code.png'
-import medal from '../../assets/medal.png'
-import rocket from '../../assets/rocket.png'
-import settings from '../../assets/settings.png'
-import Image from 'next/image'
 import Button from '../common/button/Button'
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 interface HolisticData {
     id: number;
     heading: string;
     description: string;
-    hex_code: string | null; // Allow hex_code to be null
+    hex_code: string | null;
     serviceLogo?: {
         data?: {
             attributes: {

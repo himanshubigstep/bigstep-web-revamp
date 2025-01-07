@@ -38,18 +38,14 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
 
   const toggleDropdown = (menu: any) => {
     if (menu.link) {
-      // If the menu item has a direct link, navigate to it and close the dropdown
       router.push(menu.link);
       handleLinkClick();
     } else {
-      // If the menu item has a dropdown, toggle it
       if (isDropdownOpen === menu.heading) {
-        // Close the dropdown if it's already open
         setDropdownOpen(null);
         setOpenSubmenus({});
         setSubmenuClicked({});
       } else {
-        // Open the dropdown and close other submenus
         setDropdownOpen((prev) => prev === menu.heading ? null : menu.heading);
         setOpenSubmenus((prev) => {
           const newSubmenus = { ...prev };
@@ -64,22 +60,17 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
         }));
       }
     }
-
-    // Open the mobile menu if it's not already open
     if (!isDropdownOpen) {
       setIsmobileMenu(true);
     }
   };
 
   const handleArrowClick = (menu: any) => {
-    // This function is triggered when the down arrow is clicked
     if (isDropdownOpen === menu.heading) {
-      // Close the dropdown if it's already open
       setDropdownOpen(null);
       setOpenSubmenus({});
       setSubmenuClicked({});
     } else {
-      // Open the dropdown
       setDropdownOpen(menu.heading);
       setOpenSubmenus((prev) => {
         const newSubmenus = { ...prev };
@@ -136,8 +127,6 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
         [key]: !prev[key],
       }));
     }
-
-    // Close the mobile menu after selecting a submenu item
     setIsmobileMenu(false);
   };
 
@@ -145,7 +134,7 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
     setDropdownOpen(null);
     setOpenSubmenus({});
     setSubmenuClicked({});
-    setIsmobileMenu(false); // Close the mobile menu when a link is clicked
+    setIsmobileMenu(false);
   };
 
   const toggelMobileMenu = () => {
@@ -154,11 +143,11 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
 
   useEffect(() => {
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth <= 768); // Assuming 768px as the mobile breakpoint
+      setIsMobile(window.innerWidth <= 768);
     };
 
     checkIfMobile();
-    window.addEventListener("resize", checkIfMobile);  // Listen for window resize to update state
+    window.addEventListener("resize", checkIfMobile);
 
     return () => {
       window.removeEventListener("resize", checkIfMobile);
@@ -306,9 +295,9 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
                         return (
                           <li key={submenu.id} className="relative flex flex-col lg:w-full">
                             <Link
-                              href={submenu.item_link || "#"}  // If there's a link, navigate to it; otherwise, stay at the current page
+                              href={submenu.item_link || "#"}
                               onClick={(e) => {
-                                e.preventDefault(); // Prevent default navigation behavior
+                                e.preventDefault();
                                 toggleSubmenu(
                                   submenu.item,
                                   submenu.item_link,
@@ -372,12 +361,6 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
             ? 'bg-transparent text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white hover:border-transparent'
             : 'bg-transparent text-white border-white hover:bg-white hover:text-blue-500 hover:border-blue-500')}`}
       >
-
-        {/* <Button
-          onClick={handelContactUs}
-          text={lastItemData?.item}
-          className="text-md font-medium"
-        /> */}
         <Link href={lastItemData?.item_link || '#'} passHref>
           {lastItemData?.item}
         </Link>

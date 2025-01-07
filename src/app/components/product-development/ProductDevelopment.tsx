@@ -12,7 +12,6 @@ const ProductDevelopment = ({ developmentData }: { developmentData: any }) => {
                 />
                 <div className='relative w-full flex flex-col justify-center items-center text-center'>
                     <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold text-center mb-4 text-white'>{developmentData?.why_choose?.heading}</h2>
-                    {/* <p className='text-lg text-white'>Our process integrates multiple disciplines into a cohesive workflow to deliver a complete, high-quality product.</p> */}
                 </div>
                 <div className='relative w-full max-w-[1440px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 lg:mt-8 mt-4'>
                     {productDevelopmentData && productDevelopmentData.map((item: any, index: number) => (

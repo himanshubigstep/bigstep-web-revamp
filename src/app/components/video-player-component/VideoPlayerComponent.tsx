@@ -14,7 +14,6 @@ const VideoPlayerComponent = ({ videoSectionData }: { videoSectionData: any }) =
                 </div>
             </div>
             <div className='relative w-full max-w-[1440px] mx-auto lg:mt-16 mt-8 rounded-2xl'>
-                {/* Embed YouTube video using iframe */}
                 <video className='w-full h-full rounded-2xl' controls title={videoSectionData?.images?.data?.attributes?.name}>
                     <source
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${videoSectionData?.images?.data?.attributes?.url}`}

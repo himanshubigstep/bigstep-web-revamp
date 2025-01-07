@@ -60,11 +60,6 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
             <div className={`lg:w-1/2 md:w-1/2 sm:w-[80%] w-full h-full flex flex-col justify-center items-start transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}>
                 <h2 className="lg:text-4xl md:text-3xl sm:text-md text-md lg:mb-4 md:mb-4 sm:mb-2 mb-2 font-medium">{slide.attributes.title}</h2>
                 <p className="lg:mb-8 md:mb-4 sm:mb-2 mb-2 lg:text-lg md:text-md sm:text-sm text-sm font-normal leading-normal">{slide.attributes.text_body}</p>
-                {/* <Button
-                    text={slide.attributes.button_text}
-                    className="lg:text-md text-xs bg-blue-500 hover:bg-blue-800 text-white lg:py-4 lg:px-4 md:py-4 md:px-4 px-4 py-2 rounded-xl w-auto font-medium"
-                    onClick={() => window.open(slide.attributes.button_link, '_blank')}
-                /> */}
                 <Link href={slide.attributes.button_link} passHref target='_self'
                     className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-lg text-md text-white font-normal'>
                     {slide.attributes.button_text}

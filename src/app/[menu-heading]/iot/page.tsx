@@ -4,9 +4,7 @@ import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner
 import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from "next/navigation";
 import AITech from '@/app/components/common/ai-tech/AITech'
-import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
 import Head from 'next/head'
 import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm'
@@ -186,8 +184,6 @@ const InternetOfThings = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  const router = useRouter();
-
   useEffect(() => {
     const fetchInternetOfThingsPage = async () => {
       try {
@@ -250,33 +246,20 @@ const InternetOfThings = () => {
 
   useEffect(() => {
     if (internetOfThingsPageData) {
-      // Set document title
       document.title = internetOfThingsPageData?.seo?.metaTitle || "Default Title";
-  
-      // Select meta description tag
       let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-  
-      // If meta description doesn't exist, create it
       if (!metaDescription) {
         metaDescription = document.createElement("meta");
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
-      // Set content for the meta description
       metaDescription.content = internetOfThingsPageData?.seo?.metaDescription || "Default description";
-  
-      // Select canonical link tag
       let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  
-      // If canonical link doesn't exist, create it
       if (!canonicalLink) {
         canonicalLink = document.createElement("link");
         canonicalLink.rel = "canonical";
         document.head.appendChild(canonicalLink);
       }
-  
-      // Set href for the canonical link
       canonicalLink.href = internetOfThingsPageData?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [internetOfThingsPageData]);
@@ -341,7 +324,6 @@ const InternetOfThings = () => {
           buttonTitle={internetOfThingsPageData?.latest_info?.button_text || ''}
           onButtonClick={internetOfThingsPageData?.latest_info?.button_link || ''}
         />
-        {/* <ContactUs contactUsData = {internetOfThingsPageData?.get_in_touch} /> */}
         <SimpleContactForm contactUsData={internetOfThingsPageData?.get_in_touch} />
     </div>
   )

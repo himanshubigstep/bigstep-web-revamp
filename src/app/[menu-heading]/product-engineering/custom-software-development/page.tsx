@@ -2,7 +2,6 @@
 import { fetchCustomerSoftwareDevelopmentChooseUs, fetchCustomerSoftwareDevelopmentData, fetchcustomerSoftwareDevelopmentTech, fetchModalBoxHomePage } from '@/api-data/api';
 import AITech from '@/app/components/common/ai-tech/AITech';
 import Clients from '@/app/components/common/clients/Clients';
-import ContactUs from '@/app/components/common/contact-us/ContactUs';
 import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
@@ -10,7 +9,6 @@ import ServiceDataBlock from '@/app/components/common/service-data-block/Service
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import ModelBox from '@/app/components/model-box/ModelBox';
 import Head from 'next/head';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 interface CustomerSoftwareDevelopmentPageData {
@@ -154,8 +152,6 @@ const CustomerSoftwareDevelopment = () => {
   const [customerSoftwareDevelopmentChooseUs, setCustomerSoftwareDevelopmentChooseUs] = useState<any>([]);
   const [customerSoftwareDevelopmentTechData, setCustomerSoftwareDevelopmenttechData] = useState<any>([]);
 
-  const router = useRouter();
-
   const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
 
   useEffect(() => {
@@ -223,33 +219,20 @@ const CustomerSoftwareDevelopment = () => {
 
   useEffect(() => {
     if (customerSoftwareDevelopmentData) {
-      // Set document title
       document.title = customerSoftwareDevelopmentData?.seo?.metaTitle || "Default Title";
-  
-      // Select meta description tag
       let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-  
-      // If meta description doesn't exist, create it
       if (!metaDescription) {
         metaDescription = document.createElement("meta");
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
-      // Set content for the meta description
       metaDescription.content = customerSoftwareDevelopmentData?.seo?.metaDescription || "Default description";
-  
-      // Select canonical link tag
       let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  
-      // If canonical link doesn't exist, create it
       if (!canonicalLink) {
         canonicalLink = document.createElement("link");
         canonicalLink.rel = "canonical";
         document.head.appendChild(canonicalLink);
       }
-  
-      // Set href for the canonical link
       canonicalLink.href = customerSoftwareDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [customerSoftwareDevelopmentData]);
@@ -305,7 +288,6 @@ const CustomerSoftwareDevelopment = () => {
         bgImage={customerSoftwareDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${customerSoftwareDevelopmentData.client_reviews?.background_image.data.attributes.formats.large.url}` : ''}
       />
       <div className='w-full h-full lg:pt-16 pt-8'>
-        {/* <ContactUs contactUsData={customerSoftwareDevelopmentData?.get_in_touch || []} /> */}
         <SimpleContactForm contactUsData={customerSoftwareDevelopmentData?.get_in_touch || []} />
       </div>
       <ModelBox modalBoxData={modalBoxData} />

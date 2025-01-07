@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchBlogsData } from '@/api-data/api';
 import { useRouter } from 'next/navigation';
-import Button from '../button/Button';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -92,7 +91,6 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                         >
                             <div
                                 className="w-full flex flex-col items-start rounded-lg gap-8 cursor-pointer"
-                            // onClick={() => handleItemClick(firstItem?.attributes?.slug)}
                             >
                                 <div className="w-full flex flex-col justify-center items-start rounded-lg">
                                     <img
@@ -106,28 +104,6 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                                     <h2 className="text-black dark:text-white lg:text-xl md:text-lg sm:text-md text-sm font-medium mb-4">
                                         {firstItem?.attributes?.heading}
                                     </h2>
-                                    {/* <h4 className="text-black dark:text-white lg:text-md md:text-sm sm:text-xs text-xs font-normal lg:line-clamp-6 line-clamp-2 break-all">
-                                        <ReactMarkdown
-                                            remarkPlugins={[remarkGfm]}
-                                            components={{
-                                                h2: ({ children }) => <h2 className="lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold my-4">{children}</h2>,
-                                                h3: ({ children }) => <h3 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold my-3">{children}</h3>,
-                                                p: ({ children }) => <p className="mb-4">{children}</p>,
-                                                ul: ({ children }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
-                                                li: ({ children }) => <li className="mb-2">{children}</li>,
-                                                a: ({ href, children }) => {
-                                                    if (href && href.includes("mailto:")) {
-                                                        return (
-                                                            <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>
-                                                        );
-                                                    }
-                                                    return <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>;
-                                                }
-                                            }}
-                                        >
-                                            {firstItem?.attributes?.description || ''}
-                                        </ReactMarkdown>
-                                    </h4> */}
                                     <div className='lg:text-xl md:text-lg sm:text-md text-sm font-normal w-full lg:line-clamp-5 line-clamp-2'>
                                         <ReactMarkdown
                                             remarkPlugins={[remarkGfm]}
@@ -171,7 +147,6 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                                     >
                                         <div
                                             className="w-full h-full flex lg:flex-row flex-col lg:justify-between items-center rounded-lg gap-4 cursor-pointer"
-                                        // onClick={() => handleItemClick(item?.attributes?.slug)}
                                         >
                                             <div className="lg:w-[25%] w-full h-auto lg:h-auto flex justify-center items-center rounded-lg">
                                                 <img
@@ -194,11 +169,6 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                             </div>
                         )}
                         {buttonTitle && onButtonClick && (
-                            // <Button
-                            //     onClick={() => router.push(`${onButtonClick}`)}
-                            //     text={buttonTitle}
-                            //     className='text-white bg-blue-500 hover:bg-blue-800 py-4 rounded-xl w-[180px]'
-                            // />
                             <Link href={onButtonClick} passHref target='_self'
 
                                 className='text-white bg-blue-500 hover:bg-blue-800 py-4 rounded-xl w-[180px] text-center lg:text-lg md:text-lg'>

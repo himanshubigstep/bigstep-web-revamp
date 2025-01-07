@@ -112,19 +112,6 @@ const CultureTopSlider: React.FC<SlideShowTextProps> = ({ slides = [] }) => {
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />
                 ))}
             </div>
-
-            {/* <div className="absolute z-20 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                {sortedSlides.map((slide, index) => (
-                    <button
-                        key={slide.id}
-                        type="button"
-                        className={`rounded-full ${index === currentSlideIndex ? 'bg-blue-500 w-10 h-4 border-[1px] border-white' : 'bg-gray-300 w-4 h-4 border-[1px] border-transparent'}`}
-                        aria-current={index === currentSlideIndex}
-                        aria-label={`Slide ${slide.id}`}
-                        onClick={() => handleSlideChange(index)}
-                    />
-                ))}
-            </div> */}
         </div>
     );
 };

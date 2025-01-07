@@ -57,13 +57,11 @@ const Footer = () => {
       errors.email = 'Email is required';
       isValid = false;
     } else {
-      // Regex to validate email format
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailRegex.test(inputValue.email)) {
         errors.email = 'Email is invalid';
         isValid = false;
       } else {
-        // Additional check for multiple domain extensions
         const domainPart = inputValue.email.split('@')[1];
         const domainRegex = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (domainPart.split('.').length > 2 || !domainRegex.test(domainPart)) {
@@ -141,7 +139,7 @@ const Footer = () => {
   }, []);
 
   if (!footerData) {
-    return <LoaderSpinner />;  // Avoid returning `null`, show a loading spinner instead
+    return <LoaderSpinner />;
   }
 
   const { attributes } = footerData;
@@ -160,7 +158,6 @@ const Footer = () => {
         <div className='relative flex lg:flex-row flex-col items-center justify-evenly mb-8 w-full mx-auto border-b-[1px] border-gray-500 pb-8 max-w-[1440px]'>
           <div className='lg:w-[35%] w-full lg:mb-0 mb-4'>
             <h2 className='lg:text-4xl md:text-3xl sm:text-lg text-lg font-semibold text-white capitalize'>Sign up for our newsletter</h2>
-            {/* <p className='lg:text-xl md:text-lg sm:text-md text-sm font-normal text-white top-banner-desc'>Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email.</p> */}
           </div>
           <form onSubmit={handelSubscription} className='flex lg:flex-row flex-col gap-4 lg:w-1/2 w-full'>
             <InputField

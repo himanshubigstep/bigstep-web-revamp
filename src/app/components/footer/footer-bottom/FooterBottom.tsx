@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-import { FaInstagram } from "react-icons/fa";
-import { FaLinkedinIn } from "react-icons/fa";
 
 interface FooterBottomProps {
     attributes: {

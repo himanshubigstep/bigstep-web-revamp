@@ -1,6 +1,5 @@
 'use client'
-import { fetchAwsConsultingDevelopmentBenifits, fetchAwsConsultingDevelopmentData, fetchAwsConsultingDevelopmentFeatures, fetchAwsConsultingDevelopmentTechData, fetchHeaderData } from '@/api-data/api';
-import ContactUs from '@/app/components/common/contact-us/ContactUs';
+import { fetchAwsConsultingDevelopmentBenifits, fetchAwsConsultingDevelopmentData, fetchAwsConsultingDevelopmentFeatures, fetchAwsConsultingDevelopmentTechData } from '@/api-data/api';
 import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
@@ -126,212 +125,149 @@ interface AwsConsultingDevelopmentData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 const AwsConsultingDevelopment = () => {
-    const [loading, setLoading] = useState<boolean>(true);
-    const [awsConsultingDevelopmentData, setAwsConsultingDevelopmentData] = useState<AwsConsultingDevelopmentData | null>(null)
-    const [awsConsultingDevelopmentFeaturesData, setAwsConsultingDevelopmentFeaturesData] = useState<any>([]);
-    const [awsConsultingDevelopmentTechData, setAwsConsultingDevelopmentTechData] = useState<any>([]);
-    const [awsConsultingDevelopmentBenifitsData, setAwsConsultingDevelopmentbenifitsData] = useState<any>([]);
-  
-    const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
-  
-    const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [awsConsultingDevelopmentData, setAwsConsultingDevelopmentData] = useState<AwsConsultingDevelopmentData | null>(null)
+  const [awsConsultingDevelopmentFeaturesData, setAwsConsultingDevelopmentFeaturesData] = useState<any>([]);
+  const [awsConsultingDevelopmentTechData, setAwsConsultingDevelopmentTechData] = useState<any>([]);
+  const [awsConsultingDevelopmentBenifitsData, setAwsConsultingDevelopmentbenifitsData] = useState<any>([]);
 
-    useEffect(() => {
-        const fetchHeaderDataResponse = async () => {
-          try {
-            const response = await fetchHeaderData();
-            setHeaderDataLink(response);
-          } catch (error) {
-            console.log(error);
-            return null;
-          }
-        }
-    
-        fetchHeaderDataResponse();
-      }, [])
-      
-      useEffect(() => {
-        const fetchAwsConsultingDevelopmentDataResponse = async () => {
-          try {
-            const response = await fetchAwsConsultingDevelopmentData();
-            setAwsConsultingDevelopmentData(response.attributes)
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchAwsConsultingDevelopmentDataResponse();
-      }, []);
+  const router = useRouter();
 
-      useEffect(() => {
-        const awsConsultingDevelopmentFeaturesData = async () => {
-          try {
-            const response = await fetchAwsConsultingDevelopmentFeatures();
-            setAwsConsultingDevelopmentFeaturesData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        awsConsultingDevelopmentFeaturesData();
-      }, [])
-
-      useEffect(() => {
-        const awsConsultingDevelopmentTechData = async () => {
-          try {
-            const response = await fetchAwsConsultingDevelopmentTechData();
-            setAwsConsultingDevelopmentTechData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        awsConsultingDevelopmentTechData();
-      }, [])
-
-      useEffect(() => {
-        const awsConsultingDevelopmentBenifits = async () => {
-          try {
-            const response = await fetchAwsConsultingDevelopmentBenifits();
-            setAwsConsultingDevelopmentbenifitsData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        awsConsultingDevelopmentBenifits();
-      }, [])
-
-      useEffect(() => {
-        if (awsConsultingDevelopmentData) {
-          // Set document title
-          document.title = awsConsultingDevelopmentData?.seo?.metaTitle || "Default Title";
-      
-          // Select meta description tag
-          let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-      
-          // If meta description doesn't exist, create it
-          if (!metaDescription) {
-            metaDescription = document.createElement("meta");
-            metaDescription.name = "description";
-            document.head.appendChild(metaDescription);
-          }
-      
-          // Set content for the meta description
-          metaDescription.content = awsConsultingDevelopmentData?.seo?.metaDescription || "Default description";
-      
-          // Select canonical link tag
-          let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-      
-          // If canonical link doesn't exist, create it
-          if (!canonicalLink) {
-            canonicalLink = document.createElement("link");
-            canonicalLink.rel = "canonical";
-            document.head.appendChild(canonicalLink);
-          }
-      
-          // Set href for the canonical link
-          canonicalLink.href = awsConsultingDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
-        }
-      }, [awsConsultingDevelopmentData]);
-
-      useEffect(() => {
-        if (!loading) {
-          window.scrollTo(0, 0);
-        }
-      }, [loading]);
-    
-      if (loading) {
-        return <LoaderSpinner />;
+  useEffect(() => {
+    const fetchAwsConsultingDevelopmentDataResponse = async () => {
+      try {
+        const response = await fetchAwsConsultingDevelopmentData();
+        setAwsConsultingDevelopmentData(response.attributes)
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-      
+    };
+
+    fetchAwsConsultingDevelopmentDataResponse();
+  }, []);
+
+  useEffect(() => {
+    const awsConsultingDevelopmentFeaturesData = async () => {
+      try {
+        const response = await fetchAwsConsultingDevelopmentFeatures();
+        setAwsConsultingDevelopmentFeaturesData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    awsConsultingDevelopmentFeaturesData();
+  }, [])
+
+  useEffect(() => {
+    const awsConsultingDevelopmentTechData = async () => {
+      try {
+        const response = await fetchAwsConsultingDevelopmentTechData();
+        setAwsConsultingDevelopmentTechData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    awsConsultingDevelopmentTechData();
+  }, [])
+
+  useEffect(() => {
+    const awsConsultingDevelopmentBenifits = async () => {
+      try {
+        const response = await fetchAwsConsultingDevelopmentBenifits();
+        setAwsConsultingDevelopmentbenifitsData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    awsConsultingDevelopmentBenifits();
+  }, [])
+
+  useEffect(() => {
+    if (awsConsultingDevelopmentData) {
+      document.title = awsConsultingDevelopmentData?.seo?.metaTitle || "Default Title";
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.content = awsConsultingDevelopmentData?.seo?.metaDescription || "Default description";
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.href = awsConsultingDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [awsConsultingDevelopmentData]);
+
+  useEffect(() => {
+    if (!loading) {
+      window.scrollTo(0, 0);
+    }
+  }, [loading]);
+
+  if (loading) {
+    return <LoaderSpinner />;
+  }
+
   return (
     <div className='poppins'>
-        <Head>
-          <link rel="canonical" href={awsConsultingDevelopmentData?.seo?.canonicalURL || "default-canonical-url"} />
-          <meta name="title" content={awsConsultingDevelopmentData?.seo?.metaTitle || "Default description"} />
-          <meta name="description" content={awsConsultingDevelopmentData?.seo?.metaDescription || "Default Description"} />
-        </Head>
-        <TopBanner bannerData={awsConsultingDevelopmentData?.introduction} />
-        <ServiceDataBlock
-          title={awsConsultingDevelopmentData?.engaging_streaming_experience?.heading || ''}
-          description={awsConsultingDevelopmentData?.engaging_streaming_experience?.description || ''}
-          services={awsConsultingDevelopmentFeaturesData[0]?.attributes?.service_data || []}
-          showButton={false}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
-          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
-          serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/3 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex flex-col gap-4 items-center'
-          serviceItemDescription='w-full text-center md:text-center sm:text-center text-left flex flex-col gap-2'
-          serviceHeding='lg:line-clamp-none text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
-        />
-        <Parterners
-          title={awsConsultingDevelopmentData?.cutting_edge_technologies?.heading || ''}
-          description={awsConsultingDevelopmentData?.cutting_edge_technologies?.description || ''}
-          buttonText={awsConsultingDevelopmentData?.cutting_edge_technologies?.button_text || ''}
-          buttonLink={awsConsultingDevelopmentData?.cutting_edge_technologies?.button_link || ''}
-          techData={awsConsultingDevelopmentTechData || []}
-          bgImage={awsConsultingDevelopmentData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
-        />
-        <ServiceDataBlock
-          title={awsConsultingDevelopmentData?.transformative_benefits?.heading || ''}
-          description={awsConsultingDevelopmentData?.transformative_benefits?.description || ''}
-          services={awsConsultingDevelopmentBenifitsData[0]?.attributes?.service_data || []}
-          showButton={true}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
-          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
-          serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex lg:flex-row md:flex-row sm:flex-row flex-col items-center'
-          serviceItemDescription='w-full text-left flex flex-col gap-2'
-          serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
-          buttonText={awsConsultingDevelopmentData?.transformative_benefits?.button_text || ''}
-        />
-        {/* <ContactUs contactUsData = {awsConsultingDevelopmentData?.get_in_touch || []} /> */}
-        <SimpleContactForm contactUsData = {awsConsultingDevelopmentData?.get_in_touch || []} />
+      <Head>
+        <link rel="canonical" href={awsConsultingDevelopmentData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="title" content={awsConsultingDevelopmentData?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={awsConsultingDevelopmentData?.seo?.metaDescription || "Default Description"} />
+      </Head>
+      <TopBanner bannerData={awsConsultingDevelopmentData?.introduction} />
+      <ServiceDataBlock
+        title={awsConsultingDevelopmentData?.engaging_streaming_experience?.heading || ''}
+        description={awsConsultingDevelopmentData?.engaging_streaming_experience?.description || ''}
+        services={awsConsultingDevelopmentFeaturesData[0]?.attributes?.service_data || []}
+        showButton={false}
+        mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
+        headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+        serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+        serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/3 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconHeader='w-full flex flex-col gap-4 items-center'
+        serviceItemDescription='w-full text-center md:text-center sm:text-center text-left flex flex-col gap-2'
+        serviceHeding='lg:line-clamp-none text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
+      />
+      <Parterners
+        title={awsConsultingDevelopmentData?.cutting_edge_technologies?.heading || ''}
+        description={awsConsultingDevelopmentData?.cutting_edge_technologies?.description || ''}
+        buttonText={awsConsultingDevelopmentData?.cutting_edge_technologies?.button_text || ''}
+        buttonLink={awsConsultingDevelopmentData?.cutting_edge_technologies?.button_link || ''}
+        techData={awsConsultingDevelopmentTechData || []}
+        bgImage={awsConsultingDevelopmentData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
+      />
+      <ServiceDataBlock
+        title={awsConsultingDevelopmentData?.transformative_benefits?.heading || ''}
+        description={awsConsultingDevelopmentData?.transformative_benefits?.description || ''}
+        services={awsConsultingDevelopmentBenifitsData[0]?.attributes?.service_data || []}
+        showButton={true}
+        mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
+        headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+        serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+        serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconHeader='w-full flex lg:flex-row md:flex-row sm:flex-row flex-col items-center'
+        serviceItemDescription='w-full text-left flex flex-col gap-2'
+        serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
+        buttonText={awsConsultingDevelopmentData?.transformative_benefits?.button_text || ''}
+      />
+      <SimpleContactForm contactUsData={awsConsultingDevelopmentData?.get_in_touch || []} />
     </div>
   )
 }

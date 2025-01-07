@@ -1,6 +1,5 @@
 'use client'
-import { fetchDocumentSummarizationsBenifits, fetchDocumentSummarizationsData, fetchDocumentSummarizationsFeatures, fetchDocumentSummarizationsTechData, fetchHeaderData } from '@/api-data/api';
-import ContactUs from '@/app/components/common/contact-us/ContactUs';
+import { fetchDocumentSummarizationsBenifits, fetchDocumentSummarizationsData, fetchDocumentSummarizationsFeatures, fetchDocumentSummarizationsTechData } from '@/api-data/api';
 import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
@@ -126,39 +125,6 @@ interface DocumentSummarizationsData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 const DocumentSummarizationInteligence = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [documentSummarizationsData, setDocumentSummarizationsData] = useState<DocumentSummarizationsData | null>(null)
@@ -166,23 +132,7 @@ const DocumentSummarizationInteligence = () => {
     const [documentSummarizationsTechData, setDocumentSummarizationsTechData] = useState<any>([]);
     const [documentSummarizationsBenifitsData, setDocumentSummarizationsbenifitsData] = useState<any>([]);
   
-    const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
-  
     const router = useRouter();
-
-    useEffect(() => {
-        const fetchHeaderDataResponse = async () => {
-          try {
-            const response = await fetchHeaderData();
-            setHeaderDataLink(response);
-          } catch (error) {
-            console.log(error);
-            return null;
-          }
-        }
-    
-        fetchHeaderDataResponse();
-      }, [])
       
       useEffect(() => {
         const fetchDocumentSummarizationsDataResponse = async () => {
@@ -246,33 +196,20 @@ const DocumentSummarizationInteligence = () => {
 
       useEffect(() => {
         if (documentSummarizationsData) {
-          // Set document title
           document.title = documentSummarizationsData?.seo?.metaTitle || "Default Title";
-      
-          // Select meta description tag
           let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-      
-          // If meta description doesn't exist, create it
           if (!metaDescription) {
             metaDescription = document.createElement("meta");
             metaDescription.name = "description";
             document.head.appendChild(metaDescription);
           }
-      
-          // Set content for the meta description
           metaDescription.content = documentSummarizationsData?.seo?.metaDescription || "Default description";
-      
-          // Select canonical link tag
           let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-      
-          // If canonical link doesn't exist, create it
           if (!canonicalLink) {
             canonicalLink = document.createElement("link");
             canonicalLink.rel = "canonical";
             document.head.appendChild(canonicalLink);
           }
-      
-          // Set href for the canonical link
           canonicalLink.href = documentSummarizationsData?.seo?.canonicalURL || "default-canonical-url";
         }
       }, [documentSummarizationsData]);
@@ -330,7 +267,6 @@ const DocumentSummarizationInteligence = () => {
           serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
           buttonText={documentSummarizationsData?.transformative_benefits?.button_text || ''}
         />
-        {/* <ContactUs contactUsData = {documentSummarizationsData?.get_in_touch || []} /> */}
         <SimpleContactForm contactUsData = {documentSummarizationsData?.get_in_touch || []} />
     </div>
   )

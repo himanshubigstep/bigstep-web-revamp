@@ -36,7 +36,6 @@ const OurValues = ({ valuesData }: { valuesData: any }) => {
                                         </div>
                                         <div className='w-full max-w-[80%] flex flex-col justify-center items-center'>
                                             <h2 className='lg:text-2xl md:text-xl sm:text-lg text-md text-center font-semibold mb-2 text-white line-clamp-2'>{value?.link}</h2>
-                                            {/* <p className='text-lg text-left font-normal text-white'>{value.description}</p> */}
                                         </div>
                                     </div>
                                 ))}

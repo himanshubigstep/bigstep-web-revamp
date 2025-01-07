@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { fetchOffShoreDevelopmentData, fetchOffShoreDevelopmentHolisticApproach } from '@/api-data/api'
 import Clients from '@/app/components/common/clients/Clients'
-import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
@@ -206,33 +205,20 @@ const OffShoreDevelopment = () => {
 
     useEffect(() => {
       if (offShoreProductDevelopmentData) {
-        // Set document title
         document.title = offShoreProductDevelopmentData?.seo?.metaTitle || "Default Title";
-    
-        // Select meta description tag
         let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-    
-        // If meta description doesn't exist, create it
         if (!metaDescription) {
           metaDescription = document.createElement("meta");
           metaDescription.name = "description";
           document.head.appendChild(metaDescription);
         }
-    
-        // Set content for the meta description
         metaDescription.content = offShoreProductDevelopmentData?.seo?.metaDescription || "Default description";
-    
-        // Select canonical link tag
         let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-    
-        // If canonical link doesn't exist, create it
         if (!canonicalLink) {
           canonicalLink = document.createElement("link");
           canonicalLink.rel = "canonical";
           document.head.appendChild(canonicalLink);
         }
-    
-        // Set href for the canonical link
         canonicalLink.href = offShoreProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
       }
     }, [offShoreProductDevelopmentData]);
@@ -271,7 +257,6 @@ const OffShoreDevelopment = () => {
               bgImage={offShoreProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${offShoreProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
           />
         </div>
-        {/* <ContactUs contactUsData = {offShoreProductDevelopmentData?.client_query || []} /> */}
         <div className='w-full h-full lg:mt-16 md:mt-16 mt-8'>
           <SimpleContactForm contactUsData={offShoreProductDevelopmentData?.client_query || []} />
         </div>

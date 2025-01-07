@@ -63,13 +63,6 @@ const CultureServiceBlock = ({
 
     return (
         <div className={`${containerClassName}`}>
-            {/* <div className='absolute top-0 bottom-0 left-0 right-0 w-full flex justify-center items-center text-center py-8'>
-                <Image
-                    src={BigsteLogo}
-                    alt='image'
-                    className={`${logoClassName}`}
-                />
-            </div> */}
             <div className='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'>
                 <h2 className={`${titleClassName}`}>{title}</h2>
                 {description &&
@@ -98,7 +91,6 @@ const CultureServiceBlock = ({
             {isMobile && (
                 <div className='relative flex justify-between items-center mt-8'>
                     <button onClick={handlePrevious} disabled={currentPage === 1} className={`${buttonClassName}`}>&lt;</button>
-                    {/* <span>Page {currentPage} of {totalPages}</span> */}
                     <button onClick={handleNext} disabled={currentPage === totalPages} className={`${buttonClassName}`}>&gt;</button>
               </div>
             )}

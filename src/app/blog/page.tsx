@@ -3,8 +3,6 @@ import { fetchBlogsData, fetchBlogsPageData } from '@/api-data/api';
 import React, { useEffect, useState } from 'react'
 import LoaderSpinner from '../components/common/loader-spinner/LoadingSpinner';
 import TopBanner from '../components/common/top-banner/TopBanner';
-import NewsLetter from '../components/common/news-letter/NewsLetter';
-import AITech from '../components/common/ai-tech/AITech';
 import BlogsGrid from '../components/blogs-grid/BlogsGrid';
 import Head from 'next/head';
 
@@ -52,9 +50,9 @@ interface BlogDataProps {
     category: Category;
     image: Image;
     seo: {
-        metaTitle: string;
-        metaDescription: string;
-        canonicalURL: string;
+      metaTitle: string;
+      metaDescription: string;
+      canonicalURL: string;
     }
   }
 }
@@ -113,19 +111,12 @@ const Blogs = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-
-        // Fetch the page data (static)
         const pageData = await fetchBlogsPageData();
         setBlogPageData(pageData);
-
-        // Fetch all blog data with pagination
         let allBlogsData: BlogDataProps[] = [];
-        let serviceResponse = await fetchBlogsData(1); // Start from the first page
+        let serviceResponse = await fetchBlogsData(1);
 
-        // Push the first page's data
         allBlogsData = allBlogsData.concat(serviceResponse?.data || []);
-
-        // Loop through and fetch remaining pages
         while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
           const nextPage = serviceResponse.meta.pagination.page + 1;
           serviceResponse = await fetchBlogsData(nextPage);
@@ -145,33 +136,20 @@ const Blogs = () => {
 
   useEffect(() => {
     if (blogPageData) {
-      // Set document title
       document.title = blogPageData?.attributes?.seo?.metaTitle || "Default Title";
-  
-      // Select meta description tag
       let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-  
-      // If meta description doesn't exist, create it
       if (!metaDescription) {
         metaDescription = document.createElement("meta");
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
-      // Set content for the meta description
       metaDescription.content = blogPageData?.attributes?.seo?.metaDescription || "Default description";
-  
-      // Select canonical link tag
       let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-  
-      // If canonical link doesn't exist, create it
       if (!canonicalLink) {
         canonicalLink = document.createElement("link");
         canonicalLink.rel = "canonical";
         document.head.appendChild(canonicalLink);
       }
-  
-      // Set href for the canonical link
       canonicalLink.href = blogPageData?.attributes?.seo?.canonicalURL || "default-canonical-url";
     }
   }, [blogPageData]);
@@ -201,7 +179,7 @@ const Blogs = () => {
         }
       }
     });
-    
+
     return Array.from(uniqueCategoriesMap.values());
   };
 
@@ -213,12 +191,6 @@ const Blogs = () => {
         <meta name="description" content={blogPageData?.attributes?.seo?.metaDescription || "Default Description"} />
       </Head>
       <TopBanner bannerData={blogPageData?.attributes?.intro[0]} isBlog={true} />
-      {/* <NewsLetter latest_info={blogPageData?.attributes?.latest_info} /> */}
-      {/* <AITech
-        bannerTitle={blogPageData?.attributes?.blog_page_section.heading || ''}
-        bannerDescription={blogPageData?.attributes?.blog_page_section.description || ''}
-        // isBlog={true}
-      /> */}
       <BlogsGrid
         categories={processedCategories()}
       />

@@ -1,6 +1,5 @@
 'use client'
-import { fetchHeaderData, fetchLiveStreamingAndMediaData, fetchLiveStreamingBenifits, fetchLiveStreamingFeatures, fetchLiveStreamingTechData, fetchModalBoxHomePage } from '@/api-data/api';
-import ContactUs from '@/app/components/common/contact-us/ContactUs';
+import { fetchLiveStreamingAndMediaData, fetchLiveStreamingBenifits, fetchLiveStreamingFeatures, fetchLiveStreamingTechData, fetchModalBoxHomePage } from '@/api-data/api';
 import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm';
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner';
 import Parterners from '@/app/components/common/partner-common-block/Parterners';
@@ -127,39 +126,6 @@ interface LiveStreamingData {
   }
 }
 
-interface headerDataLink {
-  id: number;
-  attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-  }
-}
-
 interface closingModalBoxData {
   id: number;
   attributes: {
@@ -184,197 +150,167 @@ interface closingModalBoxData {
 }
 
 const LiveStreaming = () => {
-    const [loading, setLoading] = useState<boolean>(true);
-    const [liveStreamingData, setLiveStreamingData] = useState<LiveStreamingData | null>(null)
-    const [liveStreamingFeaturesData, setLiveStreamingFeaturesData] = useState<any>([]);
-    const [liveStreamingTechData, setLiveStreamingTechData] = useState<any>([]);
-    const [liveStreamingBenifitsData, setLiveStreamingbenifitsData] = useState<any>([]);
-  
-    const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
-  
-    const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [liveStreamingData, setLiveStreamingData] = useState<LiveStreamingData | null>(null)
+  const [liveStreamingFeaturesData, setLiveStreamingFeaturesData] = useState<any>([]);
+  const [liveStreamingTechData, setLiveStreamingTechData] = useState<any>([]);
+  const [liveStreamingBenifitsData, setLiveStreamingbenifitsData] = useState<any>([]);
 
-    const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
-  
-    useEffect(() => {
-      const fetchModalBoxDataSection = async () => {
-        try {
-          const response = await fetchModalBoxHomePage();
-          setModalBoxData(response);
-        } catch (error) {
-          console.log(error);
-          return null;
-        } finally {
-          setLoading(false);
-        }
+  const router = useRouter();
+
+  const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+
+  useEffect(() => {
+    const fetchModalBoxDataSection = async () => {
+      try {
+        const response = await fetchModalBoxHomePage();
+        setModalBoxData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
       }
-  
-      fetchModalBoxDataSection();
-    }, [])
+    }
 
-    useEffect(() => {
-        const fetchHeaderDataResponse = async () => {
-          try {
-            const response = await fetchHeaderData();
-            setHeaderDataLink(response);
-          } catch (error) {
-            console.log(error);
-            return null;
-          }
-        }
-    
-        fetchHeaderDataResponse();
-      }, [])
-      
-      useEffect(() => {
-        const fetchLiveStreamingDataResponse = async () => {
-          try {
-            const response = await fetchLiveStreamingAndMediaData();
-            setLiveStreamingData(response.attributes)
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchLiveStreamingDataResponse();
-      }, []);
+    fetchModalBoxDataSection();
+  }, [])
 
-      useEffect(() => {
-        const liveStreamingFeaturesData = async () => {
-          try {
-            const response = await fetchLiveStreamingFeatures();
-            setLiveStreamingFeaturesData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        liveStreamingFeaturesData();
-      }, [])
-
-      useEffect(() => {
-        const liveStreamingTechData = async () => {
-          try {
-            const response = await fetchLiveStreamingTechData();
-            setLiveStreamingTechData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        liveStreamingTechData();
-      }, [])
-
-      useEffect(() => {
-        const liveStreamingBenifits = async () => {
-          try {
-            const response = await fetchLiveStreamingBenifits();
-            setLiveStreamingbenifitsData(response);
-          } catch (error) {
-            console.log(error);
-          } finally {
-            setLoading(false);
-          }
-        }
-    
-        liveStreamingBenifits();
-      }, [])
-
-      useEffect(() => {
-        if (liveStreamingData) {
-          // Set document title
-          document.title = liveStreamingData?.seo?.metaTitle || "Default Title";
-      
-          // Select meta description tag
-          let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-      
-          // If meta description doesn't exist, create it
-          if (!metaDescription) {
-            metaDescription = document.createElement("meta");
-            metaDescription.name = "description";
-            document.head.appendChild(metaDescription);
-          }
-      
-          // Set content for the meta description
-          metaDescription.content = liveStreamingData?.seo?.metaDescription || "Default description";
-      
-          // Select canonical link tag
-          let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-      
-          // If canonical link doesn't exist, create it
-          if (!canonicalLink) {
-            canonicalLink = document.createElement("link");
-            canonicalLink.rel = "canonical";
-            document.head.appendChild(canonicalLink);
-          }
-      
-          // Set href for the canonical link
-          canonicalLink.href = liveStreamingData?.seo?.canonicalURL || "default-canonical-url";
-        }
-      }, [liveStreamingData]);
-
-      useEffect(() => {
-        if (!loading) {
-          window.scrollTo(0, 0);
-        }
-      }, [loading]);
-    
-      if (loading) {
-        return <LoaderSpinner />;
+  useEffect(() => {
+    const fetchLiveStreamingDataResponse = async () => {
+      try {
+        const response = await fetchLiveStreamingAndMediaData();
+        setLiveStreamingData(response.attributes)
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-      
+    };
+
+    fetchLiveStreamingDataResponse();
+  }, []);
+
+  useEffect(() => {
+    const liveStreamingFeaturesData = async () => {
+      try {
+        const response = await fetchLiveStreamingFeatures();
+        setLiveStreamingFeaturesData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    liveStreamingFeaturesData();
+  }, [])
+
+  useEffect(() => {
+    const liveStreamingTechData = async () => {
+      try {
+        const response = await fetchLiveStreamingTechData();
+        setLiveStreamingTechData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    liveStreamingTechData();
+  }, [])
+
+  useEffect(() => {
+    const liveStreamingBenifits = async () => {
+      try {
+        const response = await fetchLiveStreamingBenifits();
+        setLiveStreamingbenifitsData(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    liveStreamingBenifits();
+  }, [])
+
+  useEffect(() => {
+    if (liveStreamingData) {
+      document.title = liveStreamingData?.seo?.metaTitle || "Default Title";
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.content = liveStreamingData?.seo?.metaDescription || "Default description";
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.href = liveStreamingData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [liveStreamingData]);
+
+  useEffect(() => {
+    if (!loading) {
+      window.scrollTo(0, 0);
+    }
+  }, [loading]);
+
+  if (loading) {
+    return <LoaderSpinner />;
+  }
+
   return (
     <div className='poppins'>
-        <Head>
-          <link rel="canonical" href={liveStreamingData?.seo?.canonicalURL || "default-canonical-url"} />
-          <meta name="title" content={liveStreamingData?.seo?.metaTitle || "Default description"} />
-          <meta name="description" content={liveStreamingData?.seo?.metaDescription || "Default Description"} />
-        </Head>
-        <TopBanner bannerData={liveStreamingData?.solution_introduction} />
-        <ServiceDataBlock
-          title={liveStreamingData?.engaging_streaming_experience?.heading || ''}
-          description={liveStreamingData?.engaging_streaming_experience?.description || ''}
-          services={liveStreamingFeaturesData[0]?.attributes?.service_data || []}
-          showButton={false}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
-          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
-          serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/3 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex flex-col gap-4 items-center'
-          serviceItemDescription='w-full text-center md:text-center sm:text-center text-left flex flex-col gap-2'
-          serviceHeding='lg:line-clamp-none text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
-        />
-        <Parterners
-          title={liveStreamingData?.cutting_edge_technologies?.heading || ''}
-          description={liveStreamingData?.cutting_edge_technologies?.description || ''}
-          buttonText={liveStreamingData?.cutting_edge_technologies?.button_text || ''}
-          buttonLink={liveStreamingData?.cutting_edge_technologies?.button_link || ''}
-          techData={liveStreamingTechData || []}
-          bgImage={liveStreamingData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
-        />
-        <ServiceDataBlock
-          title={liveStreamingData?.transformative_benefits?.heading || ''}
-          description={liveStreamingData?.transformative_benefits?.description || ''}
-          services={liveStreamingBenifitsData[0]?.attributes?.service_data || []}
-          showButton={true}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
-          headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
-          serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex lg:flex-row md:flex-row sm:flex-row flex-col items-center'
-          serviceItemDescription='w-full text-left flex flex-col gap-2'
-          serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
-          buttonText={liveStreamingData?.transformative_benefits?.button_text || ''}
-        />
-        {/* <ContactUs contactUsData = {liveStreamingData?.get_in_touch || []} /> */}
-        <SimpleContactForm contactUsData = {liveStreamingData?.get_in_touch || []} />
-        <ModelBox modalBoxData={modalBoxData} />
+      <Head>
+        <link rel="canonical" href={liveStreamingData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="title" content={liveStreamingData?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={liveStreamingData?.seo?.metaDescription || "Default Description"} />
+      </Head>
+      <TopBanner bannerData={liveStreamingData?.solution_introduction} />
+      <ServiceDataBlock
+        title={liveStreamingData?.engaging_streaming_experience?.heading || ''}
+        description={liveStreamingData?.engaging_streaming_experience?.description || ''}
+        services={liveStreamingFeaturesData[0]?.attributes?.service_data || []}
+        showButton={false}
+        mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
+        headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+        serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+        serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/3 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconHeader='w-full flex flex-col gap-4 items-center'
+        serviceItemDescription='w-full text-center md:text-center sm:text-center text-left flex flex-col gap-2'
+        serviceHeding='lg:line-clamp-none text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
+      />
+      <Parterners
+        title={liveStreamingData?.cutting_edge_technologies?.heading || ''}
+        description={liveStreamingData?.cutting_edge_technologies?.description || ''}
+        buttonText={liveStreamingData?.cutting_edge_technologies?.button_text || ''}
+        buttonLink={liveStreamingData?.cutting_edge_technologies?.button_link || ''}
+        techData={liveStreamingTechData || []}
+        bgImage={liveStreamingData?.cutting_edge_technologies?.background_image?.data?.attributes?.url || ''}
+      />
+      <ServiceDataBlock
+        title={liveStreamingData?.transformative_benefits?.heading || ''}
+        description={liveStreamingData?.transformative_benefits?.description || ''}
+        services={liveStreamingBenifitsData[0]?.attributes?.service_data || []}
+        showButton={true}
+        mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
+        headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
+        serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+        serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+        serviceIconHeader='w-full flex lg:flex-row md:flex-row sm:flex-row flex-col items-center'
+        serviceItemDescription='w-full text-left flex flex-col gap-2'
+        serviceHeding='lg:line-clamp-none text-left line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
+        buttonText={liveStreamingData?.transformative_benefits?.button_text || ''}
+      />
+      <SimpleContactForm contactUsData={liveStreamingData?.get_in_touch || []} />
+      <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }
