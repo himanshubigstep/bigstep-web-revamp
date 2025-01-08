@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BigStep Tech - AI-Driven Product Engineering & Digital Transformation Company",
     description: "BigStep Technologies is an AI-driven Cloud-Native Custom Software Product Development, Data Engineering and Digital Transformation company.",
-    url: "https://bigsteptech.com/",
+    url: "https://bigsteptech.com",
     type: "website",
     siteName: "BigStep Technologies",
   },
@@ -34,6 +34,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID`}
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'YOUR_TRACKING_ID', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        ></script>
+      </head>
       <body
         className={poppins.variable}
       >
