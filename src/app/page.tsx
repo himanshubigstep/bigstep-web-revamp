@@ -289,178 +289,129 @@ export default function Home() {
   const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
 
   useEffect(() => {
-    const fetchModalBoxDataSection = async () => {
-      try {
-        const response = await fetchModalBoxHomePage();
-        setModalBoxData(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      } finally {
-        setLoading(false);
-      }
-    }
+    const setSeoMetaTags = () => {
+      if (homePageData) {
+        // Set Document Title
+        document.title = homePageData?.seo?.metaTitle || "Default Title";
 
-    fetchModalBoxDataSection();
-  }, [])
-
-  useEffect(() => {
-    const fetchHomePageServiceData = async () => {
-      try {
-        const response = await fetchServiceDataHome();
-        setHomePageServiceData(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchHomePageServiceData();
-  }, [])
-
-  useEffect(() => {
-    const fetchtrustedClientsData = async () => {
-      try {
-        let serviceResponse = await fetchtrustedClients();
-        let allServiceData = serviceResponse?.data || [];
-
-        while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
-          const nextPage = serviceResponse.meta.pagination.page + 1;
-          serviceResponse = await fetchtrustedClients(nextPage);
-          allServiceData = allServiceData.concat(serviceResponse?.data || []);
+        // Set Meta Description
+        let metaDescriptions = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+        if (!metaDescriptions) {
+          metaDescriptions = document.createElement("meta");
+          metaDescriptions.name = "description";
+          document.head.appendChild(metaDescriptions);
         }
-        setTrustedClientsData(allServiceData);
-      } catch (error) {
-        console.log(error);
-        return null;
-      } finally {
-        setLoading(false);
-      }
-    }
+        metaDescriptions.content = homePageData?.seo?.metaDescription || "Default description";
 
-    fetchtrustedClientsData()
-  }, [])
+        // Set Canonical Link
+        let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+        if (!canonicalLink) {
+          canonicalLink = document.createElement("link");
+          canonicalLink.rel = "canonical";
+          document.head.appendChild(canonicalLink);
+        }
+        canonicalLink.href = homePageData?.seo?.canonicalURL || "default-canonical-url";
+
+        // Set Open Graph Tags
+        let ogTitle = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
+        if (!ogTitle) {
+          ogTitle = document.createElement("meta");
+          ogTitle.setAttribute("property", "og:title");
+          document.head.appendChild(ogTitle);
+        }
+        ogTitle.content = homePageData?.seo?.metaTitle || "Default Title";
+
+        let ogDescription = document.querySelector('meta[property="og:description"]') as HTMLMetaElement;
+        if (!ogDescription) {
+          ogDescription = document.createElement("meta");
+          ogDescription.setAttribute("property", "og:description");
+          document.head.appendChild(ogDescription);
+        }
+        ogDescription.content = homePageData?.seo?.metaDescription || "Default description";
+
+        let ogUrl = document.querySelector('meta[property="og:url"]') as HTMLMetaElement;
+        if (!ogUrl) {
+          ogUrl = document.createElement("meta");
+          ogUrl.setAttribute("property", "og:url");
+          document.head.appendChild(ogUrl);
+        }
+        ogUrl.content = homePageData?.seo?.canonicalURL || window.location.href;
+
+        let ogType = document.querySelector('meta[property="og:type"]') as HTMLMetaElement;
+        if (!ogType) {
+          ogType = document.createElement("meta");
+          ogType.setAttribute("property", "og:type");
+          document.head.appendChild(ogType);
+        }
+        ogType.content = "website";
+
+        let ogSiteName = document.querySelector('meta[property="og:site_name"]') as HTMLMetaElement;
+        if (!ogSiteName) {
+          ogSiteName = document.createElement("meta");
+          ogSiteName.setAttribute("property", "og:site_name");
+          document.head.appendChild(ogSiteName);
+        }
+        ogSiteName.content = homePageData?.seo?.canonicalURL || window.location.href;
+      }
+    };
+
+    if (homePageData) {
+      setSeoMetaTags();
+    }
+  }, [homePageData]);
 
   useEffect(() => {
-    const fetchHomePageDataResponse = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetchHomepageData();
-        setHomePageData(response.attributes);
+        // Fetching homepage data
+        const homePageResponse = await fetchHomepageData();
+        setHomePageData(homePageResponse.attributes);
 
+        // Fetching carousel data
+        const carouselResponse = await fetchHomePageCarousel();
+        setHomePageCarousel(carouselResponse);
+
+        // Fetching partner data
         const partnerShipResponse = await fetchPaternershipData();
         const partners = partnerShipResponse.map((item: any) => {
-          const attributes = item.attributes;
-          const logo = attributes.logo.data ? attributes.logo.data.attributes : {};
-
+          const logo = item.attributes.logo.data ? item.attributes.logo.data.attributes : {};
           return {
             src: logo.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.url}` : '',
-            alt: attributes.heading,
+            alt: item.attributes.heading,
             category: 'Unknown',
             width: 200,
             height: 80
           };
         });
-
         setPartnerShipData(partners);
 
+        // Fetching services data
+        const serviceResponse = await fetchServiceDataHome();
+        setHomePageServiceData(serviceResponse);
+
+        // Fetching trusted clients data
+        let trustedClientsResponse = await fetchtrustedClients();
+        let allTrustedClientsData = trustedClientsResponse?.data || [];
+        while (trustedClientsResponse?.meta?.pagination.page < trustedClientsResponse?.meta?.pagination.pageCount) {
+          const nextPage = trustedClientsResponse.meta.pagination.page + 1;
+          trustedClientsResponse = await fetchtrustedClients(nextPage);
+          allTrustedClientsData = allTrustedClientsData.concat(trustedClientsResponse?.data || []);
+        }
+        setTrustedClientsData(allTrustedClientsData);
+
+        // Fetching modal box data
+        const modalBoxResponse = await fetchModalBoxHomePage();
+        setModalBoxData(modalBoxResponse);
+
       } catch (error) {
-        console.log(error);
+        console.log("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchHomePageDataResponse();
+    fetchData();
   }, []);
-
-  useEffect(() => {
-    const fetchHomePageCarouselData = async () => {
-      try {
-        const response = await fetchHomePageCarousel();
-        setHomePageCarousel(response);
-      } catch (error) {
-        console.log(error);
-        return null;
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchHomePageCarouselData();
-  }, [])
-
-  useEffect(() => {
-    if (homePageData) {
-      // Set the document title for the browser tab and SEO
-      document.title = homePageData?.seo?.metaTitle || "Default Title";
-  
-      // Set the meta description tag for SEO
-      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-      if (!metaDescription) {
-        metaDescription = document.createElement("meta");
-        metaDescription.name = "description";
-        document.head.appendChild(metaDescription);
-      }
-      metaDescription.content = homePageData?.seo?.metaDescription || "Default description";
-  
-      // Set the canonical URL meta tag
-      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-      if (!canonicalLink) {
-        canonicalLink = document.createElement("link");
-        canonicalLink.rel = "canonical";
-        document.head.appendChild(canonicalLink);
-      }
-      canonicalLink.href = homePageData?.seo?.canonicalURL || "default-canonical-url";
-  
-      // Open Graph meta tags (for social media previews)
-      let ogTitle = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
-      if (!ogTitle) {
-        ogTitle = document.createElement("meta");
-        ogTitle.setAttribute("property", "og:title");
-        document.head.appendChild(ogTitle);
-      }
-      ogTitle.content = homePageData?.seo?.metaTitle || "Default Title";
-  
-      let ogDescription = document.querySelector('meta[property="og:description"]') as HTMLMetaElement;
-      if (!ogDescription) {
-        ogDescription = document.createElement("meta");
-        ogDescription.setAttribute("property", "og:description");
-        document.head.appendChild(ogDescription);
-      }
-      ogDescription.content = homePageData?.seo?.metaDescription || "Default description";
-  
-      let ogUrl = document.querySelector('meta[property="og:url"]') as HTMLMetaElement;
-      if (!ogUrl) {
-        ogUrl = document.createElement("meta");
-        ogUrl.setAttribute("property", "og:url");
-        document.head.appendChild(ogUrl);
-      }
-      ogUrl.content = homePageData?.seo?.canonicalURL || window.location.href;
-
-      // Add Open Graph type and site_name
-      let ogType = document.querySelector('meta[property="og:type"]') as HTMLMetaElement;
-      if (!ogType) {
-        ogType = document.createElement("meta");
-        ogType.setAttribute("property", "og:type");
-        document.head.appendChild(ogType);
-      }
-      ogType.content = "website"; // You can adjust this based on your content type
-  
-      let ogSiteName = document.querySelector('meta[property="og:site_name"]') as HTMLMetaElement;
-      if (!ogSiteName) {
-        ogSiteName = document.createElement("meta");
-        ogSiteName.setAttribute("property", "og:site_name");
-        document.head.appendChild(ogSiteName);
-      }
-      ogSiteName.content = homePageData?.seo?.canonicalURL || window.location.href;
-    }
-  }, [homePageData]);
-  
-  const metaTitle = homePageData?.seo?.metaTitle || 'Default Title';
-  const metaDescription = homePageData?.seo?.metaDescription || 'Default description';
-  const canonicalUrl = homePageData?.seo?.canonicalURL || 'https://yourwebsite.com';
 
   useEffect(() => {
     if (!loading) {
@@ -474,29 +425,24 @@ export default function Home() {
 
   return (
     <div className="poppins w-full h-full">
+
       <Head>
-        {/* SEO Meta Tags */}
-        <meta name="title" content={metaTitle} />
-        <meta name="description" content={metaDescription} />
-        <link rel="canonical" href={canonicalUrl} />
+        <title>{homePageData?.seo?.metaTitle}</title>
+        <meta name="description" content={homePageData?.seo?.metaDescription} />
 
-        {/* Open Graph Meta Tags (for Social Media Preview) */}
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDescription} />
-        {/* <meta property="og:image" content={ogImageUrl} /> */}
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:type" content="website" /> {/* Specifies content type */}
-        <meta property="og:site_name" content="YourSiteName" /> {/* Set site name here */}
+        <meta property="og:title" content={homePageData?.seo?.metaTitle} />
+        <meta property="og:description" content={homePageData?.seo?.metaDescription} />
+        <meta property="og:image" content="" />
+        <meta property="og:url" content={homePageData?.seo?.canonicalURL} />
+        <meta property="og:site_name" content="https://bigsteptech.com/" />
+        <meta property="og:type" content="website" />
 
-        {/* Twitter Cards */}
-        <meta name="twitter:title" content={metaTitle} />
-        <meta name="twitter:description" content={metaDescription} />
-        {/* <meta name="twitter:image" content={ogImageUrl} /> */}
         <meta name="twitter:card" content="summary_large_image" />
-
-        {/* Page Title for Browser Tab */}
-        <title>{metaTitle}</title>
+        <meta name="twitter:title" content={homePageData?.seo?.metaTitle} />
+        <meta name="twitter:description" content={homePageData?.seo?.metaDescription} />
+        <meta name="twitter:image" content="" />
       </Head>
+
       <SlideShowText slides={homePageCarousel} />
       <CommonBlock
         title={homePageData?.technologies[0]?.heading || ''}
