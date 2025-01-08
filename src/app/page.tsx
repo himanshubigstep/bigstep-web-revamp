@@ -289,129 +289,127 @@ export default function Home() {
   const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
 
   useEffect(() => {
-    const setSeoMetaTags = () => {
-      if (homePageData) {
-        // Set Document Title
-        document.title = homePageData?.seo?.metaTitle || "Default Title";
-
-        // Set Meta Description
-        let metaDescriptions = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-        if (!metaDescriptions) {
-          metaDescriptions = document.createElement("meta");
-          metaDescriptions.name = "description";
-          document.head.appendChild(metaDescriptions);
-        }
-        metaDescriptions.content = homePageData?.seo?.metaDescription || "Default description";
-
-        // Set Canonical Link
-        let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-        if (!canonicalLink) {
-          canonicalLink = document.createElement("link");
-          canonicalLink.rel = "canonical";
-          document.head.appendChild(canonicalLink);
-        }
-        canonicalLink.href = homePageData?.seo?.canonicalURL || "default-canonical-url";
-
-        // Set Open Graph Tags
-        let ogTitle = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
-        if (!ogTitle) {
-          ogTitle = document.createElement("meta");
-          ogTitle.setAttribute("property", "og:title");
-          document.head.appendChild(ogTitle);
-        }
-        ogTitle.content = homePageData?.seo?.metaTitle || "Default Title";
-
-        let ogDescription = document.querySelector('meta[property="og:description"]') as HTMLMetaElement;
-        if (!ogDescription) {
-          ogDescription = document.createElement("meta");
-          ogDescription.setAttribute("property", "og:description");
-          document.head.appendChild(ogDescription);
-        }
-        ogDescription.content = homePageData?.seo?.metaDescription || "Default description";
-
-        let ogUrl = document.querySelector('meta[property="og:url"]') as HTMLMetaElement;
-        if (!ogUrl) {
-          ogUrl = document.createElement("meta");
-          ogUrl.setAttribute("property", "og:url");
-          document.head.appendChild(ogUrl);
-        }
-        ogUrl.content = homePageData?.seo?.canonicalURL || window.location.href;
-
-        let ogType = document.querySelector('meta[property="og:type"]') as HTMLMetaElement;
-        if (!ogType) {
-          ogType = document.createElement("meta");
-          ogType.setAttribute("property", "og:type");
-          document.head.appendChild(ogType);
-        }
-        ogType.content = "website";
-
-        let ogSiteName = document.querySelector('meta[property="og:site_name"]') as HTMLMetaElement;
-        if (!ogSiteName) {
-          ogSiteName = document.createElement("meta");
-          ogSiteName.setAttribute("property", "og:site_name");
-          document.head.appendChild(ogSiteName);
-        }
-        ogSiteName.content = homePageData?.seo?.canonicalURL || window.location.href;
+    const fetchModalBoxDataSection = async () => {
+      try {
+        const response = await fetchModalBoxHomePage();
+        setModalBoxData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
       }
-    };
-
-    if (homePageData) {
-      setSeoMetaTags();
     }
-  }, [homePageData]);
+
+    fetchModalBoxDataSection();
+  }, [])
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchHomePageServiceData = async () => {
       try {
-        // Fetching homepage data
-        const homePageResponse = await fetchHomepageData();
-        setHomePageData(homePageResponse.attributes);
+        const response = await fetchServiceDataHome();
+        setHomePageServiceData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
 
-        // Fetching carousel data
-        const carouselResponse = await fetchHomePageCarousel();
-        setHomePageCarousel(carouselResponse);
+    fetchHomePageServiceData();
+  }, [])
 
-        // Fetching partner data
+  useEffect(() => {
+    const fetchtrustedClientsData = async () => {
+      try {
+        let serviceResponse = await fetchtrustedClients();
+        let allServiceData = serviceResponse?.data || [];
+
+        while (serviceResponse?.meta?.pagination.page < serviceResponse?.meta?.pagination.pageCount) {
+          const nextPage = serviceResponse.meta.pagination.page + 1;
+          serviceResponse = await fetchtrustedClients(nextPage);
+          allServiceData = allServiceData.concat(serviceResponse?.data || []);
+        }
+        setTrustedClientsData(allServiceData);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchtrustedClientsData()
+  }, [])
+
+  useEffect(() => {
+    const fetchHomePageDataResponse = async () => {
+      try {
+        const response = await fetchHomepageData();
+        setHomePageData(response.attributes);
+
         const partnerShipResponse = await fetchPaternershipData();
         const partners = partnerShipResponse.map((item: any) => {
-          const logo = item.attributes.logo.data ? item.attributes.logo.data.attributes : {};
+          const attributes = item.attributes;
+          const logo = attributes.logo.data ? attributes.logo.data.attributes : {};
+
           return {
             src: logo.url ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${logo.url}` : '',
-            alt: item.attributes.heading,
+            alt: attributes.heading,
             category: 'Unknown',
             width: 200,
             height: 80
           };
         });
+
         setPartnerShipData(partners);
 
-        // Fetching services data
-        const serviceResponse = await fetchServiceDataHome();
-        setHomePageServiceData(serviceResponse);
-
-        // Fetching trusted clients data
-        let trustedClientsResponse = await fetchtrustedClients();
-        let allTrustedClientsData = trustedClientsResponse?.data || [];
-        while (trustedClientsResponse?.meta?.pagination.page < trustedClientsResponse?.meta?.pagination.pageCount) {
-          const nextPage = trustedClientsResponse.meta.pagination.page + 1;
-          trustedClientsResponse = await fetchtrustedClients(nextPage);
-          allTrustedClientsData = allTrustedClientsData.concat(trustedClientsResponse?.data || []);
-        }
-        setTrustedClientsData(allTrustedClientsData);
-
-        // Fetching modal box data
-        const modalBoxResponse = await fetchModalBoxHomePage();
-        setModalBoxData(modalBoxResponse);
-
       } catch (error) {
-        console.log("Error fetching data:", error);
+        console.log(error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchHomePageDataResponse();
   }, []);
+
+  useEffect(() => {
+    const fetchHomePageCarouselData = async () => {
+      try {
+        const response = await fetchHomePageCarousel();
+        setHomePageCarousel(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchHomePageCarouselData();
+  }, [])
+
+  useEffect(() => {
+    if (homePageData) {
+      document.title = homePageData?.seo?.metaTitle || "Default Title";
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.content = homePageData?.seo?.metaDescription || "Default description";
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;// If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.href = homePageData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [homePageData]);
 
   useEffect(() => {
     if (!loading) {
@@ -425,24 +423,11 @@ export default function Home() {
 
   return (
     <div className="poppins w-full h-full">
-
       <Head>
-        <title>{homePageData?.seo?.metaTitle}</title>
-        <meta name="description" content={homePageData?.seo?.metaDescription} />
-
-        <meta property="og:title" content={homePageData?.seo?.metaTitle} />
-        <meta property="og:description" content={homePageData?.seo?.metaDescription} />
-        <meta property="og:image" content="" />
-        <meta property="og:url" content={homePageData?.seo?.canonicalURL} />
-        <meta property="og:site_name" content="https://bigsteptech.com/" />
-        <meta property="og:type" content="website" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={homePageData?.seo?.metaTitle} />
-        <meta name="twitter:description" content={homePageData?.seo?.metaDescription} />
-        <meta name="twitter:image" content="" />
+        <link rel="canonical" href={homePageData?.seo?.canonicalURL || "default-canonical-url"} />
+        <meta name="title" content={homePageData?.seo?.metaTitle || "Default description"} />
+        <meta name="description" content={homePageData?.seo?.metaDescription || "Default Description"} />
       </Head>
-
       <SlideShowText slides={homePageCarousel} />
       <CommonBlock
         title={homePageData?.technologies[0]?.heading || ''}
