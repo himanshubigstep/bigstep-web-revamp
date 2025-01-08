@@ -37,7 +37,7 @@ export default function RootLayout({
       <head>
         <script
           async
-          src={`https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID`}
+          src={`https://www.googletagmanager.com/gtag/js?id=G-Y2Q24ZLCNW`}
         ></script>
         <script
           dangerouslySetInnerHTML={{
@@ -46,7 +46,7 @@ export default function RootLayout({
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
-              gtag('config', 'YOUR_TRACKING_ID', {
+              gtag('config', 'G-Y2Q24ZLCNW', {
                 page_path: window.location.pathname,
               });
             `,
