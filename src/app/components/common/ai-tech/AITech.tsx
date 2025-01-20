@@ -4,8 +4,9 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import LoaderSpinner from '../loader-spinner/LoadingSpinner';
 
-const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, bannerImage, isBlog }: { bannerTitle: string, bannerDescription: string, buttonTitle?: string, onButtonClick?: string, bannerImage?: string, isBlog?: boolean }) => {
+const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, bannerImage, isBlog }: { bannerTitle?: string, bannerDescription?: string, buttonTitle?: string, onButtonClick?: string, bannerImage?: string, isBlog?: boolean }) => {
     const router = useRouter();
     const [rightSectionItems, setRightSectionItems] = useState<any>();
 
@@ -60,7 +61,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
     };
 
     return (
-        <div className={`relative w-full h-full lg:py-16 py-8 bg-white dark:bg-black ${isBlog === true && 'lg:pt-0 pt-0'}`}>
+        <div className={`relative w-full h-full lg:py-16 py-8 bg-white dark:bg-black`}>
             {bannerImage &&
                 <div className='absolute top-0 bottom-0 left-0 right-0 w-full flex justify-center items-center text-center py-8'>
                     <img
@@ -77,106 +78,113 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
                         {bannerDescription && <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal'>{bannerDescription}</p>}
                     </div>
                 </div>
+                
+                {rightSectionItems ? (
 
                 <div className='w-full h-full flex lg:flex-row flex-col justify-between items-start rounded-lg border-2 border-gray-300 dark:border-gray-800 lg:py-8 lg:px-8 px-4 py-4 lg:gap-16 gap-8'>
-                    {firstItem && (
-                        <Link
-                            href={`/blog/${decodeURIComponent(firstItem?.attributes?.slug)
-                                .toLowerCase()
-                                .replace(/\s+/g, '-')
-                                .replace(/\//g, '-')
-                                .replace(/[^a-z0-9\-]/g, '')}`}
-                            target='_blank'
-                            className="lg:w-1/2 w-full flex flex-col justify-center items-start rounded-lg"
+                {firstItem && (
+                    <Link
+                        href={`/blog/${decodeURIComponent(firstItem?.attributes?.slug)
+                            .toLowerCase()
+                            .replace(/\s+/g, '-')
+                            .replace(/\//g, '-')
+                            .replace(/[^a-z0-9\-]/g, '')}`}
+                        target='_blank'
+                        className="lg:w-1/2 w-full flex flex-col justify-center items-start rounded-lg"
+                    >
+                        <div
+                            className="w-full flex flex-col items-start rounded-lg gap-8 cursor-pointer"
                         >
-                            <div
-                                className="w-full flex flex-col items-start rounded-lg gap-8 cursor-pointer"
-                            >
-                                <div className="w-full flex flex-col justify-center items-start rounded-lg">
-                                    <img
-                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${firstItem?.attributes?.image?.data?.attributes?.url}`}
-                                        alt="AI Tech"
-                                        className="w-full object-contain rounded-lg"
-                                    />
-                                    <span className="text-black dark:text-white text-sm my-4">
-                                        {formatDate(firstItem?.attributes?.upload_date)}
-                                    </span>
-                                    <h2 className="text-black dark:text-white lg:text-xl md:text-lg sm:text-md text-sm font-medium mb-4">
-                                        {firstItem?.attributes?.heading}
-                                    </h2>
-                                    <div className='lg:text-xl md:text-lg sm:text-md text-sm font-normal w-full lg:line-clamp-5 line-clamp-2'>
-                                        <ReactMarkdown
-                                            remarkPlugins={[remarkGfm]}
-                                            components={{
-                                                h2: ({ children }) => <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md font-bold my-4">{children}</h2>,
-                                                h3: ({ children }) => <h3 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold my-3">{children}</h3>,
-                                                p: ({ children }) => <p className="mb-4">{children}</p>,
-                                                ul: ({ children }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
-                                                li: ({ children }) => <li className="mb-2">{children}</li>,
-                                                a: ({ href, children }) => {
-                                                    if (href && href.includes("mailto:")) {
-                                                        return (
-                                                            <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>
-                                                        );
-                                                    }
-                                                    return <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>;
+                            <div className="w-full flex flex-col justify-center items-start rounded-lg">
+                                <img
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${firstItem?.attributes?.image?.data?.attributes?.url}`}
+                                    alt="AI Tech"
+                                    className="w-full object-contain rounded-lg"
+                                />
+                                <span className="text-black dark:text-white text-sm my-4">
+                                    {formatDate(firstItem?.attributes?.upload_date)}
+                                </span>
+                                <h2 className="text-black dark:text-white lg:text-xl md:text-lg sm:text-md text-sm font-medium mb-4">
+                                    {firstItem?.attributes?.heading}
+                                </h2>
+                                <div className={`${isBlog === true ? 'lg:line-clamp-2 line-clamp-2' : 'lg:line-clamp-5 line-clamp-2'} lg:text-xl md:text-lg sm:text-md text-sm font-normal w-full`}>
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkGfm]}
+                                        components={{
+                                            h2: ({ children }) => <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md font-bold my-4">{children}</h2>,
+                                            h3: ({ children }) => <h3 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold my-3">{children}</h3>,
+                                            p: ({ children }) => <p className="mb-4">{children}</p>,
+                                            ul: ({ children }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
+                                            li: ({ children }) => <li className="mb-2">{children}</li>,
+                                            a: ({ href, children }) => {
+                                                if (href && href.includes("mailto:")) {
+                                                    return (
+                                                        <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>
+                                                    );
                                                 }
-                                            }}
-                                        >
-                                            {firstItem?.attributes?.description || ''}
-                                        </ReactMarkdown>
-                                    </div>
+                                                return <a href={href} className="text-blue-500 hover:text-blue-800">{children}</a>;
+                                            }
+                                        }}
+                                    >
+                                        {firstItem?.attributes?.description || ''}
+                                    </ReactMarkdown>
                                 </div>
                             </div>
+                        </div>
+                    </Link>
+                )}
+
+                <div className='lg:w-1/2 w-full flex flex-col items-center rounded-lg lg:gap-8 gap-4 overflow-y-auto'>
+                    {remainingItems.length > 0 && (
+                        <div className="w-full flex lg:flex-col flex-row rounded-lg lg:gap-8 gap-4 lg:mb-auto mb-8">
+                            {remainingItems.slice(0, 5).map((item: any) => (
+                                <Link
+                                    key={item.id}
+                                    href={`/blog/${decodeURIComponent(item?.attributes?.slug)
+                                        .toLowerCase()
+                                        .replace(/\s+/g, '-')
+                                        .replace(/\//g, '-')
+                                        .replace(/[^a-z0-9\-]/g, '')}`}
+                                    target='_blank'
+                                    className="lg:w-full lg:min-w-auto min-w-[50%] flex flex-col justify-center items-start rounded-lg"
+                                >
+                                    <div
+                                        className="w-full h-full flex lg:flex-row flex-col lg:justify-between items-center rounded-lg gap-4 cursor-pointer"
+                                    >
+                                        <div className="lg:w-[25%] w-full h-auto lg:h-auto flex justify-center items-center rounded-lg">
+                                            <img
+                                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.url}`}
+                                                alt="AI Tech"
+                                                className="w-full h-full lg:object-fill object-contain rounded-lg"
+                                            />
+                                        </div>
+                                        <div className="lg:w-[75%] flex flex-col justify-center">
+                                            <h4 className="text-black dark:text-white lg:text-xl md:text-lg sm:text-md text-sm font-medium line-clamp-2 lg:line-clamp-3">
+                                                {item?.attributes?.heading}
+                                            </h4>
+                                            <p className="text-gray-400 dark:text-white lg:text-md md:text-sm sm:text-xs text-xs font-normal">
+                                                {formatDate(item?.attributes?.upload_date)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                    {buttonTitle && onButtonClick && (
+                        <Link href={onButtonClick} passHref target='_self'
+
+                            className='text-white bg-blue-500 hover:bg-blue-800 py-4 rounded-xl w-[180px] text-center lg:text-lg md:text-lg'>
+                            {buttonTitle}
                         </Link>
                     )}
-
-                    <div className='lg:w-1/2 w-full flex flex-col items-center rounded-lg lg:gap-8 gap-4 overflow-y-auto'>
-                        {remainingItems.length > 0 && (
-                            <div className="w-full flex lg:flex-col flex-row rounded-lg lg:gap-8 gap-4 lg:mb-auto mb-8">
-                                {remainingItems.slice(0, 5).map((item: any) => (
-                                    <Link
-                                        key={item.id}
-                                        href={`/blog/${decodeURIComponent(item?.attributes?.slug)
-                                            .toLowerCase()
-                                            .replace(/\s+/g, '-')
-                                            .replace(/\//g, '-')
-                                            .replace(/[^a-z0-9\-]/g, '')}`}
-                                        target='_blank'
-                                        className="lg:w-full lg:min-w-auto min-w-[50%] flex flex-col justify-center items-start rounded-lg"
-                                    >
-                                        <div
-                                            className="w-full h-full flex lg:flex-row flex-col lg:justify-between items-center rounded-lg gap-4 cursor-pointer"
-                                        >
-                                            <div className="lg:w-[25%] w-full h-auto lg:h-auto flex justify-center items-center rounded-lg">
-                                                <img
-                                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.attributes?.image?.data?.attributes?.url}`}
-                                                    alt="AI Tech"
-                                                    className="w-full h-full lg:object-fill object-contain rounded-lg"
-                                                />
-                                            </div>
-                                            <div className="lg:w-[75%] flex flex-col justify-center">
-                                                <h4 className="text-black dark:text-white lg:text-xl md:text-lg sm:text-md text-sm font-medium line-clamp-2 lg:line-clamp-3">
-                                                    {item?.attributes?.heading}
-                                                </h4>
-                                                <p className="text-gray-400 dark:text-white lg:text-md md:text-sm sm:text-xs text-xs font-normal">
-                                                    {formatDate(item?.attributes?.upload_date)}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        )}
-                        {buttonTitle && onButtonClick && (
-                            <Link href={onButtonClick} passHref target='_self'
-
-                                className='text-white bg-blue-500 hover:bg-blue-800 py-4 rounded-xl w-[180px] text-center lg:text-lg md:text-lg'>
-                                {buttonTitle}
-                            </Link>
-                        )}
-                    </div>
                 </div>
+            </div>
+                ) : (
+                    <div className="loader">
+                        <span className="load"></span>
+                    </div>
+                )}
             </div>
         </div>
     );

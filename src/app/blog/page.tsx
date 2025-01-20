@@ -5,6 +5,7 @@ import LoaderSpinner from '../components/common/loader-spinner/LoadingSpinner';
 import TopBanner from '../components/common/top-banner/TopBanner';
 import BlogsGrid from '../components/blogs-grid/BlogsGrid';
 import Head from 'next/head';
+import AITech from '../components/common/ai-tech/AITech';
 
 interface Author {
   data: {
@@ -76,9 +77,11 @@ interface blogPageProps {
       link: string;
     }[];
     latest_info: {
+      heading: string;
       background_image: {
         data: {
           attributes: {
+            url: string;
             formats: {
               large: {
                 url: string
@@ -190,7 +193,15 @@ const Blogs = () => {
         <meta name="title" content={blogPageData?.attributes?.seo?.metaTitle || "Default description"} />
         <meta name="description" content={blogPageData?.attributes?.seo?.metaDescription || "Default Description"} />
       </Head>
-      <TopBanner bannerData={blogPageData?.attributes?.intro[0]} isBlog={true} />
+      <TopBanner bannerData={blogPageData?.attributes?.intro[0]} isBlog={true} />      
+      <AITech
+        isBlog={true}
+        bannerTitle={blogPageData?.attributes?.latest_info.heading || ''}
+        // bannerDescription={blogPageData?.attributes?.latest_info.description || ''}
+        buttonTitle={blogPageData?.attributes?.latest_info.button_text || ''}
+        onButtonClick={blogPageData?.attributes?.latest_info?.button_text || ''}
+        bannerImage={blogPageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${blogPageData?.attributes?.latest_info.background_image.data.attributes.url}` : ''}
+      />
       <BlogsGrid
         categories={processedCategories()}
       />
