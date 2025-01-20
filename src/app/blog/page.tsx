@@ -198,8 +198,8 @@ const Blogs = () => {
         isBlog={true}
         bannerTitle={blogPageData?.attributes?.latest_info.heading || ''}
         // bannerDescription={blogPageData?.attributes?.latest_info.description || ''}
-        buttonTitle={blogPageData?.attributes?.latest_info.button_text || ''}
-        onButtonClick={blogPageData?.attributes?.latest_info?.button_text || ''}
+        // buttonTitle={blogPageData?.attributes?.latest_info.button_text || ''}
+        // onButtonClick={blogPageData?.attributes?.latest_info?.button_text || ''}
         bannerImage={blogPageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${blogPageData?.attributes?.latest_info.background_image.data.attributes.url}` : ''}
       />
       <BlogsGrid
