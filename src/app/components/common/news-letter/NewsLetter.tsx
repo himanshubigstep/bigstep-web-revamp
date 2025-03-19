@@ -42,7 +42,7 @@ const NewsLetter: React.FC<SubscribeFormProps> = ({ latest_info, classNameOption
         email: '',
     });
 
-    const handleInputChange = (field: 'name' | 'email') => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleInputChange = (field: 'name' | 'email') => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setInputValue(prevState => ({
             ...prevState,
             [field]: event.target.value

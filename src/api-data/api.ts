@@ -8,6 +8,14 @@ interface ContactFormInput {
   query_description: string;
 }
 
+interface chanllengesFormInput {
+  Name: string;
+  business_email: string;
+  Company_Name: string;
+  categories: string;
+  challenges_names: string;
+}
+
 export const fetchHeaderData = async () => {
   try {
     const response = await fetch(
@@ -58,6 +66,22 @@ export const fetchHomePageCarousel = async () => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/home-page-carousels?populate=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchJoinCarousel = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/join-us-carousels?populate=*`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -170,6 +194,140 @@ export const contactFormData = async (formData: ContactFormInput) => {
       throw new Error("Network response was not ok");
     }
 
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const challengesFormData = async (challengesForm: chanllengesFormInput) => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/challenges-form-datas`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data: challengesForm }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const fetchChallengesTypes = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/challenges-types?filters[$and][0][category_type][$eq]=Aws_Form_Challenges`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchAiChallengesTypes = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/challenges-types?filters[$and][0][category_type][$eq]=Ai_Form_Challenges`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchPropChallengesTypes = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/challenges-types?filters[$and][0][category_type][$eq]=PropTech_Form_Challenges`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchAwsChallengesPage = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/aws-challenges-page?populate[challenge_heading][populate]=*&populate[challenge_listing][populate]=*&populate[challanges_form_heading][populate]=*&populate[problem_solving_introduction][populate]=*&populate[problem_solving_data][populate]=*&populate[RealWorld_SuccessStories_Introduction][populate]=*&populate[RealWorld_SuccessStories_Data][populate]=*&populate[BigStep_Accolades_Introduction][populate]=*&populate[BigStep_Accolades_Data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchAiChallengesPage = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/ai-challenges-page?populate[challenge_heading][populate]=*&populate[challenge_listing][populate]=*&populate[challanges_form_heading][populate]=*&populate[problem_solving_introduction][populate]=*&populate[problem_solving_data][populate]=*&populate[RealWorld_SuccessStories_Introduction][populate]=*&populate[RealWorld_SuccessStories_Data][populate]=*&populate[BigStep_Accolades_Introduction][populate]=*&populate[BigStep_Accolades_Data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchPropTechChallengesPage = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/prop-tech-challenges-page?populate[challenge_heading][populate]=*&populate[challenge_listing][populate]=*&populate[challanges_form_heading][populate]=*&populate[problem_solving_introduction][populate]=*&populate[problem_solving_data][populate]=*&populate[RealWorld_SuccessStories_Introduction][populate]=*&populate[RealWorld_SuccessStories_Data][populate]=*&populate[BigStep_Accolades_Introduction][populate]=*&populate[BigStep_Accolades_Data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchjoinUsData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/join-us?populate[career_mission_intro][populate]=*&populate[career_mission_data][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
     const data = await response.json();
     return data.data;
   } catch (error) {
@@ -1852,17 +2010,17 @@ export const fetchCulturePageData = async () => {
 
 export const fetchBlogsPageData = async () => {
   try {
-      const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/blog-page?populate[intro][populate]=*&populate[latest_info][populate]=*&populate[blog_page_section]=*&populate[seo][populate]=*`
-      );
-      if (!response.ok) {
-          throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.data;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/blog-page?populate[intro][populate]=*&populate[latest_info][populate]=*&populate[blog_page_section]=*&populate[seo][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data.data;
   } catch (error) {
-      console.log(error);
-      return null;
+    console.log(error);
+    return null;
   }
 };
 

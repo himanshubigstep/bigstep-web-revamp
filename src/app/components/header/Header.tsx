@@ -11,7 +11,7 @@ const Header = () => {
   const [isBlogPage, setIsBlogPage] = useState(false);
 
   useEffect(() => {
-    if (window.location.pathname.includes('/blog/')) {
+    if (window.location.pathname.includes('/blog/') || window.location.pathname.includes('/aws-well-architected-cloud-infrastructure-review') || window.location.pathname.includes('/ai-technologies') || window.location.pathname.includes('/prop-tech-technologies-challange')) {
       setIsBlogPage(true);
     } else {
       setIsBlogPage(false);

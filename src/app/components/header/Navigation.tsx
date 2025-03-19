@@ -183,7 +183,9 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
       <nav className="h-full flex items-center lg:justify-unset justify-end">
         <button
           onClick={toggelMobileMenu}
-          className={`lg:hidden flex items-center text-2xl ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
+          className={`lg:hidden flex items-center text-2xl ${
+            isBlogPage && !scrolled ? 'text-black' : scrolled ? 'text-black dark:text-white' : 'text-white'
+          }`}
         >
           {isMobileMenu ? <IoMdClose /> : <RxHamburgerMenu />}
         </button>
