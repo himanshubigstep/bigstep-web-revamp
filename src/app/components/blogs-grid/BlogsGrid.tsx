@@ -119,7 +119,7 @@ const BlogsGrid: React.FC<CommonGridProps> = ({ categories }) => {
     });
 
     return (
-        <div className="w-full h-full relative bg-white dark:bg-black lg:py-16 py-8">
+        <div className="w-full h-full relative bg-white dark:bg-black">
             <div className="w-full h-full max-w-[1440px] mx-auto px-4">
 
                 <div className="flex justify-end items-center ml-auto mr-0">
