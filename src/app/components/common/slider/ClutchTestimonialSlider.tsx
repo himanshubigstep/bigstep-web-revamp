@@ -12,16 +12,6 @@ const dummyReviews = [
     image: '/reviewers/placeholder.png',
   },
   {
-    rating: 4.5,
-    review: 'They delivered the project at a pace and quality we wanted.',
-    feedback:
-      "The client has experienced a smooth development process and is happy with the demonstration and results. OrangeMantra's team is flexible and responsive, and they've exceeded expectations.",
-    name: 'Priya Sharma',
-    title: 'Product Manager, Reporting Platform',
-    location: 'Delhi, India',
-    image: '/reviewers/placeholder.png',
-  },
-  {
     rating: 5.0,
     review:
       'They listen, truly understand our needs, and align with our specific skills and talent requirements.',
@@ -51,14 +41,15 @@ const dummyReviews = [
     image: "/reviewers/placeholder.png"
   },
   {
-    rating: 5.0,
-    review: "BigStep Technologies is great all around — it's easy to submit tickets, and they always respond.",
-    feedback: "The client is pleased with BigStep Technologies Pvt. Ltd.'s 2–3 day bug turnaround times; tickets are submitted via questionnaire. BigStep Technologies Pvt. Ltd.'s team is located in two locations and ensures the client's platform is always up to the client's standards.",
-    name: "Anonymous",
-    title: "Owner, BuyHawaii",
-    location: "Honolulu, Hawaii",
-    image: "/reviewers/placeholder.png"
-  }
+    rating: 4.5,
+    review: 'They delivered the project at a pace and quality we wanted.',
+    feedback:
+      "The client has experienced a smooth development process and is happy with the demonstration and results. OrangeMantra's team is flexible and responsive, and they've exceeded expectations.",
+    name: 'Priya Sharma',
+    title: 'Product Manager, Reporting Platform',
+    location: 'Delhi, India',
+    image: '/reviewers/placeholder.png',
+  },
 ];
 
 const BG_IMAGE = '/slider-bg.png'; // Place the provided image in public/slider-bg.png

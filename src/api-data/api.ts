@@ -143,7 +143,7 @@ export const subscriberFormData = async (inputValue: SubscriberInput) => {
 export const fetchBlogsData = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/blogs?populate[image][populate]=*&populate[author][populate]=image&populate[category][populate]=name`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/blogs?populate[image][populate]=*&populate[author][populate]=image&populate[category][populate]=name&sort=createdAt:desc`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
