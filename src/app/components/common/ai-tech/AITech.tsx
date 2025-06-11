@@ -61,7 +61,7 @@ const AITech = ({ bannerTitle, bannerDescription, buttonTitle, onButtonClick, ba
     };
 
     return (
-        <div className='relative w-full h-full lg:py-16 py-8 bg-white dark:bg-black flex justify-center items-center'>
+        <div className='relative w-full h-full bg-white dark:bg-black flex justify-center items-center'>
         {rightSectionItems ? (
             <div className={`relative w-full h-full lg:py-16 py-8 bg-white dark:bg-black`}>
             {bannerImage &&
