@@ -4,18 +4,21 @@ import ContactFormSimple from './ContactFormSimple';
 
 const SimpleContactForm = ({ contactUsData }: { contactUsData: any }) => {
 
-    const bgImageUrl = contactUsData?.background_image?.data?.attributes?.url;
-
     return (
         <div className='relative w-full h-full bg-blue-50 dark:bg-black'>
-            <div className='w-full max-w-[1440px] mx-auto h-full flex lg:flex-row flex-col justify-between items-start rounded-lg lg:py-16 lg:px-8 px-4 py-8 lg:gap-16 gap-8'>
-                <div className='relative lg:w-[40%] w-full flex flex-col justify-center'>
-                    <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-blue-500 text-lg font-semibold mb-4'>{contactUsData?.heading}</h2>
-                    <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal'>{contactUsData?.description}</p>
+            <div className='w-full max-w-[1440px] mx-auto h-full flex flex-col justify-center items-center lg:py-16 lg:px-8 px-4 py-8'>
+                {/* Header Section */}
+                <div className='text-center mb-12'>
+                    <h2 className='lg:text-4xl md:text-3xl text-2xl font-bold text-white mb-6'>
+                        Get in Touch with BigStep Technologies
+                    </h2>
+                    <p className='lg:text-lg md:text-base text-sm text-gray-200 max-w-4xl mx-auto'>
+                        Ready to take your business to the next level? Fill out the form below to connect with our experts and discuss your project!
+                    </p>
                 </div>
-                <div className='relative lg:w-[60%] w-full h-full mx-auto'>
-                    <ContactFormSimple buttonText={contactUsData?.button_text} />
-                </div>
+                
+                {/* Calendly Section */}
+                <ContactFormSimple buttonText={contactUsData?.button_text} />
             </div>
         </div>
     )
