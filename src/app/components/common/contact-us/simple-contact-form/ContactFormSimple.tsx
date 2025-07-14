@@ -145,12 +145,92 @@ const ContactFormSimple: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) 
 
     return (
         <div className='w-full h-full flex flex-col items-center justify-center mt-8'>
-        {/* Calendly iframe always visible */}
-        <iframe
-            src="https://calendly.com/bigsteptech/15min"
-            className="w-full h-[700px] rounded-2xl shadow-lg max-w-6xl"
-            frameBorder="0"
-        />
+        <div className='w-full h-full flex'>
+            <form onSubmit={handleSubmit} className='w-full mx-auto flex flex-col gap-6'>
+                <div className='flex lg:flex-row md:flex-row items-start flex-col gap-4'>
+                    <InputField
+                        newFormLabel={true}
+                        type='text'
+                        name='name'
+                        label='Name'
+                        placeholder='Enter your name'
+                        value={formData.name}
+                        onChange={handleChange}
+                        className='w-full h-12 px-4 rounded-lg outline-0 bg-white dark:bg-black'
+                        error={formErrors.name}
+                    />
+                    <InputField
+                        newFormLabel={true}
+                        type='email'
+                        name='business_mail'
+                        label='Business Email'
+                        placeholder='Enter your business email'
+                        value={formData.business_mail}
+                        onChange={handleChange}
+                        className='w-full h-12 px-4 rounded-lg outline-0 bg-white dark:bg-black'
+                        error={formErrors.business_mail}
+                    />
+                    <InputField
+                        newFormLabel={true}
+                        type='text'
+                        name='company'
+                        label='Company'
+                        placeholder='Enter your company name'
+                        value={formData.company}
+                        onChange={handleChange}
+                        className='w-full h-12 px-4 rounded-lg outline-0 bg-white dark:bg-black'
+                    />
+                </div>
+                <div className='flex lg:flex-row flex-col gap-4'>
+                    <InputField
+                        newFormLabel={true}
+                        type='text'
+                        name='location'
+                        label='Location'
+                        placeholder='Enter your location'
+                        value={formData.location}
+                        onChange={handleChange}
+                        className='w-full h-12 px-4 rounded-lg outline-0 bg-white dark:bg-black'
+                    />
+                    <div className="w-full flex flex-col phone-number-section">
+                        <label htmlFor="phone_number" className="block font-semibold mb-2">Phone Number</label>
+                        <PhoneInput
+                            international
+                            defaultCountry="US"
+                            value={formData.phone_number}
+                            onChange={(value) => setFormData({ ...formData, phone_number: value })}
+                            className="w-full h-12 rounded-lg border border-gray-300 outline-0 input-field-phone relative bg-white dark:bg-black"
+                            error={formErrors.phone_number}
+                        />
+                        {formErrors.phone_number && (
+                            <p className="text-red-500">{formErrors.phone_number}</p>
+                        )}
+                    </div>
+                </div>
+                <InputField
+                    newFormLabel={true}
+                    type='textarea'
+                    name='query_description'
+                    label='Message'
+                    placeholder='Enter your message'
+                    value={formData.query_description}
+                    onChange={handleChange}
+                    className='w-full h-32 px-4 rounded-lg outline-0 bg-white dark:bg-black'
+                    error={formErrors.query_description}
+                />
+                {submitError && <p className='text-red-500 text-center'>{submitError}</p>}
+                <div className='flex justify-center'>
+                    <button
+                        type='submit'
+                        className='w-full max-w-xs h-14 px-8 rounded-xl outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 text-white text-xl font-semibold shadow-lg transition-all duration-200'
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? <LoaderSpinner /> : buttonText}
+                    </button>
+                </div>
+            </form>
+            <ToastContainer position='bottom-right' autoClose={5000} />
+        </div>
     </div>
     );
 };
