@@ -9,10 +9,10 @@ const SimpleContactForm = ({ contactUsData }: { contactUsData: any }) => {
             <div className='w-full max-w-[1440px] mx-auto h-full flex flex-col justify-center items-center lg:py-16 lg:px-8 px-4 py-8'>
                 {/* Header Section */}
                 <div className='text-center mb-12'>
-                    <h2 className='lg:text-4xl md:text-3xl text-2xl font-bold text-white mb-6'>
+                    <h2 className='lg:text-4xl md:text-3xl text-2xl font-bold mb-6 text-blue-900 dark:text-white'>
                         Get in Touch with BigStep Technologies
                     </h2>
-                    <p className='lg:text-lg md:text-base text-sm text-gray-200 max-w-4xl mx-auto'>
+                    <p className='lg:text-lg md:text-base text-sm max-w-4xl mx-auto text-gray-700 dark:text-gray-200'>
                         Ready to take your business to the next level? Fill out the form below to connect with our experts and discuss your project!
                     </p>
                 </div>
