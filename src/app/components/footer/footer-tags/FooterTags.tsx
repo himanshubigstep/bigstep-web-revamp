@@ -16,7 +16,6 @@ const FooterTags: React.FC<FooterTagsProps> = ({ attributes }) => {
             {keyWords.map(({ id, keywords }) => (
                 <p
                     key={id}
-                    // href={`/tags/${keywords.slice(1)}`}
                     className='text-gray-400 border border-gray-400 rounded-md px-2 py-2'
                 >
                     {keywords}

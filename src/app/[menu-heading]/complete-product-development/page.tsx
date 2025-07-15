@@ -1,13 +1,15 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { fetchCompleteProductDevelopmentData, fetchCompleteProductDevelopmentHolisticApproach } from '@/api-data/api'
+import { fetchCompleteProductDevelopmentData, fetchCompleteProductDevelopmentHolisticApproach, fetchModalBoxHomePage } from '@/api-data/api'
 import Clients from '@/app/components/common/clients/Clients'
-import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
-import MilesTone from '@/app/components/common/milestones-data/MilesTone'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
 import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
+import MileStoneSubmenu from '@/app/components/common/milestones-data/MileStoneSubmenu'
+import ModelBox from '@/app/components/model-box/ModelBox'
+import Head from 'next/head'
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm'
 
 interface CompleteProductDevelopmentProps {
   id: number;
@@ -62,6 +64,7 @@ interface CompleteProductDevelopmentProps {
   holistic_approach: {
     id: number;
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -82,6 +85,7 @@ interface CompleteProductDevelopmentProps {
     description: string;
     heading: string;
     label: string
+    link: string;
     background_image: {
       data: {
         attributes: {
@@ -111,6 +115,12 @@ interface CompleteProductDevelopmentProps {
       }
     }
   }
+  MilesTones: {
+    id: number;
+    heading: string;
+    sub_heading: string;
+    description: string
+  }
   product_development: {
     id: number;
     heading: string;
@@ -128,12 +138,81 @@ interface CompleteProductDevelopmentProps {
       }
     }
   }
+  why_choose: {
+    id: number;
+    heading: string;
+    description: string;
+    button_text: string;
+    images: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
+  why_choose_data: {
+    id: number;
+    heading: string;
+    description: string
+  }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
+  }
+}
+
+interface closingModalBoxData {
+  id: number;
+  attributes: {
+    category: string;
+    Modal_closing: {
+      id: number;
+      heading: string;
+      description: string;
+      label: string;
+      link: string;
+      buttonText: string;
+      backgroundImage: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+          }
+        }[]
+      }
+    }[]
+  }
 }
 
 const CompleteProductDevelopment = () => {
     const [completeProductDevelopmentData, setCompleteProductDevelopmentData] = useState<CompleteProductDevelopmentProps | null>(null)
     const [completeProductDevelopmentHolisticData, setCompleteProductDevelopmentHolisticData] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
+  
+    useEffect(() => {
+      const fetchModalBoxDataSection = async () => {
+        try {
+          const response = await fetchModalBoxHomePage();
+          setModalBoxData(response);
+        } catch (error) {
+          console.log(error);
+          return null;
+        } finally {
+          setLoading(false);
+        }
+      }
+  
+      fetchModalBoxDataSection();
+    }, [])
 
     useEffect(() => {
       const fetchCompleteProductDevelopmentDataResponse = async () => {
@@ -166,27 +245,66 @@ const CompleteProductDevelopment = () => {
       fetchCompleteProductDevelopmentHolisticData();
     }, [])
 
+    useEffect(() => {
+      if (completeProductDevelopmentData) {
+        document.title = completeProductDevelopmentData?.seo?.metaTitle || "Default Title";
+        let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+        if (!metaDescription) {
+          metaDescription = document.createElement("meta");
+          metaDescription.name = "description";
+          document.head.appendChild(metaDescription);
+        }
+        metaDescription.content = completeProductDevelopmentData?.seo?.metaDescription || "Default description";
+        let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+        if (!canonicalLink) {
+          canonicalLink = document.createElement("link");
+          canonicalLink.rel = "canonical";
+          document.head.appendChild(canonicalLink);
+        }
+        canonicalLink.href = completeProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
+      }
+    }, [completeProductDevelopmentData]);
+
+    useEffect(() => {
+      if (!loading) {
+        window.scrollTo(0, 0);
+      }
+    }, [loading]);
+
     if (loading) {
       return <LoaderSpinner />;
     }
     
   return (    
     <div className='poppins'>
+        <Head>
+          <link rel="canonical" href={completeProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url"} />
+          <meta name="title" content={completeProductDevelopmentData?.seo?.metaTitle || "Default description"} />
+          <meta name="description" content={completeProductDevelopmentData?.seo?.metaDescription || "Default Description"} />
+        </Head>
         <TopBanner bannerData={completeProductDevelopmentData?.introduction} />
         <HolisticApproach
           title={completeProductDevelopmentData?.holistic_approach?.heading || ''}
           description={completeProductDevelopmentData?.holistic_approach?.description || ''}
           buttonText={completeProductDevelopmentData?.holistic_approach?.button_text || ''}
+          buttonLink={completeProductDevelopmentData?.holistic_approach?.button_link || ''}
           holisticData={completeProductDevelopmentHolisticData[0] || []}
         />
-        <ProductDevelopment />
-        {/* <MilesTone homePageData={homePageData} /> */}
-        <Clients
-            title={completeProductDevelopmentData?.client_review?.heading || ''}
-            description={completeProductDevelopmentData?.client_review?.description || ''}
-            bgImage={completeProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${completeProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+        <ProductDevelopment
+          developmentData={completeProductDevelopmentData}
         />
-        <ContactUs contactUsData = {completeProductDevelopmentData?.client_query || []} />
+        <MileStoneSubmenu homePageData={completeProductDevelopmentData} />
+        <div className='w-full h-full'>
+          <Clients
+              title={completeProductDevelopmentData?.client_review?.heading || ''}
+              description={completeProductDevelopmentData?.client_review?.description || ''}
+              bgImage={completeProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${completeProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+          />
+        </div>
+        <div className='w-full h-full lg:mt-16 md:mt-16 mt-8'>
+          <SimpleContactForm contactUsData={completeProductDevelopmentData?.client_query || []} />
+        </div>
+        <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }

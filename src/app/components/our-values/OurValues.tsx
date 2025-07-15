@@ -1,95 +1,77 @@
 import React, { useState } from 'react'
-import learning from '../../assets/1.png'
-import transparancy from '../../assets/2.png'
-import commitment from '../../assets/3.png'
-import accountability from '../../assets/4.png'
-import integrity from '../../assets/5.png'
-import Image from 'next/image'
+import SlideShow from '../common/slide-show/SlideShow'
 
-const OurValues = () => {
-    const ourValues = [
-        {
-            id: 1,
-            icon: learning,
-            title: 'Continuous Learning',
-            description: 'We consistently seek new insights and techniques to enhance the performance and quality of work.'
-        },
-        {
-            id: 2,
-            icon: transparancy,
-            title: 'Transparency',
-            description: 'We keep you involved throughout the project, ensuring clear communication and shared decision-making.'
-        },
-        {
-            id: 3,
-            icon: commitment,
-            title: 'Commitment',
-            description: 'We are fully dedicated to delivering successful outcomes that meet your objectives and expectations.'
-        },
-        {
-            id: 4,
-            icon: accountability,
-            title: 'Accountability',
-            description: 'We take responsibility for our results, always meeting the highest standards in client service and quality.'
-        },
-        {
-            id: 5,
-            icon: integrity,
-            title: 'Integrity',
-            description: 'We maintain the highest ethical standards, ensuring fairness and honesty in every project we undertake.'
-        },
-    ]
+const OurValues = ({ valuesData }: { valuesData: any }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+
     const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % ourValues.length);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % valuesData?.value_1.length);
     };
 
     const handlePrev = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + ourValues.length) % ourValues.length);
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + valuesData?.value_1.length) % valuesData?.value_1.length);
     };
     return (
-        <div className='w-full h-full bg-black md:py-16 py-8'>
-            <div className='w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center text-center md:px-0 px-4'>
-                <h2 className='text-3xl font-semibold text-center mb-4 text-white'>Our Values</h2>
-                <p className='text-lg font-normal text-white'>Driven by learning, transparency, commitment, integrity, and accountability — we deliver results you can trust.</p>
-                <div className='w-full flex md:py-16 py-8'>
-                    <div className='w-full flex'>
-                        <div className='md:grid hidden md:grid-cols-5 grid-cols-1'>
-                            {ourValues.map((value) => (
-                                <div key={value.id} className='md:px-8 px-4 md:py-0 py-4'>
-                                    <div className='mb-4'>
-                                        <img
-                                            src={value.icon.src}
-                                            alt={value.title}
-                                            className='object-contain min-w-66 max-w-66'
-                                        />
+        <div className='w-full h-auto bg-black'>
+            <div className='w-full flex lg:flex-row flex-col justify-center items-center text-center lg:px-0'>
+                <div className='w-full lg:w-1/2 flex flex-col justify-center items-center lg:px-0'>
+                    <SlideShow valuesData={valuesData?.value_photos?.data} />
+                </div>
+                <div className='w-full lg:w-1/2 flex flex-col justify-center items-center text-left lg:p-16 p-4'>
+                    <div className='w-full flex flex-col text-left lg:px-0'>
+                        <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-semibold text-left mb-4 text-white'>{valuesData?.title}</h2>
+                        <p className='lg:text-lg md:text-md sm:text-sm text-xs font-normal text-white'>{valuesData?.description}</p>
+                    </div>
+                    <div className='w-full flex lg:py-16 py-8'>
+                        <div className='w-full flex'>
+                            <div className='lg:grid hidden lg:grid-cols-3 grid-cols-2 gap-16'>
+                                {valuesData && valuesData?.value_1.map((value: any) => (
+                                    <div key={value.id} className='relative flex flex-col justify-center items-center'>
+                                        <div className='mb-4'>
+                                            <img
+                                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${value?.image?.data?.attributes?.url}`}
+                                                alt={value?.image?.data?.attributes?.name}
+                                                className='object-contain min-w-16 max-w-16'
+                                            />
+                                        </div>
+                                        <div className='w-full max-w-[80%] flex flex-col justify-center items-center'>
+                                            <h2 className='lg:text-2xl md:text-xl sm:text-lg text-md text-center font-semibold mb-2 text-white line-clamp-2'>{value?.link}</h2>
+                                        </div>
                                     </div>
-                                    <div className='w-full max-w[80%] flex flex-col justify-start items-start'>
-                                        <h2 className='text-xl text-left font-semibold mb-2 text-white'>{value.title}</h2>
-                                        <p className='text-lg text-left font-normal text-white'>{value.description}</p>
-                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="lg:hidden w-full flex flex-col lg:items-center">
+                                <div className="mb-4 lg:block md:block sm:block flex justify-center items-center">
+                                    <img
+                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${valuesData?.value_1[currentIndex]?.image?.data?.attributes?.url}`}
+                                        alt={valuesData?.value_1[currentIndex]?.link}
+                                        className="object-contain min-w-24 max-w-24"
+                                    />
                                 </div>
-                            ))}
-                        </div>
-                        <div className='md:hidden w-full flex flex-col items-center'>
-                            <div className='mb-4'>
-                                <img
-                                    src={ourValues[currentIndex].icon.src}
-                                    alt={ourValues[currentIndex].title}
-                                    className='object-contain min-w-66 max-w-66'
-                                />
-                            </div>
-                            <div className='w-full max-w[80%] flex flex-col justify-center items-center'>
-                                <h2 className='text-xl text-center font-semibold mb-2 text-white'>{ourValues[currentIndex].title}</h2>
-                                <p className='text-lg text-center font-normal text-white'>{ourValues[currentIndex].description}</p>
-                            </div>
-                            <div className='flex justify-between w-full mt-8'>
-                                <button onClick={handlePrev} className='bg-gray-700 text-white py-2 px-4 rounded'>
-                                    Previous
-                                </button>
-                                <button onClick={handleNext} className='bg-gray-700 text-white py-2 px-4 rounded'>
-                                    Next
-                                </button>
+                                <div className="w-full lg:max-w-[80%] md:max-w-[80%] sm:max-w-[80%] max-w-full flex flex-col justify-center items-center">
+                                    <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md font-semibold mb-2 text-white lg:text-left md:text-left sm:text-left text-center">
+                                        {valuesData?.value_1[currentIndex]?.link}
+                                    </h2>
+                                </div>
+                                <div className='relative flex justify-between w-full mt-4'>
+                                    <button onClick={handlePrev} className='flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none'>
+                                        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 dark:bg-gray-400/30 group-hover:bg-blue-500 dark:group-hover:bg-gray-500/60 group-focus:ring-4 group-focus:ring-blue-500 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                            <svg className="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
+                                            </svg>
+                                            <span className="sr-only">Previous</span>
+                                        </span>
+                                    </button>
+                                    <button onClick={handleNext} className='flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none'>
+                                        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 dark:bg-gray-400/30 group-hover:bg-blue-500 dark:group-hover:bg-gray-500/60 group-focus:ring-4 group-focus:ring-blue-500 dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                            <svg className="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+                                            </svg>
+                                            <span className="sr-only">Next</span>
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

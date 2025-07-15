@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import { fetchOffShoreDevelopmentData, fetchOffShoreDevelopmentHolisticApproach } from '@/api-data/api'
 import Clients from '@/app/components/common/clients/Clients'
-import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
-import MilesTone from '@/app/components/common/milestones-data/MilesTone'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import HolisticApproach from '@/app/components/holistic-approach/HolisticApproach'
 import ProductDevelopment from '@/app/components/product-development/ProductDevelopment'
+import MileStoneSubmenu from '@/app/components/common/milestones-data/MileStoneSubmenu'
+import Head from 'next/head'
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm'
 
 interface OffShoreDevelopmentProps {
   id: number;
@@ -62,6 +63,7 @@ interface OffShoreDevelopmentProps {
   holistic_approach: {
     id: number;
     button_text: string
+    button_link: string
     description: string
     heading: string
     background_image: {
@@ -82,6 +84,7 @@ interface OffShoreDevelopmentProps {
     description: string;
     heading: string;
     label: string
+    link: string;
     background_image: {
       data: {
         attributes: {
@@ -111,6 +114,12 @@ interface OffShoreDevelopmentProps {
       }
     }
   }
+  MilesTones: {
+    id: number;
+    heading: string;
+    sub_heading: string;
+    description: string
+  }
   product_development: {
     id: number;
     heading: string;
@@ -127,6 +136,34 @@ interface OffShoreDevelopmentProps {
         }
       }
     }
+  }
+  why_choose: {
+    id: number;
+    heading: string;
+    description: string;
+    button_text: string;
+    images: {
+      data: {
+        attributes: {
+          formats: {
+            large: {
+              url: string
+            }
+          }
+        }
+      }
+    }
+  }
+  why_choose_data: {
+    id: number;
+    heading: string;
+    description: string
+  }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
   }
 }
 
@@ -166,27 +203,63 @@ const OffShoreDevelopment = () => {
       fetchOffShoreDevelopmentHolisticData();
     }, [])
 
+    useEffect(() => {
+      if (offShoreProductDevelopmentData) {
+        document.title = offShoreProductDevelopmentData?.seo?.metaTitle || "Default Title";
+        let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+        if (!metaDescription) {
+          metaDescription = document.createElement("meta");
+          metaDescription.name = "description";
+          document.head.appendChild(metaDescription);
+        }
+        metaDescription.content = offShoreProductDevelopmentData?.seo?.metaDescription || "Default description";
+        let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+        if (!canonicalLink) {
+          canonicalLink = document.createElement("link");
+          canonicalLink.rel = "canonical";
+          document.head.appendChild(canonicalLink);
+        }
+        canonicalLink.href = offShoreProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url";
+      }
+    }, [offShoreProductDevelopmentData]);
+
+    useEffect(() => {
+      if (!loading) {
+        window.scrollTo(0, 0);
+      }
+    }, [loading]);
+
     if (loading) {
       return <LoaderSpinner />;
     }
     
   return (    
     <div className='poppins'>
+        <Head>
+          <link rel="canonical" href={offShoreProductDevelopmentData?.seo?.canonicalURL || "default-canonical-url"} />
+          <meta name="title" content={offShoreProductDevelopmentData?.seo?.metaTitle || "Default description"} />
+          <meta name="description" content={offShoreProductDevelopmentData?.seo?.metaDescription || "Default Description"} />
+        </Head>
         <TopBanner bannerData={offShoreProductDevelopmentData?.introduction} />
         <HolisticApproach
           title={offShoreProductDevelopmentData?.holistic_approach?.heading || ''}
           description={offShoreProductDevelopmentData?.holistic_approach?.description || ''}
           buttonText={offShoreProductDevelopmentData?.holistic_approach?.button_text || ''}
+          buttonLink={offShoreProductDevelopmentData?.holistic_approach?.button_link || ''}
           holisticData={offShoreDevelopmentHolisticData[0] || []}
         />
-        <ProductDevelopment />
-        {/* <MilesTone homePageData={homePageData} /> */}
-        <Clients
-            title={offShoreProductDevelopmentData?.client_review?.heading || ''}
-            description={offShoreProductDevelopmentData?.client_review?.description || ''}
-            bgImage={offShoreProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${offShoreProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
-        />
-        <ContactUs contactUsData = {offShoreProductDevelopmentData?.client_query || []} />
+        <ProductDevelopment developmentData={offShoreProductDevelopmentData} />
+        <MileStoneSubmenu homePageData={offShoreProductDevelopmentData} />
+        <div className='w-full h-full'>
+          <Clients
+              title={offShoreProductDevelopmentData?.client_review?.heading || ''}
+              description={offShoreProductDevelopmentData?.client_review?.description || ''}
+              bgImage={offShoreProductDevelopmentData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${offShoreProductDevelopmentData.client_review?.background_image.data.attributes.formats.large.url}`  : ''} 
+          />
+        </div>
+        <div className='w-full h-full lg:mt-16 md:mt-16 mt-8'>
+          <SimpleContactForm contactUsData={offShoreProductDevelopmentData?.client_query || []} />
+        </div>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import Button from '../button/Button';
+import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 interface ImageFormats {
     large: {
@@ -36,7 +36,7 @@ interface SlideShowTextProps {
 
 const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide, isActive }) => (
     <div
-        className={`absolute w-full h-full transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute w-full h-full flex items-center ${isActive ? 'opacity-100' : 'opacity-0'}`}
         data-carousel-item
     >
         {slide.attributes.image.data.attributes.ext.endsWith('.mp4') ? (
@@ -51,20 +51,19 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
             </video>
         ) : (
             <img
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.formats.large.url}`}
-                className="absolute block w-full h-full object-cover"
+                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${slide.attributes.image.data.attributes.url}`}
+                className="absolute block w-full h-full object-cover object-right"
                 alt={`Slide ${slide.id}`}
             />
         )}
-        <div className="relative w-full max-w-[1440px] mx-auto h-full text-white z-20 px-4 md:px-4">
-            <div className={`md:w-[45%] w-full h-full flex flex-col justify-center items-start transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                <h2 className="md:text-4xl text-xl mb-4 font-medium">{slide.attributes.title}</h2>
-                <p className="md:mb-16 mb-4 md:text-lg text-md font-normal">{slide.attributes.text_body}</p>
-                <Button
-                    text={slide.attributes.button_text}
-                    className="md:text-lg text-sm bg-blue-500 hover:bg-blue-800 text-white py-4 px-4 rounded-xl w-auto font-medium"
-                    onClick={() => window.open(slide.attributes.button_link, '_blank')}
-                />
+        <div className="relative w-full max-w-[1440px] mx-auto lg:h-auto md:h-auto sm:h-full h-auto text-white z-20 px-4 lg:px-4">
+            <div className={`lg:w-1/2 md:w-1/2 sm:w-[80%] w-full h-full flex flex-col justify-center items-start transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                <h2 className="lg:text-4xl md:text-3xl sm:text-md text-md lg:mb-4 md:mb-4 sm:mb-2 mb-2 font-medium">{slide.attributes.title}</h2>
+                <p className="lg:mb-8 md:mb-4 sm:mb-2 mb-2 lg:text-lg md:text-md sm:text-sm text-sm font-normal leading-normal">{slide.attributes.text_body}</p>
+                <Link href={slide.attributes.button_link} passHref target='_self'
+                    className='py-4 px-8 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-lg text-md text-white font-normal'>
+                    {slide.attributes.button_text}
+                </Link>
             </div>
         </div>
     </div>
@@ -73,32 +72,52 @@ const Slide: React.FC<{ slide: HomePageCarousel; isActive: boolean }> = ({ slide
 const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [sortedSlides, setSortedSlides] = useState<HomePageCarousel[]>([]);
+    const startTouchX = useRef(0);
 
     useEffect(() => {
         if (slides && slides.length > 0) {
-            const sortedSlides = [...slides].sort((a, b) => a.id - b.id);
+
+            const sorted = [...slides].sort((a, b) => a.id - b.id);
+            setSortedSlides(sorted);
             setCurrentSlideIndex(0);
         }
     }, [slides]);
 
     useEffect(() => {
         const timer = setInterval(() => {
-            if (!isHovered && slides.length > 0) {
+            if (!isHovered && sortedSlides.length > 0) {
                 setCurrentSlideIndex(prevIndex => {
-                    const nextIndex = (prevIndex + 1) % slides.length;
+                    const nextIndex = (prevIndex + 1) % sortedSlides.length;
                     return nextIndex;
                 });
             }
-        }, 3000);
+        }, 10000);
 
         return () => clearInterval(timer);
-    }, [slides, isHovered]);
+    }, [sortedSlides, isHovered]);
 
     const handleSlideChange = (index: number) => {
         setCurrentSlideIndex(index);
     };
-    
-    const sortedSlides = [...slides].sort((a, b) => a.id - b.id);
+
+    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+        const touchStart = e.touches[0].clientX;
+        startTouchX.current = touchStart;
+    };
+    const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+        e.preventDefault();
+    };
+    const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+        const touchEnd = e.changedTouches[0].clientX;
+        const touchDiff = startTouchX.current - touchEnd;
+
+        if (touchDiff > 50) {
+            setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % sortedSlides.length);
+        } else if (touchDiff < -50) {
+            setCurrentSlideIndex((prevIndex) => (prevIndex - 1 + sortedSlides.length) % sortedSlides.length);
+        }
+    };
 
     return (
         <div
@@ -107,8 +126,11 @@ const SlideShowText: React.FC<SlideShowTextProps> = ({ slides }) => {
             data-carousel="slide"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
         >
-            <div className="relative overflow-hidden min-h-[80vh]">
+            <div className="relative overflow-hidden lg:h-[80vh] md:h-[60vh] sm:h-[80vh] h-[65vh] md:landscape:h-[80vh] sm:landscape:h-[120vh] landscape:h-screen">
                 <div className='absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gradient-to-r from-black via-gray-900 to-transparent opacity-90 z-20' data-carousel-item></div>
                 {sortedSlides.map((slide, index) => (
                     <Slide key={slide.id} slide={slide} isActive={index === currentSlideIndex} />

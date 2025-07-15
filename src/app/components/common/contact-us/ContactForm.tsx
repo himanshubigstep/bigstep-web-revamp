@@ -2,6 +2,12 @@
 import React, { useState } from 'react'
 import InputField from '../input-fields/InputField';
 import { contactFormData } from '@/api-data/api';
+import LoaderSpinner from '../loader-spinner/LoadingSpinner';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 interface ContactFormProps {
     buttonText?: string;
@@ -13,8 +19,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
         business_mail: '',
         company: '',
         location: '',
-        phone_number: '',
-        message: ''
+        phone_number: '' as string | undefined,
+        query_description: ''
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,6 +29,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
         name: '',
         business_mail: '',
         phone_number: '',
+        query_description: ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -34,27 +41,41 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
     };
 
     const validateForm = () => {
-        const errors = { name: '', business_mail: '', phone_number: '' };
+        const errors = { name: '', business_mail: '', phone_number: '', query_description: '' };
         let isValid = true;
 
         if (!formData.name.trim()) {
-            errors.name = 'Name is required';
+            errors.name = 'Name is Required';
             isValid = false;
         }
 
         if (!formData.business_mail.trim()) {
-            errors.business_mail = 'business_mail is required';
+            errors.business_mail = 'Business Mail is Required';
             isValid = false;
-        } else if (!/\S+@\S+\.\S+/.test(formData.business_mail)) {
-            errors.business_mail = 'business_mail is invalid';
+        } else {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(formData.business_mail)) {
+                errors.business_mail = 'Business Mail is Invalid';
+                isValid = false;
+            } else {
+                const domainPart = formData.business_mail.split('@')[1];
+                if (domainPart && domainPart.split('.').length > 2) {
+                    errors.business_mail = 'Invalid email format. Multiple domain extensions are not allowed.';
+                    isValid = false;
+                }
+            }
+        }
+
+        if (!formData.phone_number) {
+            errors.phone_number = 'Phone Number is Required';
+            isValid = false;
+        } else if (formData.phone_number && !/^(\+?[\d]{1,4})?[\d]{7,15}$/.test(formData.phone_number)) {
+            errors.phone_number = 'Phone Number is Invalid';
             isValid = false;
         }
 
-        if (!formData.phone_number.trim()) {
-            errors.phone_number = 'phone_number number is required';
-            isValid = false;
-        } else if (!/^\d{10}$/.test(formData.phone_number)) {
-            errors.phone_number = 'Phone number must be exactly 10 digits';
+        if (!formData.query_description.trim()) {
+            errors.query_description = 'Message is Required';
             isValid = false;
         }
 
@@ -66,14 +87,15 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitError(null);
-
+    
         if (!validateForm()) {
             setIsSubmitting(false);
             return;
         }
-
+    
         try {
             const response = await contactFormData(formData);
+    
             if (response) {
                 console.log('Form submitted successfully:', response);
                 setFormData({
@@ -82,22 +104,39 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                     company: '',
                     location: '',
                     phone_number: '',
-                    message: ''
+                    query_description: ''
                 });
+    
+                toast.success('Form has been submitted successfully!');
             } else {
-                setSubmitError('Failed to submit the form. Please try again.');
+                const errorResponse = await fetch(
+                    `${process.env.NEXT_PUBLIC_BASE_URL}/inquiries`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ data: formData }),
+                    }
+                ).then(res => res.json());
+    
+                if (errorResponse?.error?.details?.errors) {
+                    errorResponse.error.details.errors.forEach((error: { path: any[]; message: string; }) => {
+                        const path = error?.path?.join(', ') || 'Unknown Field';
+                        const message = error?.message || 'An error occurred';
+                        toast.error(`${path}: ${message}`);
+                    });
+                } else {
+                    toast.error(errorResponse?.error?.message || 'Failed to submit the form. Please try again.');
+                }
             }
         } catch (error) {
             console.error('Error submitting the form:', error);
-
+    
             if (error instanceof Error) {
-                if (error.message === 'This attribute must be unique') {
-                    setSubmitError('Email should be unique');
-                } else {
-                    setSubmitError('An error occurred. Please try again.');
-                }
+                toast.error(error.message);
             } else {
-                setSubmitError('An unknown error occurred. Please try again.');
+                toast.error('An unknown error occurred. Please try again.');
             }
         } finally {
             setIsSubmitting(false);
@@ -148,25 +187,30 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                         onChange={handleChange}
                         className='w-1/2 md:w-full bg-black h-12 px-4 rounded-lg outline-0 text-white'
                     />
-                    <InputField
-                        type='number'
-                        name='phone_number'
-                        label='Phone Number'
-                        placeholder='Enter your phone number'
-                        value={formData.phone_number}
-                        onChange={handleChange}
-                        className='w-1/2 md:w-full bg-black h-12 px-4 rounded-lg outline-0 text-white'
-                        error={formErrors.phone_number}
-                    />
+                    <div className="w-1/2 md:w-full flex flex-col">
+                        <label htmlFor="phone_number" className="block text-white font-semibold mb-2">Phone Number</label>
+                        <PhoneInput
+                            international
+                            defaultCountry="US"
+                            value={formData.phone_number}
+                            onChange={(value) => setFormData({ ...formData, phone_number: value })}
+                            className="w-full h-12 bg-black rounded-lg outline-0 text-white input-field-phone relative"
+                            error={formErrors.phone_number}
+                        />
+                        {formErrors.phone_number && (
+                            <p className="text-red-500">{formErrors.phone_number}</p>
+                        )}
+                    </div>
                 </div>
                 <InputField
                     type='textarea'
-                    name='message'
+                    name='query_description'
                     label='Message'
                     placeholder='Enter your message'
-                    value={formData.message}
+                    value={formData.query_description}
                     onChange={handleChange}
                     className='w-full h-32 bg-black px-4 rounded-lg outline-0 text-white'
+                    error={formErrors.query_description}
                 />
                 {submitError && <p className='text-red-500 text-center'>{submitError}</p>}
                 <div className='w-full flex justify-center'>
@@ -175,10 +219,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ buttonText = 'Send' }) => {
                         className='md:w-48 w-full h-12 px-4 rounded-lg outline-0 flex justify-center items-center bg-blue-500 hover:bg-blue-800 mt-4 text-white'
                         disabled={isSubmitting}
                     >
-                        {isSubmitting ? 'Sending...' : buttonText}
+                        {isSubmitting ? <LoaderSpinner /> : buttonText}
                     </button>
                 </div>
             </form>
+            <ToastContainer position='bottom-right' autoClose={5000} />
         </div>
     );
 };

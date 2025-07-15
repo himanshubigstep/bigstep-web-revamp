@@ -9,12 +9,13 @@ interface InputFieldProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     className?: string;
     error?: string;
+    newFormLabel?: boolean
 }
 
-const InputField: React.FC<InputFieldProps> = ({ type = 'text', name, label, placeholder, value, onChange, className, error }) => {
+const InputField: React.FC<InputFieldProps> = ({ type = 'text', name, label, placeholder, value, onChange, className, error, newFormLabel }) => {
     return (
         <div className='w-full mb-4'>
-            <label htmlFor={name} className='block text-white font-semibold mb-2'>{label}</label>
+            <label htmlFor={name} className={`${newFormLabel ? 'block text-black dark:text-white font-semibold mb-2' : 'block text-white font-semibold mb-2'}`}>{label}</label>
             {type === 'textarea' ? (
                 <textarea
                     id={name}

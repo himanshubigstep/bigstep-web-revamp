@@ -1,19 +1,12 @@
 'use client'
 import React from 'react'
-import bulb from '../../assets/bulb.png'
-import pencil from '../../assets/pencil.png'
-import code from '../../assets/code.png'
-import medal from '../../assets/medal.png'
-import rocket from '../../assets/rocket.png'
-import settings from '../../assets/settings.png'
-import Image from 'next/image'
 import Button from '../common/button/Button'
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 interface HolisticData {
     id: number;
     heading: string;
     description: string;
+    hex_code: string | null;
     serviceLogo?: {
         data?: {
             attributes: {
@@ -27,6 +20,7 @@ interface HolisticApproachProps {
     title: string;
     description: string;
     buttonText: string;
+    buttonLink: string;
     holisticData: {
         attributes: {
             service_data: HolisticData[];
@@ -34,79 +28,53 @@ interface HolisticApproachProps {
     };
 }
 
-const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description, buttonText, holisticData }) => {
+const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description, buttonText, holisticData, buttonLink }) => {
     const holisticApproach = holisticData?.attributes?.service_data || [];
     const sortedApproach = holisticApproach.sort((a, b) => a.id - b.id);
-    const holisticApproachData = [
-        {
-            id: 1,
-            heading: 'Initial Concept and Ideation',
-            description: 'Understanding your vision and goals to create a detailed project roadmap.',
-            icon: bulb,
-            bgCode: '#E4F3E8',
-            color: '#1EB047'
-        },
-        {
-            id: 2,
-            heading: 'Design',
-            description: 'Crafting user-centric designs through wireframes, prototypes, and user feedback.',
-            icon: pencil,
-            bgCode: '#F5DFC3',
-            color: '#D5AC78'
-        },
-        {
-            id: 3,
-            heading: 'Development',
-            description: 'Implementing agile methodologies for iterative and flexible development.',
-            icon: code,
-            bgCode: '#FCDADA',
-            color: '#ECA5A5'
-        },
-        {
-            id: 4,
-            heading: 'Quality Assurance',
-            description: 'Conducting rigorous testing to ensure reliability and performance.',
-            icon: medal,
-            bgCode: '#FFDAFB',
-            color: '#D090C9'
-        },
-        {
-            id: 5,
-            heading: 'Deployment',
-            description: 'Seamlessly launching your product in the live environment.',
-            icon: rocket,
-            bgCode: '#DEEFD7',
-            color: '#8DB87C'
-        },
-        {
-            id: 6,
-            heading: 'Maintenance',
-            description: 'Providing ongoing support and updates to keep your product running smoothly.',
-            icon: settings,
-            bgCode: '#F0F7FF',
-            color: '#007AFF'
-        },
-    ]
+
+    const darkenHex = (hex: string, factor: number): string => {
+        let r = parseInt(hex.slice(1, 3), 16);
+        let g = parseInt(hex.slice(3, 5), 16);
+        let b = parseInt(hex.slice(5, 7), 16);
+
+        r = Math.floor(r * (1 - factor));
+        g = Math.floor(g * (1 - factor));
+        b = Math.floor(b * (1 - factor));
+
+        r = Math.max(0, Math.min(255, r));
+        g = Math.max(0, Math.min(255, g));
+        b = Math.max(0, Math.min(255, b));
+
+        let newHex = `#${((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1).toUpperCase()}`;
+        return newHex;
+    };
+
     return (
-        <div className='w-full h-full md:py-16 py-8 px-4 flex flex-col justify-center items-center'>
+        <div className='w-full h-full lg:py-16 py-8 px-4 flex flex-col justify-center items-center'>
             <div className='w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center text-center'>
-                <h2 className='text-3xl font-bold text-center mb-4'>{title}</h2>
-                <p className='text-lg'>{description}</p>
+                <h2 className='lg:text-3xl md:text-2xl sm:text-xl text-lg font-bold text-center mb-4'>{title}</h2>
+                <p className='lg:text-lg md:text-md sm:text-sm text-xs'>{description}</p>
             </div>
-            <div className='relative w-full max-w-[1440px] mx-auto mt-8 md:h-[36rem] h-auto'>
-                <div className='w-full h-full flex justify-center items-center'>
-                    <div className='flex w-full h-1 bg-[#E1E1E1] relative z-10 px-8 justify-evenly items-center'>
-                        {sortedApproach.map((item, index) => (
+            <div className='lg:block hidden relative w-full max-w-[1440px] mx-auto mt-8 lg:h-[40rem] h-auto'>
+                <div className='flex w-full h-1 bg-[#E1E1E1] absolute top-1/2 z-10 px-8 justify-evenly items-center' />
+                <div className='w-full h-full flex justify-evenly items-center'>
+                    {sortedApproach.map((item, index) => {
+                        const hexColor = item.hex_code || '#ccc'; // Fallback to a default color if hex_code is null
+
+                        return (
                             <div
                                 key={item.id}
-                                className='w-12 h-12 rounded-full relative z-10 flex justify-center items-center text-2xl font-semibold'
-                                style={{ backgroundColor: 'green', color: 'white' }}
+                                className='w-12 h-12 rounded-full relative z-20 flex justify-center items-center text-2xl font-semibold'
+                                style={{
+                                    backgroundColor: hexColor,
+                                    color: darkenHex(hexColor, 0.5),
+                                }}
                             >
                                 {index + 1}
                                 <div
                                     className='w-[1px] h-24 absolute'
                                     style={{
-                                        borderColor: 'green',
+                                        borderColor: hexColor,
                                         borderWidth: 1,
                                         borderStyle: 'dashed',
                                         bottom: item.id % 2 !== 0 ? '110%' : 'auto',
@@ -120,8 +88,8 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                                         top: item.id % 2 === 0 ? '340%' : 'auto',
                                     }}
                                 >
-                                    <h3 className='text-center text-xl font-semibold text-black'>{item.heading}</h3>
-                                    <p className='text-center text-sm font-normal text-black'>{item.description}</p>
+                                    <h3 className='text-center lg:text-xl md:text-lg sm:text-md text-sm font-semibold dark:text-white text-black'>{item.heading}</h3>
+                                    <p className='text-center text-sm font-normal dark:text-white text-black'>{item.description}</p>
                                 </div>
                                 <div
                                     className='absolute'
@@ -134,22 +102,56 @@ const HolisticApproach: React.FC<HolisticApproachProps> = ({ title, description,
                                         <img
                                             src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.serviceLogo.data.attributes.url}`}
                                             alt="icon"
-                                            className='w-16 object-contain'
+                                            className='min-w-20 object-contain'
                                         />
                                     )}
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        );
+                    })}
                 </div>
             </div>
-            <Button
-                text={buttonText}
-                onClick={() => console.log('clicked')}
-                className='py-4 px-8 md:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 text-lg text-white font-normal'
-            />
-        </div>
-    )
-}
 
-export default HolisticApproach
+            <div className='lg:hidden block relative w-full max-w-[1440px] mx-auto mt-8 lg:h-[48rem] h-auto'>
+                <div className='w-full h-full grid grid-cols-1 gap-4 justify-center items-center'>
+                    {sortedApproach.map((item, index) => {
+                        const hexColor = item.hex_code || '#ccc';
+
+                        return (
+                            <div className='w-full h-full flex flex-col justify-start gap-4 p-4' key={item.id}>
+                                {item.serviceLogo?.data?.attributes?.url && (
+                                    <img
+                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${item.serviceLogo.data.attributes.url}`}
+                                        alt="icon"
+                                        className='min-w-20 max-w-20 object-contain'
+                                    />
+                                )}
+                                <div className='w-[90%] h-full flex flex-col'>
+                                    <h3 className='flex gap-4 mb-2 items-center text-left text-xl font-semibold dark:text-white text-black'>
+                                        <span
+                                            className='w-8 h-8 rounded-full relative z-20 flex justify-center items-center text-xl font-semibold'
+                                            style={{ backgroundColor: hexColor, color: darkenHex(hexColor, 0.3) }}
+                                        >
+                                            {index + 1}
+                                        </span>
+                                        <span className='w-[calc(100%-2rem)]'>{item.heading}</span>
+                                    </h3>
+                                    <p className='text-left text-md font-normal dark:text-white text-black'>{item.description}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+            {buttonText && buttonLink &&
+                <Button
+                    text={buttonText}
+                    onClick={() => console.log('clicked')}
+                    className='py-4 px-8 lg:mt-0 mt-4 rounded-xl bg-blue-500 hover:bg-blue-800 lg:text-lg md:text-md sm:text-sm text-xs text-white font-normal'
+                />
+            }
+        </div>
+    );
+};
+
+export default HolisticApproach;

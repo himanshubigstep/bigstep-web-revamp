@@ -1,13 +1,14 @@
 'use client'
-import { fetchHeaderData, fetchRpaData, fetchRpaServiceHelp, fetchRpaTechnologiesused, fetchRpaTrustedPartner } from '@/api-data/api'
+import { fetchModalBoxHomePage, fetchRpaData, fetchRpaImplimentationSubSection, fetchRpaManagedSubSection, fetchRpaServiceHelp, fetchRpaTechnologiesused, fetchRpaTrustedPartner } from '@/api-data/api'
 import LoaderSpinner from '@/app/components/common/loader-spinner/LoadingSpinner'
 import Parterners from '@/app/components/common/partner-common-block/Parterners'
 import TopBanner from '@/app/components/common/top-banner/TopBanner'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from "next/navigation";
 import AITech from '@/app/components/common/ai-tech/AITech'
-import ContactUs from '@/app/components/common/contact-us/ContactUs'
 import ServiceDataBlock from '@/app/components/common/service-data-block/ServiceDataBlock'
+import ModelBox from '@/app/components/model-box/ModelBox'
+import Head from 'next/head'
+import SimpleContactForm from '@/app/components/common/contact-us/simple-contact-form/SimpleContactForm'
 
 interface rpaPageData {
   software: {
@@ -65,6 +66,7 @@ interface rpaPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
@@ -102,10 +104,12 @@ interface rpaPageData {
     description: string;
     button_text: string;
     label: string;
+    link: string;
     backgroundImage: {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -132,10 +136,12 @@ interface rpaPageData {
     heading: string;
     description: string;
     button_text: string;
+    button_link: string;
     background_image: {
       data: {
         id: number;
         attributes: {
+          url: string;
           formats: {
             large: {
               url: string
@@ -163,38 +169,34 @@ interface rpaPageData {
       }
     }
   }
+  seo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalURL: string;
+  }
 }
 
-interface headerDataLink {
+interface closingModalBoxData {
   id: number;
   attributes: {
-    heading_blogs: {
-      link: string
-    }
-    heading_company: {
-      items_on_left: {
-        item_link: string
-      }[]
-    }
-    heading_how_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
-    heading_lets_talk: {
-      item_link: string
-    }
-    heading_what_we_do: {
-      items_on_left: {
-        item_link: string
-      }[]
-      items_on_right: {
-        item_link: string
-      }[]
-    }
+    category: string;
+    Modal_closing: {
+      id: number;
+      heading: string;
+      description: string;
+      label: string;
+      link: string;
+      buttonText: string;
+      backgroundImage: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+          }
+        }[]
+      }
+    }[]
   }
 }
 
@@ -204,11 +206,28 @@ const RPA = () => {
   const [rpaTechData, setRpaTechData] = useState<any>([]);
   const [rpaPageTrustedData, setRpaPageTrustedData] = useState<any>([]);
 
+  const [rpaPageImplimentationSubData, setRpaPageImplimentationSubData] = useState<any>([]);
+  const [rpaPageManagedSubData, setRpaPageManagedSubData] = useState<any>([]);
+
   const [loading, setLoading] = useState<boolean>(true);
 
-  const [headerDataLink, setHeaderDataLink] = useState<headerDataLink | null>(null);
+  const [modalBoxData, setModalBoxData] = useState<closingModalBoxData | null>(null);
 
-  const router = useRouter();
+  useEffect(() => {
+    const fetchModalBoxDataSection = async () => {
+      try {
+        const response = await fetchModalBoxHomePage();
+        setModalBoxData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchModalBoxDataSection();
+  }, [])
 
   useEffect(() => {
     const fetchrpaPage = async () => {
@@ -271,64 +290,116 @@ const RPA = () => {
   }, [])
   
   useEffect(() => {
-    const fetchHeaderDataResponse = async () => {
+    const fetchImplimentSubResponse = async () => {
       try {
-        const response = await fetchHeaderData();
-        setHeaderDataLink(response);
+        const response = await fetchRpaImplimentationSubSection();
+        setRpaPageImplimentationSubData(response);
       } catch (error) {
         console.log(error);
         return null;
       }
     }
 
-    fetchHeaderDataResponse();
+    fetchImplimentSubResponse();
   }, [])
+  
+  useEffect(() => {
+    const fetchManagedSubResponse = async () => {
+      try {
+        const response = await fetchRpaManagedSubSection();
+        setRpaPageManagedSubData(response);
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    }
+
+    fetchManagedSubResponse();
+  }, [])
+
+  useEffect(() => {
+    if (rpaPageData) {
+      document.title = rpaPageData?.seo?.metaTitle || "Default Title";
+      let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+      if (!metaDescription) {
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.content = rpaPageData?.seo?.metaDescription || "Default description";
+      let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;// If canonical link doesn't exist, create it
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.href = rpaPageData?.seo?.canonicalURL || "default-canonical-url";
+    }
+  }, [rpaPageData]);
+
+  useEffect(() => {
+    if (!loading) {
+      window.scrollTo(0, 0);
+    }
+  }, [loading]);
 
   if (loading) {
     return <LoaderSpinner />;
   }
-  
   return (
     <div className='poppins'>
+        <Head>
+          <link rel="canonical" href={rpaPageData?.seo?.canonicalURL || "default-canonical-url"} />
+          <meta name="title" content={rpaPageData?.seo?.metaTitle || "Default description"} />
+          <meta name="description" content={rpaPageData?.seo?.metaDescription || "Default Description"} />
+        </Head>
         <TopBanner bannerData={rpaPageData?.introduction} />
         <ServiceDataBlock
           title={rpaPageData?.how_can_we_help?.heading || ''}
           services={rpaPageHelpServiceData[0]?.attributes?.service_data || []}
           showButton={false}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 md:px-4'
+          mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-4 dark:lg:pt-16 dark:pt-8 lg:px-0 md:px-0 sm:px-4 px-4'
           headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
-          serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/2 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex flex-col md:flex-row gap-4 md:items-center items-start'
-          serviceItemDescription='w-full text-left flex flex-col gap-2'
+          serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+          serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start lg:items-start md:items-start sm:items-start items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+          serviceIconHeader='w-full flex flex-col lg:flex-row gap-4 lg:items-center lg:items-start md:items-start sm:items-start items-center'
+          serviceItemDescription='w-full lg:text-left md:text-left sm:text-left text-center flex flex-col gap-2'
+          serviceHeding='lg:line-clamp-none lg:text-left md:text-left sm:text-left text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
+          rpaPageImplimentationSubData={rpaPageImplimentationSubData[0]?.attributes?.service_data}
+          rpaPageManagedSubData={rpaPageManagedSubData[0]?.attributes?.service_data}
         />
         <Parterners
           title={rpaPageData?.technologies_we_use?.heading || ''}
           description={rpaPageData?.technologies_we_use?.description || ''}
+          buttonText={rpaPageData?.technologies_we_use?.button_text || ''}
+          buttonLink={rpaPageData?.technologies_we_use?.button_link || ''}
           techData={rpaTechData || []}
+          bgImage={rpaPageData?.technologies_we_use?.background_image?.data?.attributes?.url || ''}
         />
         <ServiceDataBlock
           title={rpaPageData?.trusted_partner?.heading || ''}
           description={rpaPageData?.trusted_partner?.description || ''}
           services={rpaPageTrustedData[0]?.attributes?.service_data || []}
           showButton={true}
-          mainContainerClass='relative w-full max-w-[1440px] mx-auto md:py-16 py-8 md:px-4'
+          mainContainerClass='relative w-full max-w-[1440px] mx-auto lg:py-16 py-8 lg:px-0 md:px-0 sm:px-4 px-4'
           headingClassName='relative w-full max-w-[1080px] mx-auto flex flex-col justify-center items-center text-center'
-          serviceBlockClassName='relative w-full flex flex-wrap md:justify-center text-center'
-          serviceItemClassName='md:mt-8 mt-4 flex flex-col md:w-1/2 w-1/2 md:px-12 md:py-6 px-2 py-2 gap-4 justify-start items-start hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
-          serviceIconHeader='w-full flex flex-col md:flex-row gap-4 md:items-center items-start'
-          serviceItemDescription='w-full text-left flex flex-col gap-2'
+          serviceBlockClassName='relative w-full flex flex-wrap lg:justify-center text-center'
+          serviceItemClassName='lg:mt-8 mt-4 flex flex-col lg:w-1/2 w-1/2 lg:px-12 lg:py-6 px-2 py-2 gap-4 justify-start lg:items-start md:items-start sm:items-start items-center hover:shadow-2xl hover:bg-white hover:rounded-2xl dark:hover:bg-black'
+          serviceIconHeader='w-full flex flex-col lg:flex-row gap-4 lg:items-center lg:items-start md:items-start sm:items-start items-center'
+          serviceItemDescription='w-full lg:text-left md:text-left sm:text-left text-center flex flex-col gap-2'
+          serviceHeding='lg:line-clamp-none lg:text-left md:text-left sm:text-left text-center line-clamp-2 lg:text-xl md:text-lg sm:text-md text-sm font-semibold menu-item-text hover:text-blue-500'
+          logoClassName='lg:w-auto w-full lg:h-full'
           buttonText={rpaPageData?.trusted_partner?.button_text || ''}
           bgImage={rpaPageData?.trusted_partner?.background_image?.data?.attributes?.formats?.large?.url || ''}
-          logoClassName='md:w-auto w-full md:h-full'
         />
         <AITech
           bannerTitle={rpaPageData?.latest_info?.heading || ''}
           bannerDescription={rpaPageData?.latest_info?.description || ''}
           buttonTitle={rpaPageData?.latest_info?.button_text || ''}
-          onButtonClick={headerDataLink?.attributes?.heading_blogs?.link || ''}
+          onButtonClick={rpaPageData?.latest_info?.button_link || ''}
         />
-        <ContactUs contactUsData = {rpaPageData?.get_in_touch} />
+        <SimpleContactForm contactUsData={rpaPageData?.get_in_touch} />
+        <ModelBox modalBoxData={modalBoxData} />
     </div>
   )
 }
