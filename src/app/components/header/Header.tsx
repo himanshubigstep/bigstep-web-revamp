@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Logo from '../common/logo/Logo'
 import Navigation from './Navigation'
 import { fetchHeaderData } from '@/api-data/api'
+import Script from "next/script";
 
 const Header = () => {
   const [menuItems, setMenuItems] = useState<any>([]);
@@ -55,9 +56,25 @@ const Header = () => {
       } ${isBlogPage ? 'static shadow-lg transition-none' : 'fixed'}`}
     >
       <div className='md:px-4 relative w-full px-4 max-w-[1440px] mx-auto h-full flex items-center justify-between md-gap-0 gap-4'>
+      
         <Logo scrolled={scrolled} logo={logo} isBlogPage={isBlogPage} />
         <Navigation menuItems={menuItems} scrolled={scrolled} isBlogPage={isBlogPage} />
       </div>
+      <Script id="apollo-tracker" strategy="afterInteractive">
+        {`
+          (function initApollo(){
+            var n=Math.random().toString(36).substring(7),
+                o=document.createElement("script");
+            o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache=" + n;
+            o.async = true;
+            o.defer = true;
+            o.onload = function(){
+              window.trackingFunctions.onLoad({appId:"68500117e011530019c69998"})
+            };
+            document.head.appendChild(o);
+          })();
+        `}
+      </Script>
     </div>
   );
 };
