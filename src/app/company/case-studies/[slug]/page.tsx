@@ -1,6 +1,5 @@
 "use client";
 import { useParams } from 'next/navigation';
-import { caseStudies } from '../caseStudiesData';
 import Link from 'next/link';
 import Image from 'next/image';
 import ContactFormSimple from '@/app/components/common/contact-us/simple-contact-form/ContactFormSimple';
