@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_homepage_home_introductions",
+  "info": {
+    "displayName": "home_introduction"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "button_text": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_homepage_milestones",
+  "info": {
+    "displayName": "milestone"
+  },
+  "options": {},
+  "attributes": {
+    "years": {
+      "type": "component",
+      "component": "homepage.single-milestone",
+      "repeatable": false
+    },
+    "delivered": {
+      "type": "component",
+      "component": "homepage.single-milestone",
+      "repeatable": false
+    },
+    "cloud_projects": {
+      "type": "component",
+      "component": "homepage.single-milestone",
+      "repeatable": false
+    },
+    "technology_expert": {
+      "type": "component",
+      "component": "homepage.single-milestone",
+      "repeatable": true
+    },
+    "retention_rate": {
+      "type": "component",
+      "component": "homepage.single-milestone",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

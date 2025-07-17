@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_homepage_single_milestones",
+  "info": {
+    "displayName": "single_milestone"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

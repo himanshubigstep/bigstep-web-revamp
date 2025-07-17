@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "home-page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "introduction": {
+      "type": "component",
+      "component": "homepage.home-introduction",
+      "repeatable": true
+    },
+    "home_message": {
+      "type": "component",
+      "component": "homepage.message",
+      "repeatable": true
+    },
+    "success_stories": {
+      "type": "component",
+      "component": "homepage.message",
+      "repeatable": true
+    },
+    "trusted": {
+      "type": "component",
+      "component": "homepage.message",
+      "repeatable": false
+    }
+  }
+}
