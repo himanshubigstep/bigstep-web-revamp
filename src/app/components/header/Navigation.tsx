@@ -227,10 +227,13 @@ const Navigation = ({ menuItems, scrolled, isBlogPage }: { menuItems: any, scrol
 
               {isDropdownOpen === menu.heading && !menu.link && (
                 <ul
-                  className={`${menu.items_on_right.length !== 0
+                  className={`${Array.isArray(menu.items_on_right) && menu.items_on_right.length !== 0
                     ? "w-full flex lg:flex-row flex-col justify-between left-0"
                     : "small-menu left-auto right-auto"
-                    } ${(!menu.items_on_left.some((submenu: any) => submenu.technology) && !menu.items_on_right.some((submenu: any) => submenu.technology)) && 'short-menu'} bg-white lg:items-center dark:bg-black lg:absolute lg:max-h-[100vh] md:max-h-[80vh] sm:max-h-[45vh] max-h-[70vh] overflow-y-auto left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 gap-8 rounded-2xl shadow-2xl`}
+                    } ${(
+                      (!Array.isArray(menu.items_on_left) || !menu.items_on_left.some((submenu: any) => submenu.technology)) &&
+                      (!Array.isArray(menu.items_on_right) || !menu.items_on_right.some((submenu: any) => submenu.technology))
+                    ) && 'short-menu'} bg-white lg:items-center dark:bg-black lg:absolute lg:max-h-[100vh] md:max-h-[80vh] sm:max-h-[45vh] max-h-[70vh] overflow-y-auto left-0 right-0 top-full lg:border-gray-200 lg:border-t-[1px] lg:dark:border-gray-800 gap-8 rounded-2xl shadow-2xl`}
                 >
                   <ul
                     className={`${menu.items_on_left && menu.items_on_left.some((submenu: any) => submenu.technology) ? "grid md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4 lg:w-[65%] lg:p-8 p-4 lg:border-r-[1px]" : "grid grid-cols-1 lg:gap-8 gap-4 w-[100%] lg:p-8 p-4"

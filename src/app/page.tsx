@@ -14,6 +14,7 @@ import OurValues from "./components/our-values/OurValues";
 import ModelBox from "./components/model-box/ModelBox";
 import Head from "next/head";
 import SimpleContactForm from "./components/common/contact-us/simple-contact-form/SimpleContactForm";
+import ClutchTestimonialSlider from "./components/common/slider/ClutchTestimonialSlider";
 
 interface HomePageData {
   id: number;
@@ -474,12 +475,13 @@ export default function Home() {
         partnerShipData={partnerShipData}
       />
       <MilesTone homePageData={homePageData} />
+      <ClutchTestimonialSlider />
       <OurValues valuesData={homePageData?.value} />
-      <Clients
+      {/* <Clients
         title={homePageData?.client_reviews[0].heading || ''}
         description={homePageData?.client_reviews[0].description || ''}
         bgImage={homePageData ? `${process.env.NEXT_PUBLIC_IMAGE_URL}${homePageData.client_reviews[0].background_image.data.attributes.url}` : ''}
-      />
+      /> */}
       <AITech
         bannerTitle={homePageData?.home_page_blogs[0].heading || ''}
         bannerDescription={homePageData?.home_page_blogs[0].description || ''}
