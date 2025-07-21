@@ -9,6 +9,15 @@ interface ContactFormInput {
 }
 
 
+
+
+
+
+
+// case studies data
+
+
+
 // Chatgpt data api
 export const fetchChatgptData = async () => {
   try {
@@ -2063,3 +2072,187 @@ export const fetchModalBoxPropTechPage = async () => {
     return null;
   }
 }
+
+
+// case study api
+
+
+// Why BigStep data API
+export const fetchdiffBigStepData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/why-bigstep?populate[difference][populate][type][populate]=*`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchwhyBigStepData = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/why-bigstep?populate=*`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+export const fetchClientTestimonial = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/client-testimonals?populate=*&sort[0]=id:desc`
+      //  `${process.env.NEXT_PUBLIC_BASE_URL}/client-testimonals?populate=*`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchTechnologyStack = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/technology-stacks?populate[sub_type][populate]=image`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchObjective = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/objectives?populate=*`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+export const fetchCaseStudyPage = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/case-study-page?populate=*`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchkeyfeature = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/case-study-page?populate[key_features][populate]=icon,background`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchimplementation = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/case-study-page?populate[implementation][populate][type][populate]=icon,background`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+  
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchApproachType = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/case-study-page?populate[approach_type][populate][type][populate]=icon,background`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+  
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchoperation = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/case-study-page?populate[operation][populate][operation_type][populate]=icon,background`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+  
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchClientOverview = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/case-study-page?populate[client_overview]=*&populate[client_data][populate]=icon,background`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+  
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
